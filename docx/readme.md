@@ -1,0 +1,1 @@
+Thư mục này dùng để chứa tài liệu trong suốt quá trình làm Đồ án tốt nghiệp
