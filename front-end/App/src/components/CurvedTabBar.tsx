@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Dimensions, Platform } from 'react-native';
-import { HouseIcon, AppStoreLogoIcon, UserIcon } from 'phosphor-react-native';
+import { HouseIcon, PlanetIcon, UserIcon } from 'phosphor-react-native';
 
 const { width } = Dimensions.get('window');
 const height = 70;
@@ -14,7 +14,7 @@ const CurvedTabBar = ({ state, descriptors, navigation }: any) => {
           const isMiddle = route.name === 'Trang chủ';
 
           let IconComponent: any = HouseIcon;
-          if (route.name === 'Dịch vụ') IconComponent = AppStoreLogoIcon;
+          if (route.name === 'Dịch vụ') IconComponent = PlanetIcon;
           else if (route.name === 'Hồ sơ') IconComponent = UserIcon;
 
           const onPress = () => {
