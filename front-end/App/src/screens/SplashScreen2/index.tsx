@@ -7,13 +7,13 @@ import { styles } from "./SplashScreen2.styles";
 const SplashScreen2 = () => {
   const navigation = useNavigation();
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     // Khi xong splash 2 → vào Trang chủ
-  //     navigation.navigate("Trang chủ" as never);
-  //   }, 2500);
-  //   return () => clearTimeout(timer);
-  // }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      // Khi xong splash 2 → vào Trang chủ
+      navigation.navigate("AuthScreen" as never);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <LinearGradient
