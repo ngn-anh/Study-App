@@ -1,25 +1,21 @@
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ServicesScreen from '../screens/ServicesScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import HomeScreen from '../screens/HomeScreen';
-import CurvedTabBar from '../components/CurvedTabBar';
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import SplashScreen1 from "../screens/SplashScreen1";
+import SplashScreen2 from "../screens/SplashScreen2";
+import MainTabs from "./MainTabs";
 
-const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
   return (
-    <Tab.Navigator
-      initialRouteName="Trang chủ"
-      screenOptions={{
-        headerShown: false,
-      }}
-      tabBar={(props) => <CurvedTabBar {...props} />}
-    >
-      <Tab.Screen name="Dịch vụ" component={ServicesScreen} />
-      <Tab.Screen name="Trang chủ" component={HomeScreen} />
-      <Tab.Screen name="Hồ sơ" component={ProfileScreen} />
-    </Tab.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {/* Các màn không cần tab bar */}
+      <Stack.Screen name="SplashScreen1" component={SplashScreen1} />
+      <Stack.Screen name="SplashScreen2" component={SplashScreen2} />
+      
+      {/* Tab chính */}
+      <Stack.Screen name="MainTabs" component={MainTabs} />
+    </Stack.Navigator>
   );
 };
 
