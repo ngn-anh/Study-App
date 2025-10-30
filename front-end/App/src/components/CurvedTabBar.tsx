@@ -1,22 +1,20 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Dimensions, Platform } from 'react-native';
-import Svg, { Path } from 'react-native-svg';
-import { HouseIcon, AppStoreLogoIcon , UserIcon } from 'phosphor-react-native';
+import { HouseIcon, AppStoreLogoIcon, UserIcon } from 'phosphor-react-native';
 
 const { width } = Dimensions.get('window');
 const height = 70;
 
 const CurvedTabBar = ({ state, descriptors, navigation }: any) => {
-
   return (
     <View style={styles.container}>
       <View style={styles.tabContainer}>
         {state.routes.map((route: any, index: number) => {
           const isFocused = state.index === index;
+          const isMiddle = route.name === 'Trang chủ';
 
           let IconComponent: any = HouseIcon;
-          if (route.name === 'Dịch vụ') IconComponent = AppStoreLogoIcon ;
-          else if (route.name === 'Trang chủ') IconComponent = HouseIcon;
+          if (route.name === 'Dịch vụ') IconComponent = AppStoreLogoIcon;
           else if (route.name === 'Hồ sơ') IconComponent = UserIcon;
 
           const onPress = () => {
@@ -29,28 +27,47 @@ const CurvedTabBar = ({ state, descriptors, navigation }: any) => {
             }
           };
 
-          const isMiddle = route.name === 'Trang chủ';
+          // 🎨 Màu khi chưa active / active
+          const inactiveColor = '#A0A0A0'; // Xám
+          const activeColor = '#0066FF'; // Xanh
 
-          // Màu icon + weight khi active
-          const iconColor = isMiddle || isFocused ? "#fff" : "#0066FF";
-          const weight = isFocused || isMiddle ? "fill" : "regular";
+          const iconColor = isMiddle
+            ? '#fff'
+            : isFocused
+            ? activeColor
+            : inactiveColor;
 
-          const textColor = isMiddle || isFocused ? "#fff" : "#0066FF";
+          const textColor = isMiddle
+            ? '#fff'
+            : isFocused
+            ? activeColor
+            : inactiveColor;
+
+          const weight = isMiddle || isFocused ? 'fill' : 'regular';
 
           return (
-            <TouchableOpacity
+           <TouchableOpacity
               key={route.key}
               onPress={onPress}
               style={[styles.tabButton, isMiddle && styles.middleButton]}
               activeOpacity={0.8}
             >
-              <IconComponent
-                weight={weight}
-                color={iconColor}
-                size={isMiddle ? 30 : 24}
-              />
-              <Text style={[styles.label, { color: textColor }]}>{route.name}</Text>
+              {isMiddle ? (
+                <View style={styles.innerCircle}>
+                  <IconComponent weight="fill" color="#fff" size={28} />
+                </View>
+              ) : (
+                <>
+                  <IconComponent
+                    weight={weight}
+                    color={iconColor}
+                    size={24}
+                  />
+                  <Text style={[styles.label, { color: textColor }]}>{route.name}</Text>
+                </>
+              )}
             </TouchableOpacity>
+
           );
         })}
       </View>
@@ -65,16 +82,11 @@ const styles = StyleSheet.create({
     width,
     alignItems: 'center',
   },
-  svgContainer: {
-    position: 'absolute',
-    bottom: 0,
-  },
   tabContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     width,
     height,
-    backgroundColor: 'transparent',
   },
   tabButton: {
     flex: 1,
@@ -82,11 +94,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   middleButton: {
-    marginTop: -25,
+    marginTop: -45,
+  justifyContent: 'center',
+  alignItems: 'center',
+
+  },
+  label: {
+    fontSize: 12,
+    marginTop: 4,
+  },
+
+  innerCircle: {
+    width: 80,           // nhỏ hơn
+    height: 70,          // nhỏ hơn
+    borderRadius: 40,
     backgroundColor: '#0066FF',
-    width: 70,
-    height: 70,
-    borderRadius: 35,
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
@@ -94,11 +116,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3.5,
     elevation: 5,
-  },
-  label: {
-    fontSize: 12,
-    marginTop: 4,
-  },
+},
+
 });
 
 export default CurvedTabBar;
