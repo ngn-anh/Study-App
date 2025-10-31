@@ -1,52 +1,28 @@
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import {HomeScreen} from './screens/HomeScreen';
-// import {ServicesScreen} from './screens/ServicesScreen';
-// import {ProfileScreen} from './screens/ProfileScreen';
-// import Icon from 'react-native-vector-icons/MaterialIcons';
-import ServicesScreen from '../screens/ServicesScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import HomeScreen from '../screens/HomeScreen';
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../types/data";
+import SplashScreen1 from "../screens/SplashScreen1";
+import SplashScreen2 from "../screens/SplashScreen2";
+import AuthScreen from "../screens/AuthScreen";
+import RegisterScreen from "../screens/RegisterScreen";
+import LoginScreen from "../screens/LoginScreen";
+import MainTabs from "./MainTabs";
 
-const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const AppNavigator = () => {
   return (
-    <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: '#0066FF',
-        tabBarStyle: { height: 60, paddingBottom: 5 },
-      }}
-    >
-      <Tab.Screen
-        name="Trang chủ"
-        component={HomeScreen}
-        // options={{
-        //   tabBarIcon: ({ color, size }) => (
-        //     <Icon name="home" color={color} size={size} />
-        //   ),
-        // }}
-      />
-      <Tab.Screen
-        name="Dịch vụ"
-        component={ServicesScreen}
-        // options={{
-        //   tabBarIcon: ({ color, size }) => (
-        //     <Icon name="apps" color={color} size={size} />
-        //   ),
-        // }}
-      />
-      <Tab.Screen
-        name="Hồ sơ"
-        component={ProfileScreen}
-        // options={{
-        //   tabBarIcon: ({ color, size }) => (
-        //     <Icon name="person" color={color} size={size} />
-        //   ),
-        // }}
-      />
-    </Tab.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {/* Các màn không có tab bar */}
+      <Stack.Screen name="SplashScreen1" component={SplashScreen1} />
+      <Stack.Screen name="SplashScreen2" component={SplashScreen2} />
+      <Stack.Screen name="AuthScreen" component={AuthScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Register" component={RegisterScreen} />
+
+      {/* Tab chính */}
+      <Stack.Screen name="MainTabs" component={MainTabs} />
+    </Stack.Navigator>
   );
 };
 
