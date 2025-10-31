@@ -1,8 +1,10 @@
 export type RootStackParamList = {
   SplashScreen1: undefined;
   SplashScreen2: undefined;
-  login: undefined;
-  register: undefined;
+  AuthScreen: undefined;
+  Login: undefined;
+  Register: undefined;
+  MainTabs: undefined;
   Home: undefined;
   Services: undefined;
   Profile: undefined;

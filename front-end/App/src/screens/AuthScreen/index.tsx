@@ -5,18 +5,22 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
-  Dimensions,
   StatusBar,
 } from "react-native";
 import { styles } from "./index.styles";
 import { UserCirclePlusIcon } from "phosphor-react-native";
+import { useNavigation } from "@react-navigation/native";
+import { NavigationProp } from "@react-navigation/native";
+import { RootStackParamList } from "../../types/data";
 
 const AuthScreen: React.FC = () => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
 
-      {/* Phần nền uốn lượn */}
+      {/* Header có nền uốn lượn */}
       <ImageBackground
         source={require("../../assets/images/header-bg.png")}
         style={styles.headerBackground}
@@ -32,16 +36,23 @@ const AuthScreen: React.FC = () => {
         </View>
       </ImageBackground>
 
-      {/* Nút Đăng nhập / Đăng ký */}
+      {/* Nút đăng nhập / đăng ký */}
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.loginButton}>
+        {/* Nút Đăng Nhập */}
+        <TouchableOpacity
+          style={styles.loginButton}
+          onPress={() => navigation.navigate("Login")}
+        >
           <Text style={styles.loginText}>Đăng Nhập</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.registerButton}>
-          {/* icon + text xếp ngang */}
+        {/* Nút Đăng Ký */}
+        <TouchableOpacity
+          style={styles.registerButton}
+          onPress={() => navigation.navigate("Register")}
+        >
           <View style={styles.registerContent}>
-            <UserCirclePlusIcon  size={18} weight="bold" color="#0047AB" />
+            <UserCirclePlusIcon size={18} weight="bold" color="#0047AB" />
             <Text style={styles.registerText}>  Đăng Ký</Text>
           </View>
         </TouchableOpacity>
