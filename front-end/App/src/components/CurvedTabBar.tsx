@@ -11,11 +11,11 @@ const CurvedTabBar = ({ state, descriptors, navigation }: any) => {
       <View style={styles.tabContainer}>
         {state.routes.map((route: any, index: number) => {
           const isFocused = state.index === index;
-          const isMiddle = route.name === 'Trang chủ';
+          const isMiddle = route.name === 'Home';
 
           let IconComponent: any = HouseIcon;
-          if (route.name === 'Dịch vụ') IconComponent = PlanetIcon;
-          else if (route.name === 'Hồ sơ') IconComponent = UserIcon;
+          if (route.name === 'Service') IconComponent = PlanetIcon;
+          else if (route.name === 'Profile') IconComponent = UserIcon;
 
           const onPress = () => {
             const event = navigation.emit({
@@ -63,7 +63,7 @@ const CurvedTabBar = ({ state, descriptors, navigation }: any) => {
                     color={iconColor}
                     size={24}
                   />
-                  <Text style={[styles.label, { color: textColor }]}>{route.name}</Text>
+                  <Text style={[styles.label, { color: textColor }]}>{route.name == "Service" ? "Dịch vụ" : "Hồ sơ"}</Text>
                 </>
               )}
             </TouchableOpacity>

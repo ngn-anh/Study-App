@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView, Modal, Pressable } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   ArrowLeftIcon,
   FadersHorizontalIcon,
@@ -19,6 +20,7 @@ import { styles } from './ProfileScreen.styles';
 
 const ProfileScreen = ({ navigation }: any) => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const [logoutModalVisible, setLogoutModalVisible] = useState(false);
 
   const toggleMenu = () => setMenuVisible(!menuVisible);
 
@@ -27,9 +29,15 @@ const ProfileScreen = ({ navigation }: any) => {
     console.log('Đổi mật khẩu');
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setMenuVisible(false);
-    console.log('Đăng xuất');
+    setLogoutModalVisible(true);
+  };
+
+  const confirmLogout = async () => {
+    setLogoutModalVisible(false);
+    await AsyncStorage.removeItem('userData'); // Xóa thông tin user
+    navigation.reset({ index: 0, routes: [{ name: 'AuthScreen' }] }); // Reset về Auth
   };
 
   return (
@@ -67,6 +75,37 @@ const ProfileScreen = ({ navigation }: any) => {
                 <SignOutIcon size={18} color="#FF3B30" weight="bold" />
                 <Text style={[styles.dropdownText, { color: '#FF3B30' }]}>Đăng xuất</Text>
               </Pressable>
+            </View>
+          </View>
+        </Pressable>
+      </Modal>
+
+      {/* Logout Modal */}
+      <Modal
+        transparent
+        visible={logoutModalVisible}
+        animationType="fade"
+        onRequestClose={() => setLogoutModalVisible(false)}
+      >
+        <Pressable style={styles.modalOverlay} onPress={() => setLogoutModalVisible(false)}>
+          <View style={styles.customModal}>
+            <View style={styles.modalContent}>
+              <SignOutIcon size={36} color="#FF3B30" weight="bold" style={{ marginBottom: 10 }} />
+              <Text style={styles.modalMessage}>Bạn có chắc muốn đăng xuất?</Text>
+              <View style={styles.modalButtons}>
+                <TouchableOpacity
+                  style={[styles.modalButton, { backgroundColor: '#ccc' }]}
+                  onPress={() => setLogoutModalVisible(false)}
+                >
+                  <Text style={{ color: '#000', fontWeight: '600' }}>Hủy</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.modalButton, { backgroundColor: '#FF3B30' }]}
+                  onPress={confirmLogout}
+                >
+                  <Text style={{ color: '#fff', fontWeight: '600' }}>Đăng xuất</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         </Pressable>

@@ -13,11 +13,13 @@ const MainTabs = () => {
       screenOptions={{
         headerShown: false,
       }}
+      initialRouteName="Home"
       tabBar={(props) => <CurvedTabBar {...props} />}
     >
-      <Tab.Screen name="Trang chủ" component={HomeScreen} />
-      <Tab.Screen name="Dịch vụ" component={ServicesScreen} />
-      <Tab.Screen name="Hồ sơ" component={ProfileScreen} />
+      
+      <Tab.Screen name="Service" component={ServicesScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 };

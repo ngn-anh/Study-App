@@ -132,4 +132,40 @@ export const styles = StyleSheet.create({
     height: 1,
     backgroundColor: '#f2f2f2',
   },
+  customModal: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+},
+modalContent: {
+  width: '80%',
+  backgroundColor: '#fff',
+  borderRadius: 12,
+  paddingHorizontal: 40,
+  paddingVertical: 20,
+  alignItems: 'center',
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.25,
+  shadowRadius: 4,
+  elevation: 5,
+},
+modalMessage: {
+  fontSize: 16,
+  fontWeight: '500',
+  textAlign: 'center',
+  marginBottom: 20,
+},
+modalButtons: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  width: '100%',
+},
+modalButton: {
+  paddingVertical: 12,
+  borderRadius: 10,
+  marginHorizontal: 5,
+  alignItems: 'center',
+  width:'35%'
+},
 });
