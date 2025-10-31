@@ -1,31 +1,46 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import * as bcrypt from 'bcrypt'; // dùng bcryptjs cho dễ cài
+import { User, UserDocument } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
-import { User, UserDocument } from './entities/user.schema';
+import { UserEntity } from './entities/user.entity';
+import { toUserEntity } from 'src/common/utils/user.utils';
 
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  async findAll(): Promise<User[]> {
-    return this.userModel.find().exec();
+  async create(dto: CreateUserDto): Promise<UserEntity> {
+     try {
+      const hashedPassword = await bcrypt.hash(dto.password, 10);
+      const createdUser = new this.userModel({ ...dto, password: hashedPassword });
+      await createdUser.save();
+      return toUserEntity(createdUser);
+    } catch (error: any) {
+      // Check duplicate key error
+      if (error.code === 11000) {
+        // error.keyValue chứa field trùng
+        const field = Object.keys(error.keyValue)[0];
+        throw new BadRequestException(`${field} already exists`);
+      }
+      throw error;
+    }
   }
 
-  async findOne(id: string): Promise<User> {
-    const user = await this.userModel.findById(id).exec();
-    if (!user) throw new NotFoundException('User not found');
-    return user;
+  async findByUsername(username: string): Promise<UserDocument | null> {
+    return this.userModel.findOne({ username });
   }
 
-  async create(dto: CreateUserDto): Promise<User> {
-    const created = new this.userModel(dto);
-    return created.save();
+  async findByEmail(email: string): Promise<UserDocument | null> {
+    return this.userModel.findOne({ email });
   }
 
-  async remove(id: string): Promise<{ deleted: boolean }> {
-    const res = await this.userModel.findByIdAndDelete(id).exec();
-    if (!res) throw new NotFoundException('User not found');
-    return { deleted: true };
+  async validateUser(username: string, password: string): Promise<UserDocument | null> {
+    const user = await this.findByUsername(username);
+    if (!user) return null;
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    return isMatch ? user : null;
   }
 }
