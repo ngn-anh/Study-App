@@ -12,6 +12,7 @@ import {
   AppWindowIcon,
 } from 'phosphor-react-native';
 import { styles } from './ServicesScreen.styles';
+import { useNavigation } from '@react-navigation/native';
 
 interface ServiceItemProps {
   icon: React.ElementType;
@@ -20,8 +21,15 @@ interface ServiceItemProps {
 }
 
 const ServiceItem: React.FC<ServiceItemProps> = ({ icon: Icon, label, badgeCount }) => {
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    if (label === "Lịch hẹn") {
+      navigation.navigate("ScheduleScreen" as never);
+    }
+  };
   return (
-    <TouchableOpacity style={styles.itemContainer} activeOpacity={0.8}>
+    <TouchableOpacity style={styles.itemContainer} onPress={handlePress} activeOpacity={0.8}>
       <View style={styles.iconWrapper}>
         <Icon size={36} color="#0066FF" weight="duotone" />
         {badgeCount && badgeCount > 0 && (

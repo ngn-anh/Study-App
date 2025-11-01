@@ -7,6 +7,9 @@ import AuthScreen from "../screens/AuthScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import LoginScreen from "../screens/LoginScreen";
 import MainTabs from "./MainTabs";
+import ScheduleScreen from "../screens/ScheduleScreen";
+import ScheduleDetailScreen from "../screens/ScheduleDetailScreen";
+import CreateUpdateScheduleScreen from "../screens/CreateUpdateScheduleScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -19,6 +22,10 @@ const AppNavigator = () => {
       <Stack.Screen name="AuthScreen" component={AuthScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen name="ScheduleScreen" component={ScheduleScreen} />
+      <Stack.Screen name="ScheduleDetail" component={ScheduleDetailScreen} />
+      <Stack.Screen name="CreateUpdateSchedule" component={CreateUpdateScheduleScreen} />
+
 
       {/* Tab chính */}
       <Stack.Screen name="MainTabs" component={MainTabs} />
