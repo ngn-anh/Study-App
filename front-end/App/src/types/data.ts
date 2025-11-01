@@ -6,6 +6,9 @@ export type RootStackParamList = {
   Register: undefined;
   MainTabs: undefined;
   Home: undefined;
-  Services: undefined;
+  Service: undefined;
   Profile: undefined;
+  ScheduleScreen: undefined;
+  ScheduleDetail: { id: string };
+  CreateUpdateSchedule: { id?: string }; // id có thể không có khi tạo mới
 };
