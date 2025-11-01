@@ -13,27 +13,10 @@ import { CaretLeftIcon, CalendarBlankIcon, ClockIcon } from "phosphor-react-nati
 import { useNavigation, useRoute, RouteProp, NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "../../types/data";
 import { styles } from "./index.styles";
+import { createSchedule, getScheduleDetail, updateSchedule } from "../../api/reminderSchedules";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type RouteProps = RouteProp<RootStackParamList, "CreateUpdateSchedule">;
-
-const mockData = [
-  {
-    id: "1",
-    title: "Lịch kiểm tra giữa kỳ 1",
-    dueDate: "2025-11-07T12:00:00",
-    remindDate: "2025-11-06T08:00:00",
-    repeat: "Hàng ngày",
-    note: "Học hành chăm chỉ bạn sẽ có tất cả...",
-  },
-  {
-    id: "2",
-    title: "Lịch thi thử đợt 1",
-    dueDate: "2025-11-10T09:00:00",
-    remindDate: "2025-11-09T07:00:00",
-    repeat: "Hàng tuần",
-    note: "Hãy ôn luyện kỹ trước khi thi!",
-  },
-];
 
 const formatDate = (date: Date) =>
   `${date.getDate().toString().padStart(2, "0")}/${(date.getMonth() + 1).toString().padStart(2, "0")}/${date.getFullYear()}`;
@@ -60,26 +43,44 @@ const CreateUpdateScheduleScreen = () => {
   });
 
   const [isValid, setIsValid] = useState(false);
+  const [isDirty, setIsDirty] = useState(false);
   const [pickerType, setPickerType] = useState<"dueDate" | "dueTime" | "remindDate" | "remindTime" | null>(null);
   const [isRepeatDaily, setIsRepeatDaily] = useState(false);
 
+  // ===== Load dữ liệu khi edit =====
   useEffect(() => {
-    if (id) {
-      const found = mockData.find((x) => x.id === id);
-      if (found) {
+    if (!id) return;
+
+    const fetchData = async () => {
+      try {
+        const data = await getScheduleDetail(id);
+
+        const dueDate = new Date(data.due_date);
+        const [dueHour, dueMinute] = data.due_time.split(":").map(Number);
+        dueDate.setHours(dueHour, dueMinute, 0, 0);
+
+        const remindDate = new Date(data.remind_date);
+        const [remindHour, remindMinute] = data.remind_time.split(":").map(Number);
+        remindDate.setHours(remindHour, remindMinute, 0, 0);
+
         setForm({
-          title: found.title,
-          dueDate: new Date(found.dueDate),
-          remindDate: new Date(found.remindDate),
-          repeat: found.repeat,
-          note: found.note,
+          title: data.title,
+          dueDate,
+          remindDate,
+          repeat: data.repeat_mode === "daily" ? "Hàng ngày" : "Không lặp",
+          note: data.note || "",
         });
-        setIsRepeatDaily(found.repeat === "Hàng ngày");
+
+        setIsRepeatDaily(data.repeat_mode === "daily");
+      } catch (error) {
+        console.error("Load schedule error:", error);
       }
-    }
+    };
+
+    fetchData();
   }, [id]);
 
-  // =================== Validation Realtime ===================
+  // ===== Validation Realtime =====
   useEffect(() => {
     const newErrors = { title: "", dueDate: "", remindDate: "" };
     const now = new Date();
@@ -104,11 +105,10 @@ const CreateUpdateScheduleScreen = () => {
     setIsValid(!hasError);
   }, [form, isRepeatDaily]);
 
-  const handleSave = () => {
-    if (isValid) {
-      console.log(id ? "Cập nhật lịch:" : "Tạo mới lịch:", form);
-      navigation.goBack();
-    }
+  // ===== Khi người dùng thay đổi form =====
+  const handleChange = (key: keyof typeof form, value: any) => {
+    setForm(prev => ({ ...prev, [key]: value }));
+    setIsDirty(true); // đánh dấu đã thay đổi
   };
 
   const updateForm = (type: typeof pickerType, selectedDate: Date) => {
@@ -131,10 +131,12 @@ const CreateUpdateScheduleScreen = () => {
       newForm.remindDate = newDate;
     }
     setForm(newForm);
+    setIsDirty(true);
   };
 
+  // ===== Open picker =====
   const openPicker = (type: typeof pickerType) => {
-    if (type === "remindDate" && isRepeatDaily) return; // disable nếu lặp hằng ngày
+    if (type === "remindDate" && isRepeatDaily) return;
 
     if (Platform.OS === "android") {
       const current = type?.includes("due") ? form.dueDate : form.remindDate;
@@ -156,6 +158,40 @@ const CreateUpdateScheduleScreen = () => {
   const getPickerValue = () => (pickerType?.includes("due") ? form.dueDate : form.remindDate);
   const getPickerMode = () => (pickerType?.includes("Date") ? "date" : "time");
 
+  // ===== Save =====
+  const handleSave = async () => {
+    if (!isValid) return;
+
+    try {
+      const userDataStr = await AsyncStorage.getItem("userData");
+      if (!userDataStr) throw new Error("Không tìm thấy thông tin người dùng");
+      const userData = JSON.parse(userDataStr);
+      const pad = (num: number) => num.toString().padStart(2, "0");
+
+      const payload = {
+        user_id: userData.user.id,
+        title: form.title,
+        note: form.note,
+        due_date: `${form.dueDate.getFullYear()}-${pad(form.dueDate.getMonth() + 1)}-${pad(form.dueDate.getDate())}`,
+        due_time: `${pad(form.dueDate.getHours())}:${pad(form.dueDate.getMinutes())}`,
+        remind_date: `${form.remindDate.getFullYear()}-${pad(form.remindDate.getMonth() + 1)}-${pad(form.remindDate.getDate())}`,
+        remind_time: `${pad(form.remindDate.getHours())}:${pad(form.remindDate.getMinutes())}`,
+        repeat_mode: isRepeatDaily ? "daily" : "none",
+      };
+
+      if (id) {
+        console.log(id, payload)
+        await updateSchedule(id, payload);
+      } else {
+        await createSchedule(payload);
+      }
+
+      navigation.navigate("ScheduleScreen")
+    } catch (error) {
+      console.error("Lưu lịch hẹn lỗi:", error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -176,7 +212,7 @@ const CreateUpdateScheduleScreen = () => {
           style={styles.input}
           placeholder="Vui lòng nhập tiêu đề"
           value={form.title}
-          onChangeText={(text) => setForm({ ...form, title: text })}
+          onChangeText={(text) => handleChange("title", text)}
         />
         {errors.title ? <Text style={{ color: "red", marginTop: 4 }}>{errors.title}</Text> : null}
 
@@ -230,7 +266,8 @@ const CreateUpdateScheduleScreen = () => {
             value={isRepeatDaily}
             onValueChange={(val) => {
               setIsRepeatDaily(val);
-              setForm({ ...form, repeat: val ? "Hàng ngày" : "Không lặp" });
+              setForm(prev => ({ ...prev, repeat: val ? "Hàng ngày" : "Không lặp" }));
+              setIsDirty(true);
             }}
             trackColor={{ false: "#ccc", true: "#0C4299" }}
             thumbColor="#fff"
@@ -244,14 +281,14 @@ const CreateUpdateScheduleScreen = () => {
           multiline
           value={form.note}
           placeholder="Nhập ghi chú tại đây"
-          onChangeText={(text) => setForm({ ...form, note: text })}
+          onChangeText={(text) => handleChange("note", text)}
         />
 
         {/* Lưu */}
         <TouchableOpacity
-          style={[styles.saveButton, !isValid && { opacity: 0.5 }]}
+          style={[styles.saveButton, (!isValid || !isDirty) && { opacity: 0.5 }]}
           onPress={handleSave}
-          disabled={!isValid}
+          disabled={!isValid || !isDirty}
         >
           <Text style={styles.saveButtonText}>Lưu</Text>
         </TouchableOpacity>

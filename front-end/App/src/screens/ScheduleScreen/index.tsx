@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
   TouchableOpacity,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   CaretLeftIcon,
   TrashIcon,
@@ -13,37 +15,57 @@ import {
   SquareIcon,
   PlusIcon,
 } from "phosphor-react-native";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { NavigationProp, useFocusEffect, useNavigation } from "@react-navigation/native";
 import { styles } from "./index.styles";
 import { RootStackParamList } from "../../types/data";
 import { DeleteModal } from "../../components/DeleteModal";
+import { deleteManySchedules, getSchedules } from "../../api/reminderSchedules";
+import { getRemainingTime } from "../../utils/time";
 
-const appointments = [
-  {
-    id: "1",
-    title: "Lịch kiểm tra giữa kỳ 1",
-    date: "Ngày tới hạn 15:42 PM - 01/08/2022",
-    remain: "Còn 9 phút",
-  },
-  {
-    id: "2",
-    title: "Lịch thi thử đợt 1",
-    date: "Ngày tới hạn 01/08/2022",
-    remain: "Còn 6 phút",
-  },
-  {
-    id: "3",
-    title: "Lịch thi thử đợt 1",
-    date: "Ngày tới hạn 01/08/2022",
-    remain: "Còn 6 phút",
-  },
-];
+interface Schedule {
+  _id: string;
+  title: string;
+  note: string;
+  due_date: string;
+  due_time: string;
+  remind_date: string;
+  remind_time: string;
+  repeat_mode: string;
+}
 
 const ScheduleScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const [schedules, setSchedules] = useState<Schedule[]>([]);
+  const [loading, setLoading] = useState(true);
   const [isSelectMode, setIsSelectMode] = useState(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
+
+  // Lấy danh sách lịch hẹn
+ const fetchSchedules = async () => {
+  console.log(1)
+    try {
+      setLoading(true);
+      const userData = await AsyncStorage.getItem("userData");
+      console.log(userData)
+      if (!userData) return;
+      const userJson = JSON.parse(userData);
+      console.log('userJson',userJson)
+      const data = await getSchedules(userJson.user.id);
+      console.log(data)
+      setSchedules(data);
+    } catch (error) {
+      console.error("Fetch schedules error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchSchedules(); // mỗi lần màn danh sách focus lại thì fetch mới
+    }, [])
+  );
 
   const toggleSelect = (id: string) => {
     if (selectedIds.includes(id)) {
@@ -60,20 +82,33 @@ const ScheduleScreen = () => {
     }
   };
 
-  const handleDelete = () => {
-    console.log("Xoá:", selectedIds);
-    setSelectedIds([]);
-    setIsSelectMode(false);
-    setModalVisible(false);
+  const handleDelete = async() => {
+    if (selectedIds.length === 0) return;
+   try {
+    console.log('selectedIds',selectedIds)
+      // Gọi API BE xóa mềm nhiều lịch hẹn
+      await deleteManySchedules(selectedIds);
+
+      // Update UI: loại bỏ các lịch đã xóa
+      setSchedules((prev) => prev.filter((s) => !selectedIds.includes(s._id)));
+
+      // Reset chế độ chọn
+      setSelectedIds([]);
+      setIsSelectMode(false);
+      setModalVisible(false);
+    } catch (error) {
+      console.error("Xoá lịch hẹn lỗi:", error);
+    }
   };
 
-  const renderItem = ({ item }: { item: any }) => {
-    const selected = selectedIds.includes(item.id);
+  const renderItem = ({ item }: { item: Schedule }) => {
+    const selected = selectedIds.includes(item._id);
+    const remaining = getRemainingTime(item.due_date, item.due_time);
     return (
       <TouchableOpacity
         activeOpacity={0.8}
-        onLongPress={() => handleLongPress(item.id)}
-        onPress={() => (isSelectMode ? toggleSelect(item.id) : null)}
+        onLongPress={() => handleLongPress(item._id)}
+        onPress={() => (isSelectMode ? toggleSelect(item._id) : null)}
         style={styles.cardContainer}
       >
         <View style={styles.cardLeft}>
@@ -85,24 +120,45 @@ const ScheduleScreen = () => {
             )
           ) : null}
           <View style={[styles.iconBox, { marginLeft: isSelectMode ? 10 : 0 }]}>
-            <CalendarCheckIcon size={28} color="#0066FF" weight="fill" />
+            <CalendarCheckIcon size={24} color="#0066FF" weight="fill" />
           </View>
         </View>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate("ScheduleDetail", { id: item.id })}
+          onPress={() => navigation.navigate("ScheduleDetail", { id: item._id })}
           style={styles.cardContent}
         >
           <Text style={styles.cardTitle}>{item.title}</Text>
-          <Text style={styles.cardDate}>{item.date}</Text>
+          <Text style={styles.cardDate}>
+            Ngày tới hạn {item.due_time} - {new Date(item.due_date).toLocaleDateString()}
+          </Text>
         </TouchableOpacity>
 
-        <View style={styles.cardTag}>
-          <Text style={styles.cardTagText}>{item.remain}</Text>
-        </View>
+        <View
+        style={[
+          styles.cardTag,
+          {
+            backgroundColor: remaining.bgColor,
+            paddingHorizontal: 8,
+            paddingVertical: 4,
+            borderRadius: 6,
+          },
+        ]}
+      >
+        <Text style={{ color: remaining.color, fontWeight: '500', fontSize:11 }}>
+          {remaining.text}
+        </Text>
+      </View>
       </TouchableOpacity>
     );
   };
+
+  if (loading)
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#0066FF" />
+      </View>
+    );
 
   return (
     <View style={styles.container}>
@@ -111,7 +167,22 @@ const ScheduleScreen = () => {
         <View style={styles.headerLeft}>
           <TouchableOpacity
             onPress={() =>
-              isSelectMode ? setIsSelectMode(false) : navigation.goBack()
+              isSelectMode ? setIsSelectMode(false) : navigation.reset({
+                index: 0,
+                routes: [
+                  {
+                    name: "MainTabs",
+                    state: {
+                      index: 0, // chọn tab Service
+                      routes: [
+                        { name: "Service" },
+                        { name: "Home" },
+                        { name: "Profile" },
+                      ],
+                    },
+                  },
+                ],
+              })
             }
           >
             <CaretLeftIcon size={20} color="#083070" weight="bold" />
@@ -132,9 +203,9 @@ const ScheduleScreen = () => {
 
       {/* Danh sách */}
       <FlatList
-        data={appointments}
+        data={schedules}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item._id}
         contentContainerStyle={{ paddingVertical: 8 }}
       />
 
@@ -144,10 +215,7 @@ const ScheduleScreen = () => {
         activeOpacity={isSelectMode ? 1 : 0.8}
         disabled={isSelectMode}
         onPress={() =>
-          navigation.navigate({
-            name: "CreateUpdateSchedule",
-            params: {},
-          })
+          navigation.navigate("CreateUpdateSchedule", { id: undefined })
         }
       >
         <PlusIcon size={16} color="#fff" weight="bold" />

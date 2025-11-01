@@ -30,12 +30,13 @@ export const styles = StyleSheet.create({
   },
   trashButton: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-end",
   },
   trashCount: {
-    fontSize: 16,
+    fontSize: 13,
     color: "#E53935",
     marginLeft: 4,
+    fontWeight: "500",
   },
   cardContainer: {
     flexDirection: "row",
@@ -43,7 +44,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginHorizontal: 16,
     marginVertical: 12,
-    paddingHorizontal: 14,
+    paddingHorizontal: 10,
     paddingVertical: 16,
     borderRadius: 12,
     shadowColor: "#000",

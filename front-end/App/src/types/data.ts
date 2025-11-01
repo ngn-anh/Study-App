@@ -6,7 +6,7 @@ export type RootStackParamList = {
   Register: undefined;
   MainTabs: undefined;
   Home: undefined;
-  Services: undefined;
+  Service: undefined;
   Profile: undefined;
   ScheduleScreen: undefined;
   ScheduleDetail: { id: string };
