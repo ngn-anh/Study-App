@@ -10,6 +10,7 @@ import MainTabs from "./MainTabs";
 import ScheduleScreen from "../screens/ScheduleScreen";
 import ScheduleDetailScreen from "../screens/ScheduleDetailScreen";
 import CreateUpdateScheduleScreen from "../screens/CreateUpdateScheduleScreen";
+import ExamListScreen from "../screens/ExamListScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -25,6 +26,8 @@ const AppNavigator = () => {
       <Stack.Screen name="ScheduleScreen" component={ScheduleScreen} />
       <Stack.Screen name="ScheduleDetail" component={ScheduleDetailScreen} />
       <Stack.Screen name="CreateUpdateSchedule" component={CreateUpdateScheduleScreen} />
+      <Stack.Screen name="ExamListScreen" component={ExamListScreen} />
+      
 
 
       {/* Tab chính */}
