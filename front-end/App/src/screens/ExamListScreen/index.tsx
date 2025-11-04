@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import {
   View,
   Text,
@@ -6,8 +6,6 @@ import {
   FlatList,
   TextInput,
   Image,
-  Modal,
-  Pressable,
   ScrollView,
 } from "react-native";
 import {
@@ -16,7 +14,6 @@ import {
   MagnifyingGlass,
   Clock,
   Student,
-  CheckCircle,
   Check,
 } from "phosphor-react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -24,106 +21,137 @@ import { getSubjectTagStyle } from "../../utils/getSubjectTagStyle";
 import { styles } from "./index.styles";
 import { SUBJECTS } from "../../constants/subjects";
 import RNModal from "react-native-modal";
+import { getExams } from "../../api/exam";
+
 
 export default function ExamListScreen() {
   const navigation = useNavigation();
+
+  // --- Tabs ---
   const [activeTab, setActiveTab] = useState<"ongoing" | "upcoming">("ongoing");
 
-  // 👉 Bộ lọc
-  const [showFilter, setShowFilter] = useState(false);
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  // --- Data ---
+  const [exams, setExams] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  // --- Filter states ---
+  const [selectedTime, setSelectedTime] = useState<"newest" | "oldest" | null>(null);
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
+  const [searchText, setSearchText] = useState("");
 
-  const toggleSubject = (code: string) => {
-    setSelectedSubjects((prev) =>
-      prev.includes(code)
-        ? prev.filter((c) => c !== code)
-        : [...prev, code]
-    );
-  };
+  // --- Modal temp states ---
+  const [showFilter, setShowFilter] = useState(false);
+  const [tempTime, setTempTime] = useState<"newest" | "oldest" | null>(null);
+  const [tempSubjects, setTempSubjects] = useState<string[]>([]);
 
-  const handleReset = () => {
+  // --- Fetch exams ---
+  const fetchExams = useCallback(async () => {
+    try {
+      setLoading(true);
+      const params = {
+        status: activeTab,
+        sort: selectedTime ?? undefined,
+        subjectCodes: selectedSubjects.length > 0 ? selectedSubjects : undefined,
+        name: searchText ?? undefined,
+        currentClassCode: "CLASS_11",
+        page: 1,
+        limit: 10,
+      };
+      console.log("params", params);
+      const res = await getExams(params);
+      setExams(res.data || []);
+    } catch (err) {
+      console.error("❌ Lỗi khi tải danh sách bài thi:", err);
+    } finally {
+      setLoading(false);
+    }
+  }, [activeTab, selectedTime, selectedSubjects, searchText]);
+
+  useEffect(() => {
+    fetchExams();
+  }, [activeTab, selectedTime, selectedSubjects]);
+
+  // --- Handle tab change ---
+  const handleTabChange = (tab: "ongoing" | "upcoming") => {
+    setActiveTab(tab);
     setSelectedTime(null);
     setSelectedSubjects([]);
+    setSearchText("");
   };
 
+  // --- Hàm handleSearch ---
+  const handleSearch = () => {
+    fetchExams();
+  };
+
+  // --- Handle search with debounce ---
+  const handleSearchTextChange = (text: string) => {
+    setSearchText(text);
+  };
+
+  // --- Modal filter ---
+  const openFilterModal = () => {
+    setTempTime(selectedTime);
+    setTempSubjects([...selectedSubjects]);
+    setShowFilter(true);
+  };
+  const toggleTempSubject = (code: string) => {
+    setTempSubjects((prev) =>
+      prev.includes(code) ? prev.filter((c) => c !== code) : [...prev, code]
+    );
+  };
+  const handleResetModal = () => {
+    setTempTime(null);
+    setTempSubjects([]);
+  };
   const handleApply = () => {
+    setSelectedTime(tempTime);
+    setSelectedSubjects(tempSubjects);
     setShowFilter(false);
-    console.log("Filter applied:", { selectedTime, selectedSubjects });
   };
 
-  const timeOptions = [
-    { label: "Ưu tiên mới nhất", value: "newest" },
-    { label: "Ưu tiên cũ nhất", value: "oldest" },
-  ];
-
-  const exams =
-    activeTab === "ongoing"
-      ? [
-          {
-            id: 1,
-            title: "Thi thử giữa kì 2",
-            subjectCode: "MATH",
-            time: "Kết thúc vào 3 ngày",
-            participants: 22,
-          },
-          {
-            id: 2,
-            title: "Thi thử giữa kì 2",
-            subjectCode: "LITERATURE",
-            time: "Kết thúc vào 3 ngày",
-            participants: 12,
-          },
-        ]
-      : [
-          {
-            id: 3,
-            title: "Thi thử giữa kì 2",
-            subjectCode: "ENGLISH",
-            time: "Bắt đầu vào 3 ngày",
-          },
-        ];
-
+  // --- Render exam item ---
   const renderExamItem = ({ item }: { item: any }) => {
-    const subjectCode = item.subjectCode as keyof typeof SUBJECTS;
-    const tagStyle = getSubjectTagStyle(subjectCode);
-    const subjectName = SUBJECTS[subjectCode].name;
+    const subjectCode = item.subject.code as keyof typeof SUBJECTS;
+    const subjectInfo = SUBJECTS[subjectCode] ?? { name: "Không xác định", code: "MATH" };
+    const tagStyle = getSubjectTagStyle(subjectInfo.code);
+    const subjectName = subjectInfo.name;
+
+    const now = new Date();
+    const start = new Date(item.start_date);
+    const end = new Date(item.end_date);
+    const diffDays =
+      activeTab === "ongoing"
+        ? Math.ceil((end.getTime() - now.getTime()) / (1000 * 3600 * 24))
+        : Math.ceil((start.getTime() - now.getTime()) / (1000 * 3600 * 24));
+    const timeText =
+      activeTab === "ongoing"
+        ? `Kết thúc vào ${diffDays} ngày`
+        : `Bắt đầu sau ${diffDays} ngày`;
 
     return (
       <View style={styles.card}>
         <View style={styles.cardLeft}>
-          <Image
-            source={require("../../assets/images/subject.png")}
-            style={styles.thumbnail}
-          />
+          <Image source={{ uri: item.image || undefined }} style={styles.thumbnail} />
         </View>
         <View style={styles.cardRight}>
-          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.title}>{item.name ?? ""}</Text>
 
           <View style={styles.timeRow}>
             <Clock size={14} color="#5D697E" />
-            <Text style={styles.time}>{item.time}</Text>
+            <Text style={styles.time}>{timeText}</Text>
 
             {activeTab === "ongoing" && (
               <View style={styles.participantRow}>
                 <Student size={16} color="#6B7280" weight="duotone" />
-                <Text style={styles.participantText}>
-                  {item.participants}
-                </Text>
+                <Text style={styles.participantText}>{item.participants?.toString() ?? "0"}</Text>
               </View>
             )}
           </View>
 
           <View style={styles.bottomRow}>
-            <View
-              style={[
-                styles.subjectTag,
-                { backgroundColor: tagStyle.backgroundColor },
-              ]}
-            >
-              <Text style={[styles.subjectText, { color: tagStyle.color }]}>
-                {subjectName}
-              </Text>
+            <View style={[styles.subjectTag, { backgroundColor: tagStyle.backgroundColor }]}>
+              <Text style={[styles.subjectText, { color: tagStyle.color }]}>{subjectName}</Text>
             </View>
 
             {activeTab === "ongoing" ? (
@@ -157,138 +185,93 @@ export default function ExamListScreen() {
       <View style={styles.tabContainer}>
         <TouchableOpacity
           style={[styles.tab, activeTab === "ongoing" && styles.activeTab]}
-          onPress={() => setActiveTab("ongoing")}
+          onPress={() => handleTabChange("ongoing")}
         >
-          <Text
-            style={[
-              styles.tabText,
-              activeTab === "ongoing" && styles.activeTabText,
-            ]}
-          >
+          <Text style={[styles.tabText, activeTab === "ongoing" && styles.activeTabText]}>
             Đang diễn ra
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.tab, activeTab === "upcoming" && styles.activeTab]}
-          onPress={() => setActiveTab("upcoming")}
+          onPress={() => handleTabChange("upcoming")}
         >
-          <Text
-            style={[
-              styles.tabText,
-              activeTab === "upcoming" && styles.activeTabText,
-            ]}
-          >
+          <Text style={[styles.tabText, activeTab === "upcoming" && styles.activeTabText]}>
             Sắp diễn ra
           </Text>
         </TouchableOpacity>
       </View>
 
-      {/* Thanh tìm kiếm */}
+      {/* Search */}
       <View style={styles.searchBar}>
-        <MagnifyingGlass size={18} color="#B9D2FA" />
+        <TouchableOpacity onPress={handleSearch}>
+          <MagnifyingGlass size={18} color="#B9D2FA" />
+        </TouchableOpacity>
         <TextInput
           placeholder="Tìm kiếm..."
           placeholderTextColor="#999"
+          value={searchText}
+          onChangeText={handleSearchTextChange}
           style={styles.searchInput}
         />
-        <TouchableOpacity onPress={() => setShowFilter(true)}>
+        <TouchableOpacity onPress={openFilterModal}>
           <FunnelSimple size={18} color="#1669EF" weight="bold" />
         </TouchableOpacity>
       </View>
 
-      {/* Danh sách bài thi */}
-      <FlatList
-        data={exams}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={renderExamItem}
-        contentContainerStyle={{ paddingBottom: 100 }}
-      />
+      {/* Exam list */}
+      {loading ? (
+        <Text style={{ textAlign: "center", marginTop: 40 }}>Đang tải...</Text>
+      ) : (
+        <FlatList
+          data={exams}
+          keyExtractor={(item) => item._id}
+          renderItem={renderExamItem}
+          contentContainerStyle={{ paddingBottom: 100 }}
+        />
+      )}
 
-      {/* Modal Bộ lọc */}
+      {/* Modal filter */}
       <RNModal
         isVisible={showFilter}
         onBackdropPress={() => setShowFilter(false)}
         style={{ justifyContent: "flex-end", margin: 0 }}
       >
-        <View
-          style={{
-            backgroundColor: "#fff",
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
-            padding: 20,
-            maxHeight: "80%",
-          }}
-        >
+        <View style={{ backgroundColor: "#fff", borderTopLeftRadius: 20, borderTopRightRadius: 20, padding: 20, maxHeight: "80%" }}>
           <View style={{ alignItems: "center", marginBottom: 12 }}>
-            <View
-              style={{
-                width: 40,
-                height: 4,
-                borderRadius: 2,
-                backgroundColor: "#ccc",
-              }}
-            />
+            <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: "#ccc" }} />
           </View>
 
-          <Text
-            style={{
-              textAlign: "center",
-              fontSize: 12,
-              fontWeight: "600",
-              color: "#A2ADBF",
-              marginBottom: 10,
-              letterSpacing: 0.03
-            }}
-          >
+          <Text style={{ textAlign: "center", fontSize: 12, fontWeight: "600", color: "#A2ADBF", marginBottom: 10 }}>
             BỘ LỌC
           </Text>
 
           <ScrollView showsVerticalScrollIndicator={false}>
-            {/* Thời gian thi */}
             <Text style={styles.filterSectionTitle}>Thời gian thi</Text>
-            {timeOptions.map((opt) => (
-              <TouchableOpacity
-                key={opt.value}
-                style={styles.filterOption}
-                onPress={() => setSelectedTime(opt.value)}
-              >
+            {[
+              { label: "Ưu tiên mới nhất", value: "newest" as "newest" },
+              { label: "Ưu tiên cũ nhất", value: "oldest" as "oldest" },
+            ].map((opt) => (
+              <TouchableOpacity key={opt.value} style={styles.filterOption} onPress={() => setTempTime(opt.value)}>
                 <Text style={styles.filterOptionText}>{opt.label}</Text>
-                {selectedTime === opt.value && (
-                  <Check  size={16} color="#1669EF" weight="bold" />
-                )}
+                {tempTime === opt.value && <Check size={16} color="#1669EF" weight="bold" />}
               </TouchableOpacity>
             ))}
 
-            {/* Môn học */}
             <Text style={styles.filterSectionTitle}>Môn học</Text>
             {Object.values(SUBJECTS).map((subj) => {
               const tagStyle = getSubjectTagStyle(subj.code);
               return (
-                <TouchableOpacity
-                  key={subj.code}
-                  style={styles.filterOption}
-                  onPress={() => toggleSubject(subj.code)}
-                >
-                  <Text
-                    style={[
-                      styles.filterOptionText,
-                      { color: tagStyle.color || "#374151" },
-                    ]}
-                  >
-                    {subj.name}
-                  </Text>
-                  {selectedSubjects.includes(subj.code) && (
-                    <Check size={16} color="#1669EF" weight="bold" />
-                  )}
+                <TouchableOpacity key={subj.code} style={styles.filterOption} onPress={() => toggleTempSubject(subj.code)}>
+                  <Text style={[styles.filterOptionText, { color: tagStyle.color || "#374151" }]}>{subj.name}</Text>
+                  {tempSubjects.includes(subj.code) && <Check size={16} color="#1669EF" weight="bold" />}
                 </TouchableOpacity>
               );
             })}
           </ScrollView>
 
-          {/* Buttons */}
           <View style={styles.filterButtons}>
-            <TouchableOpacity style={styles.resetBtn} onPress={handleReset}>
+            <TouchableOpacity style={styles.resetBtn} onPress={handleResetModal}>
               <Text style={styles.resetText}>Thiết Lập Lại</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.applyBtn} onPress={handleApply}>
