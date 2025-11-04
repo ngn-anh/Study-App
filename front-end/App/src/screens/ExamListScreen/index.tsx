@@ -16,16 +16,22 @@ import {
   Student,
   Check,
 } from "phosphor-react-native";
-import { useNavigation } from "@react-navigation/native";
+import { NavigationProp, RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { getSubjectTagStyle } from "../../utils/getSubjectTagStyle";
 import { styles } from "./index.styles";
 import { SUBJECTS } from "../../constants/subjects";
 import RNModal from "react-native-modal";
 import { getExams } from "../../api/exam";
+import { RootStackParamList } from "../../types/data";
+import SuccessModal from "../../components/SuccessModal";
 
+type RouteProps = RouteProp<RootStackParamList, "ExamListScreen">;
 
 export default function ExamListScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const route = useRoute<RouteProps>();
+  const {showSuccessModal} = route.params || {};
+  const [showModal, setShowModal] = useState(false);
 
   // --- Tabs ---
   const [activeTab, setActiveTab] = useState<"ongoing" | "upcoming">("ongoing");
@@ -43,6 +49,12 @@ export default function ExamListScreen() {
   const [showFilter, setShowFilter] = useState(false);
   const [tempTime, setTempTime] = useState<"newest" | "oldest" | null>(null);
   const [tempSubjects, setTempSubjects] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (showSuccessModal) {
+      setShowModal(true);
+    }
+  }, [showSuccessModal]);
 
   // --- Fetch exams ---
   const fetchExams = useCallback(async () => {
@@ -159,7 +171,12 @@ export default function ExamListScreen() {
                 <Text style={styles.joinText}>Vào thi</Text>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity style={styles.remindBtn}>
+              <TouchableOpacity style={styles.remindBtn}
+                 onPress={() => navigation.navigate("CreateUpdateSchedule", {
+                    name: item.name,
+                    due_date: item.start_date,
+                  })}
+              >
                 <Text style={styles.remindText}>Nhắc tôi</Text>
               </TouchableOpacity>
             )}
@@ -174,7 +191,22 @@ export default function ExamListScreen() {
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerLeft}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+          <TouchableOpacity onPress={() => navigation.reset({
+                index: 0,
+                routes: [
+                  {
+                    name: "MainTabs",
+                    state: {
+                      index: 0, // chọn tab Service
+                      routes: [
+                        { name: "Service" },
+                        { name: "Home" },
+                        { name: "Profile" },
+                      ],
+                    },
+                  },
+                ],
+              })}>
             <CaretLeft size={20} color="#083070" weight="bold" />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Thi Thử</Text>
@@ -280,6 +312,19 @@ export default function ExamListScreen() {
           </View>
         </View>
       </RNModal>
+
+      <SuccessModal
+        visible={showModal}
+        title="Nhắc Lịch Thành Công"
+        content="Bạn có muốn xem chi tiết nhắc hẹn không?"
+        cancelText="Đóng"
+        okText="Xem Chi Tiết"
+        handleCancel={() => setShowModal(false)}
+        handleOk={() => {
+          setShowModal(false);
+          navigation.navigate('ScheduleScreen');
+        }}
+      />
     </View>
   );
 }
