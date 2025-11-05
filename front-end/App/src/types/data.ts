@@ -11,4 +11,5 @@ export type RootStackParamList = {
   ScheduleScreen: undefined;
   ScheduleDetail: { id: string };
   CreateUpdateSchedule: { id?: string }; // id có thể không có khi tạo mới
+  PracticeExam: undefined;
 };
