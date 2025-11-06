@@ -11,15 +11,19 @@ export const styles = StyleSheet.create({
     container: {
         backgroundColor: "#fff",
         borderRadius: 16,
+        borderColor: "#0418f7ff",
+        borderWidth: 1,
         overflow: "hidden",
         elevation: 3,
         shadowColor: "#000",
         shadowOpacity: 0.1,
         shadowRadius: 4,
         shadowOffset: { width: 0, height: 2 },
-        marginTop: verticalScale(40),
+        // marginTop: verticalScale(40),
         padding: scale(14),
-        width: verticalScale(345),
+        // width: verticalScale(345),
+       flex: 1, 
+       margin: 5,
     },
     image: {
         width: "100%",
@@ -60,7 +64,7 @@ export const styles = StyleSheet.create({
     iconInfo: {
         flexDirection: "row",
         alignItems: "center",
-        marginTop: verticalScale(10),
+        marginVertical: verticalScale(10),
     },
     iconRow: {
         flexDirection: "row",

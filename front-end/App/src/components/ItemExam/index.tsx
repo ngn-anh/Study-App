@@ -41,7 +41,7 @@ const ItemExam = (props: Props) => {
                         </View>
                     </View>
                     <ButtonCustom
-                        type="primary"
+                        type="secondary"
                         name="Chi Tiết"
                         paddingVertical={10}
                         onPress={handleButtonPress}

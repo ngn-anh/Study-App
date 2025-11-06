@@ -6,7 +6,7 @@ import { RootStackParamList } from "../../types/data";
 import Header from "../../components/Header";
 import SearchBar from "../../components/Search";
 import ItemExam from "../../components/ItemExam";
-import { Exam } from "../../types/typeObj";
+import { verticalScale } from "../../utils/responsive";
 
 type Props = {
   route: RouteProp<RootStackParamList, 'PracticeExamScreen'>;
@@ -64,19 +64,14 @@ const PracticeExamScreen = (props: Props) => {
     }
   ]
 
-  // const renderItemExam = ({ item }: { item: Exam }) => (
-  const renderItemExam = ({ item }: any) => (
-    <ItemExam exam={item} />
-  );
-
-  // const renderItemExam = ({ item }) => {
-  //   const isSingleItem = listExam.length === 1; // Kiểm tra nếu chỉ có 1 item
-  //   return (
-  //     <View style={{ flex: isSingleItem ? 1 : 0.5 }}> {/* Chiếm toàn bộ chiều rộng nếu chỉ có 1 item */}
-  //       <ItemExam exam={item} />
-  //     </View>
-  //   );
-  // };
+  const renderItemExam = ({ item }: any) => {
+    const isSingleItem = listExam.length === 1;
+    return (
+      <View style={{ flex: isSingleItem ? 1 : 0.5 }}>
+        <ItemExam exam={item} />
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -86,17 +81,18 @@ const PracticeExamScreen = (props: Props) => {
           <Text style={styles.title}>Làm chủ môn {subject?.name}</Text>
           <ExpandDesSubject text={subject?.description.trim() || ''} numberOfLines={5} />
         </View>
-      </ScrollView>
-      <SearchBar />
-      <FlatList
-        data={listExam}
-        renderItem={renderItemExam}
-        keyExtractor={(item) => item.id}
-        numColumns={2} // Hiển thị 2 item trên mỗi hàng
-        columnWrapperStyle={{ justifyContent: 'space-between' }} // Căn giữa các item
-        contentContainerStyle={{ paddingHorizontal: 10 }} // Thêm khoảng cách cho các item
-      />
+        <SearchBar />
+        <FlatList
+          data={listExam}
+          renderItem={renderItemExam}
+          keyExtractor={(item) => item.id}
+          numColumns={2} // Hiển thị 2 item trên mỗi hàng
+          columnWrapperStyle={{ justifyContent: 'space-between' }} // Căn giữa các item
+          contentContainerStyle={{ paddingHorizontal: 10, paddingTop: verticalScale(20) }} // Thêm khoảng cách cho các item
+        />
+      </ScrollView >
     </View>
+
   );
 }
 
