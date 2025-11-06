@@ -1,3 +1,5 @@
+import { Subject } from "./typeObj";
+
 export type RootStackParamList = {
   SplashScreen1: undefined;
   SplashScreen2: undefined;
@@ -11,4 +13,5 @@ export type RootStackParamList = {
   ScheduleScreen: undefined;
   ScheduleDetail: { id: string };
   CreateUpdateSchedule: { id?: string }; // id có thể không có khi tạo mới
+  PracticeExamScreen: { subject?: Subject };
 };
