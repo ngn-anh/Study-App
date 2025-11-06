@@ -1,157 +1,103 @@
-// import React, { useState } from "react";
-// import { View, Text, TextInput, TouchableOpacity, ImageBackground, ScrollView } from "react-native";
-// import { useNavigation, NavigationProp } from "@react-navigation/native";
-// import axios from "axios";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
-// import { ArrowLeftIcon, EyeIcon, EyeSlashIcon, PhoneIcon } from "phosphor-react-native";
-// import { styles } from "./index.styles";
-// import { API_URL } from "@env";
-// import { CustomModal } from "../../components/CustomModal";
-// import { RootStackParamList } from "../../types/data";
-
-import { ScrollView, Text, View } from "react-native";
+import { FlatList, ScrollView, Text, View } from "react-native";
 import { styles } from "./index.styles";
 import ExpandDesSubject from "../../components/ExpandDesSubject";
+import { RouteProp } from "@react-navigation/native";
+import { RootStackParamList } from "../../types/data";
+import Header from "../../components/Header";
+import SearchBar from "../../components/Search";
+import ItemExam from "../../components/ItemExam";
+import { Exam } from "../../types/typeObj";
 
-const PracticeExam = () => {
-  // const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [showPassword, setShowPassword] = useState(false);
+type Props = {
+  route: RouteProp<RootStackParamList, 'PracticeExamScreen'>;
+};
 
-  // const [modalVisible, setModalVisible] = useState(false);
-  // const [modalMessage, setModalMessage] = useState("");
-  // const [modalType, setModalType] = useState<'success' | 'error'>('success');
+const PracticeExamScreen = (props: Props) => {
+  const { route } = props;
+  const { subject } = route.params;
 
-  // const showModal = (message: string, type: 'success' | 'error' = 'success') => {
-  //   setModalMessage(message);
-  //   setModalType(type);
-  //   setModalVisible(true);
+  const listExam: any[] = [
+    {
+      id: "1",
+      image: "https://example.com/images/exam1.jpg",
+      name: "Đề thi tốt nghiệp THPT môn Toán -  Đề số 1",
+      number: 50,
+      duration: 120,
+      createdAt: "2023-11-05T10:00:00Z",
+      difficulty: 3
+    },
+    {
+      id: "2",
+      image: "https://example.com/images/exam2.jpg",
+      name: "Đề thi tốt nghiệp THPT môn Toán -  Đề số 2",
+      number: 40,
+      duration: 90,
+      createdAt: "2023-11-06T14:30:00Z",
+      difficulty: 2
+    },
+    {
+      id: "3",
+      image: "https://example.com/images/exam3.jpg",
+      name: "Đề thi tốt nghiệp THPT môn Toán -  Đề số 3",
+      number: 30,
+      duration: 60,
+      createdAt: "2023-11-05T09:15:00Z",
+      difficulty: 4
+    },
+    {
+      id: "4",
+      image: "https://example.com/images/exam4.jpg",
+      name: "Đề thi tốt nghiệp THPT môn Toán -  Đề số 4",
+      number: 50,
+      duration: 120,
+      createdAt: "2023-11-03T11:45:00Z",
+      difficulty: 3
+    },
+    {
+      id: "5",
+      image: "https://example.com/images/exam5.jpg",
+      name: "Đề thi tốt nghiệp THPT môn Toán -  Đề số 5",
+      number: 45,
+      duration: 100,
+      createdAt: "2023-11-02T08:00:00Z",
+      difficulty: 5
+    }
+  ]
+
+  // const renderItemExam = ({ item }: { item: Exam }) => (
+  const renderItemExam = ({ item }: any) => (
+    <ItemExam exam={item} />
+  );
+
+  // const renderItemExam = ({ item }) => {
+  //   const isSingleItem = listExam.length === 1; // Kiểm tra nếu chỉ có 1 item
+  //   return (
+  //     <View style={{ flex: isSingleItem ? 1 : 0.5 }}> {/* Chiếm toàn bộ chiều rộng nếu chỉ có 1 item */}
+  //       <ItemExam exam={item} />
+  //     </View>
+  //   );
   // };
-
-  // const handleLogin = async () => {
-  //   if (!username || !password) {
-  //     showModal("Vui lòng nhập username và mật khẩu", "error");
-  //     return;
-  //   }
-
-  //   try {
-  //     const response = await axios.post(`${API_URL}/auth/login`, { username, password });
-  //     const userData = response.data;
-
-  //     // Lưu userData vào AsyncStorage
-  //     await AsyncStorage.setItem("userData", JSON.stringify(userData));
-
-  //     showModal("Đăng nhập thành công!", "success");
-
-  //     // Delay để modal hiển thị trước khi navigate
-  //     setTimeout(() => {
-  //       navigation.reset({
-  //         index: 1,
-  //         routes: [{ name: "MainTabs" }], // reset về tab navigator
-  //       });
-  //     }, 1000);
-
-  //   } catch (error: any) {
-  //     const message = error.response?.data?.message || "Đăng nhập thất bại, thử lại sau";
-  //     showModal(message, "error");
-  //   }
-  // };
-
-  const description = `
-  Bộ đề được biên soạn theo chuẩn chương trình mới nhất
-
-  📘 20 đề thi
-
-  - Đề gồm 22 câu hỏi, chia thành 3 phần:
-  + Phần 1 gồm 12 câu hỏi trắc nghiệm. Mỗi câu có 4 phương án chọn 1 đáp án đúng.
-  + Phần 2 gồm 4 câu hỏi ở dạng Đúng/Sai.
-  + Phần 3 gồm 6 câu hỏi dạng trả lời ngắn.
-
-  - Các câu hỏi thuộc 3 cấp độ: Nhận biết - Thông hiểu - Vận dụng theo tỉ lệ 45% - 35% - 25%.
-
-  - Với định hướng mới, học sinh cần thay đổi cách học, tập trung rèn luyện tư duy logic, năng lực giải quyết vấn đề.
-
-  - Môn Toán là môn học quan trọng nên cần phân bổ thời gian hợp lý để đạt hiệu quả cao nhất.
-  `;
 
   return (
     <View style={styles.container}>
+      <Header data={subject} />
       <ScrollView>
         <View style={styles.content}>
-          <Text style={styles.title}>Làm chủ môn Toán</Text>
-          <ExpandDesSubject text={description.trim()} numberOfLines={5} />
+          <Text style={styles.title}>Làm chủ môn {subject?.name}</Text>
+          <ExpandDesSubject text={subject?.description.trim() || ''} numberOfLines={5} />
         </View>
       </ScrollView>
+      <SearchBar />
+      <FlatList
+        data={listExam}
+        renderItem={renderItemExam}
+        keyExtractor={(item) => item.id}
+        numColumns={2} // Hiển thị 2 item trên mỗi hàng
+        columnWrapperStyle={{ justifyContent: 'space-between' }} // Căn giữa các item
+        contentContainerStyle={{ paddingHorizontal: 10 }} // Thêm khoảng cách cho các item
+      />
     </View>
   );
 }
 
-
-// return (
-//   <View style={styles.container}>
-//     <Text>Màn luyện đề</Text>
-//     {/* <ImageBackground
-//         source={require("../../assets/images/header-bg.png")}
-//         style={styles.headerBackground}
-//         resizeMode="cover"
-//       >
-//         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-//           <ArrowLeftIcon size={22} color="#fff" weight="bold" />
-//         </TouchableOpacity>
-//       </ImageBackground>
-
-//       <ScrollView contentContainerStyle={styles.formContainer}>
-//         <Text style={styles.label}>
-//           Username: <Text style={{ color: "red" }}>*</Text>
-//         </Text>
-//         <TextInput
-//           placeholder="Vui lòng nhập username"
-//           style={styles.input}
-//           value={username}
-//           onChangeText={setUsername}
-//         />
-
-//         <Text style={styles.label}>
-//           Mật khẩu: <Text style={{ color: "red" }}>*</Text>
-//         </Text>
-//         <View style={styles.passwordWrapper}>
-//           <TextInput
-//             placeholder="Vui lòng nhập mật khẩu"
-//             style={styles.inputPassword}
-//             secureTextEntry={!showPassword}
-//             value={password}
-//             onChangeText={setPassword}
-//           />
-//           <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.iconEye}>
-//             {showPassword ? <EyeIcon size={20} color="#0047AB" /> : <EyeSlashIcon size={20} color="#0047AB" />}
-//           </TouchableOpacity>
-//         </View>
-
-//         <TouchableOpacity>
-//           <Text style={styles.forgotText}>Quên mật khẩu?</Text>
-//         </TouchableOpacity>
-
-//         <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-//           <Text style={styles.loginText}>Đăng Nhập</Text>
-//         </TouchableOpacity>
-
-//         <View style={styles.supportContainer}>
-//           <TouchableOpacity style={styles.supportLink}>
-//             <PhoneIcon size={18} color="#1669EF" weight="bold" />
-//             <Text style={styles.supportText}>  Liên hệ hỗ trợ</Text>
-//           </TouchableOpacity>
-//         </View>
-//       </ScrollView>
-
-//       <CustomModal
-//         visible={modalVisible}
-//         message={modalMessage}
-//         type={modalType}
-//         onClose={() => setModalVisible(false)}
-//       /> */}
-//   </View>
-// );
-// };
-
-export default PracticeExam;
+export default PracticeExamScreen;
