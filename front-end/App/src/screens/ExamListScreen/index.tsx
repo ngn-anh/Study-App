@@ -167,7 +167,13 @@ export default function ExamListScreen() {
             </View>
 
             {activeTab === "ongoing" ? (
-              <TouchableOpacity style={styles.joinBtn}>
+              <TouchableOpacity 
+                style={styles.joinBtn}  
+                onPress={() =>
+                  navigation.navigate("ExamInfoScreen", {
+                    examId: item._id
+                })
+  }>
                 <Text style={styles.joinText}>Vào thi</Text>
               </TouchableOpacity>
             ) : (

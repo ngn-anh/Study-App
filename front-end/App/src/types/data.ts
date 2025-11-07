@@ -12,4 +12,8 @@ export type RootStackParamList = {
   ScheduleDetail: { id: string };
   CreateUpdateSchedule: { id?: string, name?: string, due_date?: string }; // id có thể không có khi tạo mới
   ExamListScreen:  { showSuccessModal?: boolean } | undefined;
+  ExamInfoScreen: { examId: string };
+  ExamDoScreen: { examId: string };
+  ExamResultScreen: undefined;
+  ExamRankScreen: undefined;
 };
