@@ -10,6 +10,12 @@ import MainTabs from "./MainTabs";
 import ScheduleScreen from "../screens/ScheduleScreen";
 import ScheduleDetailScreen from "../screens/ScheduleDetailScreen";
 import CreateUpdateScheduleScreen from "../screens/CreateUpdateScheduleScreen";
+import ExamListScreen from "../screens/ExamListScreen";
+import ExamInfoScreen from "../screens/ExamInfoScreen";
+import ExamDoScreen from "../screens/ExamDoScreen";
+import { ExamResultScreen } from "../screens/ExamResultScreen";
+import { ExamRankScreen } from "../screens/ExamRankScreen";
+import ExamDetailResultScreen from "../screens/ExamDetailResultScreen";
 import PracticeExamScreen from "../screens/PracticeExamScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -26,6 +32,12 @@ const AppNavigator = () => {
       <Stack.Screen name="ScheduleScreen" component={ScheduleScreen} />
       <Stack.Screen name="ScheduleDetail" component={ScheduleDetailScreen} />
       <Stack.Screen name="CreateUpdateSchedule" component={CreateUpdateScheduleScreen} />
+      <Stack.Screen name="ExamListScreen" component={ExamListScreen} />
+      <Stack.Screen name="ExamInfoScreen" component={ExamInfoScreen} />
+      <Stack.Screen name="ExamDoScreen" component={ExamDoScreen} />
+      <Stack.Screen name="ExamResultScreen" component={ExamResultScreen} />
+      <Stack.Screen name="ExamRankScreen" component={ExamRankScreen} />
+      <Stack.Screen name="ExamDetailResultScreen" component={ExamDetailResultScreen} />
       <Stack.Screen name="PracticeExamScreen" component={PracticeExamScreen} />
 
       {/* Tab chính */}

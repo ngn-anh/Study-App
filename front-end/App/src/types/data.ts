@@ -12,6 +12,13 @@ export type RootStackParamList = {
   Profile: undefined;
   ScheduleScreen: undefined;
   ScheduleDetail: { id: string };
-  CreateUpdateSchedule: { id?: string }; // id có thể không có khi tạo mới
+  CreateUpdateSchedule: { id?: string, name?: string, due_date?: string }; // id có thể không có khi tạo mới
+  ExamListScreen:  { showSuccessModal?: boolean } | undefined;
+  ExamInfoScreen: { examId: string };
+  ExamDoScreen: { examId: string };
+  ExamResultScreen: { examId: string, userId: string };
+  ExamRankScreen: { examId: string, userId: string };
+  ExamDetailResultScreen: {examResultId: string}
   PracticeExamScreen: { subject?: Subject };
 };
+  

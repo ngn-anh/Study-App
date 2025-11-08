@@ -43,16 +43,12 @@ const ScheduleScreen = () => {
 
   // Lấy danh sách lịch hẹn
  const fetchSchedules = async () => {
-  console.log(1)
     try {
       setLoading(true);
       const userData = await AsyncStorage.getItem("userData");
-      console.log(userData)
       if (!userData) return;
       const userJson = JSON.parse(userData);
-      console.log('userJson',userJson)
       const data = await getSchedules(userJson.user.id);
-      console.log(data)
       setSchedules(data);
     } catch (error) {
       console.error("Fetch schedules error:", error);

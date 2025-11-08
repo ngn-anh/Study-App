@@ -26,11 +26,11 @@ const formatTime = (date: Date) =>
 const CreateUpdateScheduleScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const route = useRoute<RouteProps>();
-  const { id } = route.params || {};
+  const { id,name, due_date } = route.params || {};
 
   const [form, setForm] = useState({
-    title: "",
-    dueDate: new Date(),
+    title: name || "",
+    dueDate: due_date ? new Date(due_date) : new Date(),
     remindDate: new Date(),
     repeat: "Không lặp",
     note: "",
@@ -186,7 +186,14 @@ const CreateUpdateScheduleScreen = () => {
         await createSchedule(payload);
       }
 
-      navigation.navigate("ScheduleScreen")
+      if (name && due_date) {
+    // ✅ Quay về màn ExamListScreen và gửi flag
+        navigation.navigate("ExamListScreen", { showSuccessModal: true });
+      } else {
+        navigation.navigate("ScheduleScreen")
+      }
+
+      
     } catch (error) {
       console.error("Lưu lịch hẹn lỗi:", error);
     }

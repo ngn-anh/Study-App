@@ -26,6 +26,8 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ icon: Icon, label, badgeCount
   const handlePress = () => {
     if (label === "Lịch hẹn") {
       navigation.navigate("ScheduleScreen" as never);
+    }  else if (label === "Thi thử") {
+      navigation.navigate("ExamListScreen" as never);
     } else if (label === "Luyện đề") {
       navigation.navigate("PracticeExam" as never);
     }
