@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ApiTags, ApiQuery } from '@nestjs/swagger';
 import { ExamResultService } from './exam-result.service';
 
@@ -15,5 +15,11 @@ export class ExamResultController {
     @Query('exam_id') examId: string,
   ) {
     return this.examResultService.getExamResultDetail(userId, examId);
+  }
+
+  // GET /exam-results/:examResultId
+  @Get(':examResultId')
+  async getExamDetailResult(@Param('examResultId') examResultId: string) {
+    return await this.examResultService.getExamDetailResult(examResultId);
   }
 }
