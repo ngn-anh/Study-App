@@ -34,7 +34,7 @@ export const ExamResultScreen = () => {
         setLoading(true);
         const data = await getExamResultDetail(userId, examId);
         setResult({
-          examResultId: data.examResultId,
+          examResultId: data.exam_result_id,
           total_correct: data.total_correct,
           total_question: data.total_question,
           total_wrong: data.total_wrong,
@@ -141,7 +141,7 @@ export const ExamResultScreen = () => {
         <TouchableOpacity
           style={styles.buttonInner}
           onPress={() =>
-            navigation.navigate("ExamDetailResultScreen" as never)
+            navigation.navigate("ExamDetailResultScreen" , {examResultId:result.examResultId})
           }
         >
           <View style={styles.buttonContent}>

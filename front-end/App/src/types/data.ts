@@ -16,4 +16,5 @@ export type RootStackParamList = {
   ExamDoScreen: { examId: string };
   ExamResultScreen: { examId: string, userId: string };
   ExamRankScreen: undefined;
+  ExamDetailResultScreen: {examResultId: string}
 };
