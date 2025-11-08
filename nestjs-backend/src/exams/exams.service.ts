@@ -22,136 +22,152 @@ export class ExamsService {
     @InjectModel(ExamResult.name) private examResultModel: Model<ExamResultDocument>
   ) {}
 
-  async getExams(filterDto: ExamsFilterDto) {
-    const {
-      status,
-      name,
-      sort,
-      type,
-      currentClassCode,
-      subjectCodes,
-      page = 1,
-      limit = 10,
-    } = filterDto;
+ async getExams(filterDto: ExamsFilterDto) {
+  const {
+    status,
+    name,
+    sort,
+    type,
+    currentClassCode,
+    subjectCodes,
+    page = 1,
+    limit = 10,
+    user_id, 
+  } = filterDto;
 
-      const now = new Date();
+  const now = new Date();
 
-      // 1️⃣ Lấy class_id từ code của user
-      let classId: string | null = null;
-      if (currentClassCode) {
-        const classDoc = await this.classModel
-          .findOne({ code: currentClassCode })
-          .select('_id')
-          .lean();
-        if (!classDoc) return { data: [], total: 0, page, limit };
-        classId = classDoc._id.toString();
-      }
-      console.log('classId',classId)
+  // --- (1) Lấy classId từ code ---
+  let classId: string | null = null;
+  if (currentClassCode) {
+    const classDoc = await this.classModel
+      .findOne({ code: currentClassCode })
+      .select('_id')
+      .lean();
+    if (!classDoc) return { data: [], total: 0, page, limit };
+    classId = classDoc._id.toString();
+  }
 
-      // 2️⃣ Lấy subject_ids từ mảng subjectCodes
-      let subjectIds: string[] = [];
-      if (subjectCodes && subjectCodes.length > 0) {
-        const subjectDocs = await this.subjectModel
-          .find({ code: { $in: subjectCodes } })
-          .select('_id')
-          .lean();
-        subjectIds = subjectDocs.map(s => s._id.toString());
-      }
+  // --- (2) Lấy subjectIds ---
+  let subjectIds: string[] = [];
+  if (subjectCodes?.length) {
+    const subjectDocs = await this.subjectModel
+      .find({ code: { $in: subjectCodes } })
+      .select('_id')
+      .lean();
+    subjectIds = subjectDocs.map(s => s._id.toString());
+  }
 
-      // 3️⃣ Tìm subject_class_id thỏa mãn class_id và subject_id
-      let subjectClassIds: string[] = [];
-      if (classId) {
-        const classObjectId = new Types.ObjectId(classId);
-
-          const query: any = { class_id: classObjectId };
-        // Nếu có subjectIds thì chuyển tất cả sang ObjectId
-    if (subjectIds.length > 0) {
-      const subjectObjectIds = subjectIds.map(id => new Types.ObjectId(id));
-      query.subject_id = { $in: subjectObjectIds };
+  // --- (3) Lấy subjectClassIds ---
+  let subjectClassIds: string[] = [];
+  if (classId) {
+    const query: any = { class_id: new Types.ObjectId(classId) };
+    if (subjectIds.length) {
+      query.subject_id = { $in: subjectIds.map(id => new Types.ObjectId(id)) };
     }
-        console.log('query',query)
 
-        const subjectClassDocs = await this.subjectClassModel
-          .find(query)
-          .select('_id')
-          .lean();
-      
-          console.log('subjectClassDocs',subjectClassDocs)
-        subjectClassIds = subjectClassDocs.map(sc => sc._id.toString());
+    const subjectClassDocs = await this.subjectClassModel
+      .find(query)
+      .select('_id')
+      .lean();
 
-        if (subjectClassIds.length === 0)
-          return { data: [], total: 0, page, limit };
-      }
-      console.log('subjectClassIds',subjectClassIds)
-
-      // 4️⃣ Tìm exams với subject_class_id
-      const examQuery: any = {};
-    if (subjectClassIds.length > 0) {
-    const subjectClassObjectIds = subjectClassIds.map(id => new Types.ObjectId(id));
-    examQuery.subject_class_id = { $in: subjectClassObjectIds };
+    subjectClassIds = subjectClassDocs.map(sc => sc._id.toString());
+    if (!subjectClassIds.length) return { data: [], total: 0, page, limit };
   }
 
-      // Filter theo trạng thái
-      if (status === ExamStatus.ONGOING) {
-        examQuery.start_date = { $lte: now };
-        examQuery.end_date = { $gte: now };
-      } else if (status === ExamStatus.UPCOMING) {
-        examQuery.start_date = { $gt: now };
-      }
+  // --- (4) Lấy exam ---
+  const examQuery: any = {};
+  if (subjectClassIds.length) {
+    examQuery.subject_class_id = {
+      $in: subjectClassIds.map(id => new Types.ObjectId(id)),
+    };
+  }
 
-      // Filter theo type
-      if (type) examQuery.type = type;
+  if (status === ExamStatus.ONGOING) {
+    examQuery.start_date = { $lte: now };
+    examQuery.end_date = { $gte: now };
+  } else if (status === ExamStatus.UPCOMING) {
+    examQuery.start_date = { $gt: now };
+  }
 
-      // Filter theo name
-      if (name) {
-          examQuery.name = { $regex: name, $options: 'i' };
+  if (type) examQuery.type = type;
+  if (name) examQuery.name = { $regex: name, $options: 'i' };
+
+  let sortOption: any = {};
+
+  if (sort === SortOrder.NEWEST) sortOption = { start_date: -1 };
+  else if (sort === SortOrder.OLDEST) sortOption = { start_date: 1 };
+  else sortOption = { start_date: -1 }; // mặc định newest
+  const skip = (page - 1) * limit;
+
+  const [data, total] = await Promise.all([
+    this.examModel
+      .find(examQuery)
+      .sort(sortOption)
+      .skip(skip)
+      .limit(limit)
+      .populate({
+        path: 'subject_class_id',
+        select: '_id subject_id',
+        populate: {
+          path: 'subject_id',
+          select: 'code name',
+        },
+      })
+      .lean(),
+    this.examModel.countDocuments(examQuery),
+  ]);
+
+  // --- (5) Lấy danh sách exam_id ---
+  const examIds = data.map(e => e._id);
+
+  // --- (6) Lấy số người tham gia cho mỗi exam ---
+  const results = await this.examResultModel.aggregate([
+    { $match: { exam_id: { $in: examIds }, deleted_at: null } },
+    { $group: { _id: '$exam_id', count: { $addToSet: '$user_id' } } },
+    { $project: { _id: 1, participants: { $size: '$count' } } },
+  ]);
+
+  // --- (7) Map exam_id → số lượng người tham gia ---
+  const participantsMap = new Map<string, number>(
+    results.map(r => [r._id.toString(), r.participants])
+  );
+
+  // --- (8) Nếu có user_id, lấy danh sách exam user đã làm ---
+  let userDoneSet = new Set<string>();
+  if (user_id && Types.ObjectId.isValid(user_id)) {
+    const doneExams = await this.examResultModel
+      .find({ user_id: new Types.ObjectId(user_id), exam_id: { $in: examIds } })
+      .distinct('exam_id');
+    userDoneSet = new Set(doneExams.map(id => id.toString()));
+  }
+
+  // --- (9) Map dữ liệu trả về ---
+  const mappedData = data.map(exam => {
+    const subjectClass = exam.subject_class_id as any; // vì populate -> Object
+    const subject = subjectClass?.subject_id
+      ? {
+          code: subjectClass.subject_id.code,
+          name: subjectClass.subject_id.name,
         }
+      : null;
 
+    return {
+      _id: exam._id,
+      name: exam.name,
+      image: exam.image,
+      duration: exam.duration,
+      start_date: exam.start_date,
+      end_date: exam.end_date,
+      subject,
+      participants: participantsMap.get(exam._id.toString()) || 0,
+      is_done: userDoneSet.has(exam._id.toString()),
+    };
+  });
 
-      // Sort
-      let sortOption: any = {};
-      if (sort === SortOrder.NEWEST) sortOption = { start_date: -1 };
-      else if (sort === SortOrder.OLDEST) sortOption = { start_date: 1 };
+  return { data: mappedData, total, page, limit };
+}
 
-      const skip = (page - 1) * limit;
-
-      console.log('examQuery',examQuery)
-      const [data, total] = await Promise.all([
-        this.examModel
-          .find(examQuery)
-          .sort(sortOption)
-          .skip(skip)
-          .limit(limit)
-          .populate({
-            path: 'subject_class_id',
-            select: '_id subject_id',
-            populate: {
-              path: 'subject_id',
-              select: 'code name',
-            },
-          })
-          .lean(),
-        this.examModel.countDocuments(examQuery),
-      ]);
-
-      // Map lại data để trả về subject: { code, name }
-      const mappedData = (data as any[]).map(exam => {
-        const subject = exam.subject_class_id?.subject_id
-          ? {
-              code: exam.subject_class_id.subject_id.code,
-              name: exam.subject_class_id.subject_id.name,
-            }
-          : null;
-
-        return {
-          ...exam,
-          subject,
-          subject_class_id: undefined,
-        };
-      });
-
-    return { data: mappedData, total, page, limit };
-  }
 
   async submitExam(dto: SubmitExamDto) {
     // Tính tổng đúng

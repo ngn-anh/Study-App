@@ -39,9 +39,7 @@ export class ExamsFilterDto {
   @IsString({ each: true })
   @Transform(({ value }) => {
     if (!value) return [];
-    // Nếu là string "MATH,LIT" → tách thành array
     if (typeof value === 'string') return value.split(',');
-    // Nếu là array gửi từ axios → giữ nguyên
     return Array.isArray(value) ? value : [value];
   })
   subjectCodes?: string[];
@@ -66,4 +64,10 @@ export class ExamsFilterDto {
   @IsInt()
   @Min(1)
   limit?: number = 10;
+
+  // 👇 Thêm trường này để service biết user nào đang query
+  @ApiPropertyOptional({ description: 'ID của user để check đã làm bài chưa' })
+  @IsOptional()
+  @IsString()
+  user_id?: string;
 }
