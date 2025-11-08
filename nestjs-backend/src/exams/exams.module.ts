@@ -7,6 +7,8 @@ import { SubjectClass, SubjectClassSchema } from 'src/subject-classes/schemas/su
 import { Class, ClassSchema } from 'src/classes/schemas/classes.schema';
 import { Subject } from 'rxjs';
 import { SubjectSchema } from 'src/subjects/schema/subjects.schema';
+import { ExamResult, ExamResultSchema } from 'src/exam_results/schemas/exam_results.schema';
+import { ExamResultAnswer, ExamResultAnswerSchema } from 'src/exam_result_answers/schemas/exam_result_answers.schema';
 
 
 @Module({
@@ -15,6 +17,10 @@ import { SubjectSchema } from 'src/subjects/schema/subjects.schema';
     MongooseModule.forFeature([{ name: SubjectClass.name, schema: SubjectClassSchema }]),
     MongooseModule.forFeature([{ name: Class.name, schema: ClassSchema }]),      
     MongooseModule.forFeature([{ name: Subject.name, schema: SubjectSchema }]),  
+     MongooseModule.forFeature([
+      { name: ExamResult.name, schema: ExamResultSchema },
+      { name: ExamResultAnswer.name, schema: ExamResultAnswerSchema },
+    ]),
   ],
   controllers: [ExamsController],
   providers: [ExamsService],

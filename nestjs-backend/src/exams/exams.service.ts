@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { ExamsFilterDto, ExamStatus, SortOrder } from './dto/exams-filter.dto';
@@ -6,6 +6,9 @@ import { Exam, ExamDocument } from './schemas/exams.schema';
 import { SubjectClass, SubjectClassDocument } from '../subject-classes/schemas/subject-class.schema';
 import { Subject, SubjectDocument } from 'src/subjects/schema/subjects.schema';
 import { Class, ClassDocument } from 'src/classes/schemas/classes.schema';
+import { SubmitExamDto } from './dto/submit-exam.dto';
+import { ExamResultAnswer, ExamResultAnswerDocument } from 'src/exam_result_answers/schemas/exam_result_answers.schema';
+import { ExamResult, ExamResultDocument } from 'src/exam_results/schemas/exam_results.schema';
 
 
 @Injectable()
@@ -15,6 +18,8 @@ export class ExamsService {
     @InjectModel(SubjectClass.name) private subjectClassModel: Model<SubjectClassDocument>,
     @InjectModel(Class.name) private classModel: Model<ClassDocument>,
     @InjectModel(Subject.name) private subjectModel: Model<SubjectDocument>,
+    @InjectModel(ExamResultAnswer.name) private examResultAnswerModel: Model<ExamResultAnswerDocument>,
+    @InjectModel(ExamResult.name) private examResultModel: Model<ExamResultDocument>
   ) {}
 
   async getExams(filterDto: ExamsFilterDto) {
@@ -29,122 +34,187 @@ export class ExamsService {
       limit = 10,
     } = filterDto;
 
-    const now = new Date();
+      const now = new Date();
 
-    // 1️⃣ Lấy class_id từ code của user
-    let classId: string | null = null;
-    if (currentClassCode) {
-      const classDoc = await this.classModel
-        .findOne({ code: currentClassCode })
-        .select('_id')
-        .lean();
-      if (!classDoc) return { data: [], total: 0, page, limit };
-      classId = classDoc._id.toString();
-    }
-    console.log('classId',classId)
+      // 1️⃣ Lấy class_id từ code của user
+      let classId: string | null = null;
+      if (currentClassCode) {
+        const classDoc = await this.classModel
+          .findOne({ code: currentClassCode })
+          .select('_id')
+          .lean();
+        if (!classDoc) return { data: [], total: 0, page, limit };
+        classId = classDoc._id.toString();
+      }
+      console.log('classId',classId)
 
-    // 2️⃣ Lấy subject_ids từ mảng subjectCodes
-    let subjectIds: string[] = [];
-    if (subjectCodes && subjectCodes.length > 0) {
-      const subjectDocs = await this.subjectModel
-        .find({ code: { $in: subjectCodes } })
-        .select('_id')
-        .lean();
-      subjectIds = subjectDocs.map(s => s._id.toString());
-    }
-
-    // 3️⃣ Tìm subject_class_id thỏa mãn class_id và subject_id
-    let subjectClassIds: string[] = [];
-    if (classId) {
-       const classObjectId = new Types.ObjectId(classId);
-
-        const query: any = { class_id: classObjectId };
-      // Nếu có subjectIds thì chuyển tất cả sang ObjectId
-  if (subjectIds.length > 0) {
-    const subjectObjectIds = subjectIds.map(id => new Types.ObjectId(id));
-    query.subject_id = { $in: subjectObjectIds };
-  }
-      console.log('query',query)
-
-      const subjectClassDocs = await this.subjectClassModel
-        .find(query)
-        .select('_id')
-        .lean();
-    
-        console.log('subjectClassDocs',subjectClassDocs)
-      subjectClassIds = subjectClassDocs.map(sc => sc._id.toString());
-
-      if (subjectClassIds.length === 0)
-        return { data: [], total: 0, page, limit };
-    }
-    console.log('subjectClassIds',subjectClassIds)
-
-    // 4️⃣ Tìm exams với subject_class_id
-    const examQuery: any = {};
-   if (subjectClassIds.length > 0) {
-  const subjectClassObjectIds = subjectClassIds.map(id => new Types.ObjectId(id));
-  examQuery.subject_class_id = { $in: subjectClassObjectIds };
-}
-
-    // Filter theo trạng thái
-    if (status === ExamStatus.ONGOING) {
-      examQuery.start_date = { $lte: now };
-      examQuery.end_date = { $gte: now };
-    } else if (status === ExamStatus.UPCOMING) {
-      examQuery.start_date = { $gt: now };
-    }
-
-    // Filter theo type
-    if (type) examQuery.type = type;
-
-    // Filter theo name
-     if (name) {
-        examQuery.name = { $regex: name, $options: 'i' };
+      // 2️⃣ Lấy subject_ids từ mảng subjectCodes
+      let subjectIds: string[] = [];
+      if (subjectCodes && subjectCodes.length > 0) {
+        const subjectDocs = await this.subjectModel
+          .find({ code: { $in: subjectCodes } })
+          .select('_id')
+          .lean();
+        subjectIds = subjectDocs.map(s => s._id.toString());
       }
 
+      // 3️⃣ Tìm subject_class_id thỏa mãn class_id và subject_id
+      let subjectClassIds: string[] = [];
+      if (classId) {
+        const classObjectId = new Types.ObjectId(classId);
 
-    // Sort
-    let sortOption: any = {};
-    if (sort === SortOrder.NEWEST) sortOption = { start_date: -1 };
-    else if (sort === SortOrder.OLDEST) sortOption = { start_date: 1 };
+          const query: any = { class_id: classObjectId };
+        // Nếu có subjectIds thì chuyển tất cả sang ObjectId
+    if (subjectIds.length > 0) {
+      const subjectObjectIds = subjectIds.map(id => new Types.ObjectId(id));
+      query.subject_id = { $in: subjectObjectIds };
+    }
+        console.log('query',query)
 
-    const skip = (page - 1) * limit;
+        const subjectClassDocs = await this.subjectClassModel
+          .find(query)
+          .select('_id')
+          .lean();
+      
+          console.log('subjectClassDocs',subjectClassDocs)
+        subjectClassIds = subjectClassDocs.map(sc => sc._id.toString());
 
-    console.log('examQuery',examQuery)
-    const [data, total] = await Promise.all([
-      this.examModel
-        .find(examQuery)
-        .sort(sortOption)
-        .skip(skip)
-        .limit(limit)
-         .populate({
-          path: 'subject_class_id',
-          select: '_id subject_id',
-          populate: {
-            path: 'subject_id',
-            select: 'code name',
-          },
-        })
-        .lean(),
-      this.examModel.countDocuments(examQuery),
-    ]);
+        if (subjectClassIds.length === 0)
+          return { data: [], total: 0, page, limit };
+      }
+      console.log('subjectClassIds',subjectClassIds)
 
-    // Map lại data để trả về subject: { code, name }
-    const mappedData = (data as any[]).map(exam => {
-      const subject = exam.subject_class_id?.subject_id
-        ? {
-            code: exam.subject_class_id.subject_id.code,
-            name: exam.subject_class_id.subject_id.name,
-          }
-        : null;
+      // 4️⃣ Tìm exams với subject_class_id
+      const examQuery: any = {};
+    if (subjectClassIds.length > 0) {
+    const subjectClassObjectIds = subjectClassIds.map(id => new Types.ObjectId(id));
+    examQuery.subject_class_id = { $in: subjectClassObjectIds };
+  }
 
-      return {
-        ...exam,
-        subject,
-        subject_class_id: undefined,
-      };
+      // Filter theo trạng thái
+      if (status === ExamStatus.ONGOING) {
+        examQuery.start_date = { $lte: now };
+        examQuery.end_date = { $gte: now };
+      } else if (status === ExamStatus.UPCOMING) {
+        examQuery.start_date = { $gt: now };
+      }
+
+      // Filter theo type
+      if (type) examQuery.type = type;
+
+      // Filter theo name
+      if (name) {
+          examQuery.name = { $regex: name, $options: 'i' };
+        }
+
+
+      // Sort
+      let sortOption: any = {};
+      if (sort === SortOrder.NEWEST) sortOption = { start_date: -1 };
+      else if (sort === SortOrder.OLDEST) sortOption = { start_date: 1 };
+
+      const skip = (page - 1) * limit;
+
+      console.log('examQuery',examQuery)
+      const [data, total] = await Promise.all([
+        this.examModel
+          .find(examQuery)
+          .sort(sortOption)
+          .skip(skip)
+          .limit(limit)
+          .populate({
+            path: 'subject_class_id',
+            select: '_id subject_id',
+            populate: {
+              path: 'subject_id',
+              select: 'code name',
+            },
+          })
+          .lean(),
+        this.examModel.countDocuments(examQuery),
+      ]);
+
+      // Map lại data để trả về subject: { code, name }
+      const mappedData = (data as any[]).map(exam => {
+        const subject = exam.subject_class_id?.subject_id
+          ? {
+              code: exam.subject_class_id.subject_id.code,
+              name: exam.subject_class_id.subject_id.name,
+            }
+          : null;
+
+        return {
+          ...exam,
+          subject,
+          subject_class_id: undefined,
+        };
+      });
+
+    return { data: mappedData, total, page, limit };
+  }
+
+  async submitExam(dto: SubmitExamDto) {
+    // Tính tổng đúng
+    const total_correct = dto.answers.filter(a => a.is_correct).length;
+    const total_question = dto.answers.length;
+
+    // Convert string ISO sang Date rõ ràng
+    const timeStart = dto.time_start ? new Date(dto.time_start) : new Date();
+    const timeEnd = dto.time_end ? new Date(dto.time_end) : new Date();
+
+    // Lưu vào exam_result
+    const examResult = await this.examResultModel.create({
+      user_id: new Types.ObjectId(dto.user_id),
+      exam_id: new Types.ObjectId(dto.exam_id),
+      total_question,
+      total_correct,
+      is_finish: true,
+      time_start: timeStart,
+      time_end: timeEnd,
+      deleted_at: null,
     });
 
-  return { data: mappedData, total, page, limit };
+    // Lọc bỏ các câu không có answer_question_id
+    const validAnswers = dto.answers.filter(
+      (a): a is { answer_question_id: string; is_correct: boolean } =>
+        typeof a.answer_question_id === "string" && a.answer_question_id.trim() !== ""
+    );
+
+    // Lưu từng câu trả lời vào exam_result_answer
+    const answersToSave = validAnswers.map(a => ({
+      exam_result_id: examResult._id,
+      answer_question_id: new Types.ObjectId(a.answer_question_id),
+      is_correct: a.is_correct,
+      deleted_at: null,
+    }));
+
+    if (answersToSave.length > 0) {
+      await this.examResultAnswerModel.insertMany(answersToSave);
+    }
+
+    return { examResultId: examResult._id, total_correct, total_question };
+  }
+
+  async getExamInfo(examId: string) {
+    if (!Types.ObjectId.isValid(examId)) {
+      throw new NotFoundException('Exam not found');
+    }
+
+    const exam = await this.examModel.findById(examId).lean();
+    if (!exam) throw new NotFoundException('Exam not found');
+
+    // Lấy danh sách user_id duy nhất đã tham gia
+    const uniqueUsers = await this.examResultModel.distinct('user_id', {
+      exam_id: exam._id,
+      deleted_at: null,
+    });
+
+    return {
+      _id: exam._id,
+      name: exam.name,
+      image: exam.image,
+      duration: exam.duration,
+      participants: uniqueUsers.length,
+    };
   }
 }

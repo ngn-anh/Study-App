@@ -5,6 +5,8 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { ReminderSchedulesModule } from './reminder-schedules/reminder-schedules.module';
 import { ExamsModule } from './exams/exams.module';
+import { QuestionsModule } from './questions/questions.module';
+import { ExamResultModule } from './exam_results/exam-result.module';
 
 
 @Module({
@@ -14,7 +16,9 @@ import { ExamsModule } from './exams/exams.module';
     UsersModule,
     AuthModule,
     ReminderSchedulesModule,
-    ExamsModule 
+    ExamsModule,
+    QuestionsModule,
+    ExamResultModule
   ],
   controllers: [],
   providers: [],
