@@ -9,6 +9,7 @@ import { Class, ClassDocument } from 'src/classes/schemas/classes.schema';
 import { SubmitExamDto } from './dto/submit-exam.dto';
 import { ExamResultAnswer, ExamResultAnswerDocument } from 'src/exam_result_answers/schemas/exam_result_answers.schema';
 import { ExamResult, ExamResultDocument } from 'src/exam_results/schemas/exam_results.schema';
+import { GetExamRankDto } from './dto/get-exam-rank.dto';
 
 
 @Injectable()
@@ -233,4 +234,60 @@ export class ExamsService {
       participants: uniqueUsers.length,
     };
   }
+
+  async getExamRank(dto: GetExamRankDto) {
+    const { examId, userId, searchName } = dto;
+
+    if (!Types.ObjectId.isValid(examId)) throw new NotFoundException('Exam not found');
+
+    // Lấy tất cả kết quả bài thi
+    let results = await this.examResultModel
+      .find({ exam_id: new Types.ObjectId(examId), deleted_at: null })
+      .populate({ path: 'user_id', select: ['username', 'avatar'] })
+      .lean();
+
+    // Lọc bỏ kết quả không có user
+    results = results.filter(r => r.user_id);
+
+    // Map dữ liệu
+    const mapped = results.map(r => {
+      const durationMs = new Date(r.time_end).getTime() - new Date(r.time_start).getTime();
+      const score = r.total_question > 0 ? (r.total_correct / r.total_question) * 100 : 0;
+      const user = r.user_id as unknown as { _id: Types.ObjectId; username: string; avatar: string };
+      return {
+        name: user.username,
+        avatar: user.avatar,
+        score: +score.toFixed(2),
+        duration: durationMs,
+        is_current_user: user._id.toString() === userId,
+      };
+    });
+
+    // Sắp xếp: score giảm dần, duration tăng dần
+    mapped.sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return a.duration - b.duration;
+    });
+
+    // Thêm rank cố định
+    let currentRank = 1;
+    let lastScore: number | null = null;
+    let lastDuration: number | null = null;
+    const ranked = mapped.map((r, idx) => {
+      if (!(lastScore === r.score && lastDuration === r.duration)) {
+        currentRank = idx + 1;
+        lastScore = r.score;
+        lastDuration = r.duration;
+      }
+      return { rank: currentRank, ...r };
+    });
+
+    // Chỉ filter search sau khi đã tính rank
+    const final = searchName
+      ? ranked.filter(r => r.name.toLowerCase().includes(searchName.toLowerCase()))
+      : ranked;
+
+    return final;
+  }
+
 }

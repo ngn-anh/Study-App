@@ -129,5 +129,4 @@ export class ExamResultService {
   return { questions: mappedQuestions };
 }
 
-
 }

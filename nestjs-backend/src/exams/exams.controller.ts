@@ -3,6 +3,7 @@ import { ApiTags, ApiQuery } from '@nestjs/swagger';
 import { ExamsService } from './exams.service';
 import { ExamsFilterDto } from './dto/exams-filter.dto';
 import { SubmitExamDto } from './dto/submit-exam.dto';
+import { GetExamRankDto } from './dto/get-exam-rank.dto';
 
 @ApiTags('Exams')
 @Controller('exams')
@@ -23,5 +24,11 @@ export class ExamsController {
   @Get(':id/info')
   async getExamInfo(@Param('id') id: string) {
     return this.examsService.getExamInfo(id);
+  }
+
+  @Get('rank')
+  async getExamRank(@Query() query: GetExamRankDto) {
+    console.log('query',query)
+    return this.examsService.getExamRank(query);
   }
 }

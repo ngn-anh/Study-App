@@ -22,4 +22,5 @@ export class ExamResultController {
   async getExamDetailResult(@Param('examResultId') examResultId: string) {
     return await this.examResultService.getExamDetailResult(examResultId);
   }
+  
 }
