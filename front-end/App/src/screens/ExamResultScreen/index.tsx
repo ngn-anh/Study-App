@@ -159,7 +159,7 @@ export const ExamResultScreen = () => {
       <LinearGradient colors={["#0C4299", "#041633"]} style={styles.button}>
         <TouchableOpacity
           style={styles.buttonInner}
-          onPress={() => navigation.navigate("ExamRankScreen" as never)}
+          onPress={() => navigation.navigate("ExamRankScreen", {userId, examId})}
         >
           <View style={styles.buttonContent}>
             <TrophyIcon size={22} color="#fff" />

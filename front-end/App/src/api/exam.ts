@@ -76,3 +76,9 @@ export const getExamInfo = async (examId: string): Promise<ExamInfoResponse> => 
   const res = await axios.get(`${API_URL}/exams/${examId}/info`);
   return res.data;
 };
+
+export const getExamRank = async (params: { examId: string; userId: string; searchName?: string }) => {
+  console.log(params);
+  const { data } = await axios.get(`${API_URL}/exams/rank`, { params });
+  return data;
+};

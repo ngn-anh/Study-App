@@ -34,18 +34,18 @@ export const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#fff",
-    borderRadius: 14,
-    padding: 15,
+    backgroundColor: "#F6FAFF",
+    borderRadius: 8,
+    padding: 16,
     marginBottom: 10,
     shadowColor: "#000",
     shadowOpacity: 0.05,
     shadowRadius: 3,
   },
-  rank: { fontSize: 16, fontWeight: "bold", width: 25, textAlign: "center" },
+  rank: { fontSize: 16, fontWeight: "bold", width: 25, textAlign: "center",color:"#083070",marginRight: 8 },
   info: { flex: 1, marginLeft: 8 },
-  name: { fontSize: 15, fontWeight: "600" },
-  details: { fontSize: 13, color: "#777", marginTop: 4 },
+  name: { fontSize: 15, fontWeight: "600",marginBottom:4 },
+  details: { fontSize: 13, color: "#777", marginRight:15 },
   tagShort: {
     backgroundColor: "#FFEFE0",
     borderRadius: 8,
@@ -53,4 +53,8 @@ export const styles = StyleSheet.create({
     paddingVertical: 3,
   },
   tagText: { fontSize: 12, color: "#E58B00", fontWeight: "600" },
+  image:{
+    width:42,
+    height:42
+  }
 });
