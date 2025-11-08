@@ -14,6 +14,6 @@ export type RootStackParamList = {
   ExamListScreen:  { showSuccessModal?: boolean } | undefined;
   ExamInfoScreen: { examId: string };
   ExamDoScreen: { examId: string };
-  ExamResultScreen: undefined;
+  ExamResultScreen: { examId: string, userId: string };
   ExamRankScreen: undefined;
 };

@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     paddingHorizontal: 16,
+    justifyContent: "space-between",
   },
   header: {
     flexDirection: "row",
@@ -72,17 +73,6 @@ export const styles = StyleSheet.create({
     color: "#0C4299",
     fontWeight: "700",
   },
-  skipBtn: {
-    flexDirection: "row",
-    alignItems:"center",
-    justifyContent: "center",
-    borderColor: "#cacacaff",
-    borderWidth:1,
-    borderRadius: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 14,
-    marginBottom: 20,
-  },
   skipText: {
     color: "#000",
     fontSize:18,
@@ -118,4 +108,36 @@ export const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#333",
   },
+  navButtons: {
+  flexDirection: "row",
+  gap:20,
+  marginTop: 16,
+  marginBottom: 20,
+},
+navBtn: {
+  flex: 1,
+  paddingVertical: 12,
+  borderRadius: 10,
+  alignItems: "center",
+  marginHorizontal: 4,
+},
+skipBtn: {
+  backgroundColor: "#F0F0F0",
+},
+nextBtn: {
+  flexDirection:"row",
+  alignItems: "center",
+  textAlign:"center",
+  justifyContent:"center",
+  backgroundColor: "#0C4299",
+},
+navBtnText: {
+  fontSize: 16,
+  fontWeight: 500,
+  color: "#fff",
+  marginRight:5,
+},
+skipBtnText: {
+  color: "#000",
+},
 });

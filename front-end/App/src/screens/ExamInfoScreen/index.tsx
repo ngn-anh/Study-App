@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useNavigation, useRoute, RouteProp, NavigationProp } from "@react-navigation/native";
-import { CaretLeft, Clock, Student, Heart, ArrowRight, ThumbsUp } from "phosphor-react-native";
+import { CaretLeft, Clock, Student, ThumbsUp, ArrowRight } from "phosphor-react-native";
 import { RootStackParamList } from "../../types/data";
 import { styles } from "./index.styles";
+import { getExamInfo } from "../../api/exam"; 
 
 type RouteProps = RouteProp<RootStackParamList, "ExamInfoScreen">;
 
@@ -13,15 +14,39 @@ export default function ExamInfoScreen() {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { examId } = route.params;
 
-  // 🔹 Tạm fix cứng dữ liệu bài thi
-  const examInfo = {
-    name: "Đề Thi Thử Toán THPT Quốc Gia 2025",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_g0nAjaKp3XDubou5iKP1-JMtwANQunsKAw&s",
-    participants: 245,
-    likes: 120,
-    status: "Đang diễn ra",
-  };
+  const [examInfo, setExamInfo] = useState<{
+    name: string;
+    image?: string;
+    participants: number;
+    duration: number;
+    likes: number;
+  } | null>(null);
+
+  useEffect(() => {
+    const fetchExamInfo = async () => {
+      try {
+        const data = await getExamInfo(examId);
+        setExamInfo({
+          name: data.name,
+          image: data.image,
+          participants: data.participants,
+          duration: data.duration, // thay status bằng duration
+          likes: 120, // tạm fix cứng
+        });
+      } catch (err) {
+        console.error("Không lấy được thông tin bài thi:", err);
+      }
+    };
+    fetchExamInfo();
+  }, [examId]);
+
+  if (!examInfo) {
+    return (
+      <View style={styles.container}>
+        <Text>Đang tải thông tin bài thi...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -42,14 +67,14 @@ export default function ExamInfoScreen() {
         <View style={styles.statusRow}>
           <View style={styles.statusItem}>
             <Clock size={16} color="#0C4299" weight="fill" />
-            <Text style={styles.statusText}>{examInfo.status}</Text>
+            <Text style={styles.statusText}>{examInfo.duration} phút</Text>
           </View>
           <View style={styles.statusItem}>
             <Student size={16} color="#0C4299" weight="fill" />
             <Text style={styles.statusText}>{examInfo.participants}</Text>
           </View>
           <View style={styles.statusItem}>
-            <ThumbsUp  size={16} color="#0C4299" weight="bold" />
+            <ThumbsUp size={16} color="#0C4299" weight="bold" />
             <Text style={styles.statusText}>{examInfo.likes}</Text>
           </View>
         </View>

@@ -13,6 +13,25 @@ export interface ExamsFilter {
   limit?: number;
 }
 
+export interface SubmitExamPayload {
+  exam_id: string;
+  user_id: string;
+  answers: {
+    answer_question_id: string | null;
+    is_correct: boolean;
+  }[];
+  time_start?: string;
+  time_end?: string;
+}
+
+export interface ExamInfoResponse {
+  _id: string;
+  name: string;
+  image?: string;
+  duration: number;
+  participants: number;
+}
+
 export const getExams = async (params: {
   status?: 'ongoing' | 'upcoming';
   sort?: 'newest' | 'oldest';
@@ -40,3 +59,19 @@ export const getExams = async (params: {
   return response.data;
 };
 
+export const getExamQuestions = async (examId: string) => {
+  const response = await axios.get(`${API_URL}/questions/by-exam`, {
+    params: { exam_id: examId },
+  });
+  return response.data.data; //  { success, total, data }
+};
+
+export const submitExam = async (payload: SubmitExamPayload) => {
+  const res = await axios.post(`${API_URL}/exams/submit`, payload);
+  return res.data;
+};
+
+export const getExamInfo = async (examId: string): Promise<ExamInfoResponse> => {
+  const res = await axios.get(`${API_URL}/exams/${examId}/info`);
+  return res.data;
+};

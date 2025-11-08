@@ -11,6 +11,7 @@ type ConfirmModalProps = {
   onCancel?: () => void;
   onConfirm?: () => void;
   type?: 'warning' | 'confirm';
+  isButtonOk?: boolean;
 };
 
 export const ConfirmModal: React.FC<ConfirmModalProps> = ({
@@ -22,6 +23,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
   onCancel = () => {},
   onConfirm = () => {},
   type = "confirm",
+  isButtonOk = true, // mặc định hiển thị button OK
 }) => {
   const mainColor = type === "warning" ? "#ff1c1cff" : "#083070";
 
@@ -42,12 +44,14 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
               </Text>
             </TouchableOpacity>
 
+            {isButtonOk ? (
             <TouchableOpacity
               onPress={onConfirm}
               style={[styles.confirmBtn, { backgroundColor: mainColor }]}
             >
               <Text style={styles.confirmText}>{confirmText}</Text>
             </TouchableOpacity>
+          ) : null}
           </View>
         </View>
       </View>
