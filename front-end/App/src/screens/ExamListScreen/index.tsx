@@ -24,6 +24,7 @@ import RNModal from "react-native-modal";
 import { getExams } from "../../api/exam";
 import { RootStackParamList } from "../../types/data";
 import SuccessModal from "../../components/SuccessModal";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type RouteProps = RouteProp<RootStackParamList, "ExamListScreen">;
 
@@ -32,6 +33,7 @@ export default function ExamListScreen() {
   const route = useRoute<RouteProps>();
   const {showSuccessModal} = route.params || {};
   const [showModal, setShowModal] = useState(false);
+  const [userId, setUserId] = useState<string>("");
 
   // --- Tabs ---
   const [activeTab, setActiveTab] = useState<"ongoing" | "upcoming">("ongoing");
@@ -49,12 +51,22 @@ export default function ExamListScreen() {
   const [showFilter, setShowFilter] = useState(false);
   const [tempTime, setTempTime] = useState<"newest" | "oldest" | null>(null);
   const [tempSubjects, setTempSubjects] = useState<string[]>([]);
+  
 
   useEffect(() => {
     if (showSuccessModal) {
       setShowModal(true);
     }
   }, [showSuccessModal]);
+
+  useEffect(() => {
+    (async () => {
+      const userDataStr = await AsyncStorage.getItem("userData");
+      if (!userDataStr) throw new Error("Không tìm thấy thông tin người dùng");
+      const userData = JSON.parse(userDataStr);
+      if (userData.user.id) setUserId(userData.user.id);
+    })();
+  }, []);
 
   // --- Fetch exams ---
   const fetchExams = useCallback(async () => {
@@ -66,6 +78,7 @@ export default function ExamListScreen() {
         subjectCodes: selectedSubjects.length > 0 ? selectedSubjects : undefined,
         name: searchText ?? undefined,
         currentClassCode: "CLASS_11",
+        user_id: userId,
         page: 1,
         limit: 10,
       };
@@ -77,11 +90,11 @@ export default function ExamListScreen() {
     } finally {
       setLoading(false);
     }
-  }, [activeTab, selectedTime, selectedSubjects, searchText]);
+  }, [activeTab, selectedTime, selectedSubjects, searchText, userId]);
 
   useEffect(() => {
     fetchExams();
-  }, [activeTab, selectedTime, selectedSubjects]);
+  }, [activeTab, selectedTime, selectedSubjects, userId]);
 
   // --- Handle tab change ---
   const handleTabChange = (tab: "ongoing" | "upcoming") => {
@@ -124,6 +137,7 @@ export default function ExamListScreen() {
 
   // --- Render exam item ---
   const renderExamItem = ({ item }: { item: any }) => {
+    console.log('item',item)
     const subjectCode = item.subject.code as keyof typeof SUBJECTS;
     const subjectInfo = SUBJECTS[subjectCode] ?? { name: "Không xác định", code: "MATH" };
     const tagStyle = getSubjectTagStyle(subjectInfo.code);
@@ -166,26 +180,40 @@ export default function ExamListScreen() {
               <Text style={[styles.subjectText, { color: tagStyle.color }]}>{subjectName}</Text>
             </View>
 
-            {activeTab === "ongoing" ? (
-              <TouchableOpacity 
-                style={styles.joinBtn}  
+            {/* Nút hành động */}
+          {activeTab === "ongoing" ? (
+            item.is_done ? (
+              <TouchableOpacity
+                style={styles.seeBtn}
                 onPress={() =>
-                  navigation.navigate("ExamInfoScreen", {
-                    examId: item._id
-                })
-  }>
-                <Text style={styles.joinText}>Vào thi</Text>
+                  navigation.navigate("ExamResultScreen", { examId: item._id, userId:userId })
+                }
+              >
+                <Text style={styles.joinText}>Xem kết quả</Text>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity style={styles.remindBtn}
-                 onPress={() => navigation.navigate("CreateUpdateSchedule", {
-                    name: item.name,
-                    due_date: item.start_date,
-                  })}
+              <TouchableOpacity
+                style={styles.joinBtn}
+                onPress={() =>
+                  navigation.navigate("ExamInfoScreen", { examId: item._id })
+                }
               >
-                <Text style={styles.remindText}>Nhắc tôi</Text>
+                <Text style={styles.joinText}>Vào thi</Text>
               </TouchableOpacity>
-            )}
+            )
+          ) : (
+            <TouchableOpacity
+              style={styles.remindBtn}
+              onPress={() =>
+                navigation.navigate("CreateUpdateSchedule", {
+                  name: item.name,
+                  due_date: item.start_date,
+                })
+              }
+            >
+              <Text style={styles.remindText}>Nhắc tôi</Text>
+            </TouchableOpacity>
+          )}
           </View>
         </View>
       </View>

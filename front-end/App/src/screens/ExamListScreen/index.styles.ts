@@ -138,6 +138,12 @@ export const styles = StyleSheet.create({
   },
   remindText: { fontSize: 12, color: "#fff", fontWeight: "500" },
   joinBtn: {
+    backgroundColor: "#1669EF",
+    borderRadius: 20,
+    paddingVertical: 4,
+    paddingHorizontal: 12,
+  },
+  seeBtn: {
     backgroundColor: "#22A112",
     borderRadius: 20,
     paddingVertical: 4,

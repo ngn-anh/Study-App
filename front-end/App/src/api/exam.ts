@@ -40,6 +40,7 @@ export const getExams = async (params: {
   currentClassCode?: string;
   page?: number;
   limit?: number;
+  userId?: string;
 }) => {
   const response = await axios.get(`${API_URL}/exams`, {
     params,
