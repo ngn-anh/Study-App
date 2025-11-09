@@ -4,11 +4,12 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./index.styles";
 
 interface Props {
-    data?: any
+    data?: any,
+    title?: string,
 }
 
 const Header = (props: Props) => {
-    const { data } = props;
+    const { data, title } = props;
     const navigation = useNavigation();
     return (
         <>
@@ -17,7 +18,7 @@ const Header = (props: Props) => {
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <ArrowLeftIcon size={24} color="#083070" />
                     </TouchableOpacity>
-                    <Text style={styles.headerTitle}>{data?.name}</Text>
+                    <Text style={styles.headerTitle}>{!!title ? title : data?.name}</Text>
                 </View>
 
                 {/* <TouchableOpacity onPress={toggleMenu}>

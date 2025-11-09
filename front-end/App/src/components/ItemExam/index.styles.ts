@@ -20,17 +20,19 @@ export const styles = StyleSheet.create({
         shadowRadius: 4,
         shadowOffset: { width: 0, height: 2 },
         // marginTop: verticalScale(40),
-        padding: scale(14),
+        // padding: scale(14),
         // width: verticalScale(345),
        flex: 1, 
        margin: 5,
     },
     image: {
+        flex: 1,
         width: "100%",
-        height: verticalScale(140),
+        height: verticalScale(88),
     },
     content: {
-        marginTop: verticalScale(12),
+        paddingHorizontal: scale(14),
+        marginVertical: verticalScale(12),
     },
     headerRow: {
         flexDirection: "row",

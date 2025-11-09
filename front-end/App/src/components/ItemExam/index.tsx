@@ -1,24 +1,31 @@
 import { useNavigation } from "@react-navigation/native";
 import { Exam } from "../../types/typeObj";
-import { Image, Text, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./index.styles";
 import ButtonCustom from "../ButtonCustom";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../types/data";
 
 interface Props {
     exam?: Exam;
 }
 
+type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
+
 const ItemExam = (props: Props) => {
     const { exam } = props;
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavigationProps>();
     const handleButtonPress = () => {
-        console.log("Button was pressed!");
-        // Thêm logic khác ở đây
+        console.log("loanhtm exam: ", exam);
+        navigation.navigate('PracticeExamDetailScreen', { exam: exam });
     };
 
     return (
         <>
-            <View style={styles.container}>
+            <TouchableOpacity
+                style={styles.container}
+                onPress={() => handleButtonPress()}
+            >
                 <Image source={{ uri: exam?.image }} style={styles.image} />
                 <View style={styles.content}>
                     {/* Header: title + subject */}
@@ -43,8 +50,7 @@ const ItemExam = (props: Props) => {
                     <ButtonCustom
                         type="secondary"
                         name="Chi Tiết"
-                        paddingVertical={10}
-                        onPress={handleButtonPress}
+                        paddingVertical={5}
                     />
                     {/* Footer: buttons */}
                     {/* <View style={styles.footerRow}>
@@ -71,7 +77,7 @@ const ItemExam = (props: Props) => {
                         </TouchableOpacity>
                     </View> */}
                 </View>
-            </View>
+            </TouchableOpacity>
         </>
     );
 }
