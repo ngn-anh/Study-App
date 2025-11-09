@@ -1,4 +1,4 @@
-import { FlatList, ScrollView, Text, View } from "react-native";
+import { FlatList, Image, ScrollView, Text, View } from "react-native";
 import { styles } from "./index.styles";
 import ExpandDesSubject from "../../components/ExpandDesSubject";
 import { RouteProp } from "@react-navigation/native";
@@ -7,15 +7,17 @@ import Header from "../../components/Header";
 import SearchBar from "../../components/Search";
 import ItemExam from "../../components/ItemExam";
 import { verticalScale } from "../../utils/responsive";
+import { ClockIcon } from "phosphor-react-native";
 
 type Props = {
-  route: RouteProp<RootStackParamList, 'PracticeExamScreen'>;
+  route: RouteProp<RootStackParamList, 'PracticeExamDetailScreen'>;
 };
 
-const PracticeExamScreen = (props: Props) => {
+const PracticeExamDetailScreen = (props: Props) => {
   const { route } = props;
-  const { subject } = route.params;
-
+  const { exam } = route.params;
+  console.log(">>>>>");
+  console.log("loanhtm exam detail: ", exam);
   const listExam: any[] = [
     {
       id: "1",
@@ -75,14 +77,54 @@ const PracticeExamScreen = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <Header data={subject} />
+      <Header
+        data={exam}
+        title="Chi tiết đề thi"
+      />
       <ScrollView>
-        {/* <View> */}
         <View style={styles.content}>
-          <Text style={styles.title}>Làm chủ môn {subject?.name}</Text>
-          <ExpandDesSubject text={subject?.description.trim() || ''} numberOfLines={5} />
+          <View style={styles.infoExamContainer}>
+            <Image source={{ uri: exam?.image }} style={styles.imageExam} />
+            <Text style={styles.nameExam}>{exam?.name ?? ''}</Text>
+            <View style={styles.infoExam}>
+              <View style={styles.infoExamLeft}>
+                <View style={styles.itemLeft}>
+                  <ClockIcon style={styles.itemIcon} />
+                  <Text style={styles.itemValue}>{exam?.number + ""}</Text>
+                </View>
+                <View style={styles.itemLeft}>
+                  <ClockIcon style={styles.itemIcon} />
+                  <Text style={styles.itemValue}>{exam?.number + ""}</Text>
+                </View>
+                <View style={styles.itemLeft}>
+                  <ClockIcon style={styles.itemIcon} />
+                  <Text style={styles.itemValue}>{exam?.number + ""}</Text>
+                </View>
+              </View>
+              <View style={styles.infoExamRight}>
+                <View style={styles.itemRight}>
+                  <Text style={styles.itemValueRight}>100</Text>
+                  <Text style={styles.itemDesRight}>Lượt thi</Text>
+                </View>
+                <View style={styles.itemRight}>
+                  <Text style={styles.itemValueRight}>50</Text>
+                  <Text style={styles.itemDesRight}>Lượt thích</Text>
+                </View>
+                <View style={styles.itemRight}>
+                  <Text style={styles.itemValueRight}>2</Text>
+                  <Text style={styles.itemDesRight}>Lượt tải</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View style={styles.actionContainer}>
+
+          </View>
+          <View style={styles.previewExamContainer}>
+
+          </View>
         </View>
-        <SearchBar />
+        {/* <SearchBar />
         <FlatList
           data={listExam}
           renderItem={renderItemExam}
@@ -90,12 +132,11 @@ const PracticeExamScreen = (props: Props) => {
           numColumns={2} // Hiển thị 2 item trên mỗi hàng
           columnWrapperStyle={{ justifyContent: 'space-between' }} // Căn giữa các item
           contentContainerStyle={{ paddingHorizontal: 10, paddingTop: verticalScale(20) }} // Thêm khoảng cách cho các item
-        />
+        /> */}
       </ScrollView >
-      {/* </View> */}
-    </View>
+    </View >
 
   );
 }
 
-export default PracticeExamScreen;
+export default PracticeExamDetailScreen;

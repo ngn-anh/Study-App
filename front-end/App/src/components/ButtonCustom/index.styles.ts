@@ -6,11 +6,11 @@ export const styles = StyleSheet.create({
     },
     containerPrimary: {
         backgroundColor: "#1900ffff",
-        borderRadius: 10,
+        borderRadius: 50,
         color: "#FFFFFF",
     },
     containerSecondary: {
-        borderRadius: 10,
+        borderRadius: 50,
         borderColor: "#1900ffff",
         borderWidth: 1,
         backgroundColor: "#FFFFFF",
@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     },
 
     containerDisable: {
-        borderRadius: 10,
+        borderRadius: 50,
         borderColor: "#a2a0b3ff",
         borderWidth: 1,
         backgroundColor: "#FFFFFF",

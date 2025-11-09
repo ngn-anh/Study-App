@@ -17,6 +17,7 @@ import { ExamResultScreen } from "../screens/ExamResultScreen";
 import { ExamRankScreen } from "../screens/ExamRankScreen";
 import ExamDetailResultScreen from "../screens/ExamDetailResultScreen";
 import PracticeExamScreen from "../screens/PracticeExamScreen";
+import PracticeExamDetailScreen from "../screens/PracticeExamDetailScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -39,6 +40,7 @@ const AppNavigator = () => {
       <Stack.Screen name="ExamRankScreen" component={ExamRankScreen} />
       <Stack.Screen name="ExamDetailResultScreen" component={ExamDetailResultScreen} />
       <Stack.Screen name="PracticeExamScreen" component={PracticeExamScreen} />
+      <Stack.Screen name="PracticeExamDetailScreen" component={PracticeExamDetailScreen} />
 
       {/* Tab chính */}
       <Stack.Screen name="MainTabs" component={MainTabs} />

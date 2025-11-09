@@ -1,4 +1,4 @@
-import { Subject } from "./typeObj";
+import { Exam, Subject } from "./typeObj";
 
 export type RootStackParamList = {
   SplashScreen1: undefined;
@@ -20,5 +20,6 @@ export type RootStackParamList = {
   ExamRankScreen: { examId: string, userId: string };
   ExamDetailResultScreen: {examResultId: string}
   PracticeExamScreen: { subject?: Subject };
+  PracticeExamDetailScreen: { exam?: Exam };
 };
   
