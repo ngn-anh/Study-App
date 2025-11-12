@@ -69,6 +69,7 @@ export const styles = StyleSheet.create({
     fontSize: 13,
     color: "#5E6B85",
     marginTop: 4,
+    width:"93%"
   },
   rightWrapper: {
     flexDirection: "row",
@@ -81,7 +82,7 @@ export const styles = StyleSheet.create({
     height: 22,
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 8,
+    marginRight: 4,
   },
   badgeText: {
     color: "#fff",
