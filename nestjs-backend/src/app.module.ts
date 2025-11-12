@@ -7,6 +7,8 @@ import { ReminderSchedulesModule } from './reminder-schedules/reminder-schedules
 import { ExamsModule } from './exams/exams.module';
 import { QuestionsModule } from './questions/questions.module';
 import { ExamResultModule } from './exam_results/exam-result.module';
+import { NotificationTypesModule } from './notification-types/notification-types.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 
 @Module({
@@ -18,7 +20,9 @@ import { ExamResultModule } from './exam_results/exam-result.module';
     ReminderSchedulesModule,
     ExamsModule,
     QuestionsModule,
-    ExamResultModule
+    ExamResultModule,
+    NotificationTypesModule,
+    NotificationsModule
   ],
   controllers: [],
   providers: [],
