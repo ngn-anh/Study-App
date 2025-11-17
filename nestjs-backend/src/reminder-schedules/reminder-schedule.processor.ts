@@ -25,7 +25,7 @@ export class ReminderProcessor {
       | null;
 
     // 🔹 2️⃣ Lưu notification vào MongoDB
-    await this.notificationsService.create({
+    const newNoti= await this.notificationsService.create({
       schedule_id: new Types.ObjectId(schedule._id),
       noti_type_id: reminderType?._id,
       name: schedule.title,
@@ -42,6 +42,7 @@ export class ReminderProcessor {
           schedule.title,
           schedule.note || 'Thông báo đến',
           {
+            notiId: (newNoti as any)._id.toString(),
             scheduleId: schedule._id.toString(),
             type: 'REMINDER',
           }
