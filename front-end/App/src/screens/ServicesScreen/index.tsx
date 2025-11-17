@@ -30,6 +30,8 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ icon: Icon, label, badgeCount
       navigation.navigate("ExamListScreen" as never);
     } else if (label === "Luyện đề") {
       navigation.navigate("PracticeExam" as never);
+    } else if (label === "Thông báo") {
+      navigation.navigate("NotificationScreen" as never);
     }
   };
   return (

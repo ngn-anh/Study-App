@@ -10,11 +10,15 @@ import { ReminderSchedule } from './schemas/reminder-schedule.schema';
 export class ReminderSchedulesController {
   constructor(private readonly service: ReminderSchedulesService) {}
 
+   // 🔹 Tạo schedule + schedule job
   @Post()
   @ApiBody({ type: CreateReminderScheduleDto })
-  @ApiResponse({ status: 201, description: 'Tạo lịch hẹn mới', type: ReminderSchedule })
-  create(@Body() dto: CreateReminderScheduleDto) {
-    return this.service.create(dto);
+  @ApiResponse({ status: 201, description: 'Tạo lịch hẹn mới và schedule job', type: ReminderSchedule })
+  async create(@Body() dto: CreateReminderScheduleDto) {
+    // Lưu schedule vào MongoDB
+    const schedule = await this.service.create(dto);
+
+    return { success: true, schedule };
   }
 
   @Get('user/:user_id')
@@ -52,5 +56,4 @@ export class ReminderSchedulesController {
   async findAllGlobal() {
     return this.service.findAllGlobal();
   }
-
 }
