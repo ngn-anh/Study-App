@@ -4,6 +4,7 @@ import notifee, { AndroidImportance, AndroidStyle, EventType } from '@notifee/re
 import { Platform, ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { navigate } from '../navigation/RootNavigation';
+import { markNotificationRead } from '../api/notification';
 
 // 🔹 Cờ ngăn listener gọi nhiều lần
 let isForegroundListenerSet = false;
@@ -106,10 +107,12 @@ export const setupForegroundListener = async () => {
   // Nhấn notification từ background
   messaging().onNotificationOpenedApp(remoteMessage => {
     const scheduleId = remoteMessage?.data?.scheduleId as string;
+    const notiId = remoteMessage?.data?.notiId as string;
     console.log("Background open:", scheduleId);
 
     if (scheduleId) {
       navigate("ScheduleDetail", { id: scheduleId });
+       markNotificationRead(notiId).then();
     }
   });
 
@@ -117,11 +120,13 @@ export const setupForegroundListener = async () => {
   const initialNotification = await messaging().getInitialNotification();
   if (initialNotification) {
     const scheduleId = initialNotification.data?.scheduleId as string;
+    const notiId = initialNotification?.data?.notiId as string;
     console.log("Killed state open:", initialNotification);
 
     if (scheduleId) {
       setTimeout(() => {
         navigate("ScheduleDetail", { id: scheduleId });
+         markNotificationRead(notiId).then();
       }, 500);
     }
   }
@@ -132,10 +137,12 @@ export const registerNotificationEvents = () => {
   notifee.onForegroundEvent(({ type, detail }) => {
     if (type === EventType.PRESS) {
         const scheduleId = detail?.notification?.data?.scheduleId as string;
+        const notiId = detail?.notification?.data?.notiId as string;
         console.log("Foreground press:", scheduleId);
 
         if (scheduleId) {
          navigate("ScheduleDetail", { id: scheduleId });
+         markNotificationRead(notiId).then();
         }
     }
   });
