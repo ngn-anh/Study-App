@@ -9,12 +9,19 @@ import { QuestionsModule } from './questions/questions.module';
 import { ExamResultModule } from './exam_results/exam-result.module';
 import { NotificationTypesModule } from './notification-types/notification-types.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { BullModule } from '@nestjs/bull';
 
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),           // Load .env
     MongooseModule.forRoot(process.env.MONGO_URI ||  'mongodb://localhost:27017/nestjs_db'),      // Kết nối MongoDB
+    BullModule.forRoot({
+      redis: {
+        host: '127.0.0.1',
+        port: 6379,
+      },
+    }),
     UsersModule,
     AuthModule,
     ReminderSchedulesModule,

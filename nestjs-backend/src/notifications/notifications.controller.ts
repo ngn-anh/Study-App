@@ -8,15 +8,21 @@ export class NotificationsController {
 
   // GET /notifications?code=SALE
   @Get()
-  async getByCode(@Query('code') code: string) {
-    const data = await this.notificationsService.getNotificationsByCode(code);
+  async getByCode(
+    @Query('code') code: string,
+    @Query('user_id') user_id: string
+  ) {
+    const data = await this.notificationsService.getNotificationsByCode(code, user_id);
     return { success: true, data };
   }
 
   // API đánh dấu tất cả notification theo type là đã đọc
   @Patch('mark-all-read')
-  async markAllRead(@Query('type') type: string) {
-    return this.notificationsService.markAllReadByType(type);
+  async markAllRead(
+    @Query('type') type: string,
+    @Query('user_id') user_id: string
+  ) {
+    return this.notificationsService.markAllReadByType(type, user_id);
   }
 
    // PATCH /notifications/:id/mark-read

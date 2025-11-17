@@ -5,12 +5,14 @@ import { NotificationType, NotificationTypeSchema } from './schemas/notification
 import { Notification, NotificationSchema } from 'src/notifications/schemas/notification.schema';
 import { NotificationTypesService } from './notification-types.service';
 import { NotificationTypesController } from './notification-types.controller';
+import { ReminderSchedule, ReminderScheduleSchema } from 'src/reminder-schedules/schemas/reminder-schedule.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: NotificationType.name, schema: NotificationTypeSchema },
-      { name: Notification.name, schema: NotificationSchema }, // ✅ cần dòng này
+      { name: Notification.name, schema: NotificationSchema },
+      { name: ReminderSchedule.name, schema: ReminderScheduleSchema }
     ]),
   ],
   controllers: [NotificationTypesController],
