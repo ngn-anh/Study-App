@@ -5,6 +5,7 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { styles } from "./index.styles";
 import { RootStackParamList } from "../../types/data";
 import { getNotificationTypes } from "../../api/notification";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const iconMap: Record<string, any> = {
   SALE: Megaphone,
@@ -19,7 +20,11 @@ const NotificationScreen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getNotificationTypes();
+      const userDataStr = await AsyncStorage.getItem("userData");
+      if (!userDataStr) throw new Error("Không tìm thấy thông tin người dùng");
+      const userData = JSON.parse(userDataStr);
+
+      const res = await getNotificationTypes(userData.user.id);
       setNotificationTypes(res);
       setLoading(false);
     };

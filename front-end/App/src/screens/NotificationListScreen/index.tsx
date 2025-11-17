@@ -6,6 +6,7 @@ import { RootStackParamList } from "../../types/data";
 import { styles } from "./index.styles";
 import { ConfirmModal } from "../../components/ConfirmModal";
 import { getNotificationsByCode, markAllNotificationsRead, markNotificationRead, Notification  } from "../../api/notification";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const NotificationListScreen = () => {
   const route = useRoute<any>();
@@ -18,8 +19,12 @@ const NotificationListScreen = () => {
 
   useEffect(() => {
   const fetchData = async () => {
+    const userDataStr = await AsyncStorage.getItem("userData");
+    if (!userDataStr) throw new Error("Không tìm thấy thông tin người dùng");
+    const userData = JSON.parse(userDataStr);
+
     setLoading(true);
-    const data = await getNotificationsByCode(type);
+    const data = await getNotificationsByCode(type,userData.user.id);
     setNotificationTypeName(data.notification_type_name)
     setNotifications(data.notifications);
     setLoading(false);
@@ -33,8 +38,12 @@ const NotificationListScreen = () => {
 
   const handleConfirm = async () => {
   try {
+    const userDataStr = await AsyncStorage.getItem("userData");
+    if (!userDataStr) throw new Error("Không tìm thấy thông tin người dùng");
+    const userData = JSON.parse(userDataStr);
+    console.log('userData.user.id',userData.user.id)
     // Gọi API đánh dấu tất cả đã đọc
-    await markAllNotificationsRead(type);
+    await markAllNotificationsRead(type,userData.user.id);
 
     // Cập nhật local state ngay lập tức
     setNotifications((prev) =>
@@ -85,12 +94,12 @@ const NotificationListScreen = () => {
                   // Nếu chưa đọc thì gọi API đánh dấu đã đọc
                   if (!item.is_read) {
                     console.log('schedule_id',item.schedule_id)
-                    await markNotificationRead(item.schedule_id);
+                    await markNotificationRead(item._id);
 
                     // Cập nhật local state ngay lập tức
                     setNotifications((prev) =>
                       prev.map((n) =>
-                        n._id === item.schedule_id ? { ...n, is_read: true } : n
+                        n._id === item._id ? { ...n, is_read: true } : n
                       )
                     );
                   }

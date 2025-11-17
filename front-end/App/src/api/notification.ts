@@ -16,9 +16,11 @@ export interface NotificationResponse {
   notifications: Notification[];
 }
 
-export const getNotificationTypes = async () => {
+export const getNotificationTypes = async (user_id: string) => {
   try {
-    const response = await axios.get(`${API_URL}/notification-types`);
+    const response = await axios.get(`${API_URL}/notification-types`, {
+      params: { user_id }
+    });
     return response.data.data; // lấy mảng data trong response
   } catch (error) {
     console.error("Lỗi khi gọi API notification-types:", error);
@@ -26,9 +28,14 @@ export const getNotificationTypes = async () => {
   }
 };
 
-export const getNotificationsByCode = async (code: string): Promise<NotificationResponse> => {
+export const getNotificationsByCode = async (code: string,user_id: string): Promise<NotificationResponse> => {
   try {
-    const res = await axios.get(`${API_URL}/notifications?code=${code}`);
+    const res = await axios.get(`${API_URL}/notifications`, {
+      params: {
+        code,
+        user_id,
+      },
+    });
     return res.data?.data || { notification_type_name: '', notifications: [] };
   } catch (error) {
     console.error("Error fetching notifications:", error);
@@ -36,9 +43,15 @@ export const getNotificationsByCode = async (code: string): Promise<Notification
   }
 };
 
-export const markAllNotificationsRead = async (code: string) => {
+export const markAllNotificationsRead = async (code: string, user_id: string) => {
   try {
-    const res = await axios.patch(`${API_URL}/notifications/mark-all-read?type=${code}`);
+    const res = await axios.patch(
+      `${API_URL}/notifications/mark-all-read`,
+      {},
+      {
+        params: { type: code, user_id },
+      }
+    );
     return res.data;
   } catch (error) {
     console.error("Error marking notifications as read:", error);
