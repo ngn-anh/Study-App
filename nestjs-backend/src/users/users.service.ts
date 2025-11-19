@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import * as bcrypt from 'bcrypt'; // dùng bcryptjs cho dễ cài
 import { User, UserDocument } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -14,7 +14,11 @@ export class UsersService {
   async create(dto: CreateUserDto): Promise<UserEntity> {
      try {
       const hashedPassword = await bcrypt.hash(dto.password, 10);
-      const createdUser = new this.userModel({ ...dto, password: hashedPassword });
+      const createdUser = new this.userModel({
+         ...dto, 
+         password: hashedPassword,
+          class_id: new Types.ObjectId(dto.class_id) , 
+        });
       await createdUser.save();
       return toUserEntity(createdUser);
     } catch (error: any) {

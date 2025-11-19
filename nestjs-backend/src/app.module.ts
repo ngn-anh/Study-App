@@ -10,6 +10,7 @@ import { ExamResultModule } from './exam_results/exam-result.module';
 import { NotificationTypesModule } from './notification-types/notification-types.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { BullModule } from '@nestjs/bull';
+import { ClassModule } from './classes/class.module';
 
 
 @Module({
@@ -29,7 +30,8 @@ import { BullModule } from '@nestjs/bull';
     QuestionsModule,
     ExamResultModule,
     NotificationTypesModule,
-    NotificationsModule
+    NotificationsModule,
+    ClassModule,
   ],
   controllers: [],
   providers: [],
