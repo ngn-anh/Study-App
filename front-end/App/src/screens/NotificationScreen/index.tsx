@@ -21,6 +21,7 @@ const NotificationScreen = () => {
   useEffect(() => {
     const fetchData = async () => {
       const userDataStr = await AsyncStorage.getItem("userData");
+      console.log('userDataStr',userDataStr)
       if (!userDataStr) throw new Error("Không tìm thấy thông tin người dùng");
       const userData = JSON.parse(userDataStr);
 

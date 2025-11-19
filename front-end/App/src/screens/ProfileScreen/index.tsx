@@ -1,84 +1,149 @@
-import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView, Modal, Pressable } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Modal,
+  Pressable
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   ArrowLeftIcon,
-  FadersHorizontalIcon,
   BellIcon,
   UserCircleIcon,
   PencilSimpleIcon,
-  ShieldCheckIcon,
-  PaintBrushIcon,
-  GlobeIcon,
   QuestionIcon,
   EnvelopeSimpleIcon,
-  LockIcon,
   KeyIcon,
   SignOutIcon
 } from 'phosphor-react-native';
 import { styles } from './ProfileScreen.styles';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { updateAvatar } from '../../api/user';
+import { getClasses, ClassItem } from '../../api/class';
+import { UpdateProfileModal } from '../../components/UpdateProfileModal';
+
+
+interface UserType {
+  username: string;
+  email: string;
+  phone?: string;
+  full_name?: string;
+  avatar?: string;
+}
 
 const ProfileScreen = ({ navigation }: any) => {
-  const [menuVisible, setMenuVisible] = useState(false);
+  const [user, setUser] = useState<UserType>({
+    username: '',
+    email: '',
+    phone: '',
+    full_name: '',
+    avatar: '',
+  });
+
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
+  const [modalProfileVisible, setModalProfileVisible] = useState(false);
+  const [classes, setClasses] = useState<ClassItem[]>([]);
 
-  const toggleMenu = () => setMenuVisible(!menuVisible);
+  // Load danh sách lớp
+  useEffect(() => {
+    const fetchClasses = async () => {
+      try {
+        const data = await getClasses();
+        setClasses(data);
+      } catch (error) {
+        console.log('Error fetching classes:', error);
+      }
+    };
+    fetchClasses();
+  }, []);
 
-  const handleChangePassword = () => {
-    setMenuVisible(false);
-    console.log('Đổi mật khẩu');
-  };
+  // Load user data từ AsyncStorage
+  useEffect(() => {
+    const loadUserData = async () => {
+      try {
+        const userDataStr = await AsyncStorage.getItem('userData'); 
+        if (userDataStr) {
+          const userData = JSON.parse(userDataStr);
+          setUser(userData.user); // 
+        }
+      } catch (error) {
+        console.log('Error loading user data:', error);
+      }
+    };
 
-  const handleLogout = async () => {
-    setMenuVisible(false);
-    setLogoutModalVisible(true);
-  };
+    loadUserData();
+  }, []);
+
+
+  const handleLogout = () => setLogoutModalVisible(true);
 
   const confirmLogout = async () => {
     setLogoutModalVisible(false);
-    await AsyncStorage.removeItem('userData'); // Xóa thông tin user
-    navigation.reset({ index: 0, routes: [{ name: 'AuthScreen' }] }); // Reset về Auth
+    await AsyncStorage.removeItem('userData');
+    navigation.reset({ index: 0, routes: [{ name: 'AuthScreen' }] });
   };
 
+  
+  const handlePickImage = () => {
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+        maxWidth: 500,
+        maxHeight: 500,
+        quality: 0.7,
+      },
+      async (response) => {
+        if (response.didCancel) return;
+        if (response.errorCode) {
+          console.log('ImagePicker Error: ', response.errorMessage);
+          return;
+        }
+        if (response.assets && response.assets.length > 0) {
+          const pickedImageUri = response.assets[0].uri;
+
+          // Update local state
+          setUser(prev => ({ ...prev, avatar: pickedImageUri }));
+
+          // Update server
+          try {
+            const userDataStr = await AsyncStorage.getItem('userData');
+            if (!userDataStr) return;
+            const userData = JSON.parse(userDataStr);
+
+            console.log(userData.user.id,pickedImageUri)
+
+            await updateAvatar({
+              user_id: userData.user.id,
+              avatar: pickedImageUri || "",
+            });
+
+            // Update AsyncStorage
+            const updatedUserData = {
+              ...userData,
+              user: { ...userData.user, avatar: pickedImageUri },
+            };
+            await AsyncStorage.setItem('userData', JSON.stringify(updatedUserData));
+          } catch (error) {
+            console.log('Error updating avatar:', error);
+          }
+        }
+      }
+    );
+  };
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerLeft}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <ArrowLeftIcon size={24} color="#083070" />
+            <ArrowLeftIcon size={20} color="#083070" />
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Profile</Text>
+          <Text style={styles.headerTitle}>Hồ sơ</Text>
         </View>
-
-        <TouchableOpacity onPress={toggleMenu}>
-          <FadersHorizontalIcon size={24} color="#083070" />
-        </TouchableOpacity>
       </View>
-
-      {/* Dropdown Menu */}
-      <Modal
-        transparent
-        visible={menuVisible}
-        animationType="fade"
-        onRequestClose={() => setMenuVisible(false)}
-      >
-        <Pressable style={styles.modalOverlay} onPress={() => setMenuVisible(false)}>
-          <View style={styles.dropdownWrapper}>
-            <View style={styles.dropdownMenu}>
-              <Pressable style={styles.dropdownItem} onPress={handleChangePassword}>
-                <KeyIcon size={18} color="#000" weight="bold" />
-                <Text style={styles.dropdownText}>Đổi mật khẩu</Text>
-              </Pressable>
-              <View style={styles.dropdownDivider} />
-              <Pressable style={styles.dropdownItem} onPress={handleLogout}>
-                <SignOutIcon size={18} color="#FF3B30" weight="bold" />
-                <Text style={[styles.dropdownText, { color: '#FF3B30' }]}>Đăng xuất</Text>
-              </Pressable>
-            </View>
-          </View>
-        </Pressable>
-      </Modal>
 
       {/* Logout Modal */}
       <Modal
@@ -116,68 +181,70 @@ const ProfileScreen = ({ navigation }: any) => {
         <View style={styles.profileSection}>
           <View style={styles.avatarWrapper}>
             <Image
-              source={{ uri: 'https://cdn-icons-png.flaticon.com/512/219/219969.png' }}
+              source={{
+                uri:
+                  user.avatar ||
+                  'https://cdn-icons-png.flaticon.com/512/219/219969.png',
+              }}
               style={styles.avatar}
             />
-            <TouchableOpacity style={styles.editButton}>
+            <TouchableOpacity style={styles.editButton} onPress={handlePickImage}>
               <PencilSimpleIcon size={14} color="#fff" weight="bold" />
             </TouchableOpacity>
           </View>
-          <Text style={styles.name}>Laiba Ahmar</Text>
-          <Text style={styles.email}>youremail@domain.com | +01 234 567 89</Text>
+          <Text style={styles.name}>{user.full_name || user.username}</Text>
+          <Text style={styles.email}>
+            {user.email} {user.phone ? `| ${user.phone}` : ''}
+          </Text>
         </View>
 
         {/* Section 1 */}
         <View style={styles.card}>
-          <TouchableOpacity style={styles.row}>
-            <UserCircleIcon size={22} color="#083070" />
-            <Text style={styles.label}>Edit profile information</Text>
+          <TouchableOpacity style={styles.row} onPress={() => setModalProfileVisible(true)}>
+            <UserCircleIcon size={22} color="#083070" weight="bold" />
+            <Text style={styles.label}>Cập nhật hồ sơ</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.row}>
-            <BellIcon size={22} color="#083070" />
-            <Text style={styles.label}>Notifications</Text>
+            <BellIcon size={22} color="#083070" weight="bold" />
+            <Text style={styles.label}>Thông báo</Text>
             <Text style={styles.badge}>ON</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.row}>
-            <GlobeIcon size={22} color="#083070" />
-            <Text style={styles.label}>Language</Text>
-            <Text style={styles.badge}>English</Text>
           </TouchableOpacity>
         </View>
 
         {/* Section 2 */}
         <View style={styles.card}>
           <TouchableOpacity style={styles.row}>
-            <ShieldCheckIcon size={22} color="#083070" />
-            <Text style={styles.label}>Security</Text>
+            <KeyIcon size={22} color="#083070" weight="bold" />
+            <Text style={styles.label}>Đổi mật khẩu</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.row}>
-            <PaintBrushIcon size={22} color="#083070" />
-            <Text style={styles.label}>Theme</Text>
-            <Text style={styles.badge}>Light mode</Text>
+          <TouchableOpacity style={styles.row} onPress={handleLogout}>
+            <SignOutIcon size={22} color="#FF3B30" weight="bold" />
+            <Text style={styles.label}>Đăng xuất</Text>
           </TouchableOpacity>
         </View>
 
         {/* Section 3 */}
         <View style={styles.card}>
           <TouchableOpacity style={styles.row}>
-            <QuestionIcon size={22} color="#083070" />
-            <Text style={styles.label}>Help & Support</Text>
+            <QuestionIcon size={22} color="#083070" weight="bold" />
+            <Text style={styles.label}>Hỗ trợ</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.row}>
-            <EnvelopeSimpleIcon size={22} color="#083070" />
-            <Text style={styles.label}>Contact us</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.row}>
-            <LockIcon size={22} color="#083070" />
-            <Text style={styles.label}>Privacy policy</Text>
+            <EnvelopeSimpleIcon size={22} color="#083070" weight="bold" />
+            <Text style={styles.label}>Liên hệ chúng tôi</Text>
           </TouchableOpacity>
         </View>
+
+        <UpdateProfileModal
+          visible={modalProfileVisible}
+          onClose={() => setModalProfileVisible(false)}
+          user={user}
+          classes={classes}
+          onProfileUpdated={(updatedUser: any) => setUser(updatedUser)}
+        />
       </ScrollView>
     </View>
   );

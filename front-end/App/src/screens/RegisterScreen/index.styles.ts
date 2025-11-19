@@ -117,4 +117,22 @@ export const styles = StyleSheet.create({
     fontWeight: "500",
     fontSize: 14,
   },
+  selectWrapper: {
+  borderWidth: 1,
+  borderColor: "#D9D9D9",
+  borderRadius: 8,
+  paddingHorizontal: 6,
+  marginBottom: 16,
+  backgroundColor: "#fff",
+},
+picker: {
+  fontSize: 10,          
+  height: 47,
+  color: "#333",
+},
+pickerItem: {
+  fontSize: 12,          
+  color: "#333",
+},
+
 });

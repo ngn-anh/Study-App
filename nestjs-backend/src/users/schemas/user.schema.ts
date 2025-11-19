@@ -20,6 +20,12 @@ export class User {
   @Prop({ default: null })
   avatar?: string;
 
+  @Prop({ default: null })
+  full_name: string;
+
+  @Prop({ type: Types.ObjectId, ref: 'Class', required: true })
+  class_id: Types.ObjectId;
+
   @Prop({ default: 1 })
   role: number;
 
