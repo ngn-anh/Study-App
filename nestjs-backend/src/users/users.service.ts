@@ -6,6 +6,8 @@ import { User, UserDocument } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserEntity } from './entities/user.entity';
 import { toUserEntity } from 'src/common/utils/user.utils';
+import { UpdateAvatarDto } from './dto/update-avatar.dto';
+import { UpdateProfileDto } from './dto/update-profile.dto';
 
 @Injectable()
 export class UsersService {
@@ -46,5 +48,30 @@ export class UsersService {
 
     const isMatch = await bcrypt.compare(password, user.password);
     return isMatch ? user : null;
+  }
+
+  async updateAvatar(dto: UpdateAvatarDto): Promise<UserEntity> {
+    const user = await this.userModel.findById(dto.user_id);
+    if (!user) throw new BadRequestException('User not found');
+
+    user.avatar = dto.avatar;
+    await user.save();
+
+    return toUserEntity(user);
+  }
+
+  async updateProfile(dto: UpdateProfileDto): Promise<UserEntity> {
+    const user = await this.userModel.findById(dto.user_id);
+    if (!user) throw new BadRequestException('User not found');
+
+    // Cập nhật các trường nếu tồn tại trong DTO
+    if (dto.full_name !== undefined) user.full_name = dto.full_name;
+    if (dto.email !== undefined) user.email = dto.email;
+    if (dto.phone !== undefined) user.phone = dto.phone;
+    if (dto.class_id !== undefined) user.class_id = new Types.ObjectId(dto.class_id);
+
+    await user.save();
+
+    return toUserEntity(user);
   }
 }
