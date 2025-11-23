@@ -21,7 +21,7 @@ export type RootStackParamList = {
   ExamDetailResultScreen: { examResultId: string }
   PracticeExamScreen: { subject?: Subject };
   PracticeExamDetailScreen: { exam?: Exam };
+  PracticeExamSettingScreen: { exam?: Exam };
   NotificationScreen :undefined;
   NotificationListScreen :{type: string};
-  PracticeExamSettingScreen: { exam?: Exam };
 };
