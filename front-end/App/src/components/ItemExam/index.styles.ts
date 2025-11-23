@@ -64,6 +64,8 @@ export const styles = StyleSheet.create({
         marginTop: verticalScale(10),
     },
     iconInfo: {
+        flex: 1,
+        justifyContent: 'space-between',
         flexDirection: "row",
         alignItems: "center",
         marginVertical: verticalScale(10),
@@ -75,7 +77,6 @@ export const styles = StyleSheet.create({
     iconGroup: {
         flexDirection: "row",
         alignItems: "center",
-        marginRight: scale(14),
     },
     iconGroupLink: {
         flexDirection: "row",
@@ -83,10 +84,11 @@ export const styles = StyleSheet.create({
         marginRight: scale(14),
     },
     icon: {
-        width: scale(14),
-        height: scale(14),
-        marginRight: scale(6),
-        tintColor: "#6B7280",
+        width: 11,
+        height: 11,
+        marginRight: 4,
+        color: "#5D697E",
+        tintColor: "#5D697E",
     },
     iconLink: {
         width: scale(14),
@@ -96,7 +98,7 @@ export const styles = StyleSheet.create({
     },
     iconText: {
         fontSize: moderateScale(12),
-        color: "#6B7280",
+        color: "#5D697E",
     },
     linkText: {
         fontSize: moderateScale(12),

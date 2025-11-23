@@ -5,7 +5,9 @@ import { useNavigation, useRoute, RouteProp, NavigationProp } from "@react-navig
 import { CaretLeft, Clock, Student, ThumbsUp, ArrowRight } from "phosphor-react-native";
 import { RootStackParamList } from "../../types/data";
 import { styles } from "./index.styles";
-import { getExamInfo } from "../../api/exam"; 
+import { getExamInfo } from "../../api/exam";
+import InstructionDoExam from "../../components/InstructionDoExam";
+import ShortInfoExam from "../../components/ShortInfoExam";
 
 type RouteProps = RouteProp<RootStackParamList, "ExamInfoScreen">;
 
@@ -60,11 +62,14 @@ export default function ExamInfoScreen() {
 
       {/* Body */}
       <View style={styles.body}>
+        <ShortInfoExam
+          exam={{ id: examId }}
+        />
         {/* Hình ảnh */}
-        <Image source={{ uri: examInfo.image }} style={styles.image} />
+        {/* <Image source={{ uri: examInfo.image }} style={styles.image} /> */}
 
         {/* Row trạng thái */}
-        <View style={styles.statusRow}>
+        {/* <View style={styles.statusRow}>
           <View style={styles.statusItem}>
             <Clock size={16} color="#0C4299" weight="fill" />
             <Text style={styles.statusText}>{examInfo.duration} phút</Text>
@@ -77,10 +82,10 @@ export default function ExamInfoScreen() {
             <ThumbsUp size={16} color="#0C4299" weight="bold" />
             <Text style={styles.statusText}>{examInfo.likes}</Text>
           </View>
-        </View>
+        </View> */}
 
         {/* Instruction box */}
-        <View style={styles.instructionBox}>
+        {/* <View style={styles.instructionBox}>
           <Text style={styles.subTitle}>HƯỚNG DẪN LÀM BÀI KIỂM TRA</Text>
 
           {[
@@ -95,7 +100,8 @@ export default function ExamInfoScreen() {
               <Text style={styles.instructionText}>{text}</Text>
             </View>
           ))}
-        </View>
+        </View> */}
+        <InstructionDoExam />
 
         {/* Nút bắt đầu */}
         <TouchableOpacity

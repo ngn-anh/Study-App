@@ -7,6 +7,7 @@ import Header from "../../components/Header";
 import SearchBar from "../../components/Search";
 import ItemExam from "../../components/ItemExam";
 import { verticalScale } from "../../utils/responsive";
+import { Exam } from "../../types/typeObj";
 
 type Props = {
   route: RouteProp<RootStackParamList, 'PracticeExamScreen'>;
@@ -16,7 +17,7 @@ const PracticeExamScreen = (props: Props) => {
   const { route } = props;
   const { subject } = route.params;
 
-  const listExam: any[] = [
+  const listExam: Exam[] = [
     {
       id: "1",
       image: "https://res.cloudinary.com/dr0ncakbs/image/upload/v1762674778/exam_w1rblh.png",

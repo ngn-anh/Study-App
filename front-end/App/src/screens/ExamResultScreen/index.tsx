@@ -14,7 +14,7 @@ import {
   CheckIcon,
   XIcon,
   ClockIcon,
-  MinusCircleIcon, 
+  MinusCircleIcon,
 } from "phosphor-react-native";
 import { RootStackParamList } from "../../types/data";
 import { ExamResultDetail, getExamResultDetail } from "../../api/examResult";
@@ -51,7 +51,7 @@ export const ExamResultScreen = () => {
     fetchResult();
   }, [examId, userId]);
 
-   if (loading || !result) {
+  if (loading || !result) {
     return (
       <View style={styles.container}>
         <Text>Đang tải kết quả...</Text>
@@ -93,27 +93,27 @@ export const ExamResultScreen = () => {
       {/* 5 ô thống kê */}
       <View style={styles.statsRow}>
         <View style={styles.statBox}>
-          <LightbulbIcon size={22} color="#F4C430"  weight="bold" />
+          <LightbulbIcon size={22} color="#F4C430" weight="bold" />
           <Text style={styles.statValue}>{total_question}</Text>
           <Text style={styles.statLabel}>Tổng cộng</Text>
         </View>
         <View style={styles.statBox}>
-          <CheckIcon size={22} color="#1BA803" weight="bold"/>
+          <CheckIcon size={22} color="#1BA803" weight="bold" />
           <Text style={styles.statValue}>{total_correct}</Text>
           <Text style={styles.statLabel}>Câu đúng</Text>
         </View>
         <View style={styles.statBox}>
-          <XIcon size={22} color="#E53935"  weight="bold"/>
+          <XIcon size={22} color="#E53935" weight="bold" />
           <Text style={styles.statValue}>{total_wrong}</Text>
           <Text style={styles.statLabel}>Câu sai</Text>
         </View>
         <View style={styles.statBox}>
-          <MinusCircleIcon size={22} color="#999999"  weight="bold" />
+          <MinusCircleIcon size={22} color="#999999" weight="bold" />
           <Text style={styles.statValue}>{total_not_done}</Text>
           <Text style={styles.statLabel}>Chưa làm</Text>
         </View>
         <View style={styles.statBox}>
-          <ClockIcon size={22} color="#0C4299"  weight="bold"/>
+          <ClockIcon size={22} color="#0C4299" weight="bold" />
           <Text style={styles.statValue}>{duration_text}</Text>
           <Text style={styles.statLabel}>Thời gian</Text>
         </View>
@@ -141,7 +141,7 @@ export const ExamResultScreen = () => {
         <TouchableOpacity
           style={styles.buttonInner}
           onPress={() =>
-            navigation.navigate("ExamDetailResultScreen" , {examResultId:result.examResultId})
+            navigation.navigate("ExamDetailResultScreen", { examResultId: result.examResultId })
           }
         >
           <View style={styles.buttonContent}>
@@ -159,7 +159,7 @@ export const ExamResultScreen = () => {
       <LinearGradient colors={["#0C4299", "#041633"]} style={styles.button}>
         <TouchableOpacity
           style={styles.buttonInner}
-          onPress={() => navigation.navigate("ExamRankScreen", {userId, examId})}
+          onPress={() => navigation.navigate("ExamRankScreen", { userId, examId })}
         >
           <View style={styles.buttonContent}>
             <TrophyIcon size={22} color="#fff" />
