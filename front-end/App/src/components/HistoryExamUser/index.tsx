@@ -2,11 +2,10 @@
    HistoryExamUser – hiển thị lịch sử thi của một người dùng.
    -------------------------------------------------------------- */
 import React, { memo, useEffect, useState } from "react";
-import { ActivityIndicator, View, Text, StyleSheet } from "react-native";
+import { ActivityIndicator, View, Text } from "react-native";
 import { styles } from "./index.styles";
 import { Exam } from "../../types/typeObj";
-// import { Exam } from "../../types/typeObj";
-// import { styles as externalStyles } from "./index.styles";
+import { CalendarBlankIcon, CalendarDotsIcon, ClockIcon } from "phosphor-react-native";
 
 interface ExamHistory {
     time: string;
@@ -144,31 +143,36 @@ const HistoryExamUser: React.FC<Props> = memo(({ exam, userId }) => {
                     ]}
                 >
                     <Text style={[styles.scoreText, { color: scoreStyle.color }]}>
+                        Điểm
+                    </Text>
+                    <Text style={[styles.scoreText, { color: scoreStyle.color }]}>
                         {score.toFixed(2)} / 10
                     </Text>
                 </View>
 
                 {/* ---- Thông tin chi tiết ---- */}
                 <View style={styles.detailContainer}>
-                    {/* Thời gian thi */}
-                    <Text style={styles.timeLine}>Thời gian thi: {history.time}</Text>
-                    {/* Thời gian hoàn thành */}
-                    <Text style={styles.timeLine}>
-                        Thời gian hoàn thành: {history.timeCompleted}
-                    </Text>
+                    <View style={styles.detailItem}>
+                        <ClockIcon color="#000" size={20} />
+                        <Text style={styles.timeLine}>{history.time}</Text>
+                    </View>
+                    <View style={styles.detailItem}>
+                        <CalendarDotsIcon color="#000" size={20} />
+                        <Text style={styles.timeLine}>
+                            {history.timeCompleted}
+                        </Text>
+                    </View>
                 </View>
             </View>
             {/* Progress bar */}
             <View style={styles.progressWrapper}>
                 <View style={styles.progressBackground}>
-                    {/* phần đã làm */}
                     <View
                         style={[
                             styles.progressDone,
                             { flex: answered / history.totalQuestion },
                         ]}
                     />
-                    {/* phần chưa làm */}
                     <View
                         style={[
                             styles.progressRemain,
@@ -179,10 +183,9 @@ const HistoryExamUser: React.FC<Props> = memo(({ exam, userId }) => {
                         ]}
                     />
                 </View>
-                {/* Text nằm chính giữa thanh */}
                 <View style={styles.progressLabelOverlay}>
                     <Text style={styles.progressLabel}>
-                        {answered}/{history.totalQuestion}
+                        {"Số câu đã làm: "}{answered}/{history.totalQuestion}
                     </Text>
                 </View>
             </View>

@@ -14,8 +14,7 @@ export const styles = StyleSheet.create({
     },
     row: {
         flexDirection: "row",
-        alignItems: "flex-start",
-        gap: 12,
+        gap: 28,
     },
 
     /* ----- Score box (trái) ----- */
@@ -36,12 +35,20 @@ export const styles = StyleSheet.create({
     detailContainer: {
         flex: 1,
         flexDirection: "column",
-        gap: 6,
+        justifyContent:'space-between',
+        paddingHorizontal: 3,
+        borderWidth: 1,
+    },
+
+    detailItem:{
+        // flex: 1,
+         flexDirection: 'row',
+        alignItems: 'center',
+        gap: 5,
     },
 
     timeLine: {
-        fontSize: 13,
-        color: "#333",
+        color: "#000",
     },
 
     /* ----- Progress bar ----- */

@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet } from "react-native";
 import { verticalScale, scale } from "../../utils/responsive";
 
 const COLORS = {
