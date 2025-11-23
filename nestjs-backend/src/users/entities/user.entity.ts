@@ -4,6 +4,8 @@ export class UserEntity {
   email: string;
   phone?: string;
   avatar?: string;
+  full_name?: string;
+  class_id: string;
   role: number;
   created_at?: Date;
   updated_at?: Date;

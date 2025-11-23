@@ -26,6 +26,7 @@ const formatTime = (date: Date) =>
 const CreateUpdateScheduleScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const route = useRoute<RouteProps>();
+
   const { id,name, due_date } = route.params || {};
 
   const [form, setForm] = useState({
@@ -163,6 +164,9 @@ const CreateUpdateScheduleScreen = () => {
     if (!isValid) return;
 
     try {
+      const fcmToken = await AsyncStorage.getItem("fcmToken");
+      if (!fcmToken) throw new Error("Không tìm thấy FCM token");
+
       const userDataStr = await AsyncStorage.getItem("userData");
       if (!userDataStr) throw new Error("Không tìm thấy thông tin người dùng");
       const userData = JSON.parse(userDataStr);
@@ -177,6 +181,7 @@ const CreateUpdateScheduleScreen = () => {
         remind_date: `${form.remindDate.getFullYear()}-${pad(form.remindDate.getMonth() + 1)}-${pad(form.remindDate.getDate())}`,
         remind_time: `${pad(form.remindDate.getHours())}:${pad(form.remindDate.getMinutes())}`,
         repeat_mode: isRepeatDaily ? "daily" : "none",
+        fcm_token: fcmToken,
       };
 
       if (id) {

@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, TextInput, Text, TouchableOpacity, ImageBackground, ScrollView } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { API_URL } from "@env";
 import { styles } from "./index.styles";
+import { Picker } from "@react-native-picker/picker";
+import { getClasses, ClassItem } from "../../api/class"; 
 import { UserCirclePlusIcon, EyeIcon, EyeSlashIcon, ArrowLeftIcon, PhoneIcon } from "phosphor-react-native";
 import { CustomModal } from "../../components/CustomModal";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { RootStackParamList } from "../../types/data";
 
 const RegisterScreen: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,6 +21,11 @@ const RegisterScreen: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  // ⚡ STATE CLASS
+  const [classes, setClasses] = useState<ClassItem[]>([]);
+  const [classId, setClassId] = useState("");
+
+  // Modal
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [modalType, setModalType] = useState<'success'|'error'>('success');
@@ -25,6 +35,19 @@ const RegisterScreen: React.FC = () => {
     setModalType(type);
     setModalVisible(true);
   };
+
+  // ⚡ Load class list
+  useEffect(() => {
+    const fetchClasses = async () => {
+      try {
+        const data = await getClasses();
+        setClasses(data);
+      } catch (error) {
+        console.log("Error fetching classes:", error);
+      }
+    };
+    fetchClasses();
+  }, []);
 
   const handleRegister = async () => {
     if (password !== confirmPassword) {
@@ -37,8 +60,25 @@ const RegisterScreen: React.FC = () => {
         username,
         email,
         password,
+        class_id: classId || null,
       });
+
+       const userData = response.data;
+
+      // Lưu userData vào AsyncStorage
+      await AsyncStorage.setItem("userData", JSON.stringify(userData));
+
+      // navigation.navigate("Home"); // hoặc màn bạn muốn
+
       showModal("Đăng ký thành công!", "success");
+
+      setTimeout(() => {
+        navigation.reset({
+          index: 1,
+          routes: [{ name: "MainTabs" }], // reset về tab navigator
+        });
+      }, 1000);
+
     } catch (error: any) {
       const message = error.response?.data?.message || "Đăng ký thất bại, thử lại sau";
       showModal(message, "error");
@@ -47,27 +87,76 @@ const RegisterScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground source={require("../../assets/images/header-bg.png")} style={styles.headerBackground} imageStyle={styles.imageStyle}>
+      <ImageBackground 
+        source={require("../../assets/images/header-bg.png")} 
+        style={styles.headerBackground} 
+        imageStyle={styles.imageStyle}
+      >
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <ArrowLeftIcon size={22} color="#fff" weight="bold" />
         </TouchableOpacity>
       </ImageBackground>
 
       <ScrollView contentContainerStyle={styles.formContainer}>
+        {/* Username */}
         <Text style={styles.label}>Username <Text style={{ color: "red" }}>*</Text></Text>
-        <TextInput placeholder="Vui lòng nhập username" style={styles.input} value={username} onChangeText={setUsername} />
+        <TextInput 
+          placeholder="Vui lòng nhập username" 
+          style={styles.input} 
+          value={username} 
+          onChangeText={setUsername} 
+        />
+
+        {/* Email */}
         <Text style={styles.label}>Email <Text style={{ color: "red" }}>*</Text></Text>
-        <TextInput placeholder="Vui lòng nhập email" style={styles.input} keyboardType="email-address" value={email} onChangeText={setEmail} />
+        <TextInput 
+          placeholder="Vui lòng nhập email" 
+          style={styles.input} 
+          keyboardType="email-address" 
+          value={email} 
+          onChangeText={setEmail} 
+        />
+
+        {/* SELECT CLASS */}
+        <Text style={styles.label}>Lớp <Text style={{ color: "red" }}>*</Text></Text>
+        <View style={styles.selectWrapper}>
+          <Picker
+            style={styles.picker}
+            selectedValue={classId}
+            onValueChange={(value: any) => setClassId(value)}
+          >
+            <Picker.Item label="-- Chọn lớp --" value="" style={styles.pickerItem}/>
+            {classes.map((item) => (
+              <Picker.Item key={item._id} label={item.name} value={item._id} style={styles.pickerItem}/>
+            ))}
+          </Picker>
+        </View>
+
+        {/* Password */}
         <Text style={styles.label}>Mật khẩu <Text style={{ color: "red" }}>*</Text></Text>
         <View style={styles.passwordWrapper}>
-          <TextInput placeholder="Vui lòng nhập mật khẩu" style={styles.inputPassword} secureTextEntry={!showPassword} value={password} onChangeText={setPassword} />
+          <TextInput 
+            placeholder="Vui lòng nhập mật khẩu" 
+            style={styles.inputPassword} 
+            secureTextEntry={!showPassword} 
+            value={password} 
+            onChangeText={setPassword} 
+          />
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.iconEye}>
             {showPassword ? <EyeIcon size={20} color="#0047AB" /> : <EyeSlashIcon size={20} color="#0047AB" />}
           </TouchableOpacity>
         </View>
+
+        {/* Confirm Password */}
         <Text style={styles.label}>Xác nhận mật khẩu <Text style={{ color: "red" }}>*</Text></Text>
         <View style={styles.passwordWrapper}>
-          <TextInput placeholder="Nhập lại mật khẩu" style={styles.inputPassword} secureTextEntry={!showConfirmPassword} value={confirmPassword} onChangeText={setConfirmPassword} />
+          <TextInput 
+            placeholder="Nhập lại mật khẩu" 
+            style={styles.inputPassword} 
+            secureTextEntry={!showConfirmPassword} 
+            value={confirmPassword} 
+            onChangeText={setConfirmPassword} 
+          />
           <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)} style={styles.iconEye}>
             {showConfirmPassword ? <EyeIcon size={20} color="#0047AB" /> : <EyeSlashIcon size={20} color="#0047AB" />}
           </TouchableOpacity>
@@ -86,7 +175,12 @@ const RegisterScreen: React.FC = () => {
         </TouchableOpacity>
       </View>
 
-      <CustomModal visible={modalVisible} message={modalMessage} type={modalType} onClose={() => setModalVisible(false)} />
+      <CustomModal 
+        visible={modalVisible} 
+        message={modalMessage} 
+        type={modalType} 
+        onClose={() => setModalVisible(false)} 
+      />
     </View>
   );
 };
