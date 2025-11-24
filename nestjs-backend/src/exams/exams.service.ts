@@ -29,25 +29,17 @@ export class ExamsService {
     name,
     sort,
     type,
-    currentClassCode,
+    class_id,
     subjectCodes,
     page = 1,
-    limit = 10,
+    limit = 5,
     user_id, 
   } = filterDto;
 
   const now = new Date();
 
-  // --- (1) Lấy classId từ code ---
-  let classId: string | null = null;
-  if (currentClassCode) {
-    const classDoc = await this.classModel
-      .findOne({ code: currentClassCode })
-      .select('_id')
-      .lean();
-    if (!classDoc) return { data: [], total: 0, page, limit };
-    classId = classDoc._id.toString();
-  }
+  // --- (1) Lấy classId ---
+  let classId = class_id;
 
   // --- (2) Lấy subjectIds ---
   let subjectIds: string[] = [];

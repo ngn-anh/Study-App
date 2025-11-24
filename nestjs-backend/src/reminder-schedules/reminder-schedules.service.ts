@@ -20,15 +20,36 @@ export class ReminderSchedulesService {
     return this.reminderScheduleModel.find();
   }
 
-  async findAll(user_id: string) {
-    return this.reminderScheduleModel.find({
-      user_id: new Types.ObjectId(user_id),
-      $or: [
-        { deleted_at: null },
-        { deleted_at: { $exists: false } }
-      ],
-    }).sort({ due_date: 1, due_time: 1 });
+  async findAll(user_id: string, page = 1, limit = 10) {
+    const skip = (page - 1) * limit;
+
+    const [items, total] = await Promise.all([
+      this.reminderScheduleModel
+        .find({
+          user_id: new Types.ObjectId(user_id),
+          $or: [{ deleted_at: null }, { deleted_at: { $exists: false } }],
+        })
+        .sort({ due_date: 1, due_time: 1 })
+        .skip(skip)
+        .limit(limit),
+
+      this.reminderScheduleModel.countDocuments({
+        user_id: new Types.ObjectId(user_id),
+        $or: [{ deleted_at: null }, { deleted_at: { $exists: false } }],
+      }),
+    ]);
+
+    console.log('item',items)
+
+    return {
+      items,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    };
   }
+
 
   async findOne(id: string) {
     const schedule = await this.reminderScheduleModel.findById(id);

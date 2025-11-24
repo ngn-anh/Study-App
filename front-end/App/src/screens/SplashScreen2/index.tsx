@@ -3,16 +3,43 @@ import { View, Text, Image, StatusBar } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "./SplashScreen2.styles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SplashScreen2 = () => {
   const navigation = useNavigation();
+  
+  const isTokenValid = async () => {
+    const data = await AsyncStorage.getItem("userData");
+    console.log(data)
+    if (!data) return false;
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      // Khi xong splash 2 → vào Trang chủ
-      navigation.navigate("AuthScreen" as never);
-    }, 2500);
-    return () => clearTimeout(timer);
+    const userData = JSON.parse(data);
+    const now = Math.floor(Date.now() / 1000);
+
+    return userData.user.token_expired > now;
+  };
+
+
+   useEffect(() => {
+    const checkAuth = async () => {
+      const valid = await isTokenValid();
+
+      setTimeout(() => {
+        if (valid) {
+          // Token còn hạn → vào app
+          navigation.reset({
+            index: 1,
+            routes: [{ name: "MainTabs" as never }],
+          });
+        } else {
+          // Token hết hạn → xóa data và quay về đăng nhập
+          AsyncStorage.removeItem("userData");
+          navigation.navigate("AuthScreen" as never);
+        }
+      }, 2500); // chờ splash hiển thị
+    };
+
+    checkAuth();
   }, []);
 
   return (

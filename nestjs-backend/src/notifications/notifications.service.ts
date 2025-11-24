@@ -15,7 +15,7 @@ export class NotificationsService {
   ) {}
 
   // Lấy danh sách notifications theo code
-  async getNotificationsByCode(code: string, user_id: string) {
+  async getNotificationsByCode(code: string, user_id: string,  page: number, limit: number) {
     const notiType = await this.notificationTypeModel.findOne({ code, status: 'active' });
     if (!notiType) return { notification_type_name: '', notifications: [] };
 
@@ -30,6 +30,8 @@ export class NotificationsService {
       return { notification_type_name: notiType.name, notifications: [] };
     }
 
+    const skip = (page - 1) * limit;
+
     // 2) Lấy notifications có schedule_id trong danh sách đó
     const notifications = await this.notificationModel
       .find({
@@ -39,6 +41,8 @@ export class NotificationsService {
       })
       .select('schedule_id name description image is_read created_at')
       .sort({ created_at: -1 })
+      .skip(skip)
+      .limit(limit)
       .lean();
 
     return {

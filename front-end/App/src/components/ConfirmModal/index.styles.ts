@@ -15,12 +15,17 @@ export const styles = StyleSheet.create({
     padding: 20,
     alignItems: "flex-start",
   },
+   cpn_title: {
+    flexDirection: "row",
+    gap: 7,
+    alignItems: "center",
+    marginBottom: 20,
+  },
   title: {
     fontSize: 20,
     fontWeight: '500',
     color: '#083070',
     textAlign: 'left',
-    marginBottom: 20,
   },
   content: {
     fontSize: 13,

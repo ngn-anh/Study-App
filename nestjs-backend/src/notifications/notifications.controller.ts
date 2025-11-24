@@ -10,9 +10,11 @@ export class NotificationsController {
   @Get()
   async getByCode(
     @Query('code') code: string,
-    @Query('user_id') user_id: string
+    @Query('user_id') user_id: string,
+    @Query('page') page = 1,
+    @Query('limit') limit = 10
   ) {
-    const data = await this.notificationsService.getNotificationsByCode(code, user_id);
+    const data = await this.notificationsService.getNotificationsByCode(code, user_id,page,limit);
     return { success: true, data };
   }
 

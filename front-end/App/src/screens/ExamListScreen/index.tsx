@@ -34,6 +34,7 @@ export default function ExamListScreen() {
   const {showSuccessModal} = route.params || {};
   const [showModal, setShowModal] = useState(false);
   const [userId, setUserId] = useState<string>("");
+  const [classId, setClassId] = useState<string>("");
 
   // --- Tabs ---
   const [activeTab, setActiveTab] = useState<"ongoing" | "upcoming">("ongoing");
@@ -46,6 +47,10 @@ export default function ExamListScreen() {
   const [selectedTime, setSelectedTime] = useState<"newest" | "oldest" | null>(null);
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
   const [searchText, setSearchText] = useState("");
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const LIMIT = 8;
 
   // --- Modal temp states ---
   const [showFilter, setShowFilter] = useState(false);
@@ -64,37 +69,76 @@ export default function ExamListScreen() {
       const userDataStr = await AsyncStorage.getItem("userData");
       if (!userDataStr) throw new Error("Không tìm thấy thông tin người dùng");
       const userData = JSON.parse(userDataStr);
-      if (userData.user.id) setUserId(userData.user.id);
+      if (userData?.user?.id) setUserId(userData.user.id);
+      if (userData?.user?.class_id) setClassId(userData.user.class_id)
+      
     })();
   }, []);
 
   // --- Fetch exams ---
-  const fetchExams = useCallback(async () => {
-    try {
-      setLoading(true);
-      const params = {
-        status: activeTab,
-        sort: selectedTime ?? undefined,
-        subjectCodes: selectedSubjects.length > 0 ? selectedSubjects : undefined,
-        name: searchText ?? undefined,
-        currentClassCode: "CLASS_11",
-        user_id: userId,
-        page: 1,
-        limit: 10,
-      };
-      console.log("params", params);
-      const res = await getExams(params);
-      setExams(res.data || []);
-    } catch (err) {
-      console.error("❌ Lỗi khi tải danh sách bài thi:", err);
-    } finally {
-      setLoading(false);
-    }
-  }, [activeTab, selectedTime, selectedSubjects, searchText, userId]);
+  const fetchExams = useCallback(
+    async (reset = false) => {
+      try {
+        if (reset) {
+          setPage(1);
+          setHasMore(true);
+        }
+
+        if (!userId) return;
+
+        if (!reset) setLoadingMore(true);
+        else setLoading(true);
+
+        const params = {
+          status: activeTab,
+          sort: selectedTime ?? undefined,
+          subjectCodes: selectedSubjects.length > 0 ? selectedSubjects : undefined,
+          name: searchText ?? undefined,
+          class_id: classId,
+          user_id: userId,
+          page: reset ? 1 : page,
+          limit: LIMIT,
+        };
+
+        const res = await getExams(params);
+
+        if (reset) {
+          setExams(res.data || []);
+        } else {
+          // tránh trùng lặp
+          setExams(prev => {
+            const map = new Map();
+            [...prev, ...res.data].forEach(item => map.set(item._id, item));
+            return Array.from(map.values());
+          });
+        }
+
+        setHasMore(res.data.length === LIMIT);
+      } catch (err) {
+        console.error("❌ Lỗi khi tải danh sách bài thi:", err);
+      } finally {
+        setLoading(false);
+        setLoadingMore(false);
+      }
+    },
+    [activeTab, selectedTime, selectedSubjects, searchText, userId, page]
+  );
+
+  const loadMore = () => {
+    if (loading || loadingMore || !hasMore) return;
+    setPage(prev => prev + 1);
+  };
 
   useEffect(() => {
+    if (page === 1) return; // page 1 đã fetch trong reset
     fetchExams();
-  }, [activeTab, selectedTime, selectedSubjects, userId]);
+  }, [page]);
+
+  useEffect(() => {
+    if (!userId || !classId) return;
+    fetchExams(true); // reset = true, load page 1
+  }, [activeTab, selectedTime, selectedSubjects, searchText, userId, classId]);
+
 
   // --- Handle tab change ---
   const handleTabChange = (tab: "ongoing" | "upcoming") => {
@@ -102,11 +146,13 @@ export default function ExamListScreen() {
     setSelectedTime(null);
     setSelectedSubjects([]);
     setSearchText("");
+    setPage(1); // reset page
   };
 
   // --- Hàm handleSearch ---
   const handleSearch = () => {
     fetchExams();
+    setPage(1);
   };
 
   // --- Handle search with debounce ---
@@ -137,7 +183,6 @@ export default function ExamListScreen() {
 
   // --- Render exam item ---
   const renderExamItem = ({ item }: { item: any }) => {
-    console.log('item',item)
     const subjectCode = item.subject.code as keyof typeof SUBJECTS;
     const subjectInfo = SUBJECTS[subjectCode] ?? { name: "Không xác định", code: "MATH" };
     const tagStyle = getSubjectTagStyle(subjectInfo.code);
@@ -161,7 +206,7 @@ export default function ExamListScreen() {
           <Image source={{ uri: item.image || undefined }} style={styles.thumbnail} />
         </View>
         <View style={styles.cardRight}>
-          <Text style={styles.title}>{item.name ?? ""}</Text>
+          <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{item.name ?? ""}</Text>
 
           <View style={styles.timeRow}>
             <Clock size={14} color="#5D697E" />
@@ -293,9 +338,18 @@ export default function ExamListScreen() {
           data={exams}
           keyExtractor={(item) => item._id}
           renderItem={renderExamItem}
-          contentContainerStyle={{ paddingBottom: 100 }}
+          // contentContainerStyle={{ paddingBottom: 100 }}
+          onEndReached={loadMore}
+          onEndReachedThreshold={0.05}
+          ListFooterComponent={
+            loadingMore ? (
+              <Text style={{ textAlign: 'center', paddingVertical: 10 }}>Đang tải thêm...</Text>
+            ) : null
+          }
         />
       )}
+
+       <View style={styles.block}></View>
 
       {/* Modal filter */}
       <RNModal

@@ -133,6 +133,7 @@ export const ExamRankScreen = () => {
         )}
       />
       {loading && <Text style={{ textAlign: "center", marginTop: 20 }}>Đang tải...</Text>}
+      <View style={styles.block}></View>
     </View>
   );
 };

@@ -1,13 +1,22 @@
 import { Exam, Subject } from "./typeObj";
 
+export type MainTabsParamList = {
+  Home: { showNotificationPopup?: boolean } | undefined;
+  Service: undefined;
+  Profile: undefined;
+};
+
 export type RootStackParamList = {
   SplashScreen1: undefined;
   SplashScreen2: undefined;
   AuthScreen: undefined;
   Login: undefined;
   Register: undefined;
-  MainTabs: undefined;
-  Home: undefined;
+  MainTabs: {
+  screen: keyof MainTabsParamList;
+  params?: any;
+} | undefined;
+  Home: {showNotificationPopup?: boolean} | undefined;
   Service: undefined;
   Profile: undefined;
   ScheduleScreen: undefined;

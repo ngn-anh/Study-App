@@ -4,6 +4,8 @@ import { CreateReminderScheduleDto } from './dto/create-reminder-schedule.dto';
 import { UpdateReminderScheduleDto } from './dto/update-reminder-schedule.dto';
 import { ApiTags, ApiParam, ApiBody, ApiResponse } from '@nestjs/swagger';
 import { ReminderSchedule } from './schemas/reminder-schedule.schema';
+import { Query } from '@nestjs/common';
+
 
 @ApiTags('reminder-schedules')
 @Controller('reminder-schedules')
@@ -22,11 +24,14 @@ export class ReminderSchedulesController {
   }
 
   @Get('user/:user_id')
-  @ApiParam({ name: 'user_id', type: String })
-  @ApiResponse({ status: 200, description: 'Danh sách lịch hẹn của user', type: [ReminderSchedule] })
-  findAll(@Param('user_id') user_id: string) {
-    return this.service.findAll(user_id);
+  findAll(
+    @Param('user_id') user_id: string,
+    @Query('page') page = 1,
+    @Query('limit') limit = 10
+  ) {
+    return this.service.findAll(user_id, Number(page), Number(limit));
   }
+
 
   @Get('detail/:id')
   @ApiParam({ name: 'id', type: String })

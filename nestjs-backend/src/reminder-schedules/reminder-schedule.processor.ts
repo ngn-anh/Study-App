@@ -5,12 +5,14 @@ import { NotificationsService } from '../notifications/notifications.service';
 import { NotificationTypesService } from 'src/notification-types/notification-types.service';
 import { Types } from 'mongoose';
 import { sendFCMNotification } from 'src/firebase-admin'; // 🔹 dùng Admin SDK
+import { NotificationSettingService } from 'src/notification-setting/notification-setting.service';
 
 @Processor('reminderQueue')
 export class ReminderProcessor {
   constructor(
     private readonly notificationsService: NotificationsService,
     private readonly notificationTypesService: NotificationTypesService,
+    private readonly notificationSettingService: NotificationSettingService,
   ) {}
 
   @Process('sendReminder')
@@ -18,6 +20,10 @@ export class ReminderProcessor {
     const { schedule } = job.data;
     console.log('schedule', schedule);
     console.log('ReminderProcessor job running for:', schedule.title);
+
+    const setting = await this.notificationSettingService.getByUser(schedule.user_id);
+    // Nếu user tắt thông báo
+    if (setting.is_open_noti === false) return;
 
     // 🔹 1️⃣ Tìm loại thông báo "REMINDER"
     const reminderType = (await this.notificationTypesService.findByCode('REMINDER')) as

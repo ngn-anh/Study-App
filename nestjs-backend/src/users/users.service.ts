@@ -74,4 +74,8 @@ export class UsersService {
 
     return toUserEntity(user);
   }
+
+   async findById(id: string) {
+    return this.userModel.findById(id).exec();
+  }
 }
