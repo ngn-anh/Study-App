@@ -7,15 +7,17 @@ export type Subject = {
 
 export type Exam = {
     id: string,
-    subjectId: string,
-    name: string,
-    description: string,
-    type: string,
-    image: string,
-    difficulty: Number,
-    duration: Number,
-    number: Number,
-    createdAt: string,
-    updatedAt: string,
-    deletedAt: string,
+    subjectId?: string,
+    name?: string,
+    description?: string,
+    type?: string,
+    image?: string,
+    difficulty?: number,
+    duration?: number,
+    number?: number,
+    // participants?: number,
+    // likes?: number;
+    createdAt?: string,
+    updatedAt?: string,
+    deletedAt?: string,
 };

@@ -2,19 +2,20 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
-        // textAlign: "center",
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent:'center',
+        alignItems: 'center',
     },
     containerPrimary: {
-        backgroundColor: "#1900ffff",
+        backgroundColor: "#0C4299",
         borderRadius: 50,
-        color: "#FFFFFF",
     },
     containerSecondary: {
         borderRadius: 50,
-        borderColor: "#1900ffff",
+        borderColor: "#0C4299",
         borderWidth: 1,
         backgroundColor: "#FFFFFF",
-        color: '#1900ffff'
     },
 
     containerDisable: {
@@ -22,15 +23,18 @@ export const styles = StyleSheet.create({
         borderColor: "#a2a0b3ff",
         borderWidth: 1,
         backgroundColor: "#FFFFFF",
-        color: '#a2a0b3ff'
-    },
-    image: {
-        width: 20,
-        height: 20
     },
     name: {
         fontSize: 12,
         textAlign: 'center',
+    },
+    namePrimary: {
+        color: "#FFFFFF",
+    },
+    nameSecondary: {
+        color: '#1900ffff',
+    },
+    nameDisable: {
+        color: '#a2a0b3ff',
     }
-
 });

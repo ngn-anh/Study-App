@@ -20,6 +20,8 @@ import PracticeExamScreen from "../screens/PracticeExamScreen";
 import PracticeExamDetailScreen from "../screens/PracticeExamDetailScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import NotificationListScreen from "../screens/NotificationListScreen";
+import PracticeExamSettingScreen from "../screens/PracticeExamSettingScreen";
+// import PracticeExamSettingScreen from "../screens/PracticeExamSettingScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -43,6 +45,7 @@ const AppNavigator = () => {
       <Stack.Screen name="ExamDetailResultScreen" component={ExamDetailResultScreen} />
       <Stack.Screen name="PracticeExamScreen" component={PracticeExamScreen} />
       <Stack.Screen name="PracticeExamDetailScreen" component={PracticeExamDetailScreen} />
+      <Stack.Screen name="PracticeExamSettingScreen" component={PracticeExamSettingScreen} />
       <Stack.Screen name="NotificationScreen" component={NotificationScreen} />
       <Stack.Screen name="NotificationListScreen" component={NotificationListScreen} />
 

@@ -5,6 +5,7 @@ import { styles } from "./index.styles";
 import ButtonCustom from "../ButtonCustom";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../types/data";
+import { ClockIcon, QuestionIcon } from "phosphor-react-native";
 
 interface Props {
     exam?: Exam;
@@ -39,11 +40,13 @@ const ItemExam = (props: Props) => {
                     {/* Number questions + Duration */}
                     <View style={styles.iconInfo}>
                         <View style={styles.iconGroup}>
-                            <Image source={require("../../assets/icons/group.png")} style={styles.icon} />
+                            {/* <Image source={require("../../assets/icons/group.png")} style={styles.icon} /> */}
+                            <QuestionIcon style={styles.icon} />
                             <Text style={styles.iconText}>{exam?.number + " câu"}</Text>
                         </View>
                         <View style={styles.iconGroup}>
-                            <Image source={require("../../assets/icons/like.png")} style={styles.icon} />
+                            {/* <Image source={require("../../assets/icons/like.png")} style={styles.icon} /> */}
+                            <ClockIcon style={styles.icon} />
                             <Text style={styles.iconText}>{exam?.duration + " phút"}</Text>
                         </View>
                     </View>

@@ -1,10 +1,11 @@
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity } from "react-native";
 import { styles } from "./index.styles";
 
 interface Props {
     type: "primary" | "secondary" | "disable";
     name: string;
-    image?: string;
+    image?: any;
+    styleImage?: object;
     paddingVertical?: number;
     paddingHorizontal?: number;
     width?: number;
@@ -12,7 +13,7 @@ interface Props {
 }
 
 const ButtonCustom = (props: Props) => {
-    const { type, name, image, paddingVertical, paddingHorizontal, width, onPress } = props;
+    const { type, name, image, styleImage, paddingVertical, paddingHorizontal, width, onPress } = props;
 
     return (
         <TouchableOpacity
@@ -27,8 +28,13 @@ const ButtonCustom = (props: Props) => {
                 width ? { width: width } : {},
             ]}
         >
-            {image && <Image source={{ uri: image }} style={styles.image} />}
-            <Text style={styles.name}>{name}</Text>
+            {image && <Image source={image} style={styleImage} />}
+            <Text style={[
+                styles.name,
+                type === "primary" ? styles.namePrimary : null,
+                type === "secondary" ? styles.nameSecondary : null,
+                type === "disable" ? styles.nameDisable : null,
+            ]}>{name}</Text>
         </TouchableOpacity>
     );
 }
