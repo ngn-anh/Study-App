@@ -7,6 +7,7 @@ import { BullModule } from '@nestjs/bull';
 import { ReminderProcessor } from './reminder-schedule.processor';
 import { NotificationsModule } from 'src/notifications/notifications.module';
 import { NotificationTypesModule } from 'src/notification-types/notification-types.module';
+import { NotificationSettingModule } from 'src/notification-setting/notification-setting.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { NotificationTypesModule } from 'src/notification-types/notification-typ
     }),
     NotificationsModule,
     NotificationTypesModule,
+    NotificationSettingModule,
   ],
   controllers: [ReminderSchedulesController],
   providers: [ReminderSchedulesService, ReminderProcessor],

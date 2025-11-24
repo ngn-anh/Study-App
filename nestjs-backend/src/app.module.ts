@@ -11,6 +11,7 @@ import { NotificationTypesModule } from './notification-types/notification-types
 import { NotificationsModule } from './notifications/notifications.module';
 import { BullModule } from '@nestjs/bull';
 import { ClassModule } from './classes/class.module';
+import { NotificationSettingModule } from './notification-setting/notification-setting.module';
 
 
 @Module({
@@ -32,6 +33,7 @@ import { ClassModule } from './classes/class.module';
     NotificationTypesModule,
     NotificationsModule,
     ClassModule,
+    NotificationSettingModule
   ],
   controllers: [],
   providers: [],
