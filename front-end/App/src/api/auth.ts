@@ -4,6 +4,7 @@ interface RegisterData {
   username: string;
   password: string;
   email: string;
+  class_id?: string | null;
 }
 
 interface LoginData {
@@ -28,9 +29,10 @@ export const loginUser = async (data: LoginData) => {
     const response = await api.post('/auth/login', data);
     return { success: true, data: response.data };
   } catch (error: any) {
+    console.log(error)
     return {
       success: false,
-      message: error.response?.data?.message || 'Login failed',
+      message: error.response?.data || 'Login failed',
     };
   }
 };

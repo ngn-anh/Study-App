@@ -28,12 +28,15 @@ export const getNotificationTypes = async (user_id: string) => {
   }
 };
 
-export const getNotificationsByCode = async (code: string,user_id: string): Promise<NotificationResponse> => {
+export const getNotificationsByCode = async (code: string,user_id: string,page = 1,
+  limit = 10): Promise<NotificationResponse> => {
   try {
     const res = await axios.get(`${API_URL}/notifications`, {
       params: {
         code,
         user_id,
+        page,  
+        limit, 
       },
     });
     return res.data?.data || { notification_type_name: '', notifications: [] };

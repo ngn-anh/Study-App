@@ -37,7 +37,7 @@ export const getExams = async (params: {
   sort?: 'newest' | 'oldest';
   subjectCodes?: string[];
   name?: string;
-  currentClassCode?: string;
+  class_id?: string;
   page?: number;
   limit?: number;
   userId?: string;
@@ -57,6 +57,7 @@ export const getExams = async (params: {
       return searchParams.toString();
     },
   });
+  console.log('response',response)
   return response.data;
 };
 

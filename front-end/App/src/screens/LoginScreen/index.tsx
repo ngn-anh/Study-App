@@ -8,6 +8,7 @@ import { styles } from "./index.styles";
 import { API_URL } from "@env";
 import { CustomModal } from "../../components/CustomModal";
 import { RootStackParamList } from "../../types/data";
+import { loginUser } from "../../api/auth";
 
 
 const LoginScreen = () => {
@@ -33,7 +34,7 @@ const LoginScreen = () => {
     }
 
     try {
-      const response = await axios.post(`${API_URL}/auth/login`, { username, password });
+      const response = await loginUser({ username, password });
       const userData = response.data;
 
       // Lưu userData vào AsyncStorage
