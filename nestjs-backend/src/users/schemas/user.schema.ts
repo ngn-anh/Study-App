@@ -23,7 +23,7 @@ export class User {
   @Prop({ default: null })
   full_name: string;
 
-  @Prop({ type: Types.ObjectId, ref: 'Class', required: true })
+  @Prop({ type: Types.ObjectId, ref: 'Class', required: false })
   class_id: Types.ObjectId;
 
   @Prop({ default: 1 })
