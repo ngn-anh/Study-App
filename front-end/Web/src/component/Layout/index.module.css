@@ -1,0 +1,7 @@
+.dashboardMenu :global(.ant-menu-item) {
+  margin-bottom: 16px;
+}
+
+.logo{
+  width: 50%;
+}

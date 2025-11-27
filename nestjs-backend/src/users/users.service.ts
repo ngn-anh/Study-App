@@ -16,11 +16,14 @@ export class UsersService {
   async create(dto: CreateUserDto): Promise<UserEntity> {
      try {
       const hashedPassword = await bcrypt.hash(dto.password, 10);
-      const createdUser = new this.userModel({
-         ...dto, 
-         password: hashedPassword,
-          class_id: new Types.ObjectId(dto.class_id) , 
-        });
+        const userData: Partial<any> = {
+        ...dto,
+        password: hashedPassword,
+        role: dto.class_id ? 1 : 2, // Nếu có class_id thì role = 1 (normal user), nếu không có class_id thì role = 2 (admin)
+        class_id: dto.class_id ?  new Types.ObjectId(dto.class_id) : null
+      };
+
+    const createdUser = new this.userModel(userData);
       await createdUser.save();
       return toUserEntity(createdUser);
     } catch (error: any) {
