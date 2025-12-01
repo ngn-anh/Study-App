@@ -17,6 +17,9 @@ export class Subject {
   @Prop()
   image?: string;
 
+  @Prop({ default: 1 }) // 1: active, 2: inactive
+  status: number;
+
   @Prop({ type: Date })
   deleted_at?: Date;
 }
