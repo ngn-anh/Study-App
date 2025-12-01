@@ -3,7 +3,7 @@ import illustration from '../../../assets/auth/illustration.png'
 import logo from '../../../assets/auth/logo.png'
 import AuthForm from "../../../component/AuthForm";
 
-export default function Auth() {
+export default function Auth(props: {setUserData: any}) {
   return (
     <div className={styles.container}>
       <div className={styles.left}> 
@@ -19,7 +19,7 @@ export default function Auth() {
 
       <div className={styles.right}>
         <div className={styles.rightContent}>
-          <AuthForm />
+          <AuthForm setUserData= {props.setUserData} />
         </div>
       </div>
     </div>
