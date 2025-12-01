@@ -11,6 +11,11 @@ const { Header, Sider, Content } = Layout;
 export default function DashboardLayout({ onLogout }: { onLogout: () => void }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const userDataString = localStorage.getItem("userData");
+  const userData = userDataString ? JSON.parse(userDataString) : null;
+
+  const username = userData?.user?.full_name || userData?.user?.username || "User";
+  const avatarUrl = userData?.user?.avatar;
 
   const userRole = "admin"; // mock — replace later
 
@@ -40,7 +45,13 @@ export default function DashboardLayout({ onLogout }: { onLogout: () => void }) 
 
   return (
     <Layout style={{ height: "100vh" }}>
-      <Sider collapsible style={{ background: "#f2f4f7ff" }}>
+      <Sider 
+      collapsible 
+      style={{ background: "#f6f9fcff" }} 
+      className={styles.customSider}
+      width={260}          // width khi mở
+  collapsedWidth={80}  // width khi đóng
+      >
         <img src={logo} className={styles.logo} />
         <Menu
           theme="light"
@@ -71,13 +82,15 @@ export default function DashboardLayout({ onLogout }: { onLogout: () => void }) 
           <div style={{ fontSize: 20, fontWeight: 600 }}>LOGO</div>
 
           <Dropdown menu={userMenu} placement="bottomRight">
-            <Avatar style={{ cursor: "pointer" }} icon={<UserIcon size={20} />} />
-          </Dropdown>
+          <div style={{ display: "flex", alignItems: "center", cursor: "pointer", gap: 8 }}>
+            <Avatar src={avatarUrl} icon={!avatarUrl && <UserIcon size={20} />} />
+            <span style={{ fontWeight: 500 }}>{username}</span>
+          </div>
+        </Dropdown>
         </Header>
 
         <Content style={{ background: "#fff", padding: 24 }}>
           <Breadcrumb style={{ marginBottom: 16 }}>
-            <Breadcrumb.Item>Trang chủ</Breadcrumb.Item>
             {breadcrumbItem && <Breadcrumb.Item>{breadcrumbItem.breadcrumb}</Breadcrumb.Item>}
           </Breadcrumb>
 

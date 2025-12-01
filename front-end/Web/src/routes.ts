@@ -1,5 +1,6 @@
 import { House, BookOpen, Users, User, Bell } from "phosphor-react";
 import HomePage from "./pages/homepage";
+import SubjectPage from "./pages/subject";
 
 export const appRoutes = [
   {
@@ -14,7 +15,7 @@ export const appRoutes = [
     path: "/subject",
     label: "Quản lý môn học",
     icon: BookOpen,
-    element: HomePage,
+    element: SubjectPage,
     breadcrumb: "Quản lý môn học",
     roles: ["admin"],
   },

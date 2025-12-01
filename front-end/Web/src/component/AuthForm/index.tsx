@@ -2,12 +2,15 @@ import { useState } from "react";
 import { Eye, EyeSlash } from "phosphor-react";
 import styles from "./index.module.css";
 import { login, register } from "../../api/auth";
+import { useNavigate } from "react-router-dom";
 
-export default function AuthForm() {
+export default function AuthForm(props: {setUserData: any}) {
   const [isRegister, setIsRegister] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [error, setError] = useState("");
+  const [errors, setErrors] = useState<any>({});
+  const navigate = useNavigate();
 
   const [values, setValues] = useState({
     username: "",
@@ -15,8 +18,6 @@ export default function AuthForm() {
     password: "",
     confirmPassword: "",
   });
-
-  const [errors, setErrors] = useState<any>({});
 
   const toggleForm = () => {
     setIsRegister(!isRegister);
@@ -64,8 +65,10 @@ export default function AuthForm() {
         const res = await login(data);
         // Lưu vào localStorage
         localStorage.setItem("userData", JSON.stringify(res));
-        setErrors(null)
+        props.setUserData(res);
+        setErrors({})
         console.log("LOGIN SUCCESS:", res.data);
+        navigate("/home", { replace: true });
 
     } catch (e: any) {
         setError(e.response?.data?.message || "Có lỗi xảy ra");
@@ -84,7 +87,7 @@ export default function AuthForm() {
             // Lưu vào localStorage
             localStorage.setItem("userData", JSON.stringify(res));
             console.log("REGISTER SUCCESS:", res.data);
-            setErrors(null)
+            setErrors({})
 
         } catch (e: any) {
             setError(e.response?.data?.message || "Có lỗi xảy ra");

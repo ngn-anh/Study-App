@@ -6,3 +6,11 @@
 body{
   margin: 0;
 }
+
+.ant-drawer-mask.ant-drawer-mask-blur{
+  backdrop-filter: blur(0px) !important
+}
+
+.ant-modal-root .ant-modal-mask.ant-modal-mask-blur{
+  backdrop-filter: blur(0px) !important
+}

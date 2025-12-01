@@ -18,7 +18,7 @@ function App() {
         {/* Trang login */}
         <Route
           path="/login"
-          element={!isLoggedIn ? <Auth /> : <Navigate to="/home" replace />}
+          element={!isLoggedIn ? <Auth setUserData={setUserData}/> : <Navigate to="/home" replace />}
         />
 
         {/* Dashboard (sau khi login) */}
@@ -27,8 +27,7 @@ function App() {
           element={isLoggedIn ? <DashboardLayout onLogout={() => setUserData(null)} /> : <Navigate to="/login" replace />}
         />
 
-        {/* Redirect mặc định */}
-        <Route path="*" element={<Navigate to={isLoggedIn ? "/home" : "/login"} replace />} />
+        
       </Routes>
     </BrowserRouter>
   );
