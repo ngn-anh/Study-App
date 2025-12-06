@@ -11,6 +11,9 @@ export class Class {
   @Prop({ required: true, unique: true })
   code: string;
 
+  @Prop({ required: true, enum: [1, 2], default: 1 })
+  status: number;
+
   @Prop()
   description?: string;
 

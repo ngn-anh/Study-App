@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateClassDto {
   @IsNotEmpty()
@@ -12,4 +12,8 @@ export class CreateClassDto {
   @IsOptional()
   @IsString()
   description?: string;
+
+  @IsOptional()
+  @IsNumber()
+  status?: number;  // mặc định = 1
 }
