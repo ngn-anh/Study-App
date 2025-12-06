@@ -7,20 +7,20 @@ import { useForm } from "antd/es/form/Form";
 import ProTableFixed from "../../component/ProTableFixed";
 import { filterOptions } from "../../utils/helper";
 import { useRef, useState } from "react";
-import { STATUS_SUBJECT } from "../../utils/enum";
-import { deleteSubject, getSubjectDetail, getSubjects } from "../../api/subject";
-import CreateUpdateSubject from "./component/createUpdateSubjectDrawer";
 import CustomModal from "../../component/CustomModal";
+import { deleteClass, getClassDetail, getClasses } from "../../api/class";
+import CreateUpdateClass from "./component/createUpdateClassDrawer";
+import { STATUS_CLASS } from "../../utils/enum";
 
 
-export default function SubjectPage() {
+export default function ClassPage() {
     const [form] = useForm();
     const filter = useRef({});
     const [filterParams, setFilterParams] = useState<any>({});
     const [isOpenDrawer, setIsOpenDrawer] = useState<boolean>(false);
     const [isOpenModal, setOpenModal] = useState(false);
-    const [idSubject, setIdSubject] = useState<any>();
-    const [subjectDetail, setSubjectDetail] = useState<any>();
+    const [idClass, setIdClass] = useState<any>();
+    const [classDetail, setClassDetail] = useState<any>();
     const actionRef = useRef<any>();
     
     const optionStatus = [
@@ -41,7 +41,7 @@ const requestGetDataSource = async (param: any) => {
     limit: param.pageSize,
   };
 
-  const res = await getSubjects(params);
+  const res = await getClasses(params);
 
   return {
     data: res.data.map((item: any) => ({
@@ -63,13 +63,13 @@ const requestGetDataSource = async (param: any) => {
   };
 
   const getStatus =(status: number)=>{
-    if(status == STATUS_SUBJECT.ACTIVE) return <div className="lbl-active">Đang hoạt động</div>
+    if(status == STATUS_CLASS.ACTIVE) return <div className="lbl-active">Đang hoạt động</div>
     return <div className="lbl-inactive">Không hoạt động</div>
   }
 
   const handleOkDelete= async()=>{
     try {
-      await deleteSubject(idSubject);
+      await deleteClass(idClass);
 
       setOpenModal(false);
       message.success("Xóa môn học thành công!");
@@ -87,39 +87,29 @@ const requestGetDataSource = async (param: any) => {
   }
 
   const onOpenDelete = async (id: string) => {
-    setIdSubject(id);
+    setIdClass(id);
 
-    const res = await getSubjectDetail(id);    
-    setSubjectDetail(res.data.data);            
+    const res = await getClassDetail(id);    
+    setClassDetail(res.data);            
 
     setOpenModal(true);
   };
 
   const getContentDelete = () => {
-    if (!subjectDetail) return "";
-
-    if (subjectDetail.total_class > 0) {
-      return (
-        <>
-          <b>{subjectDetail.name}</b> đã được áp dụng ở{" "}
-          <b>{subjectDetail.total_class}</b> lớp.  
-          Bạn có chắc muốn xóa môn này không?
-        </>
-      );
-    }
+    if (!classDetail) return "";
 
     return (
       <>
-        Bạn có chắc muốn xóa môn <b>{subjectDetail.name}</b> không?
+        Bạn có chắc muốn xóa lớp <b>{classDetail.name}</b> không?
       </>
     );
   };
 
   const columns = [
     {
-      title: "Tên môn học",
+      title: "Tên lớp học",
       dataIndex: 'name',
-      key: 'student',
+      key: 'class',
       width: 200,
       fixed: 'left',
       align: 'left',
@@ -130,7 +120,7 @@ const requestGetDataSource = async (param: any) => {
       },
     },
     {
-      title: "Mã môn học",
+      title: "Mã lớp học",
       dataIndex: 'code',
       key: 'code',
       width: 150,
@@ -188,7 +178,7 @@ const requestGetDataSource = async (param: any) => {
             <Tooltip title={"Sửa"} onClick={
               ()=>{
                 console.log('row',row)
-                setIdSubject(row.id)
+                setIdClass(row.id)
                 setIsOpenDrawer(true)
               }
             }>
@@ -206,7 +196,7 @@ const requestGetDataSource = async (param: any) => {
     return (
         <PageContainerFixed
             header={{
-                title: "Quản Lý Môn Học",
+                title: "Quản Lý Lớp Học",
                 extra: (
                     <Button
                   size={'large'}
@@ -214,10 +204,10 @@ const requestGetDataSource = async (param: any) => {
                   className="ant-btn-primary"
                   onClick={() => {
                    setIsOpenDrawer(true)
-                   setIdSubject(undefined)
+                   setIdClass(undefined)
                   }}
                 >
-                  <Plus weight="bold"/> <span>Môn Học Mới</span>
+                  <Plus weight="bold"/> <span>Lớp Học Mới</span>
                 </Button>
                 )
             }}
@@ -227,10 +217,9 @@ const requestGetDataSource = async (param: any) => {
                 <div>
                     <ProFormText
                     width={400}
-                    placeholder={"Nhập tên môn học để tìm kiếm"}
+                    placeholder={"Nhập tên lớp học để tìm kiếm"}
                     fieldProps={{
-                    prefix: <MagnifyingGlass color="#083070" weight="bold" />,
-                    //   onPressEnter: handleEnterSearch,
+                        prefix: <MagnifyingGlass color="#083070" weight="bold" />,
                     }}
                     name="name"
                 />
@@ -278,18 +267,19 @@ const requestGetDataSource = async (param: any) => {
             tableAlertRender={false}
           />
         </div>
-        <CreateUpdateSubject
+
+        <CreateUpdateClass
           isOpenDrawer={isOpenDrawer}
           setIsOpenDrawer={setIsOpenDrawer}
-          idSubject={idSubject}
-          setIdSubject={setIdSubject}
+          idClass={idClass}
+          setIdClass={setIdClass}
           actionRef={actionRef}
         />
 
          <CustomModal
             open={isOpenModal}
             type="warning"
-            title="Xoá Môn Học"
+            title="Xoá Lớp Học"
             content={getContentDelete()}
             textOk="Xoá"
             textCancel="Hủy"

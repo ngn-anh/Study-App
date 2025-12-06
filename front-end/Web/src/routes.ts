@@ -1,12 +1,13 @@
 import { House, BookOpen, Users, User, Bell } from "phosphor-react";
 import HomePage from "./pages/homepage";
 import SubjectPage from "./pages/subject";
+import ClassPage from "./pages/class";
 
 export const appRoutes = [
   {
     path: "/home",
     label: "Trang chủ",
-    icon: House,            // ⬅ không dùng <House />
+    icon: House,           
     element: HomePage,
     breadcrumb: "Trang chủ",
     roles: ["admin", "user"],
@@ -23,7 +24,7 @@ export const appRoutes = [
     path: "/class",
     label: "Quản lý lớp học",
     icon: Users,
-    element: HomePage,
+    element: ClassPage,
     breadcrumb: "Quản lý lớp học",
     roles: ["admin", "user"],
   },
