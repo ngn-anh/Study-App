@@ -1,4 +1,3 @@
-export const a='1';
 import { IsEmail, IsNotEmpty, IsOptional, IsString, MinLength } from 'class-validator';
 
 export class CreateUserDto {

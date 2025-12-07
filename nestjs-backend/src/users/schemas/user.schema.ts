@@ -1,10 +1,9 @@
-export const a='1';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
 export type UserDocument = User & Document & { _id: Types.ObjectId };
 
-@Schema({ timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }  })
+@Schema({ timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } })
 export class User {
   @Prop({ required: true })
   username: string;
@@ -22,9 +21,9 @@ export class User {
   avatar?: string;
 
   @Prop({ default: null })
-  full_name: string;
+  full_name?: string;
 
-  @Prop({ type: Types.ObjectId, ref: 'Class', required: false })
+  @Prop({ type: Types.ObjectId, ref: 'Class', required: true })
   class_id: Types.ObjectId;
 
   @Prop({ default: 1 })
