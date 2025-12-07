@@ -1,3 +1,4 @@
+export const a = '1';
 import React, { useEffect, useState } from "react";
 import { SafeAreaView, View, Text, Image, ScrollView, TouchableOpacity, StatusBar } from "react-native";
 import { styles } from "./HomeScreen.styles";
@@ -21,7 +22,7 @@ const HomeScreen: React.FC = () => {
     if (showPopup) {
       setShowNotiModal(true);
     }
-    console.log('route.params',route.params)
+    console.log('route.params', route.params)
   }, []);
 
   const handleEnableNotification = async () => {
@@ -46,14 +47,14 @@ const HomeScreen: React.FC = () => {
       setShowNotiModal(false);
     }
   };
-  
+
 
   const handleDisableNotification = () => {
     setShowNotiModal(false);
   };
   return (
     <LinearGradient
-      colors={["#170A66", "#3169a8ff","#fff"]}
+      colors={["#170A66", "#3169a8ff", "#fff"]}
       locations={[0, 0.8, 1]}
       style={styles.container}
     >
@@ -63,7 +64,7 @@ const HomeScreen: React.FC = () => {
           {/* Header */}
           <View style={styles.header}>
             <View style={styles.option}>
-               <Image
+              <Image
                 source={require("../../assets/icons/option.png")}
                 style={styles.bellIcon}
               />
@@ -91,7 +92,7 @@ const HomeScreen: React.FC = () => {
           {/* Subject section */}
           <SubjectList />
 
-         {/* Exam section */}
+          {/* Exam section */}
           <View style={styles.examSection}>
             <ExamList />
           </View>

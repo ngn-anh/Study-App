@@ -1,3 +1,4 @@
+export const a = '1';
 import React, { useEffect, useState, useCallback } from "react";
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { useRoute, useNavigation, NavigationProp } from "@react-navigation/native";
@@ -46,18 +47,18 @@ const NotificationListScreen = () => {
         setLoadingMore(true);
       }
 
-      const res = await getNotificationsByCode(type, userId, page, LIMIT); 
-      console.log('page',page)
-      console.log('res',res)
+      const res = await getNotificationsByCode(type, userId, page, LIMIT);
+      console.log('page', page)
+      console.log('res', res)
       if (reset) {
         setNotifications(res.notifications);
         setNotificationTypeName(res.notification_type_name);
       } else {
-       setNotifications(prev => {
-        const map = new Map();
-        [...prev, ...res.notifications].forEach(item => map.set(item._id, item));
-        return Array.from(map.values());
-      });
+        setNotifications(prev => {
+          const map = new Map();
+          [...prev, ...res.notifications].forEach(item => map.set(item._id, item));
+          return Array.from(map.values());
+        });
 
       }
 
@@ -166,7 +167,7 @@ const NotificationListScreen = () => {
       )}
 
       <View style={styles.block}></View>
-      
+
       {/* Confirm Modal */}
       <ConfirmModal
         visible={showConfirmModal}

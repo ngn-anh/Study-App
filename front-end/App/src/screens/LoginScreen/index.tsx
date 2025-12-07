@@ -1,3 +1,4 @@
+export const a = '1';
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, ImageBackground, ScrollView } from "react-native";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
@@ -19,9 +20,9 @@ const LoginScreen = () => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-  const [modalType, setModalType] = useState<'success'|'error'>('success');
+  const [modalType, setModalType] = useState<'success' | 'error'>('success');
 
-  const showModal = (message: string, type: 'success'|'error' = 'success') => {
+  const showModal = (message: string, type: 'success' | 'error' = 'success') => {
     setModalMessage(message);
     setModalType(type);
     setModalVisible(true);
