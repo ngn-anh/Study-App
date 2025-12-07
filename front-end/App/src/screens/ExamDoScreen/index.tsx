@@ -1,3 +1,4 @@
+export const a = '2';
 import React, { useEffect, useState, useRef } from "react";
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { useNavigation, useRoute, RouteProp, NavigationProp } from "@react-navigation/native";
