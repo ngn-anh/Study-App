@@ -1,3 +1,4 @@
+export const a = '2';
 import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaView, View, Text, Image, ScrollView, TouchableOpacity, StatusBar } from "react-native";
 import { styles } from "./HomeScreen.styles";
