@@ -1,3 +1,4 @@
+export const a = '2';
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -42,7 +43,7 @@ const ScheduleScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   // Lấy danh sách lịch hẹn
- const fetchSchedules = async () => {
+  const fetchSchedules = async () => {
     try {
       setLoading(true);
       const userData = await AsyncStorage.getItem("userData");
@@ -78,10 +79,10 @@ const ScheduleScreen = () => {
     }
   };
 
-  const handleDelete = async() => {
+  const handleDelete = async () => {
     if (selectedIds.length === 0) return;
-   try {
-    console.log('selectedIds',selectedIds)
+    try {
+      console.log('selectedIds', selectedIds)
       // Gọi API BE xóa mềm nhiều lịch hẹn
       await deleteManySchedules(selectedIds);
 
@@ -131,20 +132,20 @@ const ScheduleScreen = () => {
         </TouchableOpacity>
 
         <View
-        style={[
-          styles.cardTag,
-          {
-            backgroundColor: remaining.bgColor,
-            paddingHorizontal: 8,
-            paddingVertical: 4,
-            borderRadius: 6,
-          },
-        ]}
-      >
-        <Text style={{ color: remaining.color, fontWeight: '500', fontSize:11 }}>
-          {remaining.text}
-        </Text>
-      </View>
+          style={[
+            styles.cardTag,
+            {
+              backgroundColor: remaining.bgColor,
+              paddingHorizontal: 8,
+              paddingVertical: 4,
+              borderRadius: 6,
+            },
+          ]}
+        >
+          <Text style={{ color: remaining.color, fontWeight: '500', fontSize: 11 }}>
+            {remaining.text}
+          </Text>
+        </View>
       </TouchableOpacity>
     );
   };

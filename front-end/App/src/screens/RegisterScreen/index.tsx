@@ -1,3 +1,4 @@
+export const a = '2';
 import React, { useState, useEffect } from "react";
 import { View, TextInput, Text, TouchableOpacity, ImageBackground, ScrollView } from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
@@ -5,7 +6,7 @@ import axios from "axios";
 import { API_URL } from "@env";
 import { styles } from "./index.styles";
 import { Picker } from "@react-native-picker/picker";
-import { getClasses, ClassItem } from "../../api/class"; 
+import { getClasses, ClassItem } from "../../api/class";
 import { UserCirclePlusIcon, EyeIcon, EyeSlashIcon, ArrowLeftIcon, PhoneIcon } from "phosphor-react-native";
 import { CustomModal } from "../../components/CustomModal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -28,9 +29,9 @@ const RegisterScreen: React.FC = () => {
   // Modal
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-  const [modalType, setModalType] = useState<'success'|'error'>('success');
+  const [modalType, setModalType] = useState<'success' | 'error'>('success');
 
-  const showModal = (message: string, type: 'success'|'error' = 'success') => {
+  const showModal = (message: string, type: 'success' | 'error' = 'success') => {
     setModalMessage(message);
     setModalType(type);
     setModalVisible(true);
@@ -63,7 +64,7 @@ const RegisterScreen: React.FC = () => {
         class_id: classId || null,
       });
 
-       const userData = response.data;
+      const userData = response.data;
 
       // Lưu userData vào AsyncStorage
       await AsyncStorage.setItem("userData", JSON.stringify(userData));
@@ -87,9 +88,9 @@ const RegisterScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground 
-        source={require("../../assets/images/header-bg.png")} 
-        style={styles.headerBackground} 
+      <ImageBackground
+        source={require("../../assets/images/header-bg.png")}
+        style={styles.headerBackground}
         imageStyle={styles.imageStyle}
       >
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
@@ -100,21 +101,21 @@ const RegisterScreen: React.FC = () => {
       <ScrollView contentContainerStyle={styles.formContainer}>
         {/* Username */}
         <Text style={styles.label}>Username <Text style={{ color: "red" }}>*</Text></Text>
-        <TextInput 
-          placeholder="Vui lòng nhập username" 
-          style={styles.input} 
-          value={username} 
-          onChangeText={setUsername} 
+        <TextInput
+          placeholder="Vui lòng nhập username"
+          style={styles.input}
+          value={username}
+          onChangeText={setUsername}
         />
 
         {/* Email */}
         <Text style={styles.label}>Email <Text style={{ color: "red" }}>*</Text></Text>
-        <TextInput 
-          placeholder="Vui lòng nhập email" 
-          style={styles.input} 
-          keyboardType="email-address" 
-          value={email} 
-          onChangeText={setEmail} 
+        <TextInput
+          placeholder="Vui lòng nhập email"
+          style={styles.input}
+          keyboardType="email-address"
+          value={email}
+          onChangeText={setEmail}
         />
 
         {/* SELECT CLASS */}
@@ -125,9 +126,9 @@ const RegisterScreen: React.FC = () => {
             selectedValue={classId}
             onValueChange={(value: any) => setClassId(value)}
           >
-            <Picker.Item label="-- Chọn lớp --" value="" style={styles.pickerItem}/>
+            <Picker.Item label="-- Chọn lớp --" value="" style={styles.pickerItem} />
             {classes.map((item) => (
-              <Picker.Item key={item._id} label={item.name} value={item._id} style={styles.pickerItem}/>
+              <Picker.Item key={item._id} label={item.name} value={item._id} style={styles.pickerItem} />
             ))}
           </Picker>
         </View>
@@ -135,12 +136,12 @@ const RegisterScreen: React.FC = () => {
         {/* Password */}
         <Text style={styles.label}>Mật khẩu <Text style={{ color: "red" }}>*</Text></Text>
         <View style={styles.passwordWrapper}>
-          <TextInput 
-            placeholder="Vui lòng nhập mật khẩu" 
-            style={styles.inputPassword} 
-            secureTextEntry={!showPassword} 
-            value={password} 
-            onChangeText={setPassword} 
+          <TextInput
+            placeholder="Vui lòng nhập mật khẩu"
+            style={styles.inputPassword}
+            secureTextEntry={!showPassword}
+            value={password}
+            onChangeText={setPassword}
           />
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.iconEye}>
             {showPassword ? <EyeIcon size={20} color="#0047AB" /> : <EyeSlashIcon size={20} color="#0047AB" />}
@@ -150,12 +151,12 @@ const RegisterScreen: React.FC = () => {
         {/* Confirm Password */}
         <Text style={styles.label}>Xác nhận mật khẩu <Text style={{ color: "red" }}>*</Text></Text>
         <View style={styles.passwordWrapper}>
-          <TextInput 
-            placeholder="Nhập lại mật khẩu" 
-            style={styles.inputPassword} 
-            secureTextEntry={!showConfirmPassword} 
-            value={confirmPassword} 
-            onChangeText={setConfirmPassword} 
+          <TextInput
+            placeholder="Nhập lại mật khẩu"
+            style={styles.inputPassword}
+            secureTextEntry={!showConfirmPassword}
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
           />
           <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)} style={styles.iconEye}>
             {showConfirmPassword ? <EyeIcon size={20} color="#0047AB" /> : <EyeSlashIcon size={20} color="#0047AB" />}
@@ -175,11 +176,11 @@ const RegisterScreen: React.FC = () => {
         </TouchableOpacity>
       </View>
 
-      <CustomModal 
-        visible={modalVisible} 
-        message={modalMessage} 
-        type={modalType} 
-        onClose={() => setModalVisible(false)} 
+      <CustomModal
+        visible={modalVisible}
+        message={modalMessage}
+        type={modalType}
+        onClose={() => setModalVisible(false)}
       />
     </View>
   );
