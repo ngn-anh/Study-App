@@ -1,4 +1,3 @@
-export const a = '1';
 import React, { useState, useEffect } from "react";
 import { View, TextInput, Text, TouchableOpacity, ImageBackground, ScrollView } from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
@@ -57,7 +56,7 @@ const RegisterScreen: React.FC = () => {
       return;
     }
 
-    try {
+try {
       const result = await registerUser({
         username,
         email,
@@ -69,6 +68,8 @@ const RegisterScreen: React.FC = () => {
 
       // Lưu userData vào AsyncStorage
       await AsyncStorage.setItem("userData", JSON.stringify(userData));
+
+      // navigation.navigate("Home"); // hoặc màn bạn muốn
 
       showModal("Đăng ký thành công!", "success");
 

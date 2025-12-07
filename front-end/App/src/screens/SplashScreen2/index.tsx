@@ -1,4 +1,3 @@
-export const a = '1';
 import React, { useEffect } from "react";
 import { View, Text, Image, StatusBar } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
