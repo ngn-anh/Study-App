@@ -1,4 +1,3 @@
-export const a='1';
 import { Injectable, BadRequestException, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { RegisterDto } from './dto/register.dto';
@@ -6,6 +5,7 @@ import { LoginDto } from './dto/login.dto';
 import { UserEntity } from '../users/entities/user.entity';
 import * as jwt from 'jsonwebtoken';
 import { toUserEntity } from 'src/common/utils/user.utils';
+
 
 @Injectable()
 export class AuthService {
