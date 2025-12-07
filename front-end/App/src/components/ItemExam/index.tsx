@@ -1,3 +1,4 @@
+export const a = '2';
 import { useNavigation } from "@react-navigation/native";
 import { Exam } from "../../types/typeObj";
 import { Image, Text, TouchableOpacity, View } from "react-native";
