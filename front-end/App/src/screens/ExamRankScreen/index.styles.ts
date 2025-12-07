@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#edf4fdff",
+    backgroundColor: "#F6FAFF",
     borderRadius: 8,
     padding: 16,
     marginBottom: 10,
@@ -56,8 +56,5 @@ export const styles = StyleSheet.create({
   image:{
     width:42,
     height:42
-  },
-  block:{
-    height:50
   }
 });

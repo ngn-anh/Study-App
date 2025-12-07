@@ -242,8 +242,5 @@ applyBtn: {
   marginLeft: 8,
 },
 
-block:{
-    height:50
-  }
 
 });
