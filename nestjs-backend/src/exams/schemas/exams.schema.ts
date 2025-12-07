@@ -4,7 +4,7 @@ import { Document, Types } from 'mongoose';
 
 export type ExamDocument = Exam & Document;
 
-@Schema({collection: 'exams',  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }})
+@Schema({ collection: 'exams', timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } })
 export class Exam {
   @Prop({ type: Types.ObjectId, ref: 'SubjectClass', required: true })
   subject_class_id: Types.ObjectId;
@@ -32,6 +32,9 @@ export class Exam {
 
   @Prop()
   end_date?: Date;
+
+  @Prop({ type: Number, default: 25 })
+  total_download?: number;
 
   @Prop()
   deleted_at?: Date;

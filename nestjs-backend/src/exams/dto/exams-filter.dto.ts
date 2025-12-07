@@ -28,10 +28,10 @@ export class ExamsFilterDto {
   @IsEnum(SortOrder)
   sort?: SortOrder;
 
-  @ApiPropertyOptional({ description: 'Id lớp hiện tại của user (FE gửi)' })
+  @ApiPropertyOptional({ description: 'Mã lớp hiện tại của user (FE gửi)' })
   @IsOptional()
   @IsString()
-  class_id?: string;
+  currentClassCode?: string;
 
   @ApiPropertyOptional({ type: [String], description: 'Danh sách mã môn học (FE gửi)' })
   @IsOptional()
@@ -63,7 +63,7 @@ export class ExamsFilterDto {
   @Type(() => Number)
   @IsInt()
   @Min(1)
-  limit?: number = 5;
+  limit?: number = 10;
 
   // 👇 Thêm trường này để service biết user nào đang query
   @ApiPropertyOptional({ description: 'ID của user để check đã làm bài chưa' })

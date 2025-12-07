@@ -31,10 +31,6 @@ export class ReminderSchedule {
 
   @Prop({ type: Date, default: null })
   deleted_at: Date | null;
-
-  @Prop({ type: String })
-  fcm_token?: string;
-
 }
 
 export const ReminderScheduleSchema = SchemaFactory.createForClass(ReminderSchedule);

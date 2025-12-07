@@ -28,8 +28,4 @@ export class CreateReminderScheduleDto {
   @IsString()
   @IsOptional()
   repeat_mode?: string;
-
-  @IsString()
-  @IsOptional()
-  fcm_token?: string; 
 }
