@@ -10,13 +10,19 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+
 import { styles } from "./index.styles";
-import { Answer, Exam, Question } from "../../types/typeObj";
-import { getQuestionsByExam } from "../../api/question";
+import { Exam } from "../../types/typeObj";
 
 /* -------------------  Types nhận từ API -------------------- */
+export interface Question {
+    /** Câu hỏi (vd: “Câu 1: Đề bài …”) */
+    title: string;
+    /** Các đáp án A‑D */
+    options: string[];
+}
 export interface Part {
-    /** Tên phần (section) */
+    /** Tên phần – “Phần 1”, “Phần 2”, … */
     title: string;
     /** Danh sách câu hỏi của phần */
     questions: Question[];
@@ -24,210 +30,138 @@ export interface Part {
 
 /* -------------------  Props của component ----------------- */
 interface Props {
-    /** Id của đề thi cần preview */
-    examId: string | undefined;
+    /** Đề thi sẽ preview (chỉ dùng để lấy id khi gọi API) */
+    exam?: Exam;
 }
 
 /* -----------------------  Component ------------------------ */
-const PreviewExam: React.FC<Props> = memo(({ examId }) => {
+const PreviewExam: React.FC<Props> = memo(({ exam }) => {
+    /* ---------- State ----------
+     * parts          : dữ liệu lấy từ server (hoặc mock)
+     * loading        : hiển thị ActivityIndicator khi chờ
+     * expandedParts  : Set chứa index của các phần đang mở
+     */
     const [parts, setParts] = useState<Part[]>([]);
-    const [listSection, setListSection] = useState<string[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [expandedParts, setExpandedParts] = useState<Set<number>>(new Set());
 
-    /* --------------------  Xử lý dữ liệu từ API -------------------- */
-    /** Nhóm danh sách câu hỏi theo trường `section` và trả về mảng Part */
-    const processQuestionsData = (
-        questions: Question[]
-    ): { parts: Part[]; sections: string[] } => {
-        if (!questions?.length) return { parts: [], sections: [] };
-
-        const bySection: Record<string, Question[]> = {};
-
-        questions.forEach((q) => {
-            // nếu không có section => đặt “Chung”
-            const sec = (q as any).section?.toString() ?? "Chung";
-            if (!bySection[sec]) bySection[sec] = [];
-            bySection[sec].push(q);
-        });
-
-        const sections = Object.keys(bySection);
-
-        const parts: Part[] = sections.map((sec) => ({
-            title: `Phần ${sec}`,
-            questions: bySection[sec],
-        }));
-
-        return { parts, sections };
-    };
-
-    /* --------------------  Mock data (được cung cấp) -------------------- */
-    // Bạn đã gửi cho chúng tôi một object có key `questions`; chúng tôi chỉ cần mảng này.
-    const mockQuestions: Question[] = [
+    /* ---------------------------------------------------------
+       Mock data – sẽ được dùng khi:
+          • Ứng dụng đang ở chế độ development (__DEV__) hoặc
+          •  API trả về lỗi.
+       --------------------------------------------------------- */
+    const mockData: Part[] = [
         {
-            _id: "690dd86a1e4d52743251d885",
-            exam_id: "6908a903bc2ae0fd775ccad6",
-            image:
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFlpfC7Xq14JaD8Zdf34Y7Jhi2vw0mBCJfhA&s",
-            description: "Đâu là thủ đô của Việt Nam?",
-            difficulty: 1,
-            section: 3,
-            answers: [
+            title: "Phần 1",
+            questions: [
                 {
-                    _id: "690dd9ca1e4d52743251d88f",
-                    question_id: "690dd86a1e4d52743251d885",
-                    description: "Hà Nội",
-                    image: null,
-                    is_correct: true,
-                    explanation: "Hà Nội là thủ đô của Việt Nam từ năm 1976.",
+                    title: "Câu 1: Đề bài 1",
+                    options: [
+                        "Đáp án A",
+                        "Đáp án B",
+                        "Đáp án C",
+                        "Đáp án D",
+                    ],
                 },
                 {
-                    _id: "690dd9ca1e4d52743251d890",
-                    question_id: "690dd86a1e4d52743251d885",
-                    description: "TP. Hồ Chí Minh",
-                    image: null,
-                    is_correct: false,
-                    explanation:
-                        "TP. Hồ Chí Minh là trung tâm kinh tế lớn nhất nước.",
-                },
-                {
-                    _id: "690dd9ca1e4d52743251d891",
-                    question_id: "690dd86a1e4d52743251d885",
-                    description: "Đà Nẵng",
-                    image: null,
-                    is_correct: false,
-                    explanation:
-                        "Đà Nẵng là thành phố lớn ở miền Trung Việt Nam.",
-                },
-                {
-                    _id: "690dd9ca1e4d52743251d892",
-                    question_id: "690dd86a1e4d52743251d885",
-                    description: "Huế",
-                    image: null,
-                    is_correct: false,
-                    explanation: "Huế từng là kinh đô của triều Nguyễn.",
+                    title: "Câu 2: Đề bài 2",
+                    options: [
+                        "Đáp án A",
+                        "Đáp án B",
+                        "Đáp án C",
+                        "Đáp án D",
+                    ],
                 },
             ],
         },
         {
-            _id: "690dd86a1e4d52743251d886",
-            exam_id: "6908a903bc2ae0fd775ccad6",
-            image: null,
-            description: "Kết quả của phép tính 15 × 3 là bao nhiêu?",
-            difficulty: 1,
-            section: 1,
-            answers: [
+            title: "Phần 2",
+            questions: [
                 {
-                    _id: "690dd9ca1e4d52743251d893",
-                    question_id: "690dd86a1e4d52743251d886",
-                    description: "45",
-                    image: null,
-                    is_correct: true,
-                    explanation: "15 × 3 = 45.",
+                    title: "Câu 1: Đề bài 1",
+                    options: ["1", "2", "3", "4"],
                 },
                 {
-                    _id: "690dd9ca1e4d52743251d894",
-                    question_id: "690dd86a1e4d52743251d886",
-                    description: "35",
-                    image: null,
-                    is_correct: false,
-                    explanation: "Sai, 15 × 3 không bằng 35.",
-                },
-                {
-                    _id: "690dd9ca1e4d52743251d895",
-                    question_id: "690dd86a1e4d52743251d886",
-                    description: "55",
-                    image: null,
-                    is_correct: false,
-                    explanation: "Sai, kết quả lớn hơn thực tế.",
-                },
-                {
-                    _id: "690dd9ca1e4d52743251d896",
-                    question_id: "690dd86a1e4d52743251d886",
-                    description: "50",
-                    image: null,
-                    is_correct: false,
-                    explanation: "Sai, 15 nhân 3 không thể ra số chẵn 50.",
+                    title: "Câu 2: Đề bài 2",
+                    options: ["1", "2", "3", "4"],
                 },
             ],
         },
-        // 👉 Bạn có thể thêm bao nhiêu câu hỏi “mock” nữa ở đây.
+        {
+            title: "Phần 3",
+            questions: [
+                {
+                    title: "Câu 1: Đề bài 1",
+                    options: ["A", "B", "C", "D"],
+                },
+                {
+                    title: "Câu 2: Đề bài 2",
+                    options: ["A", "B", "C", "D"],
+                },
+            ],
+        },
     ];
 
-    /* --------------------  Hàm fetch -------------------- */
-    const fetchQuestions = async () => {
-        /* ---- Trường hợp không có examId → dùng mock ngay ---- */
-        if (!examId) {
-            const { parts: p, sections: s } = processQuestionsData(mockQuestions);
-            setParts(p);
-            setListSection(s);
-            setExpandedParts(new Set([0])); // mở phần đầu tiên mặc định
+    /* --------------------  Lấy dữ liệu -------------------- */
+    useEffect(() => {
+        // Nếu không có exam.id → không fetch, dùng mock ngay
+        if (!exam?.id) {
+            setParts(mockData);
+            setExpandedParts(new Set([0])); // mở phần 1 mặc định
             setLoading(false);
             return;
         }
 
-        try {
-            setLoading(true);
-            const response = await getQuestionsByExam(examId);
-            const apiData = response.data; // dữ liệu thực tế nằm trong response.data
+        const fetchParts = async () => {
+            try {
+                const response = await fetch(
+                    `https://your‑api.com/exams/${exam.id}/parts`
+                );
+                const json = await response.json();
 
-            if (apiData?.errorCode === 0) {
-                const questions: Question[] = apiData.data ?? [];
+                // Giả sử API trả về { parts: Part[] }
+                const fetchedParts: Part[] = json?.parts ?? [];
 
-                if (questions.length === 0) {
-                    // API trả về rỗng → dùng mock
-                    const { parts: p, sections: s } = processQuestionsData(mockQuestions);
-                    setParts(p);
-                    setListSection(s);
+                // Nếu API trả về rỗng → dùng mock để tránh màn trắng
+                if (fetchedParts.length === 0) {
+                    setParts(mockData);
+                    setExpandedParts(new Set([0]));
                 } else {
-                    // Xử lý dữ liệu thực tế
-                    const { parts: p, sections: s } = processQuestionsData(questions);
-                    setParts(p);
-                    setListSection(s);
+                    setParts(fetchedParts);
+                    // mở mặc định phần đầu tiên nếu có
+                    setExpandedParts(new Set([0]));
                 }
-                setExpandedParts(new Set([0])); // mở phần đầu tiên
-            } else {
-                // API trả về lỗi → fallback sang mock
-                console.warn("API error:", apiData?.message);
-                const { parts: p, sections: s } = processQuestionsData(mockQuestions);
-                setParts(p);
-                setListSection(s);
+            } catch (error) {
+                console.warn("Failed to fetch exam parts:", error);
+                // Khi có lỗi → fallback sang mock data
+                setParts(mockData);
                 setExpandedParts(new Set([0]));
+            } finally {
+                setLoading(false);
             }
-        } catch (error) {
-            // Lỗi kết nối, timeout … → fallback sang mock
-            console.warn("Failed to fetch exam questions:", error);
-            const { parts: p, sections: s } = processQuestionsData(mockQuestions);
-            setParts(p);
-            setListSection(s);
-            setExpandedParts(new Set([0]));
-        } finally {
-            setLoading(false);
-        }
-    };
+        };
 
-    /* --------------------  Effect -------------------- */
-    useEffect(() => {
-        fetchQuestions();
-    }, [examId]);
+        fetchParts();
+    }, [exam?.id]);
 
     /* --------------------  Mở / Đóng phần ----------------- */
     const togglePart = (index: number) => {
         setExpandedParts((prev) => {
-            const set = new Set(prev);
-            set.has(index) ? set.delete(index) : set.add(index);
-            return set;
+            const newSet = new Set(prev);
+            if (newSet.has(index)) {
+                newSet.delete(index); // đóng
+            } else {
+                newSet.add(index); // mở (không ảnh hưởng tới các phần khác)
+            }
+            return newSet;
         });
     };
 
-    /* --------------------  Render ----------------- */
+    /* --------------------  Render -------------------------- */
     if (loading) {
         return (
             <View style={styles.loadingContainer}>
-                <ActivityIndicator
-                    size="large"
-                    color={styles.accentColor?.color || "#007AFF"}
-                />
+                <ActivityIndicator size="large" color={styles.accentColor.color} />
             </View>
         );
     }
@@ -235,19 +169,19 @@ const PreviewExam: React.FC<Props> = memo(({ examId }) => {
     if (parts.length === 0) {
         return (
             <View style={styles.emptyContainer}>
-                <Text style={styles.emptyText}>Không có câu hỏi nào để hiển thị</Text>
+                <Text style={styles.emptyText}>Không có dữ liệu để hiển thị</Text>
             </View>
         );
     }
 
     return (
         <View style={styles.previewExamContainer}>
-            {/* Danh sách các phần (Section) */}
+            {/* ----------- Danh sách các phần (Section) ----------- */}
             {parts.map((part, partIdx) => {
                 const isExpanded = expandedParts.has(partIdx);
                 return (
                     <View key={partIdx} style={styles.partWrapper}>
-                        {/* Tiêu đề phần */}
+                        {/* ---- Tiêu đề phần ---- */}
                         <TouchableOpacity
                             style={[
                                 styles.partHeader,
@@ -276,49 +210,53 @@ const PreviewExam: React.FC<Props> = memo(({ examId }) => {
                             </Text>
                         </TouchableOpacity>
 
-                        {/* Nội dung phần (câu hỏi) */}
-                        {isExpanded && (
-                            <View style={styles.partContent}>
-                                <FlatList<Question>
-                                    data={part.questions}
-                                    keyExtractor={(item, idx) =>
-                                        `${partIdx}-${item._id || idx}`
-                                    }
-                                    renderItem={({ item, index }) => (
-                                        <View style={styles.questionWrapper}>
-                                            {/* Tiêu đề câu hỏi */}
-                                            <Text style={styles.questionTitle}>
-                                                {`Câu ${index + 1}: ${item.description}`}
-                                            </Text>
+                        {/* ---- Nội dung phần (câu hỏi) ---- */}
+                        {
+                            isExpanded && (
+                                <View style={styles.partContent}>
+                                    {/* -------------------------------------------------
+                        FlatList được generic <Question> → item luôn có kiểu
+                        Question, index luôn là number.
+                        ------------------------------------------------- */}
+                                    <FlatList<Question>
+                                        data={part.questions}
+                                        keyExtractor={(_, i) => `${partIdx}-${i}`} // key duy nhất
+                                        renderItem={({
+                                            item,
+                                            index,
+                                        }: {
+                                            item: Question;
+                                            // item: any;
+                                            index: number;
+                                        }) => (
+                                            <View style={styles.questionWrapper}>
+                                                {/* Tiêu đề câu hỏi */}
+                                                <Text style={styles.questionTitle}>{item.title}</Text>
 
-                                            {/* Các đáp án */}
-                                            {item.answers?.map(
-                                                (ans: Answer, ansIdx: number) => (
-                                                    <View
-                                                        key={ans._id}
-                                                        style={styles.optionRow}
-                                                    >
-                                                        <Text style={styles.optionLabel}>
-                                                            {String.fromCharCode(
-                                                                65 + ansIdx
-                                                            )}
-                                                            .
-                                                        </Text>
-                                                        <Text style={styles.optionText}>
-                                                            {ans.description}
-                                                        </Text>
-                                                    </View>
-                                                )
-                                            )}
-                                        </View>
-                                    )}
-                                />
-                            </View>
-                        )}
+                                                {/* Các đáp án A‑D */}
+                                                {item.options.map(
+                                                    (opt: string, optIdx: number) => (
+                                                        <View
+                                                            key={optIdx}
+                                                            style={styles.optionRow}
+                                                        >
+                                                            <Text style={styles.optionLabel}>
+                                                                {String.fromCharCode(65 + optIdx)}.
+                                                            </Text>
+                                                            <Text style={styles.optionText}>{opt}</Text>
+                                                        </View>
+                                                    )
+                                                )}
+                                            </View>
+                                        )}
+                                    />
+                                </View>
+                            )
+                        }
                     </View>
                 );
             })}
-        </View>
+        </View >
     );
 });
 

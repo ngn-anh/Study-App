@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
   itemLeft: {
     display: "flex",
     flexDirection: "row",
-    alignItems: 'center',
+    alignItems:'center',
     gap: 4,
   },
   // itemIcon: {
@@ -74,8 +74,8 @@ export const styles = StyleSheet.create({
 
   actionDownloadShare: {
     display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection:'row',
+    justifyContent:'space-between',
     marginTop: 12,
     paddingTop: 5,
     paddingBottom: 12,
@@ -85,7 +85,7 @@ export const styles = StyleSheet.create({
   },
   nameExamPdf: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems:'center',
     gap: 10,
   },
   pdfIcon: {
@@ -120,17 +120,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-
-  actionDisabled: {
-    opacity: 0.5,
-  },
-
-  loadingText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-
   actionShare: {},
 
   // Tab Xem trước/Lịch sử thi

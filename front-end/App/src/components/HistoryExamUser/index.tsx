@@ -4,19 +4,31 @@
 import React, { memo, useEffect, useState } from "react";
 import { ActivityIndicator, View, Text } from "react-native";
 import { styles } from "./index.styles";
-import { ExamHistory } from "../../types/typeObj";
-import { CalendarDotsIcon, ClockIcon } from "phosphor-react-native";
-import { getExamResultDetail } from "../../api/examResult";
-import { formatDateTime, secondsToHHMMSS } from "../../utils/time";
+import { Exam } from "../../types/typeObj";
+import { CalendarBlankIcon, CalendarDotsIcon, ClockIcon } from "phosphor-react-native";
+
+interface ExamHistory {
+    time: string;
+    /** Thời gian hoàn thành (ví dụ "15:30 17-04-2025") */
+    timeCompleted: string;
+    /** Số câu đúng */
+    answerCorrect: number;
+    /** Số câu sai */
+    answerWrong: number;
+    /** Tổng số câu trong đề */
+    totalQuestion: number;
+}
 
 /* ---------------------  Props của component --------------------- */
 interface Props {
-    examId?: string | null;
+    /** Đề thi – chỉ dùng để lấy exam.id */
+    exam?: Exam;
+    /** Id của người dùng muốn lấy lịch sử */
     userId?: string;
 }
 
 /* ------------------------  Component --------------------------- */
-const HistoryExamUser: React.FC<Props> = memo(({ examId, userId }) => {
+const HistoryExamUser: React.FC<Props> = memo(({ exam, userId }) => {
     const [history, setHistory] = useState<ExamHistory | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -25,48 +37,52 @@ const HistoryExamUser: React.FC<Props> = memo(({ examId, userId }) => {
           Mock data – dùng khi không có API thật
           ------------------------------------------------- */
     const mockData: ExamHistory = {
-        "exam_result_id": "690f10f71b908e644b126284",
-        "exam_id": "6908a903bc2ae0fd775ccad6",
-        "user_id": "690426dbdbf4313e26d816d5",
-        "total_question": 10,
-        "total_correct": 1,
-        "total_wrong": 2,
-        "total_not_done": 7,
-        "is_finish": true,
-        "time_start": "2025-11-08T09:44:13.888Z",
-        "time_end": "2025-11-08T09:44:21.906Z",
-        "durationSec": 8,
-        "duration_text": "0p08s"
+        time: "00:30:15",
+        timeCompleted: "15:30 17-04-2025",
+        answerCorrect: 25,
+        answerWrong: 5,
+        totalQuestion: 34,
     };
 
-    const fetchHistory = async () => {
-        if (!examId || !userId) {
+    /* ----------------------  Fetch API  --------------------- */
+    useEffect(() => {
+        // Nếu không có exam.id hoặc userId → dùng mock ngay
+        if (!exam?.id || !userId) {
             setHistory(mockData);
             setLoading(false);
             return;
         }
-        try {
-            const res = await getExamResultDetail(userId, examId);
 
-            // Giả sử API trả về đúng định dạng ExamHistory
-            const data: ExamHistory = res ?? mockData;
-            setHistory(data);
-        } catch (e) {
-            console.warn("Fetch exam history failed:", e);
-            // Khi lỗi → fallback sang mock
-            setHistory(mockData);
-            setError("Không tải được dữ liệu, đang hiển thị mẫu.");
-        } finally {
-            setLoading(false);
-        }
-    };
+        const fetchHistory = async () => {
+            try {
+                // -------------------------------------------------
+                // 👉 Thay URL này bằng endpoint thực tế của bạn
+                // -------------------------------------------------
+                const resp = await fetch(
+                    `https://your-api.com/users/${userId}/exams/${exam.id}/history`
+                );
+                const json = await resp.json();
 
-    useEffect(() => {
+                // Giả sử API trả về đúng định dạng ExamHistory
+                const data: ExamHistory = json?.history ?? mockData;
+                setHistory(data);
+            } catch (e) {
+                console.warn("Fetch exam history failed:", e);
+                // Khi lỗi → fallback sang mock
+                setHistory(mockData);
+                setError("Không tải được dữ liệu, đang hiển thị mẫu.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
         fetchHistory();
-    }, [examId, userId]);
+    }, [exam?.id, userId]);
 
-    const calculateScore = (e: ExamHistory) => {
-        const raw = (e.total_correct / e.total_question) * 10;
+    /* ----------------------  Helper  ------------------------ */
+    const calculateScore = (h: ExamHistory) => {
+        const raw = (h.answerCorrect / h.totalQuestion) * 10;
+        // làm tròn 2 chữ số
         return Math.round(raw * 100) / 100;
     };
 
@@ -77,9 +93,11 @@ const HistoryExamUser: React.FC<Props> = memo(({ examId, userId }) => {
         if (score >= 5 && score < 7) {
             return { backgroundColor: "#FFB700", color: "#000000" };
         }
+        // >=7
         return { backgroundColor: "#22A012", color: "#FFFFFF" };
     };
 
+    /* -------------------------- Render ---------------------- */
     if (loading) {
         return (
             <View style={styles.container}>
@@ -91,14 +109,15 @@ const HistoryExamUser: React.FC<Props> = memo(({ examId, userId }) => {
     if (!history) {
         return (
             <View style={styles.container}>
-                <Text style={styles.errorText}>Bạn chưa từng làm đề thi này. Bắt đầu làm bài ngay bạn nhé!</Text>
+                <Text style={styles.errorText}>Không có dữ liệu lịch sử.</Text>
             </View>
         );
     }
 
     const score = calculateScore(history);
     const scoreStyle = getScoreStyle(score);
-    const answered = history.total_correct + history.total_wrong;
+    const answered = history.answerCorrect + history.answerWrong;
+    const blank = history.totalQuestion - answered;
 
     const StatItem: React.FC<{ label: string; value: number }> = ({
         label,
@@ -135,12 +154,12 @@ const HistoryExamUser: React.FC<Props> = memo(({ examId, userId }) => {
                 <View style={styles.detailContainer}>
                     <View style={styles.detailItem}>
                         <ClockIcon color="#000" size={20} />
-                        <Text style={styles.timeLine}>{secondsToHHMMSS(history?.durationSec || 0, true)}</Text>
+                        <Text style={styles.timeLine}>{history.time}</Text>
                     </View>
                     <View style={styles.detailItem}>
                         <CalendarDotsIcon color="#000" size={20} />
                         <Text style={styles.timeLine}>
-                            {formatDateTime(history?.time_end || '0')}
+                            {history.timeCompleted}
                         </Text>
                     </View>
                 </View>
@@ -151,30 +170,31 @@ const HistoryExamUser: React.FC<Props> = memo(({ examId, userId }) => {
                     <View
                         style={[
                             styles.progressDone,
-                            { flex: answered / history.total_question },
+                            { flex: answered / history.totalQuestion },
                         ]}
                     />
                     <View
                         style={[
                             styles.progressRemain,
                             {
-                                flex: history.total_not_done / history.total_question,
+                                flex:
+                                    (history.totalQuestion - answered) / history.totalQuestion,
                             },
                         ]}
                     />
                 </View>
                 <View style={styles.progressLabelOverlay}>
                     <Text style={styles.progressLabel}>
-                        {"Số câu đã làm: "}{answered}/{history.total_question}
+                        {"Số câu đã làm: "}{answered}/{history.totalQuestion}
                     </Text>
                 </View>
             </View>
 
             {/* Phần thống kê: Đúng / Sai / Bỏ trống */}
             <View style={styles.statsRow}>
-                <StatItem label="Đúng" value={history.total_correct} />
-                <StatItem label="Sai" value={history.total_wrong} />
-                <StatItem label="Bỏ trống" value={history.total_not_done} />
+                <StatItem label="Đúng" value={history.answerCorrect} />
+                <StatItem label="Sai" value={history.answerWrong} />
+                <StatItem label="Bỏ trống" value={blank} />
             </View>
             {/* Thông báo lỗi (nếu có) – nằm dưới cùng */}
             {error && <Text style={styles.errorText}>{error}</Text>}

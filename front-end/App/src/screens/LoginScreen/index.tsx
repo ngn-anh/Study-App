@@ -19,9 +19,9 @@ const LoginScreen = () => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-  const [modalType, setModalType] = useState<'success' | 'error'>('success');
+  const [modalType, setModalType] = useState<'success'|'error'>('success');
 
-  const showModal = (message: string, type: 'success' | 'error' = 'success') => {
+  const showModal = (message: string, type: 'success'|'error' = 'success') => {
     setModalMessage(message);
     setModalType(type);
     setModalVisible(true);
@@ -34,7 +34,6 @@ const LoginScreen = () => {
     }
 
     try {
-      // const response = await axios.post(`${API_URL}/auth/login`, { username, password });
       const response = await loginUser({ username, password });
       const userData = response.data;
 

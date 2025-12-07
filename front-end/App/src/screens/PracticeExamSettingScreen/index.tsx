@@ -11,10 +11,6 @@ import ShortInfoExam from "../../components/ShortInfoExam";
 import SettingExam from "../../components/SettingExam";
 import InstructionDoExam from "../../components/InstructionDoExam";
 import { Icons } from "../../constants/icons";
-import { useCallback, useEffect, useState } from "react";
-import { Exam, UserInfo } from "../../types/typeObj";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getExamInfo } from "../../api/exam";
 
 type Props = {
   route: RouteProp<RootStackParamList, 'PracticeExamSettingScreen'>;
@@ -24,88 +20,72 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 const PracticeExamSettingScreen = (props: Props) => {
   const { route } = props;
-  const { examId } = route.params;
+  const { exam } = route.params;
   const navigation = useNavigation<NavigationProps>();
-
-  const [user, setUser] = useState<UserInfo | null>(null);
-  const [examInfo, setExamInfo] = useState<Exam | null>(null);
-  const [reverseQuestion, setReverseQuestion] = useState<boolean>(false);
-  const [reverseAnswer, setReverseAnswer] = useState<boolean>(false);
-  const [durationSetting, setDurationSetting] = useState<number | null>(null);
-
-  const getUserData = async () => {
-    try {
-      const userDataString = await AsyncStorage.getItem("userData");
-      if (userDataString !== null) {
-        const userData = JSON.parse(userDataString);
-        setUser(userData);
-      } else {
-        console.log('Không tìm thấy user data');
-      }
-    } catch (error) {
-      console.error('Lỗi khi lấy user data:', error);
-    }
-  };
-
-  const fetchGetExamInfo = async () => {
-    try {
-      if (!examId) return;
-      const data = await getExamInfo(examId);
-      setExamInfo(data);
-      setDurationSetting(data?.duration);
-    } catch (err) {
-      console.error("Không lấy được thông tin bài thi:", err);
-    }
-  };
-
-  useEffect(() => {
-    getUserData();
-  }, []);
-
-  useEffect(() => {
-    fetchGetExamInfo();
-  }, [examId]);
 
   const handlePressStart = () => {
     // navigation.navigate('PracticeExamDetailScreen', { exam: exam });
-    navigation.navigate("ExamDoScreen", { examId: examId + '' });
+    navigation.navigate("ExamDoScreen", {
+      examId: exam?.id + ''
+    });
   }
-
-  /* --------------------------------------------------------------
-     Các callback được truyền xuống SettingExam
-   -------------------------------------------------------------- */
-  const handleModeChange = useCallback(
-    (mode: "TIMED" | "UNLIMITED") => {
-      if (mode === "UNLIMITED") {
-        setDurationSetting(null);
-      } else {
-        setDurationSetting(examInfo?.duration ?? null);
-      }
-    },
-    [examInfo]
-  );
 
   return (
     <View style={styles.container}>
       <Header
-        data={examInfo}
+        data={exam}
         title="Chi tiết đề thi"
       />
       <ScrollView>
         <View style={styles.content}>
+          {/* <View style={styles.infoExamContainer}>
+            <Image source={{ uri: exam?.image }} style={styles.imageExam} />
+            <Text style={styles.nameExam}>{exam?.name ?? ''}</Text>
+            <View style={styles.infoExam}>
+              <View style={styles.infoExamLeft}>
+                <View style={styles.itemLeft}>
+                  <QuestionIcon style={styles.itemIcon} />
+                  <Text style={styles.itemValue}>{exam?.number + ""}</Text>
+                </View>
+                <View style={styles.itemLeft}>
+                  <ClockIcon style={styles.itemIcon} />
+                  <Text style={styles.itemValue}>{exam?.number + ""}</Text>
+                </View>
+                <View style={styles.itemLeft}>
+                  <CalendarDotsIcon style={styles.itemIcon} />
+                  <Text style={styles.itemValue}>{exam?.number + ""}</Text>
+                </View>
+              </View>
+              <View style={styles.infoExamRight}>
+                <View style={styles.itemRight}>
+                  <Text style={styles.itemValueRight}>100</Text>
+                  <Text style={styles.itemDesRight}>Lượt thi</Text>
+                </View>
+                <View style={styles.itemRight}>
+                  <Text style={styles.itemValueRight}>50</Text>
+                  <Text style={styles.itemDesRight}>Lượt thích</Text>
+                </View>
+                <View style={styles.itemRight}>
+                  <Text style={styles.itemValueRight}>2</Text>
+                  <Text style={styles.itemDesRight}>Lượt tải</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View style={styles.actionContainer}>
+            <ButtonCustom
+              type="primary"
+              name="Bắt đầu"
+              onPress={handlePressStart}
+            />
+          </View>
+          <View style={styles.previewExamContainer}>
+
+          </View> */}
           <ShortInfoExam
-            exam={examInfo}
+            exam={exam}
           />
-          <SettingExam
-            examInfo={examInfo}
-            reverseQuestion={reverseQuestion}
-            reverseAnswer={reverseAnswer}
-            durationSetting={durationSetting}
-            setReverseQuestion={setReverseQuestion}
-            setReverseAnswer={setReverseAnswer}
-            setDurationSetting={setDurationSetting}
-            onModeChange={handleModeChange}
-          />
+          <SettingExam />
           <InstructionDoExam />
           <View style={styles.actionContainer}>
             <ButtonCustom
