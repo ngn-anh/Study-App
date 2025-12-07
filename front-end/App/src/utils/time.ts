@@ -1,3 +1,4 @@
+export const a='1';
 export const getRemainingTime = (dueDateStr: string, dueTimeStr: string) => {
   const now = new Date();
 

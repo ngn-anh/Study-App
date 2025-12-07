@@ -1,3 +1,4 @@
+export const a='1';
 export type Subject = {
     id: string;
     name: string;

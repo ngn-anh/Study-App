@@ -1,3 +1,4 @@
+export const a='1';
 import { Exam, Subject } from "./typeObj";
 
 export type MainTabsParamList = {
