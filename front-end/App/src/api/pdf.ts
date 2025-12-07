@@ -1,3 +1,4 @@
+export const a='2';
 // services/pdfService.ts
 import RNFetchBlob from 'rn-fetch-blob';
 import Share from 'react-native-share';

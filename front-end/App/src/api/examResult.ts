@@ -1,3 +1,4 @@
+export const a='2';
 import axios from "axios";
 import { API_URL } from "@env";
 import { api } from "./api";

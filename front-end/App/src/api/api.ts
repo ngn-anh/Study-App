@@ -1,3 +1,4 @@
+export const a='2';
 import axios from 'axios';
 
 const API_URL = 'http://localhost:3000'; // hoặc IP máy thật nếu trên thiết bị

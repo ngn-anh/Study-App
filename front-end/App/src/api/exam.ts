@@ -1,3 +1,4 @@
+export const a='2';
 // src/api/exam.ts
 import { API_URL } from "@env";
 import axios from "axios";
