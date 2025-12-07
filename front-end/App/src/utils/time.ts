@@ -1,4 +1,3 @@
-export const a='1';
 export const getRemainingTime = (dueDateStr: string, dueTimeStr: string) => {
   const now = new Date();
 
@@ -17,7 +16,7 @@ export const getRemainingTime = (dueDateStr: string, dueTimeStr: string) => {
     0
   );
 
-  console.log('dueDate',dueDateUTC.getUTCFullYear(),
+  console.log('dueDate', dueDateUTC.getUTCFullYear(),
     dueDateUTC.getUTCMonth(),
     dueDateUTC.getUTCDate())
 
@@ -64,4 +63,39 @@ export const formatDate = (isoString: string) => {
   const year = date.getFullYear();
 
   return `${day}/${month}/${year}`;
+};
+
+export const formatDateTime = (isoString: string) => {
+  const date = new Date(isoString);
+
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear();
+
+  return `${hours}:${minutes} ${day}/${month}/${year}`;
+};
+
+export const secondsToHHMMSS = (seconds: number, alwaysShowHours: boolean = false) => {
+  const sec = Math.max(0, Math.floor(seconds));
+  const hours = Math.floor(sec / 3600);
+  const minutes = Math.floor((sec % 3600) / 60);
+  const remainingSeconds = sec % 60;
+
+  if (hours > 0 || alwaysShowHours) {
+    return [hours, minutes, remainingSeconds]
+      .map(unit => unit.toString().padStart(2, '0'))
+      .join(':');
+  } else {
+    return [minutes, remainingSeconds]
+      .map(unit => unit.toString().padStart(2, '0'))
+      .join(':');
+  }
+};
+
+export const formatTime = (seconds: number) => {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m}:${s < 10 ? "0" + s : s}`;
 };
