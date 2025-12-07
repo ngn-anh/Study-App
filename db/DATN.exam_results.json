@@ -417,32 +417,4 @@
     "$date": "2025-11-08T10:00:13.223Z"
   },
   "__v": 0
-},
-{
-  "_id": {
-    "$oid": "692185558387c49434a79669"
-  },
-  "user_id": {
-    "$oid": "691dd03b4f9c7f0a8095add3"
-  },
-  "exam_id": {
-    "$oid": "6908a903bc2ae0fd775ccad6"
-  },
-  "total_question": 10,
-  "total_correct": 1,
-  "is_finish": true,
-  "time_start": {
-    "$date": "2025-11-22T09:41:29.203Z"
-  },
-  "time_end": {
-    "$date": "2025-11-22T09:41:39.786Z"
-  },
-  "deleted_at": null,
-  "created_at": {
-    "$date": "2025-11-22T09:41:41.106Z"
-  },
-  "updated_at": {
-    "$date": "2025-11-22T09:41:41.106Z"
-  },
-  "__v": 0
 }]

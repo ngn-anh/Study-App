@@ -11,8 +11,7 @@
   "updated_at": {
     "$date": "2025-01-01T08:05:00.000Z"
   },
-  "deleted_at": null,
-  "status": 1
+  "deleted_at": null
 },
 {
   "_id": {
@@ -27,8 +26,7 @@
   "updated_at": {
     "$date": "2025-01-01T08:10:00.000Z"
   },
-  "deleted_at": null,
-  "status": 1
+  "deleted_at": null
 },
 {
   "_id": {
@@ -43,6 +41,5 @@
   "updated_at": {
     "$date": "2025-01-01T08:00:00.000Z"
   },
-  "deleted_at": null,
-  "status": 1
+  "deleted_at": null
 }]

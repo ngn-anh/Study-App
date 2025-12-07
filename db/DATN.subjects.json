@@ -4,16 +4,15 @@
   },
   "name": "Tiếng Anh",
   "code": "ENG",
-  "description": "Môn học ngoại ngữ tiếng Anh gồm 4 kỹ năng.",
+  "description": "Môn học ngoại ngữ tiếng Anh.",
   "image": "english.png",
   "created_at": {
     "$date": "2025-01-01T09:10:00.000Z"
   },
   "updated_at": {
-    "$date": "2025-12-01T07:54:44.742Z"
+    "$date": "2025-01-01T09:10:00.000Z"
   },
-  "deleted_at": null,
-  "status": 1
+  "deleted_at": null
 },
 {
   "_id": {
@@ -29,8 +28,7 @@
   "updated_at": {
     "$date": "2025-01-01T09:15:00.000Z"
   },
-  "deleted_at": null,
-  "status": 1
+  "deleted_at": null
 },
 {
   "_id": {
@@ -46,8 +44,7 @@
   "updated_at": {
     "$date": "2025-01-01T09:20:00.000Z"
   },
-  "deleted_at": null,
-  "status": 2
+  "deleted_at": null
 },
 {
   "_id": {
@@ -63,8 +60,7 @@
   "updated_at": {
     "$date": "2025-01-01T09:05:00.000Z"
   },
-  "deleted_at": null,
-  "status": 1
+  "deleted_at": null
 },
 {
   "_id": {
@@ -80,8 +76,7 @@
   "updated_at": {
     "$date": "2025-01-01T09:40:00.000Z"
   },
-  "deleted_at": null,
-  "status": 1
+  "deleted_at": null
 },
 {
   "_id": {
@@ -97,8 +92,7 @@
   "updated_at": {
     "$date": "2025-01-01T09:00:00.000Z"
   },
-  "deleted_at": null,
-  "status": 1
+  "deleted_at": null
 },
 {
   "_id": {
@@ -114,8 +108,7 @@
   "updated_at": {
     "$date": "2025-01-01T09:30:00.000Z"
   },
-  "deleted_at": null,
-  "status": 2
+  "deleted_at": null
 },
 {
   "_id": {
@@ -131,8 +124,7 @@
   "updated_at": {
     "$date": "2025-01-01T09:25:00.000Z"
   },
-  "deleted_at": null,
-  "status": 1
+  "deleted_at": null
 },
 {
   "_id": {
@@ -148,42 +140,5 @@
   "updated_at": {
     "$date": "2025-01-01T09:35:00.000Z"
   },
-  "deleted_at": null,
-  "status": 1
-},
-{
-  "_id": {
-    "$oid": "692d4a06d153d182da625489"
-  },
-  "name": "Quốc phòng",
-  "code": "NAP",
-  "description": "Môn học giáo dục quốc phòng",
-  "status": 1,
-  "created_at": {
-    "$date": "2025-12-01T07:55:50.289Z"
-  },
-  "updated_at": {
-    "$date": "2025-12-01T09:07:19.642Z"
-  },
-  "__v": 0,
-  "deleted_at": {
-    "$date": "2025-12-01T09:07:19.640Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "692d5b1f5dbf3c8ad313462d"
-  },
-  "name": "Thể dục",
-  "code": "PRA",
-  "description": "",
-  "status": 1,
-  "created_at": {
-    "$date": "2025-12-01T09:08:47.894Z"
-  },
-  "updated_at": {
-    "$date": "2025-12-01T09:09:58.246Z"
-  },
-  "__v": 0,
   "deleted_at": null
 }]

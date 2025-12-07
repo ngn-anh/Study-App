@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "671fa1040000000000000001"
+  },
+  "name": "Exam Reminder",
+  "status": "active"
+},
+{
+  "_id": {
+    "$oid": "671fa1040000000000000002"
+  },
+  "name": "System Update",
+  "status": "inactive"
+},
+{
+  "_id": {
+    "$oid": "671fa1040000000000000003"
+  },
+  "name": "New Message",
+  "status": "active"
+}]

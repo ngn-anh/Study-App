@@ -697,44 +697,4 @@
   "updated_at": {
     "$date": "2025-11-08T10:00:13.256Z"
   }
-},
-{
-  "_id": {
-    "$oid": "692185558387c49434a7966b"
-  },
-  "exam_result_id": {
-    "$oid": "692185558387c49434a79669"
-  },
-  "answer_question_id": {
-    "$oid": "690dd9ca1e4d52743251d88f"
-  },
-  "is_correct": true,
-  "deleted_at": null,
-  "__v": 0,
-  "created_at": {
-    "$date": "2025-11-22T09:41:41.142Z"
-  },
-  "updated_at": {
-    "$date": "2025-11-22T09:41:41.142Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "692185558387c49434a7966c"
-  },
-  "exam_result_id": {
-    "$oid": "692185558387c49434a79669"
-  },
-  "answer_question_id": {
-    "$oid": "690dd9ca1e4d52743251d898"
-  },
-  "is_correct": false,
-  "deleted_at": null,
-  "__v": 0,
-  "created_at": {
-    "$date": "2025-11-22T09:41:41.142Z"
-  },
-  "updated_at": {
-    "$date": "2025-11-22T09:41:41.142Z"
-  }
 }]
