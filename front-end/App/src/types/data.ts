@@ -1,3 +1,4 @@
+export const a='2';
 import { Exam, Subject } from "./typeObj";
 
 export type RootStackParamList = {

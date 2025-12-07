@@ -1,3 +1,4 @@
+export const a='2';
 export const LIMIT = 10;
 
 export const TYPE_EXAM = {
