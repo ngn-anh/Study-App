@@ -1,5 +1,4 @@
 [{
-    "a": 1,
   "_id": {
     "$oid": "6908a903bc2ae0fd775ccac3"
   },
@@ -159,6 +158,17 @@
   },
   "subject_id": {
     "$oid": "6908a903bc2ae0fd775ccab6"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab2"
+  }
+},
+{
+  "_id": {
+    "$oid": "6924373adbfaf34f8b926ae9"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccab4"
   },
   "class_id": {
     "$oid": "6908a903bc2ae0fd775ccab2"

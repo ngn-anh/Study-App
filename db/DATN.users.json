@@ -1,5 +1,4 @@
 [{
-    "a": 1,
   "_id": {
     "$oid": "690426dbdbf4313e26d816d5"
   },
@@ -18,7 +17,10 @@
   },
   "__v": 0,
   "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDQyNmRiZGJmNDMxM2UyNmQ4MTZkNSIsInVzZXJuYW1lIjoibmdhbjEiLCJyb2xlIjoxLCJpYXQiOjE3NjQxNjE0MjksImV4cCI6MTc2NDc2NjIyOX0._QyCmb-HqKVAcjkLoZivos5Lk_hir_kSgscsd-tslqE",
-  "token_expired": 1764165029
+  "token_expired": 1764165029,
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab2"
+  }
 },
 {
   "_id": {
@@ -39,7 +41,10 @@
   },
   "__v": 0,
   "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDQyOGU4ZGJmNDMxM2UyNmQ4MTZkOCIsInVzZXJuYW1lIjoibmdhbjIiLCJyb2xlIjoxLCJpYXQiOjE3NjMzODU2NDMsImV4cCI6MTc2Mzk5MDQ0M30.ydDMmQ6iWoCieeD1R8jhflvefgAcmC2y68euvt6zftI",
-  "token_expired": 1763389243
+  "token_expired": 1763389243,
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab2"
+  }
 },
 {
   "_id": {
@@ -56,11 +61,14 @@
     "$date": "2025-11-03T17:17:41.758Z"
   },
   "updated_at": {
-    "$date": "2025-11-26T12:56:02.564Z"
+    "$date": "2025-11-27T06:57:06.964Z"
   },
   "__v": 0,
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDhlM2I1YzhmM2Y4N2FhMzAzMjE4MyIsInVzZXJuYW1lIjoibG9hbiIsInJvbGUiOjEsImlhdCI6MTc2NDE2MTc2MiwiZXhwIjoxNzY0NzY2NTYyfQ.3rtRUh9NB71PbXpX8UoqF6y8Pb5KI4Lr-vBP-7Z0xa0",
-  "token_expired": 1764165362
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDhlM2I1YzhmM2Y4N2FhMzAzMjE4MyIsInVzZXJuYW1lIjoibG9hbiIsInJvbGUiOjEsImlhdCI6MTc2NDIyNjYyNiwiZXhwIjoxNzY0ODMxNDI2fQ.N-HrR3orvIVESPasQt5OC_5NecwkCJUXxisoqYthTgY",
+  "token_expired": 1764230226,
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab2"
+  }
 },
 {
   "_id": {
@@ -73,7 +81,7 @@
   "avatar": "file:///data/user/0/com.app/cache/rn_image_picker_lib_temp_75be6360-bba2-4093-b8e8-020dd55d423f.jpg",
   "full_name": "Nguyễn Thị Thu Ngân ",
   "class_id": {
-    "$oid": "6908a903bc2ae0fd775ccab2"
+    "$oid": "6908a903bc2ae0fd775ccab1"
   },
   "role": 1,
   "deleted_at": null,
@@ -81,11 +89,11 @@
     "$date": "2025-11-19T14:12:11.027Z"
   },
   "updated_at": {
-    "$date": "2025-11-27T06:59:01.048Z"
+    "$date": "2025-11-19T16:50:16.471Z"
   },
   "__v": 0,
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWRkMDNiNGY5YzdmMGE4MDk1YWRkMyIsInVzZXJuYW1lIjoidGh1bmdhbiIsInJvbGUiOjEsImlhdCI6MTc2NDIyNjc0MSwiZXhwIjoxNzY0ODMxNTQxfQ.EePsKqq4rdD-Q9OsV5IZZWpiSl3sVlDZO2EurX_pk88",
-  "token_expired": 1764230341
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWRkMDNiNGY5YzdmMGE4MDk1YWRkMyIsInVzZXJuYW1lIjoidGh1bmdhbiIsInJvbGUiOjEsImlhdCI6MTc2MzU2ODU4OSwiZXhwIjoxNzY0MTczMzg5fQ.ExzCNRL6_-1Gwsq6JPro02z3t02cANytI6ezB_Jm4TY",
+  "token_expired": 1763572189
 },
 {
   "_id": {
@@ -106,11 +114,11 @@
     "$date": "2025-11-19T15:56:12.224Z"
   },
   "updated_at": {
-    "$date": "2025-11-26T12:45:38.013Z"
+    "$date": "2025-11-19T15:56:12.396Z"
   },
   "__v": 0,
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWRlODljMmMwYzdkMjMxY2FkY2Y5OSIsInVzZXJuYW1lIjoibmdhbiIsInJvbGUiOjEsImlhdCI6MTc2NDE2MTEzOCwiZXhwIjoxNzY0NzY1OTM4fQ.beyUnA8W_8d5TLm-MKYzx_RfvStrbV3ah2p5LlFW7xc",
-  "token_expired": 1764164738
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWRlODljMmMwYzdkMjMxY2FkY2Y5OSIsInVzZXJuYW1lIjoibmdhbiIsInJvbGUiOjEsImlhdCI6MTc2MzU2Nzc3MiwiZXhwIjoxNzY0MTcyNTcyfQ.XE9HyvL_xlVvGq3ShfyudEr2l6B7lVWpkSay8vOjRdA",
+  "token_expired": 1763571372
 },
 {
   "_id": {

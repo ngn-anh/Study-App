@@ -1,5 +1,4 @@
 [{
-    "a": 1,
   "_id": {
     "$oid": "690dd86a1e4d52743251d885"
   },
@@ -15,7 +14,8 @@
   "updated_at": {
     "$date": "2025-11-07T11:30:50.588Z"
   },
-  "deleted_at": null
+  "deleted_at": null,
+  "section": 3
 },
 {
   "_id": {
@@ -33,7 +33,8 @@
   "updated_at": {
     "$date": "2025-11-07T11:30:50.588Z"
   },
-  "deleted_at": null
+  "deleted_at": null,
+  "section": 1
 },
 {
   "_id": {
@@ -51,7 +52,8 @@
   "updated_at": {
     "$date": "2025-11-07T11:30:50.588Z"
   },
-  "deleted_at": null
+  "deleted_at": null,
+  "section": 1
 },
 {
   "_id": {
@@ -69,7 +71,8 @@
   "updated_at": {
     "$date": "2025-11-07T11:30:50.588Z"
   },
-  "deleted_at": null
+  "deleted_at": null,
+  "section": 1
 },
 {
   "_id": {
@@ -87,7 +90,8 @@
   "updated_at": {
     "$date": "2025-11-07T11:30:50.588Z"
   },
-  "deleted_at": null
+  "deleted_at": null,
+  "section": 1
 },
 {
   "_id": {
@@ -105,7 +109,8 @@
   "updated_at": {
     "$date": "2025-11-07T11:30:50.588Z"
   },
-  "deleted_at": null
+  "deleted_at": null,
+  "section": 2
 },
 {
   "_id": {
@@ -123,7 +128,8 @@
   "updated_at": {
     "$date": "2025-11-07T11:30:50.588Z"
   },
-  "deleted_at": null
+  "deleted_at": null,
+  "section": 2
 },
 {
   "_id": {
@@ -141,7 +147,8 @@
   "updated_at": {
     "$date": "2025-11-07T11:30:50.589Z"
   },
-  "deleted_at": null
+  "deleted_at": null,
+  "section": 1
 },
 {
   "_id": {
@@ -159,7 +166,8 @@
   "updated_at": {
     "$date": "2025-11-07T11:30:50.589Z"
   },
-  "deleted_at": null
+  "deleted_at": null,
+  "section": 3
 },
 {
   "_id": {
@@ -177,5 +185,101 @@
   "updated_at": {
     "$date": "2025-11-07T11:30:50.589Z"
   },
-  "deleted_at": null
+  "deleted_at": null,
+  "section": 2
+},
+{
+  "_id": {
+    "$oid": "6925258ed2b1c9fa89a6b4f9"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad8"
+  },
+  "image": "https://example.com/images/history_question1.png",
+  "description": "Ai là vị vua đầu tiên của nhà Nguyễn?",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "6925258ed2b1c9fa89a6b4fa"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad8"
+  },
+  "image": "https://example.com/images/history_question2.png",
+  "description": "Trận Điện Biên Phủ kết thúc vào năm nào?",
+  "difficulty": 2,
+  "created_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "6925258ed2b1c9fa89a6b4fb"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad8"
+  },
+  "image": "https://example.com/images/history_question3.png",
+  "description": "Vua Quang Trung tên thật là gì?",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "6925258ed2b1c9fa89a6b4fc"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad8"
+  },
+  "image": "https://example.com/images/history_question4.png",
+  "description": "Chiến thắng Bạch Đằng năm 938 do ai lãnh đạo?",
+  "difficulty": 2,
+  "created_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "6925258ed2b1c9fa89a6b4fd"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad8"
+  },
+  "image": "https://example.com/images/history_question5.png",
+  "description": "Hội nghị Diên Hồng diễn ra dưới thời vua nào?",
+  "difficulty": 3,
+  "created_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "deleted_at": null,
+  "section": 1
 }]
