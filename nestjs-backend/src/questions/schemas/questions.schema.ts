@@ -20,6 +20,9 @@ export class Question {
   @Prop({ type: Number })
   difficulty?: number;
 
+  @Prop({ default: 1 })
+  section: number;
+
   @Prop()
   deleted_at?: Date;
 }
