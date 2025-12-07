@@ -1,4 +1,3 @@
-export const a='1';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
@@ -52,82 +51,95 @@ export class ExamResultService {
     let duration_text = '';
 
     if (result.time_start && result.time_end) {
-        const start = new Date(result.time_start).getTime();
-        const end = new Date(result.time_end).getTime();
-     
-        durationSec = Math.max(0, Math.floor((end - start) / 1000)); // tính theo giây
-     
-        const minutes = Math.floor(durationSec / 60);
-        const seconds = durationSec % 60;
+      const start = new Date(result.time_start).getTime();
+      const end = new Date(result.time_end).getTime();
 
-        duration_text = `${minutes}p${seconds.toString().padStart(2, "0")}s`;
+      durationSec = Math.max(0, Math.floor((end - start) / 1000)); // tính theo giây
+
+      const minutes = Math.floor(durationSec / 60);
+      const seconds = durationSec % 60;
+
+      duration_text = `${minutes}p${seconds.toString().padStart(2, "0")}s`;
 
     }
     return {
       exam_result_id: result._id,
       exam_id: result.exam_id,
+      user_id: userId,
       total_question,
       total_correct,
       total_wrong,
       total_not_done,
+      is_finish: result.is_finish,
+      time_start: result.time_start,
+      time_end: result.time_end,
       durationSec,
       duration_text,
     };
   }
 
   async getExamDetailResult(examResultId: string) {
-  // 1. Lấy kết quả thi
-  const examResult = await this.examResultModel.findById(examResultId).lean();
-  if (!examResult) return { message: 'Không tìm thấy kết quả thi' };
+    // 1. Lấy kết quả thi
+    const examResult = await this.examResultModel.findById(examResultId).lean();
+    if (!examResult) return { message: 'Không tìm thấy kết quả thi' };
 
-  // 2. Lấy tất cả câu trả lời user
-  let resultAnswers = await this.examResultAnswerModel
-    .find({ exam_result_id: examResult._id })
-    .lean();
+    // 2. Lấy tất cả câu trả lời user
+    let resultAnswers = await this.examResultAnswerModel
+      .find({ exam_result_id: examResult._id })
+      .lean();
 
-  // 3. Lấy tất cả câu hỏi của bài thi
-  const questions = await this.questionModel
-    .find({ exam_id: examResult.exam_id, deleted_at: null })
-    .lean();
+    // 3. Lấy tất cả câu hỏi của bài thi
+    const questions = await this.questionModel
+      .find({ exam_id: examResult.exam_id, deleted_at: null })
+      .lean();
 
-  // 4. Lấy tất cả đáp án của các câu hỏi này
-  const answerQuestions = await this.answerQuestionModel
-    .find({ question_id: { $in: questions.map(q => q._id) }, deleted_at: null })
-    .lean();
+    // 4. Lấy tất cả đáp án của các câu hỏi này
+    const answerQuestions = await this.answerQuestionModel
+      .find({ question_id: { $in: questions.map(q => q._id) }, deleted_at: null })
+      .lean();
 
-  const mappedQuestions = questions.map(q => {
-    const answers = answerQuestions
-      .filter(aq => aq.question_id.toString() === q._id.toString())
-      .map(aq => ({
-        _id: aq._id,
-        description: aq.description,
-        is_correct: aq.is_correct,
-        explanation: aq.explanation,
-      }));
+    const mappedQuestions = questions.map(q => {
+      const answers = answerQuestions
+        .filter(aq => aq.question_id.toString() === q._id.toString())
+        .map(aq => ({
+          _id: aq._id,
+          description: aq.description,
+          is_correct: aq.is_correct,
+          explanation: aq.explanation,
+        }));
 
-    const userAnswerObj = resultAnswers.find(
-      ra => answers.some(a => a._id.toString() === ra.answer_question_id.toString())
-    );
+      const userAnswerObj = resultAnswers.find(
+        ra => answers.some(a => a._id.toString() === ra.answer_question_id.toString())
+      );
 
-    let userAnswerIndex: number | undefined = undefined;
-    let correctAnswerIndex = answers.findIndex(a => a.is_correct);
+      let userAnswerIndex: number | undefined = undefined;
+      let correctAnswerIndex = answers.findIndex(a => a.is_correct);
 
-    if (userAnswerObj) {
-      userAnswerIndex = answers.findIndex(a => a._id.toString() === userAnswerObj.answer_question_id.toString());
-    }
+      if (userAnswerObj) {
+        userAnswerIndex = answers.findIndex(a => a._id.toString() === userAnswerObj.answer_question_id.toString());
+      }
 
-    return {
-      id: q._id,
-      text: q.description,
-      image: q.image || null,
-      options: answers.map(a => a.description),
-      answers,
-      correctAnswer: correctAnswerIndex,
-      userAnswer: userAnswerIndex,
-    };
-  });
+      const correctAnswerId = answers.filter(a => a.is_correct).map(a => a._id);
+      let userAnswerId: any[] | undefined = undefined;
+      if (userAnswerObj) {
+        const userAnswerTemp = answers.find(a => a._id.toString() === userAnswerObj.answer_question_id.toString());
+        userAnswerId = userAnswerTemp ? [userAnswerTemp._id] : []; // Trả về mảng ID
+      }
 
-  return { questions: mappedQuestions };
-}
+      return {
+        id: q._id,
+        text: q.description,
+        image: q.image || null,
+        options: answers.map(a => a.description),
+        answers,
+        correctAnswerIndex: correctAnswerIndex,
+        userAnswerIndex: userAnswerIndex,
+        correctAnswerId: correctAnswerId,
+        userAnswerId: userAnswerId,
+      };
+    });
+
+    return { questions: mappedQuestions };
+  }
 
 }

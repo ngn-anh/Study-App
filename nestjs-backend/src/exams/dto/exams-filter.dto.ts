@@ -1,4 +1,3 @@
-export const a='1';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsOptional, IsString, IsEnum, IsArray, IsInt, Min } from 'class-validator';
 import { Type, Transform } from 'class-transformer';
@@ -29,9 +28,10 @@ export class ExamsFilterDto {
   @IsEnum(SortOrder)
   sort?: SortOrder;
 
-  @ApiPropertyOptional({ description: 'Id lớp hiện tại của user (FE gửi)' })
+  @ApiPropertyOptional({ description: 'Mã lớp hiện tại của user (FE gửi)' })
   @IsOptional()
   @IsString()
+  // currentClassCode?: string;
   class_id?: string;
 
   @ApiPropertyOptional({ type: [String], description: 'Danh sách mã môn học (FE gửi)' })
@@ -64,7 +64,7 @@ export class ExamsFilterDto {
   @Type(() => Number)
   @IsInt()
   @Min(1)
-  limit?: number = 5;
+  limit?: number = 10;
 
   // 👇 Thêm trường này để service biết user nào đang query
   @ApiPropertyOptional({ description: 'ID của user để check đã làm bài chưa' })
