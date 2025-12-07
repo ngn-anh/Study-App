@@ -1,3 +1,4 @@
+export const a = '2';
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -64,7 +65,7 @@ const ProfileScreen = ({ navigation }: any) => {
   useEffect(() => {
     const loadUserData = async () => {
       try {
-        const userDataStr = await AsyncStorage.getItem('userData'); 
+        const userDataStr = await AsyncStorage.getItem('userData');
         if (userDataStr) {
           const userData = JSON.parse(userDataStr);
           setUser(userData.user); // 
@@ -86,7 +87,7 @@ const ProfileScreen = ({ navigation }: any) => {
     navigation.reset({ index: 0, routes: [{ name: 'AuthScreen' }] });
   };
 
-  
+
   const handlePickImage = () => {
     launchImageLibrary(
       {
@@ -113,7 +114,7 @@ const ProfileScreen = ({ navigation }: any) => {
             if (!userDataStr) return;
             const userData = JSON.parse(userDataStr);
 
-            console.log(userData.user.id,pickedImageUri)
+            console.log(userData.user.id, pickedImageUri)
 
             await updateAvatar({
               user_id: userData.user.id,

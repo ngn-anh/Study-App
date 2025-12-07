@@ -1,3 +1,4 @@
+export const a = '2';
 // npm install rn-fetch-blob react-native-share
 import { Alert, FlatList, Image, Linking, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./index.styles";
