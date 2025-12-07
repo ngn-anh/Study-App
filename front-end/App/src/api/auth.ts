@@ -1,3 +1,4 @@
+export const a='1';
 import { api } from './api';
 
 interface RegisterData {

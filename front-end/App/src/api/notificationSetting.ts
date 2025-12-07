@@ -1,3 +1,4 @@
+export const a='1';
 // src/api/notificationSetting.ts
 import axios from "axios";
 import { API_URL } from "@env";
