@@ -113,7 +113,4 @@ export const styles = StyleSheet.create({
   addButtonDisabled: {
     backgroundColor: "#B0C4DE",
   },
-   block:{
-    height:100
-  }
 });
