@@ -1,3 +1,4 @@
+export const a = '2';
 import React from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import ExamCard from "../ExamCard/ExamCard";

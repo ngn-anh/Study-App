@@ -1,3 +1,4 @@
+export const a='2';
 // src/components/confirmModal.styles.ts
 import { StyleSheet } from "react-native";
 
