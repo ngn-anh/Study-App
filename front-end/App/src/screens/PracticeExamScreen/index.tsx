@@ -63,7 +63,7 @@ const PracticeExamScreen = (props: Props) => {
       createdAt: "2023-11-02T08:00:00Z",
       difficulty: 5
     }
-  ]
+  ];
 
   const renderItemExam = ({ item }: any) => {
     const isSingleItem = listExam.length === 1;
