@@ -1,4 +1,3 @@
-export const a = '1';
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import {
   View,
@@ -95,14 +94,18 @@ export default function ExamListScreen() {
           sort: selectedTime ?? undefined,
           subjectCodes: selectedSubjects.length > 0 ? selectedSubjects : undefined,
           name: searchText ?? undefined,
+          // currentClassCode: "CLASS_11",
           class_id: classId,
           user_id: userId,
+          // page: 1,
+          // limit: 10,
           page: reset ? 1 : page,
           limit: LIMIT,
         };
 
         const res = await getExams(params);
 
+        // setExams(res.data || []);
         if (reset) {
           setExams(res.data || []);
         } else {
@@ -122,7 +125,8 @@ export default function ExamListScreen() {
         setLoadingMore(false);
       }
     },
-    [activeTab, selectedTime, selectedSubjects, searchText, userId, page]
+    // [activeTab, selectedTime, selectedSubjects, searchText, userId]
+    [activeTab, selectedTime, selectedSubjects, searchText, classId, userId, page]
   );
 
   const loadMore = () => {
@@ -207,7 +211,7 @@ export default function ExamListScreen() {
           <Image source={{ uri: item.image || undefined }} style={styles.thumbnail} />
         </View>
         <View style={styles.cardRight}>
-          <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{item.name ?? ""}</Text>
+          <Text style={styles.title}>{item.name ?? ""}</Text>
 
           <View style={styles.timeRow}>
             <Clock size={14} color="#5D697E" />

@@ -1,4 +1,3 @@
-export const a='1';
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -35,7 +34,7 @@ export const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#edf4fdff",
+    backgroundColor: "#F6FAFF",
     borderRadius: 8,
     padding: 16,
     marginBottom: 10,
