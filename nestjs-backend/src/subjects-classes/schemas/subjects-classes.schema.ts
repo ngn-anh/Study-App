@@ -3,7 +3,7 @@ import { Document, Types } from 'mongoose';
 
 export type SubjectClassDocument = SubjectClass & Document;
 
-@Schema({ collection: 'subject_classes'})
+@Schema({ collection: 'subjects_classes', timestamps: true })
 export class SubjectClass {
   @Prop({ type: Types.ObjectId, ref: 'Subject', required: true })
   subject_id: Types.ObjectId;
