@@ -1,4 +1,3 @@
-export const a = '1';
 import React from "react";
 import { Modal, View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./index.styles";
@@ -22,8 +21,8 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
   content = "",
   cancelText = "Hủy",
   confirmText = "Xác nhận",
-  onCancel = () => { },
-  onConfirm = () => { },
+  onCancel = () => {  },
+  onConfirm = () => {  },
   type = "confirm",
   isButtonOk = true, // mặc định hiển thị button OK
   headerIcon
@@ -52,13 +51,13 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
             </TouchableOpacity>
 
             {isButtonOk ? (
-              <TouchableOpacity
-                onPress={onConfirm}
-                style={[styles.confirmBtn, { backgroundColor: mainColor }]}
-              >
-                <Text style={styles.confirmText}>{confirmText}</Text>
-              </TouchableOpacity>
-            ) : null}
+                <TouchableOpacity
+                  onPress={onConfirm}
+                  style={[styles.confirmBtn, { backgroundColor: mainColor }]}
+                >
+                  <Text style={styles.confirmText}>{confirmText}</Text>
+                </TouchableOpacity>
+              ) : null}
           </View>
         </View>
       </View>

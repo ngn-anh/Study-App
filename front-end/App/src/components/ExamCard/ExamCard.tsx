@@ -1,14 +1,13 @@
-export const a = '1';
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { styles } from "./ExamCard.styles";
 
 interface ExamCardProps {
-  title: string;
-  subject: string;
-  imageUrl: string;
-  likes: number;
-  comments: number;
+  title?: string;
+  subject?: string;
+  imageUrl?: string;
+  likes?: number;
+  participants?: number;
   done?: boolean; // trạng thái đã làm/chưa
   onPressButton?: () => void;
 }
@@ -18,8 +17,9 @@ const ExamCard: React.FC<ExamCardProps> = ({
   subject,
   imageUrl,
   likes,
-  comments,
-  done = false,
+  participants,
+  // done = false,
+  done,
   onPressButton,
 }) => {
   return (
@@ -41,7 +41,7 @@ const ExamCard: React.FC<ExamCardProps> = ({
         <View style={styles.iconInfo}>
           <View style={styles.iconGroup}>
             <Image source={require("../../assets/icons/group.png")} style={styles.icon} />
-            <Text style={styles.iconText}>{comments}</Text>
+            <Text style={styles.iconText}>{participants}</Text>
           </View>
           <View style={styles.iconGroup}>
             <Image source={require("../../assets/icons/like.png")} style={styles.icon} />
