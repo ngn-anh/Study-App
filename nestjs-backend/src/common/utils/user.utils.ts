@@ -1,4 +1,3 @@
-export const a='1';
 import { UserEntity } from "src/users/entities/user.entity";
 import { UserDocument } from "src/users/schemas/user.schema";
 
@@ -12,7 +11,8 @@ export function toUserEntity(user: UserDocument): UserEntity {
     phone: user.phone,
     avatar: user.avatar,
     role: user.role,
-    class_id:user.class_id?.toString(),
+    class_id: user.class_id?.toString(),
+    // class_id: user.class_id,
     created_at: user.created_at,
     updated_at: user.updated_at,
     deleted_at: user.deleted_at,
