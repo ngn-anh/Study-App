@@ -1,4 +1,3 @@
-export const a = '1';
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -273,10 +272,7 @@ const ProfileScreen = ({ navigation }: any) => {
           <TouchableOpacity style={styles.row}>
             <BellIcon size={22} color="#083070" weight="bold" />
             <Text style={styles.label}>Thông báo</Text>
-            <Switch
-              value={isNotificationOn}
-              onValueChange={handleToggleNotification}
-            />
+            <Text style={styles.badge}>ON</Text>
           </TouchableOpacity>
         </View>
 
