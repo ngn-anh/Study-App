@@ -1,0 +1,740 @@
+[{
+  "_id": {
+    "$oid": "690eec066b2048cd06492419"
+  },
+  "exam_result_id": {
+    "$oid": "690eec066b2048cd06492417"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d88f"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T07:06:46.219Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T07:06:46.219Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690eec066b2048cd0649241a"
+  },
+  "exam_result_id": {
+    "$oid": "690eec066b2048cd06492417"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d897"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T07:06:46.219Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T07:06:46.219Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690eeca96b2048cd06492436"
+  },
+  "exam_result_id": {
+    "$oid": "690eeca96b2048cd06492434"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d897"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T07:09:29.532Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T07:09:29.532Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690ef98610384dda93439398"
+  },
+  "exam_result_id": {
+    "$oid": "690ef98510384dda93439396"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d88f"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:04:22.174Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:04:22.174Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690efb9d10384dda934393ab"
+  },
+  "exam_result_id": {
+    "$oid": "690efb9d10384dda934393a9"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d88f"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:13:17.640Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:13:17.640Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690efc5910384dda934393be"
+  },
+  "exam_result_id": {
+    "$oid": "690efc5910384dda934393bc"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d88f"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:16:25.472Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:16:25.472Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f0085e69968b4e08a95bd"
+  },
+  "exam_result_id": {
+    "$oid": "690f0085e69968b4e08a95bb"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d88f"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:34:13.655Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:34:13.655Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f0085e69968b4e08a95be"
+  },
+  "exam_result_id": {
+    "$oid": "690f0085e69968b4e08a95bb"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d896"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:34:13.655Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:34:13.655Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f00dce69968b4e08a95d3"
+  },
+  "exam_result_id": {
+    "$oid": "690f00dce69968b4e08a95d1"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d88f"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:35:40.411Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:35:40.411Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f00dce69968b4e08a95d4"
+  },
+  "exam_result_id": {
+    "$oid": "690f00dce69968b4e08a95d1"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d896"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:35:40.411Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:35:40.411Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f00dce69968b4e08a95d5"
+  },
+  "exam_result_id": {
+    "$oid": "690f00dce69968b4e08a95d1"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d898"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:35:40.411Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:35:40.411Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f015fe69968b4e08a95e8"
+  },
+  "exam_result_id": {
+    "$oid": "690f015fe69968b4e08a95e6"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d88f"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:37:51.724Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:37:51.724Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f015fe69968b4e08a95e9"
+  },
+  "exam_result_id": {
+    "$oid": "690f015fe69968b4e08a95e6"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d896"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:37:51.724Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:37:51.724Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f015fe69968b4e08a95ea"
+  },
+  "exam_result_id": {
+    "$oid": "690f015fe69968b4e08a95e6"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d898"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:37:51.724Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:37:51.724Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f01f8e69968b4e08a95fd"
+  },
+  "exam_result_id": {
+    "$oid": "690f01f8e69968b4e08a95fb"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d88f"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:40:24.303Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:40:24.303Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f01f8e69968b4e08a95fe"
+  },
+  "exam_result_id": {
+    "$oid": "690f01f8e69968b4e08a95fb"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d896"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:40:24.303Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:40:24.303Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f0549e69968b4e08a9613"
+  },
+  "exam_result_id": {
+    "$oid": "690f0549e69968b4e08a9611"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d88f"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:54:33.077Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:54:33.077Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f05fae69968b4e08a962e"
+  },
+  "exam_result_id": {
+    "$oid": "690f05fae69968b4e08a962c"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d88f"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:57:30.964Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:57:30.964Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f05fae69968b4e08a962f"
+  },
+  "exam_result_id": {
+    "$oid": "690f05fae69968b4e08a962c"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d896"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:57:30.964Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:57:30.964Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f05fae69968b4e08a9630"
+  },
+  "exam_result_id": {
+    "$oid": "690f05fae69968b4e08a962c"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d899"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T08:57:30.965Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:57:30.965Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f0d061b908e644b1261db"
+  },
+  "exam_result_id": {
+    "$oid": "690f0d061b908e644b1261d9"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d88f"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T09:27:34.533Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T09:27:34.533Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f0d061b908e644b1261dc"
+  },
+  "exam_result_id": {
+    "$oid": "690f0d061b908e644b1261d9"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d895"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T09:27:34.533Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T09:27:34.533Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f0d061b908e644b1261dd"
+  },
+  "exam_result_id": {
+    "$oid": "690f0d061b908e644b1261d9"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d898"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T09:27:34.533Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T09:27:34.533Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f0d061b908e644b1261de"
+  },
+  "exam_result_id": {
+    "$oid": "690f0d061b908e644b1261d9"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d89b"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T09:27:34.534Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T09:27:34.534Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f0d061b908e644b1261df"
+  },
+  "exam_result_id": {
+    "$oid": "690f0d061b908e644b1261d9"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d8aa"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T09:27:34.534Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T09:27:34.534Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f10f71b908e644b126286"
+  },
+  "exam_result_id": {
+    "$oid": "690f10f71b908e644b126284"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d890"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T09:44:23.859Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T09:44:23.859Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f10f71b908e644b126287"
+  },
+  "exam_result_id": {
+    "$oid": "690f10f71b908e644b126284"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d896"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T09:44:23.859Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T09:44:23.859Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f10f71b908e644b126288"
+  },
+  "exam_result_id": {
+    "$oid": "690f10f71b908e644b126284"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d897"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T09:44:23.859Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T09:44:23.859Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f14ad1b908e644b12630c"
+  },
+  "exam_result_id": {
+    "$oid": "690f14ad1b908e644b12630a"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d890"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T10:00:13.256Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T10:00:13.256Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f14ad1b908e644b12630d"
+  },
+  "exam_result_id": {
+    "$oid": "690f14ad1b908e644b12630a"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d895"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T10:00:13.256Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T10:00:13.256Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f14ad1b908e644b12630e"
+  },
+  "exam_result_id": {
+    "$oid": "690f14ad1b908e644b12630a"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d897"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T10:00:13.256Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T10:00:13.256Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f14ad1b908e644b12630f"
+  },
+  "exam_result_id": {
+    "$oid": "690f14ad1b908e644b12630a"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d89b"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T10:00:13.256Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T10:00:13.256Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f14ad1b908e644b126310"
+  },
+  "exam_result_id": {
+    "$oid": "690f14ad1b908e644b12630a"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d89f"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T10:00:13.256Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T10:00:13.256Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f14ad1b908e644b126311"
+  },
+  "exam_result_id": {
+    "$oid": "690f14ad1b908e644b12630a"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d8a6"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T10:00:13.256Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T10:00:13.256Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "690f14ad1b908e644b126312"
+  },
+  "exam_result_id": {
+    "$oid": "690f14ad1b908e644b12630a"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d8a9"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-08T10:00:13.256Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T10:00:13.256Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692185558387c49434a7966b"
+  },
+  "exam_result_id": {
+    "$oid": "692185558387c49434a79669"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d88f"
+  },
+  "is_correct": true,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-22T09:41:41.142Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-22T09:41:41.142Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692185558387c49434a7966c"
+  },
+  "exam_result_id": {
+    "$oid": "692185558387c49434a79669"
+  },
+  "answer_question_id": {
+    "$oid": "690dd9ca1e4d52743251d898"
+  },
+  "is_correct": false,
+  "deleted_at": null,
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-11-22T09:41:41.142Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-22T09:41:41.142Z"
+  }
+}]

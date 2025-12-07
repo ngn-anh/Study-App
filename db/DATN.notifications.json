@@ -1,0 +1,2633 @@
+[{
+  "_id": {
+    "$oid": "671fa1060000000000000001"
+  },
+  "schedule_id": {
+    "$oid": "671fa1070000000000000003"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Math Exam Tomorrow",
+  "description": "Your math exam is scheduled for 9:00 AM tomorrow. Don’t forget to review chapters 1–3.",
+  "image": "https://example.com/notify/math_exam.jpg",
+  "is_read": true,
+  "created_at": {
+    "$date": "2025-04-04T09:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T06:31:23.624Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "671fa1060000000000000002"
+  },
+  "schedule_id": {
+    "$oid": "690641d79a0e07950f4635d2"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "System Maintenance",
+  "description": "System maintenance will occur tonight from 10 PM to 11 PM. Please save your work.",
+  "image": "https://example.com/notify/system.jpg",
+  "is_read": true,
+  "created_at": {
+    "$date": "2025-04-08T10:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-04-08T11:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "671fa1060000000000000003"
+  },
+  "schedule_id": {
+    "$oid": "690a28c5d6b31b8449706990"
+  },
+  "noti_type_id": {
+    "$oid": "6911df83e15eaf755174a92e"
+  },
+  "name": "New Message from Teacher",
+  "description": "You’ve received a new message regarding your History exam. Check your inbox for details.",
+  "image": "https://example.com/notify/message.jpg",
+  "is_read": true,
+  "created_at": {
+    "$date": "2025-04-10T09:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T06:30:53.805Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69145466e591d437414c2ec0"
+  },
+  "schedule_id": "69145466e591d437414c2ebd",
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "Test notification + MongoDB record",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T09:33:26.961Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T09:33:26.961Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6914548ee591d437414c2ec7"
+  },
+  "schedule_id": "6914548de591d437414c2ec4",
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "Test notification + MongoDB record",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T09:34:06.569Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T09:34:06.569Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69145811812cba3f748b28bf"
+  },
+  "schedule_id": {
+    "$oid": "69145811812cba3f748b28bc"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "Test notification + MongoDB record",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T09:49:05.669Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691458d661d8bb5b6aef7385"
+  },
+  "schedule_id": {
+    "$oid": "691458cc61d8bb5b6aef7382"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "Test notification + MongoDB record",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T09:52:22.786Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69145f364e9929d36829168f"
+  },
+  "schedule_id": {
+    "$oid": "69145f364e9929d36829168c"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "Test notification + MongoDB record",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T10:19:34.838Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69145fb4c8098f22b126e384"
+  },
+  "schedule_id": {
+    "$oid": "69145fb3c8098f22b126e381"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "Test notification + MongoDB record",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T10:21:40.271Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691461303c4f40cd69395e7d"
+  },
+  "schedule_id": {
+    "$oid": "691461073c4f40cd69395e7a"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "Test notification + MongoDB record",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T10:28:00.456Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691463c43c4f40cd69395e84"
+  },
+  "schedule_id": {
+    "$oid": "691463ae3c4f40cd69395e81"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "Test notification + MongoDB record",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T10:39:00.105Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6914646f3c4f40cd69395e89"
+  },
+  "schedule_id": {
+    "$oid": "6914646f3c4f40cd69395e86"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "Test notification + MongoDB record",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T10:41:51.991Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691464993c4f40cd69395e8e"
+  },
+  "schedule_id": {
+    "$oid": "691464993c4f40cd69395e8b"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "Test notification + MongoDB record",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T10:42:33.524Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69146b1a3fff6bf63987c227"
+  },
+  "schedule_id": {
+    "$oid": "69146b1a3fff6bf63987c224"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "Test notification + MongoDB record",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T11:10:18.985Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69146d813fff6bf63987c22c"
+  },
+  "schedule_id": {
+    "$oid": "69146d813fff6bf63987c229"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "Test notification + MongoDB record",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T11:20:33.372Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69146dbe3fff6bf63987c231"
+  },
+  "schedule_id": {
+    "$oid": "69146dbe3fff6bf63987c22e"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "Test notification + MongoDB record",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T11:21:34.213Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915b96a0660ca441e53549f"
+  },
+  "schedule_id": {
+    "$oid": "6915b96a0660ca441e53549c"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJS",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T10:56:42.670Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915bf1ce29072b020ef1e4d"
+  },
+  "schedule_id": {
+    "$oid": "6915bf0ee29072b020ef1e4a"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJS",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T11:21:00.105Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915bf92799b373625b3f370"
+  },
+  "schedule_id": {
+    "$oid": "6915bf92799b373625b3f36d"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJS",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T11:22:58.374Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915c0c0c5b4b7f60682d856"
+  },
+  "schedule_id": {
+    "$oid": "6915c09dc5b4b7f60682d853"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJS",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T11:28:00.145Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915c0fcc5b4b7f60682d85b"
+  },
+  "schedule_id": {
+    "$oid": "6915c0f5c5b4b7f60682d858"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T11:29:00.110Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915c138c5b4b7f60682d86b"
+  },
+  "schedule_id": {
+    "$oid": "6915c110c5b4b7f60682d85d"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T11:30:00.104Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915c87caf13bb70e5f2fa54"
+  },
+  "schedule_id": {
+    "$oid": "6915c86eaf13bb70e5f2fa51"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T12:01:00.139Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915c8b8af13bb70e5f2fa59"
+  },
+  "schedule_id": {
+    "$oid": "6915c894af13bb70e5f2fa56"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T12:02:00.134Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915cb109879d2c474b697b5"
+  },
+  "schedule_id": {
+    "$oid": "6915caef9879d2c474b697b2"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T12:12:00.146Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915cb4c9879d2c474b697ba"
+  },
+  "schedule_id": {
+    "$oid": "6915cb279879d2c474b697b7"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T12:13:00.107Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915cc3c9879d2c474b697bf"
+  },
+  "schedule_id": {
+    "$oid": "6915cc0b9879d2c474b697bc"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T12:17:00.104Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915ccf09879d2c474b697c6"
+  },
+  "schedule_id": {
+    "$oid": "6915ccb79879d2c474b697c3"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T12:20:00.110Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d3bc9879d2c474b697cb"
+  },
+  "schedule_id": {
+    "$oid": "6915d3a59879d2c474b697c8"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T12:49:00.105Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d56011fc4e2aa9cae3c0"
+  },
+  "schedule_id": {
+    "$oid": "6915d53811fc4e2aa9cae3bd"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T12:56:00.221Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d57811fc4e2aa9cae3c5"
+  },
+  "schedule_id": {
+    "$oid": "6915d57811fc4e2aa9cae3c2"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T12:56:24.487Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d5f211fc4e2aa9cae3ca"
+  },
+  "schedule_id": {
+    "$oid": "6915d5f111fc4e2aa9cae3c7"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T12:58:26.215Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d5ff11fc4e2aa9cae3cf"
+  },
+  "schedule_id": {
+    "$oid": "6915d5ff11fc4e2aa9cae3cc"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T12:58:39.536Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d6a711fc4e2aa9cae3d4"
+  },
+  "schedule_id": {
+    "$oid": "6915d6a611fc4e2aa9cae3d1"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminder",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:01:27.064Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d6b211fc4e2aa9cae3d9"
+  },
+  "schedule_id": {
+    "$oid": "6915d6b211fc4e2aa9cae3d6"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminded4564r",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:01:38.773Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d71611fc4e2aa9cae3de"
+  },
+  "schedule_id": {
+    "$oid": "6915d71611fc4e2aa9cae3db"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminded4564r",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:03:18.377Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d77811fc4e2aa9cae3e3"
+  },
+  "schedule_id": {
+    "$oid": "6915d77811fc4e2aa9cae3e0"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminded4564r",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:04:56.982Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d7eadd8ad8e2c78e0119"
+  },
+  "schedule_id": {
+    "$oid": "6915d7e9dd8ad8e2c78e0116"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminded4564r",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:06:50.139Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d824555d49b36093b9f3"
+  },
+  "schedule_id": {
+    "$oid": "6915d824555d49b36093b9f0"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminded4564r",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:07:48.691Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d9e4555d49b36093b9f8"
+  },
+  "schedule_id": {
+    "$oid": "6915d9e4555d49b36093b9f5"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminded4564r",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:15:16.797Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d9ed555d49b36093b9fd"
+  },
+  "schedule_id": {
+    "$oid": "6915d9ed555d49b36093b9fa"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test Reminded4564r",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:15:25.797Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d9fd555d49b36093ba02"
+  },
+  "schedule_id": {
+    "$oid": "6915d9fd555d49b36093b9ff"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:15:41.875Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915de2d0ce62beeff94b80d"
+  },
+  "schedule_id": {
+    "$oid": "6915de2d0ce62beeff94b80a"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:33:33.438Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915de340ce62beeff94b812"
+  },
+  "schedule_id": {
+    "$oid": "6915de340ce62beeff94b80f"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:33:40.334Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915decf0ce62beeff94b817"
+  },
+  "schedule_id": {
+    "$oid": "6915decf0ce62beeff94b814"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:36:15.537Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915df2b0ce62beeff94b81c"
+  },
+  "schedule_id": {
+    "$oid": "6915df2b0ce62beeff94b819"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:37:47.259Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915dfe20ce62beeff94b821"
+  },
+  "schedule_id": {
+    "$oid": "6915dfe20ce62beeff94b81e"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:40:50.818Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915dfe70ce62beeff94b826"
+  },
+  "schedule_id": {
+    "$oid": "6915dfe70ce62beeff94b823"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:40:55.343Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e3020ce62beeff94b82b"
+  },
+  "schedule_id": {
+    "$oid": "6915e3020ce62beeff94b828"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:54:10.993Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e3080ce62beeff94b830"
+  },
+  "schedule_id": {
+    "$oid": "6915e3080ce62beeff94b82d"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T13:54:16.592Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e47d0ce62beeff94b835"
+  },
+  "schedule_id": {
+    "$oid": "6915e47d0ce62beeff94b832"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T14:00:29.568Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e4840ce62beeff94b83a"
+  },
+  "schedule_id": {
+    "$oid": "6915e4840ce62beeff94b837"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T14:00:36.320Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e4f90ce62beeff94b83f"
+  },
+  "schedule_id": {
+    "$oid": "6915e4f80ce62beeff94b83c"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T14:02:33.042Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e4fe0ce62beeff94b844"
+  },
+  "schedule_id": {
+    "$oid": "6915e4fe0ce62beeff94b841"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T14:02:38.920Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e67a0ce62beeff94b849"
+  },
+  "schedule_id": {
+    "$oid": "6915e67a0ce62beeff94b846"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T14:08:58.617Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e6820ce62beeff94b84e"
+  },
+  "schedule_id": {
+    "$oid": "6915e6820ce62beeff94b84b"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T14:09:06.367Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e6960ce62beeff94b853"
+  },
+  "schedule_id": {
+    "$oid": "6915e6960ce62beeff94b850"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T14:09:26.952Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e6e60ce62beeff94b858"
+  },
+  "schedule_id": {
+    "$oid": "6915e6e60ce62beeff94b855"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T14:10:46.422Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e7840ce62beeff94b85d"
+  },
+  "schedule_id": {
+    "$oid": "6915e7840ce62beeff94b85a"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "hello",
+  "description": "FCM test from NestJSjhkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T14:13:24.211Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:50:32.416Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6918018c38580285af8d077b"
+  },
+  "schedule_id": {
+    "$oid": "6918016238580285af8d0773"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Thi toán",
+  "description": "Thi thi",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-15T04:29:00.080Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T04:29:00.080Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691801c838580285af8d0782"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-15T04:30:00.084Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T05:18:10.650Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691824b4fbcf8d04b51edeb1"
+  },
+  "schedule_id": {
+    "$oid": "6918016238580285af8d0773"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Thi toán",
+  "description": "Thi thi",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-15T06:59:00.114Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T06:59:00.114Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691824f0fbcf8d04b51edeb4"
+  },
+  "schedule_id": {
+    "$oid": "691823a2fbcf8d04b51edea6"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test repeat",
+  "description": "",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-15T07:00:00.149Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T07:17:50.576Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691826583c8ff6965c5cafd8"
+  },
+  "schedule_id": {
+    "$oid": "691823a2fbcf8d04b51edea6"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test repeat",
+  "description": "hkj",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-15T07:06:00.121Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T07:06:00.121Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691826943c8ff6965c5cafdb"
+  },
+  "schedule_id": {
+    "$oid": "691823a2fbcf8d04b51edea6"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test repeat",
+  "description": "hkj",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-15T07:07:00.116Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T07:07:00.116Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691826d03c8ff6965c5cafe4"
+  },
+  "schedule_id": {
+    "$oid": "691823a2fbcf8d04b51edea6"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test repeat",
+  "description": "hkj",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-15T07:08:00.114Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T07:08:00.114Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6918270c3c8ff6965c5cafe7"
+  },
+  "schedule_id": {
+    "$oid": "691823a2fbcf8d04b51edea6"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test repeat",
+  "description": "hkj",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-15T07:09:00.135Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T07:23:08.774Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691827483c8ff6965c5cafea"
+  },
+  "schedule_id": {
+    "$oid": "691823a2fbcf8d04b51edea6"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test repeat",
+  "description": "hkj",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-15T07:10:00.127Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T07:10:00.127Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691827843c8ff6965c5cafed"
+  },
+  "schedule_id": {
+    "$oid": "691823a2fbcf8d04b51edea6"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test repeat",
+  "description": "hkj",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-15T07:11:00.160Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T07:11:00.160Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691827c019564f7b4973a47c"
+  },
+  "schedule_id": {
+    "$oid": "691823a2fbcf8d04b51edea6"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test repeat",
+  "description": "hkj",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-15T07:12:00.137Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T07:12:00.137Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6918283819564f7b4973a481"
+  },
+  "schedule_id": {
+    "$oid": "691823a2fbcf8d04b51edea6"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test repeat",
+  "description": "hkjdgd",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-15T07:14:00.129Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T07:22:54.311Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691828ec19564f7b4973a488"
+  },
+  "schedule_id": {
+    "$oid": "6918288f19564f7b4973a484"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test",
+  "description": "Hello",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-15T07:17:00.134Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T07:17:00.134Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b07b067be4201a8df75bc"
+  },
+  "schedule_id": {
+    "$oid": "691b078d67be4201a8df75ad"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T11:32:00.109Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T11:32:00.109Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b082867be4201a8df75c3"
+  },
+  "schedule_id": {
+    "$oid": "691b078d67be4201a8df75ad"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T11:34:00.063Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T11:34:00.063Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b08dc67be4201a8df75cd"
+  },
+  "schedule_id": {
+    "$oid": "691b078d67be4201a8df75ad"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T11:37:00.056Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T11:37:00.056Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b099067be4201a8df75d7"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T11:40:00.103Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T11:40:00.103Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b09cc67be4201a8df75dd"
+  },
+  "schedule_id": {
+    "$oid": "691b09b667be4201a8df75d9"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "gdfhdcr",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T11:41:00.065Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T11:41:00.065Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b0a0867be4201a8df75e4"
+  },
+  "schedule_id": {
+    "$oid": "691b09b667be4201a8df75d9"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "gdfhdcr",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T11:42:00.059Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T11:42:00.059Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b0a4467be4201a8df75ea"
+  },
+  "schedule_id": {
+    "$oid": "691b0a2367be4201a8df75e6"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "dghfg",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T11:43:00.097Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T11:43:00.097Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b0abc67be4201a8df75f1"
+  },
+  "schedule_id": {
+    "$oid": "6918288f19564f7b4973a484"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Test",
+  "description": "Hello",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T11:45:00.096Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T11:45:00.096Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b0b3467be4201a8df75fb"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T11:47:00.056Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T11:47:00.056Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b0c6067be4201a8df7608"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T11:52:00.058Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T11:52:00.058Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b0d1467be4201a8df760f"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T11:55:00.068Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T11:55:00.068Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b0d8c67be4201a8df7616"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T11:57:00.065Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T11:57:00.065Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b0fa867be4201a8df7620"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:06:00.057Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:06:00.057Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b102067be4201a8df762a"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:08:00.067Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:08:00.067Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b109867be4201a8df7631"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:10:00.064Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:10:00.064Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b10d467be4201a8df763a"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:11:00.052Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:11:00.052Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b111067be4201a8df7641"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:12:00.054Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:12:00.054Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b118867be4201a8df764c"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:14:00.057Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:14:00.057Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b11c467be4201a8df7652"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:15:00.499Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:15:00.499Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b123c67be4201a8df765a"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:17:00.058Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:17:00.058Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b132c67be4201a8df7661"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:21:00.063Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:21:00.063Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b13a467be4201a8df7668"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:23:00.059Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:24:43.301Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b158467be4201a8df7684"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:31:00.066Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:31:00.066Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b15c067be4201a8df768b"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:32:00.058Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:32:00.058Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b167467be4201a8df76df"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:35:00.077Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:35:00.077Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b16b067be4201a8df76e8"
+  },
+  "schedule_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "Thi tưu",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:36:00.066Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:46:27.296Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b176467be4201a8df76ff"
+  },
+  "schedule_id": {
+    "$oid": "691b09b667be4201a8df75d9"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "gdfhdcr",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:39:00.066Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:39:00.066Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b17a067be4201a8df7706"
+  },
+  "schedule_id": {
+    "$oid": "691b09b667be4201a8df75d9"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "gdfhdcr",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:40:00.066Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:40:00.066Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b19806e1a2c6334cefc63"
+  },
+  "schedule_id": {
+    "$oid": "691b09b667be4201a8df75d9"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "gdfhdcr",
+  "description": "hello",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:48:00.072Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:48:00.072Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b19f86e1a2c6334cefc8d"
+  },
+  "schedule_id": {
+    "$oid": "691b19f16e1a2c6334cefc7e"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "hello",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:50:00.056Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:50:00.056Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b1aac1d4e447ba35736d2"
+  },
+  "schedule_id": {
+    "$oid": "691b1a891d4e447ba35736ce"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Lịch thi toán",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T12:53:00.062Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:53:00.062Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b217879e51394fab8d238"
+  },
+  "schedule_id": {
+    "$oid": "691b19f16e1a2c6334cefc7e"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "hello",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T13:22:00.060Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T13:22:00.060Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b21f079e51394fab8d242"
+  },
+  "schedule_id": {
+    "$oid": "691b19f16e1a2c6334cefc7e"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "hello123",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T13:24:00.046Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T13:24:00.046Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b2268842e55fe95771eb1"
+  },
+  "schedule_id": {
+    "$oid": "691b19f16e1a2c6334cefc7e"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "hello123",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T13:26:00.069Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T13:26:06.175Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b22a6842e55fe95771ec5"
+  },
+  "schedule_id": {
+    "$oid": "691b1a891d4e447ba35736ce"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Lịch thi toán",
+  "description": "",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T13:27:02.663Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T13:27:24.255Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b231c842e55fe95771ee5"
+  },
+  "schedule_id": {
+    "$oid": "691b1a891d4e447ba35736ce"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Lịch thi toán",
+  "description": "",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-17T13:29:00.049Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T13:29:03.595Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6921717c82aa0a7ae9cf9c36"
+  },
+  "schedule_id": {
+    "$oid": "6921711e82aa0a7ae9cf9c20"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "hello",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-22T08:17:00.072Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-22T08:17:05.307Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692172e482aa0a7ae9cf9c5e"
+  },
+  "schedule_id": {
+    "$oid": "6921711e82aa0a7ae9cf9c20"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "hello",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-22T08:23:00.082Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-22T08:23:00.082Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692185e08387c49434a7968f"
+  },
+  "schedule_id": {
+    "$oid": "6921711e82aa0a7ae9cf9c20"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "description": "hello",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-22T09:44:00.079Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-22T09:44:22.552Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6924443a4a3e2a796f76ced5"
+  },
+  "schedule_id": {
+    "$oid": "6924443a4a3e2a796f76cecf"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Thi anh",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-24T11:40:42.419Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:40:42.419Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692444544a3e2a796f76cedd"
+  },
+  "schedule_id": {
+    "$oid": "692444544a3e2a796f76ced7"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Thi sinh",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-24T11:41:08.522Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:41:08.522Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6924446d4a3e2a796f76cee3"
+  },
+  "schedule_id": {
+    "$oid": "6924446d4a3e2a796f76cedf"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Thi văn",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-24T11:41:33.766Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:41:33.766Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692444864a3e2a796f76ceeb"
+  },
+  "schedule_id": {
+    "$oid": "692444864a3e2a796f76cee7"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Thi tiếng anh",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-24T11:41:58.728Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:41:58.728Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692444d84a3e2a796f76cf32"
+  },
+  "schedule_id": {
+    "$oid": "692444d84a3e2a796f76cf2e"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề Ngữ văn lớp 12 - Tác phẩm Chí Phèo",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-24T11:43:20.512Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:43:20.512Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6924450f4a3e2a796f76cf48"
+  },
+  "schedule_id": {
+    "$oid": "6924450f4a3e2a796f76cf42"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Thi vật lý",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-24T11:44:15.757Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:44:15.757Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692447ef03a54e6c8677f339"
+  },
+  "schedule_id": {
+    "$oid": "692447ee03a54e6c8677f333"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Thi thi",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-24T11:56:31.147Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:56:31.147Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692447fc03a54e6c8677f345"
+  },
+  "schedule_id": {
+    "$oid": "692447fc03a54e6c8677f33f"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Thi test",
+  "description": "",
+  "is_read": false,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-24T11:56:44.975Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:56:44.975Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692451e432c7fba7f51da273"
+  },
+  "schedule_id": {
+    "$oid": "692444174a3e2a796f76cecb"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Thi toán",
+  "description": "",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-24T12:39:00.074Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T15:23:08.408Z"
+  },
+  "__v": 0
+}]

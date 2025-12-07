@@ -1,0 +1,68 @@
+[{
+  "_id": {
+    "$oid": "6911df59e15eaf755174a92d"
+  },
+  "name": "Khuyến mãi",
+  "code": "SALE",
+  "image": "https://example.com/icons/exam.png",
+  "description": "Hãy cập nhật những thông tin mới nhất về các khuyến mãi",
+  "status": "active",
+  "created_at": {
+    "$date": "2025-03-10T10:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-03-10T10:00:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "6911df83e15eaf755174a92e"
+  },
+  "name": "Khóa học",
+  "code": "LESSON",
+  "image": "https://example.com/icons/system.png",
+  "description": "Hãy xem các thông tin về các khóa học",
+  "status": "active",
+  "created_at": {
+    "$date": "2025-03-11T10:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-03-10T10:00:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Nhắc nhở",
+  "code": "REMINDER",
+  "image": "https://example.com/icons/message.png",
+  "description": "Đừng bỏ qua nhắc nhở nhé",
+  "status": "active",
+  "created_at": {
+    "$date": "2025-03-12T10:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-03-10T10:00:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "6911e4f7e15eaf755174a93c"
+  },
+  "name": "Tài khoản",
+  "code": "ACCOUNT",
+  "image": "https://example.com/icons/message.png",
+  "description": "Đừng bỏ qua nhắc nhở nhé",
+  "status": "inactive",
+  "created_at": {
+    "$date": "2025-03-12T10:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-03-10T10:00:00.000Z"
+  },
+  "deleted_at": null
+}]

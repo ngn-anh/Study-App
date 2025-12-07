@@ -1,0 +1,189 @@
+[{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccab6"
+  },
+  "name": "Tiếng Anh",
+  "code": "ENG",
+  "description": "Môn học ngoại ngữ tiếng Anh gồm 4 kỹ năng.",
+  "image": "english.png",
+  "created_at": {
+    "$date": "2025-01-01T09:10:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-01T07:54:44.742Z"
+  },
+  "deleted_at": null,
+  "status": 1
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccab7"
+  },
+  "name": "Hóa học",
+  "code": "CHEM",
+  "description": "Môn học nghiên cứu các chất và phản ứng hóa học.",
+  "image": "chemistry.png",
+  "created_at": {
+    "$date": "2025-01-01T09:15:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-01-01T09:15:00.000Z"
+  },
+  "deleted_at": null,
+  "status": 1
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccab8"
+  },
+  "name": "Lịch sử",
+  "code": "HIS",
+  "description": "Môn học nghiên cứu các sự kiện lịch sử Việt Nam và thế giới.",
+  "image": "history.png",
+  "created_at": {
+    "$date": "2025-01-01T09:20:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-01-01T09:20:00.000Z"
+  },
+  "deleted_at": null,
+  "status": 2
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccab5"
+  },
+  "name": "Ngữ Văn",
+  "code": "LIT",
+  "description": "Môn học về ngôn ngữ và văn học Việt Nam.",
+  "image": "literature.png",
+  "created_at": {
+    "$date": "2025-01-01T09:05:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-01-01T09:05:00.000Z"
+  },
+  "deleted_at": null,
+  "status": 1
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccabc"
+  },
+  "name": "Giáo dục công dân",
+  "code": "CIVIC",
+  "description": "Môn học giúp học sinh hiểu về pháp luật, đạo đức và trách nhiệm công dân.",
+  "image": "civic.png",
+  "created_at": {
+    "$date": "2025-01-01T09:40:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-01-01T09:40:00.000Z"
+  },
+  "deleted_at": null,
+  "status": 1
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccab4"
+  },
+  "name": "Toán học",
+  "code": "MATH",
+  "description": "Môn học nghiên cứu về số, hình học và các phép toán.",
+  "image": "math.png",
+  "created_at": {
+    "$date": "2025-01-01T09:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-01-01T09:00:00.000Z"
+  },
+  "deleted_at": null,
+  "status": 1
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccaba"
+  },
+  "name": "Địa lý",
+  "code": "GEO",
+  "description": "Môn học nghiên cứu về Trái Đất và các hiện tượng địa lý.",
+  "image": "geography.png",
+  "created_at": {
+    "$date": "2025-01-01T09:30:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-01-01T09:30:00.000Z"
+  },
+  "deleted_at": null,
+  "status": 2
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccab9"
+  },
+  "name": "Vật lý",
+  "code": "PHY",
+  "description": "Môn học nghiên cứu về vật chất và năng lượng.",
+  "image": "physics.png",
+  "created_at": {
+    "$date": "2025-01-01T09:25:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-01-01T09:25:00.000Z"
+  },
+  "deleted_at": null,
+  "status": 1
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccabb"
+  },
+  "name": "Sinh học",
+  "code": "BIO",
+  "description": "Môn học nghiên cứu về sinh vật và sự sống.",
+  "image": "biology.png",
+  "created_at": {
+    "$date": "2025-01-01T09:35:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-01-01T09:35:00.000Z"
+  },
+  "deleted_at": null,
+  "status": 1
+},
+{
+  "_id": {
+    "$oid": "692d4a06d153d182da625489"
+  },
+  "name": "Quốc phòng",
+  "code": "NAP",
+  "description": "Môn học giáo dục quốc phòng",
+  "status": 1,
+  "created_at": {
+    "$date": "2025-12-01T07:55:50.289Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-01T09:07:19.642Z"
+  },
+  "__v": 0,
+  "deleted_at": {
+    "$date": "2025-12-01T09:07:19.640Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "692d5b1f5dbf3c8ad313462d"
+  },
+  "name": "Thể dục",
+  "code": "PRA",
+  "description": "",
+  "status": 1,
+  "created_at": {
+    "$date": "2025-12-01T09:08:47.894Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-01T09:09:58.246Z"
+  },
+  "__v": 0,
+  "deleted_at": null
+}]

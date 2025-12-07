@@ -1,0 +1,760 @@
+[{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d88f"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d885"
+  },
+  "description": "Hà Nội",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Hà Nội là thủ đô của Việt Nam từ năm 1976.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d890"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d885"
+  },
+  "description": "TP. Hồ Chí Minh",
+  "image": null,
+  "is_correct": false,
+  "explanation": "TP. Hồ Chí Minh là trung tâm kinh tế lớn nhất nước.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d891"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d885"
+  },
+  "description": "Đà Nẵng",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Đà Nẵng là thành phố lớn ở miền Trung Việt Nam.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d892"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d885"
+  },
+  "description": "Huế",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Huế từng là kinh đô của triều Nguyễn.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d893"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d886"
+  },
+  "description": "45",
+  "image": null,
+  "is_correct": true,
+  "explanation": "15 × 3 = 45.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d894"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d886"
+  },
+  "description": "35",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, 15 × 3 không bằng 35.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d895"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d886"
+  },
+  "description": "55",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, kết quả lớn hơn thực tế.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d896"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d886"
+  },
+  "description": "50",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, 15 nhân 3 không thể ra số chẵn 50.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d897"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d887"
+  },
+  "description": "Nam Cao",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Nam Cao là tác giả truyện ngắn 'Lão Hạc'.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d898"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d887"
+  },
+  "description": "Ngô Tất Tố",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Ngô Tất Tố là tác giả 'Tắt đèn'.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d899"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d887"
+  },
+  "description": "Vũ Trọng Phụng",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Vũ Trọng Phụng là tác giả 'Số đỏ'.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d89a"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d887"
+  },
+  "description": "Nguyễn Du",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Nguyễn Du là tác giả 'Truyện Kiều'.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d89b"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d888"
+  },
+  "description": "8",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Oxy có 8 electron, 8 proton và 8 neutron.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d89c"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d888"
+  },
+  "description": "6",
+  "image": null,
+  "is_correct": false,
+  "explanation": "6 là số electron của nguyên tử Cacbon.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d89d"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d888"
+  },
+  "description": "10",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, oxy chỉ có 8 electron.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d89e"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d888"
+  },
+  "description": "12",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, 12 là số electron của Magie (Mg).",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d89f"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d889"
+  },
+  "description": "Nitơ và Oxy",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Không khí gồm khoảng 78% Nitơ và 21% Oxy.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a0"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d889"
+  },
+  "description": "Hydro và Helium",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, đó là thành phần của Mặt trời.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a1"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d889"
+  },
+  "description": "Oxy và Carbon",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, Carbon chỉ chiếm tỉ lệ nhỏ trong không khí.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a2"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d889"
+  },
+  "description": "Hydro và Nitơ",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, khí Hydro rất ít trong khí quyển.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a3"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88a"
+  },
+  "description": "90°",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Trong tam giác vuông, tổng hai góc nhọn bằng 90°.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a4"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88a"
+  },
+  "description": "180°",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, đó là tổng ba góc của tam giác.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a5"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88a"
+  },
+  "description": "60°",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, không phải tổng hai góc nhọn trong tam giác vuông.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a6"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88a"
+  },
+  "description": "120°",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, tổng hai góc nhọn không vượt quá 90°.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a7"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88b"
+  },
+  "description": "Sông Mê Kông",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Sông Mê Kông là con sông dài nhất chảy qua Việt Nam.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a8"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88b"
+  },
+  "description": "Sông Hồng",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sông Hồng ngắn hơn sông Mê Kông.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a9"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88b"
+  },
+  "description": "Sông Đồng Nai",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sông Đồng Nai là sông lớn miền Nam nhưng không dài nhất.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8aa"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88b"
+  },
+  "description": "Sông Cửu Long",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sông Cửu Long là tên gọi phần sông Mê Kông ở Việt Nam.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8ab"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88c"
+  },
+  "description": "Charles Darwin",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Darwin là cha đẻ của thuyết tiến hóa bằng chọn lọc tự nhiên.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8ac"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88c"
+  },
+  "description": "Albert Einstein",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Einstein là nhà vật lý, không phải nhà sinh học.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8ad"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88c"
+  },
+  "description": "Isaac Newton",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Newton nghiên cứu về cơ học và hấp dẫn.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8ae"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88c"
+  },
+  "description": "Louis Pasteur",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Pasteur là nhà vi sinh học, không phải người sáng lập thuyết tiến hóa.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8af"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88d"
+  },
+  "description": "Android OS",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Android OS là hệ điều hành phổ biến nhất cho điện thoại Android.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8b0"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88d"
+  },
+  "description": "iOS",
+  "image": null,
+  "is_correct": false,
+  "explanation": "iOS được dùng cho thiết bị Apple, không phải Android.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8b1"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88d"
+  },
+  "description": "Windows Mobile",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Windows Mobile hiện đã ngừng phát triển.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8b2"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88d"
+  },
+  "description": "HarmonyOS",
+  "image": null,
+  "is_correct": false,
+  "explanation": "HarmonyOS chỉ phổ biến trên thiết bị Huawei.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8b3"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88e"
+  },
+  "description": "6",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Thế giới có 6 châu lục chính: Á, Âu, Phi, Mỹ, Úc, Nam Cực.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8b4"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88e"
+  },
+  "description": "5",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, có 6 châu lục, không phải 5.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8b5"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88e"
+  },
+  "description": "7",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Một số tài liệu tính Bắc Mỹ và Nam Mỹ là một, nên vẫn là 6.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8b6"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88e"
+  },
+  "description": "8",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, không có 8 châu lục được công nhận.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+}]
