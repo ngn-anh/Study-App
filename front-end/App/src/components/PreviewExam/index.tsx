@@ -1,3 +1,4 @@
+export const a = '1';
 /* --------------------------------------------------------------
    PreviewExam – hiển thị nội dung “preview” của một đề thi.
    Các phần (section) được tải từ API, có thể mở/đóng riêng.
