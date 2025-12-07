@@ -1,3 +1,4 @@
+export const a = '1';
 import React from "react";
 import { styles } from "./SubjectList.styles";
 import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity } from "react-native";
