@@ -1,3 +1,4 @@
+export const a = '2';
 // /* --------------------------------------------------------------
 //    SettingExam – Cho phép người dùng chọn chế độ thi
 //    (giới hạn thời gian / không giới hạn) và bật/tắt 2 tùy chọn

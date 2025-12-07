@@ -1,3 +1,4 @@
+export const a = '2';
 import React from "react";
 import { View, Text, Image } from "react-native";
 import { styles } from "./ProfileCard.styles";
