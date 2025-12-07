@@ -1,3 +1,4 @@
+export const a='2';
 import { Controller, Get, Query } from '@nestjs/common';
 import { QuestionsService } from './questions.service';
 import { GetQuestionsByExamDto } from './dto/get-questions-by-exam.dto';
