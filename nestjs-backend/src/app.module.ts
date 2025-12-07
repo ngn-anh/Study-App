@@ -7,37 +7,29 @@ import { ReminderSchedulesModule } from './reminder-schedules/reminder-schedules
 import { ExamsModule } from './exams/exams.module';
 import { QuestionsModule } from './questions/questions.module';
 import { ExamResultModule } from './exam_results/exam-result.module';
-import { NotificationTypesModule } from './notification-types/notification-types.module';
-import { NotificationsModule } from './notifications/notifications.module';
-import { BullModule } from '@nestjs/bull';
-import { ClassModule } from './classes/class.module';
-import { NotificationSettingModule } from './notification-setting/notification-setting.module';
-import { SubjectModule } from './subjects/subject.module';
+import { SubjectsModule } from './subjects/subjects.module';
+import { ClassesModule } from './classes/classes.module';
+import { LikeExamModule } from './like-exam/like-exam.module';
+import { PdfModule } from './pdf/pdf.module';
 
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),           // Load .env
-    MongooseModule.forRoot(process.env.MONGO_URI ||  'mongodb://localhost:27017/nestjs_db'),      // Kết nối MongoDB
-    BullModule.forRoot({
-      redis: {
-        host: '127.0.0.1',
-        port: 6379,
-      },
-    }),
+    // MongooseModule.forRoot(process.env.MONGO_URI || 'mongodb://localhost:27017/Mobile'),      // Kết nối MongoDB
+    MongooseModule.forRoot('mongodb://localhost:27017/DATN'),
     UsersModule,
     AuthModule,
     ReminderSchedulesModule,
     ExamsModule,
     QuestionsModule,
     ExamResultModule,
-    NotificationTypesModule,
-    NotificationsModule,
-    ClassModule,
-    NotificationSettingModule,
-    SubjectModule
+    SubjectsModule,
+    ClassesModule,
+    LikeExamModule,
+    PdfModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }
