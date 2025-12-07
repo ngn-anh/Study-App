@@ -1,4 +1,3 @@
-export const a='1';
 import { api } from './api';
 
 interface RegisterData {
@@ -33,7 +32,7 @@ export const loginUser = async (data: LoginData) => {
     console.log(error)
     return {
       success: false,
-      message: error.response?.data || 'Login failed',
+      message: error.response?.data?.message || 'Login failed',
     };
   }
 };

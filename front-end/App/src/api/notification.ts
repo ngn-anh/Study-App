@@ -1,4 +1,3 @@
-export const a='1';
 import axios from "axios";
 import { API_URL } from "@env"; // nếu bạn đang dùng react-native-dotenv
 
