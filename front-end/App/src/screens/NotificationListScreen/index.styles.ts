@@ -1,4 +1,3 @@
-export const a='1';
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -59,19 +58,19 @@ export const styles = StyleSheet.create({
   },
   fixedBadge: {
     position: "absolute",
-    top: 6,
+    top: 10,
     right: 12,
     backgroundColor: "#F1215A",
     borderRadius: 20,
-    paddingHorizontal: 6,
-    paddingVertical: 3,
+    paddingHorizontal: 7,
+    paddingVertical: 4,
     justifyContent: "center",
     alignItems: "center",
     zIndex: 10,
   },
   badgeText: {
     color: "#fff",
-    fontSize: 9,
+    fontSize: 10,
     fontWeight: "400",
     fontStyle: "italic",
   },

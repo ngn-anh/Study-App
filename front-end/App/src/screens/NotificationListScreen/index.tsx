@@ -1,4 +1,3 @@
-export const a = '1';
 import React, { useEffect, useState, useCallback } from "react";
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { useRoute, useNavigation, NavigationProp } from "@react-navigation/native";
