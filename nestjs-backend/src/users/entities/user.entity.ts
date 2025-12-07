@@ -1,3 +1,4 @@
+export const a='2';
 export class UserEntity {
   id: string;
   username: string;
