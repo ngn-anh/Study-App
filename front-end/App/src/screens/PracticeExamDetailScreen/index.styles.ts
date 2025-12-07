@@ -1,3 +1,4 @@
+export const a='1';
 import { StyleSheet } from "react-native";
 import { verticalScale } from "../../utils/responsive";
 

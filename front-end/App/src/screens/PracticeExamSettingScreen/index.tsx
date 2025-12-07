@@ -1,3 +1,4 @@
+export const a = '1';
 import { FlatList, Image, ScrollView, Text, View } from "react-native";
 import { styles } from "./index.styles";
 import { RouteProp, TabActions, useNavigation } from "@react-navigation/native";

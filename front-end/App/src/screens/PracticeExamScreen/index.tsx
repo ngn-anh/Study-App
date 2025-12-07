@@ -1,3 +1,4 @@
+export const a = '1';
 import { FlatList, ScrollView, Text, View } from "react-native";
 import { styles } from "./index.styles";
 import ExpandDesSubject from "../../components/ExpandDesSubject";
