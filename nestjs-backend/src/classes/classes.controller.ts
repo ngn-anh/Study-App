@@ -1,3 +1,4 @@
+export const a='2';
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ClassesService } from './classes.service';
 import { GetClassByCodeDto } from './dto/get-class-by-code.dto';

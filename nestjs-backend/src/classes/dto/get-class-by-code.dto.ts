@@ -1,3 +1,4 @@
+export const a='2';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from 'class-validator';
 
