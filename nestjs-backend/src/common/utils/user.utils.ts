@@ -1,3 +1,4 @@
+export const a='2';
 import { UserEntity } from "src/users/entities/user.entity";
 import { UserDocument } from "src/users/schemas/user.schema";
 

@@ -1,3 +1,4 @@
+export const a='2';
 /**
  * Hàm đảo ngẫu nhiên thứ tự các phần tử trong mảng
  * Sử dụng Fisher-Yates shuffle algorithm
