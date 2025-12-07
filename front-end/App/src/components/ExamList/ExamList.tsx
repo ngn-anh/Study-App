@@ -1,3 +1,4 @@
+export const a = '1';
 import React from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import ExamCard from "../ExamCard/ExamCard";
@@ -62,7 +63,7 @@ const ExamList: React.FC = () => {
 
 const styles = StyleSheet.create({
   listContainer: {
-    
+
   },
 });
 

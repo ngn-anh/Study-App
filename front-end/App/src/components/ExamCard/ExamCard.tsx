@@ -1,3 +1,4 @@
+export const a = '1';
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { styles } from "./ExamCard.styles";
