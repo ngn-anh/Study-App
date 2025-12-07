@@ -12,7 +12,6 @@ type ConfirmModalProps = {
   onConfirm?: () => void;
   type?: 'warning' | 'confirm';
   isButtonOk?: boolean;
-  headerIcon?: React.ReactNode;
 };
 
 export const ConfirmModal: React.FC<ConfirmModalProps> = ({
@@ -25,7 +24,6 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
   onConfirm = () => {},
   type = "confirm",
   isButtonOk = true, // mặc định hiển thị button OK
-  headerIcon 
 }) => {
   const mainColor = type === "warning" ? "#ff1c1cff" : "#083070";
 
@@ -33,11 +31,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
     <Modal visible={visible} transparent animationType="fade">
       <View style={styles.overlay}>
         <View style={[styles.modalContainer, { borderColor: mainColor }]}>
-          <View style={styles.cpn_title}>
-              {headerIcon ? <View>{headerIcon}</View> : null}
-              <Text style={[styles.title, { color: mainColor }]}>{title}</Text>
-          </View>
-          
+          <Text style={[styles.title, { color: mainColor }]}>{title}</Text>
           <Text style={styles.content}>{content}</Text>
 
           <View style={styles.actionContainer}>

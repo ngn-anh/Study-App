@@ -17,18 +17,9 @@ export interface ReminderSchedule {
   deleted_at: string | null;
 }
 
-export interface PaginatedSchedules {
-  items: ReminderSchedule[];
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
-}
-
-
 // Lấy danh sách lịch hẹn theo user_id
-export const getSchedules = async (user_id: string, page = 1, limit = 10): Promise<PaginatedSchedules> => {
-  const response = await axios.get(`${API_URL}/reminder-schedules/user/${user_id}?page=${page}&limit=${limit}`);
+export const getSchedules = async (user_id: string): Promise<ReminderSchedule[]> => {
+  const response = await axios.get(`${API_URL}/reminder-schedules/user/${user_id}`);
   return response.data;
 };
 

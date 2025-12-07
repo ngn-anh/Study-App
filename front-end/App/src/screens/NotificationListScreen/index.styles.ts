@@ -38,7 +38,6 @@ export const styles = StyleSheet.create({
   componentCard: {
     marginVertical: 20,
     marginHorizontal: 16,
-    paddingBottom:10,
   },
   card: {
     backgroundColor: "#fff",
@@ -58,19 +57,19 @@ export const styles = StyleSheet.create({
   },
   fixedBadge: {
     position: "absolute",
-    top: 6,
+    top: 10,
     right: 12,
     backgroundColor: "#F1215A",
     borderRadius: 20,
-    paddingHorizontal: 6,
-    paddingVertical: 3,
+    paddingHorizontal: 7,
+    paddingVertical: 4,
     justifyContent: "center",
     alignItems: "center",
     zIndex: 10,
   },
   badgeText: {
     color: "#fff",
-    fontSize: 9,
+    fontSize: 10,
     fontWeight: "400",
     fontStyle: "italic",
   },
@@ -108,7 +107,4 @@ export const styles = StyleSheet.create({
     color: "#534B4B",
     marginTop: 8,
   },
-  block:{
-    height:50
-  }
 });

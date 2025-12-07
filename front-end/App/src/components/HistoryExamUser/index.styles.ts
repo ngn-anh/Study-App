@@ -35,14 +35,15 @@ export const styles = StyleSheet.create({
     detailContainer: {
         flex: 1,
         flexDirection: "column",
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         paddingHorizontal: 3,
+        paddingVertical: 4,
         borderWidth: 1,
     },
 
-    detailItem:{
+    detailItem: {
         // flex: 1,
-         flexDirection: 'row',
+        flexDirection: 'row',
         alignItems: 'center',
         gap: 5,
     },

@@ -10,7 +10,6 @@ import { UserCirclePlusIcon, EyeIcon, EyeSlashIcon, ArrowLeftIcon, PhoneIcon } f
 import { CustomModal } from "../../components/CustomModal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootStackParamList } from "../../types/data";
-import { registerUser } from "../../api/auth";
 
 const RegisterScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -57,24 +56,26 @@ const RegisterScreen: React.FC = () => {
     }
 
     try {
-      const result = await registerUser({
+      const response = await axios.post(`${API_URL}/auth/register`, {
         username,
         email,
         password,
-        class_id: classId || null, // nếu API cho phép
+        class_id: classId || null,
       });
 
-       const userData = result.data;
+       const userData = response.data;
 
       // Lưu userData vào AsyncStorage
       await AsyncStorage.setItem("userData", JSON.stringify(userData));
 
+      // navigation.navigate("Home"); // hoặc màn bạn muốn
+
       showModal("Đăng ký thành công!", "success");
 
       setTimeout(() => {
-         navigation.navigate("MainTabs", {
-          screen: "Home",
-          params: { showNotificationPopup: true },
+        navigation.reset({
+          index: 1,
+          routes: [{ name: "MainTabs" }], // reset về tab navigator
         });
       }, 1000);
 

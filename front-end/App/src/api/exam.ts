@@ -1,6 +1,7 @@
 // src/api/exam.ts
 import { API_URL } from "@env";
 import axios from "axios";
+import { api } from "./api";
 
 export interface ExamsFilter {
   status?: "ongoing" | "upcoming"; // ExamStatus
@@ -24,20 +25,20 @@ export interface SubmitExamPayload {
   time_end?: string;
 }
 
-export interface ExamInfoResponse {
-  _id: string;
-  name: string;
-  image?: string;
-  duration: number;
-  participants: number;
-}
+// export interface ExamInfoResponse {
+//   _id: string;
+//   name: string;
+//   image?: string;
+//   duration: number;
+//   participants: number;
+// }
 
 export const getExams = async (params: {
   status?: 'ongoing' | 'upcoming';
   sort?: 'newest' | 'oldest';
   subjectCodes?: string[];
   name?: string;
-  class_id?: string;
+  currentClassCode?: string;
   page?: number;
   limit?: number;
   userId?: string;
@@ -57,24 +58,28 @@ export const getExams = async (params: {
       return searchParams.toString();
     },
   });
-  console.log('response',response)
   return response.data;
 };
 
-export const getExamQuestions = async (examId: string) => {
-  const response = await axios.get(`${API_URL}/questions/by-exam`, {
-    params: { exam_id: examId },
-  });
-  return response.data.data; //  { success, total, data }
-};
+// export const getExamQuestions = async (examId: string) => {
+//   const response = await axios.get(`${API_URL}/questions/by-exam`, {
+//     params: { exam_id: examId },
+//   });
+//   return response.data.data; //  { success, total, data }
+// };
 
 export const submitExam = async (payload: SubmitExamPayload) => {
   const res = await axios.post(`${API_URL}/exams/submit`, payload);
   return res.data;
 };
 
-export const getExamInfo = async (examId: string): Promise<ExamInfoResponse> => {
-  const res = await axios.get(`${API_URL}/exams/${examId}/info`);
+// export const getExamInfo = async (examId: string): Promise<ExamInfoResponse> => {
+//   const res = await axios.get(`${API_URL}/exams/${examId}/info`);
+//   return res.data;
+// };
+
+export const getExamInfo = async (examId: string) => {
+  const res = await api.get(`/exams/${examId}/info`);
   return res.data;
 };
 

@@ -6,8 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Modal,
-  Pressable,
-  Switch 
+  Pressable
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
@@ -25,8 +24,6 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { updateAvatar } from '../../api/user';
 import { getClasses, ClassItem } from '../../api/class';
 import { UpdateProfileModal } from '../../components/UpdateProfileModal';
-import { getNotificationSetting, updateNotificationSetting } from '../../api/notificationSetting';
-import NotificationMuteModal from '../../components/NotificationMuteModal';
 
 
 interface UserType {
@@ -49,55 +46,37 @@ const ProfileScreen = ({ navigation }: any) => {
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
   const [modalProfileVisible, setModalProfileVisible] = useState(false);
   const [classes, setClasses] = useState<ClassItem[]>([]);
-  const [isNotificationOn, setIsNotificationOn] = useState(false);
-  const [showMuteOptions, setShowMuteOptions] = useState(false);
 
   // Load danh sách lớp
-  const fetchClasses = async () => {
+  useEffect(() => {
+    const fetchClasses = async () => {
       try {
         const data = await getClasses();
         setClasses(data);
       } catch (error) {
         console.log('Error fetching classes:', error);
       }
-  };
-
-  const fetchNotificationSetting = async () => {
-    try {
-      const userDataStr = await AsyncStorage.getItem("userData");
-      if (!userDataStr) return;
-      const userData = JSON.parse(userDataStr);
-
-      const setting = await getNotificationSetting(userData.user.id);
-      setIsNotificationOn(setting.is_open_noti);
-    } catch (error) {
-      console.log("Error fetching notification setting:", error);
-    }
-  };
+    };
+    fetchClasses();
+  }, []);
 
   // Load user data từ AsyncStorage
-  const loadUserData = async () => {
-    try {
-      const userDataStr = await AsyncStorage.getItem('userData'); 
-      if (userDataStr) {
-        const userData = JSON.parse(userDataStr);
-        setUser(userData.user); // 
-      }
-    } catch (error) {
-      console.log('Error loading user data:', error);
-    }
-  };
-  
-
   useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      fetchClasses();
-      loadUserData();
-      fetchNotificationSetting();
-    });
+    const loadUserData = async () => {
+      try {
+        const userDataStr = await AsyncStorage.getItem('userData'); 
+        if (userDataStr) {
+          const userData = JSON.parse(userDataStr);
+          setUser(userData.user); // 
+        }
+      } catch (error) {
+        console.log('Error loading user data:', error);
+      }
+    };
 
-    return unsubscribe;
-  }, [navigation]);
+    loadUserData();
+  }, []);
+
 
   const handleLogout = () => setLogoutModalVisible(true);
 
@@ -154,49 +133,6 @@ const ProfileScreen = ({ navigation }: any) => {
       }
     );
   };
-
-  const handleToggleNotification = async () => {
-  try {
-    const userDataStr = await AsyncStorage.getItem("userData");
-    if (!userDataStr) return;
-    const userData = JSON.parse(userDataStr);
-
-    if (isNotificationOn) {
-      // đang ON → muốn tắt → hiện modal chọn thời gian
-      setShowMuteOptions(true);
-    } else {
-      // đang OFF → bật ON ngay
-      setIsNotificationOn(true);
-      await updateNotificationSetting(userData.user.id, { is_open_noti: true });
-    }
-  } catch (error) {
-    console.log("Error toggling notification:", error);
-  }
-};
-
-// chọn option trong modal
-const handleMuteOption = async (minutes: number | null) => {
-  try {
-    const userDataStr = await AsyncStorage.getItem("userData");
-    if (!userDataStr) return;
-    const userData = JSON.parse(userDataStr);
-
-    let payload: any = { is_open_noti: false };
-    if (minutes) {
-      payload.temporary_muted_until = new Date(Date.now() + minutes * 60 * 1000);
-      payload.temporary_muted_type = `${minutes}m`;
-    } else {
-      payload.temporary_muted_until = null;
-      payload.temporary_muted_type = null;
-    }
-
-    await updateNotificationSetting(userData.user.id, payload);
-    setIsNotificationOn(false);
-    setShowMuteOptions(false);
-  } catch (error) {
-    console.log(error);
-  }
-};
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -272,10 +208,7 @@ const handleMuteOption = async (minutes: number | null) => {
           <TouchableOpacity style={styles.row}>
             <BellIcon size={22} color="#083070" weight="bold" />
             <Text style={styles.label}>Thông báo</Text>
-            <Switch
-              value={isNotificationOn}
-              onValueChange={handleToggleNotification}
-            />
+            <Text style={styles.badge}>ON</Text>
           </TouchableOpacity>
         </View>
 
@@ -312,13 +245,6 @@ const handleMuteOption = async (minutes: number | null) => {
           classes={classes}
           onProfileUpdated={(updatedUser: any) => setUser(updatedUser)}
         />
-
-        <NotificationMuteModal
-          visible={showMuteOptions}
-          onClose={() => setShowMuteOptions(false)}
-          onSelectOption={handleMuteOption}
-        />
-
       </ScrollView>
     </View>
   );

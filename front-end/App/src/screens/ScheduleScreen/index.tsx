@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   FlatList,
   ActivityIndicator,
-  Pressable,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
@@ -41,39 +40,16 @@ const ScheduleScreen = () => {
   const [isSelectMode, setIsSelectMode] = useState(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const LIMIT = 10;
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [initialLoad, setInitialLoad] = useState(true);
-
-
 
   // Lấy danh sách lịch hẹn
- const fetchSchedules = async (reset = false) => {
+ const fetchSchedules = async () => {
     try {
-      if (reset) {
-        setInitialLoad(false);  // chặn loadMore khi reset
-        setPage(1);
-      }
-
+      setLoading(true);
       const userData = await AsyncStorage.getItem("userData");
       if (!userData) return;
       const userJson = JSON.parse(userData);
-
-      const res = await getSchedules(userJson.user.id, reset ? 1 : page, LIMIT);
-
-      if (reset) {
-        setSchedules(res.items);
-      } else {
-        setSchedules(prev => {
-          const map = new Map();
-          [...prev, ...res.items].forEach(item => map.set(item._id, item));
-          return Array.from(map.values());
-        });
-      }
-
-      setHasMore(res.page < res.totalPages);
+      const data = await getSchedules(userJson.user.id);
+      setSchedules(data);
     } catch (error) {
       console.error("Fetch schedules error:", error);
     } finally {
@@ -81,38 +57,9 @@ const ScheduleScreen = () => {
     }
   };
 
-  const loadMore = async () => {
-    if (loading || loadingMore || !hasMore || initialLoad) return;
-
-    setLoadingMore(true);
-    const nextPage = page + 1;
-    setPage(nextPage);
-
-    try {
-      const userData = await AsyncStorage.getItem("userData");
-      if (!userData) return;
-      const userJson = JSON.parse(userData);
-
-      const res = await getSchedules(userJson.user.id, nextPage, LIMIT);
-
-      setSchedules(prev => {
-        const map = new Map();
-        [...prev, ...res.items].forEach(item => map.set(item._id, item));
-        return Array.from(map.values());
-      });
-      setHasMore(res.page < res.totalPages);
-    } catch (e) {
-      console.log("Load more error:", e);
-    } finally {
-      setLoadingMore(false);
-    }
-  };
-
-
   useFocusEffect(
     React.useCallback(() => {
-      setLoading(true);
-      fetchSchedules(true); // mỗi lần màn danh sách focus lại thì fetch mới
+      fetchSchedules(); // mỗi lần màn danh sách focus lại thì fetch mới
     }, [])
   );
 
@@ -154,7 +101,8 @@ const ScheduleScreen = () => {
     const selected = selectedIds.includes(item._id);
     const remaining = getRemainingTime(item.due_date, item.due_time);
     return (
-      <Pressable
+      <TouchableOpacity
+        activeOpacity={0.8}
         onLongPress={() => handleLongPress(item._id)}
         onPress={() => (isSelectMode ? toggleSelect(item._id) : null)}
         style={styles.cardContainer}
@@ -176,28 +124,28 @@ const ScheduleScreen = () => {
           onPress={() => navigation.navigate("ScheduleDetail", { id: item._id })}
           style={styles.cardContent}
         >
-          <Text style={styles.cardTitle} numberOfLines={1} ellipsizeMode="tail">{item.title}</Text>
-          <Text style={styles.cardDate} numberOfLines={1} ellipsizeMode="tail">
+          <Text style={styles.cardTitle}>{item.title}</Text>
+          <Text style={styles.cardDate}>
             Ngày tới hạn {item.due_time} - {new Date(item.due_date).toLocaleDateString()}
           </Text>
         </TouchableOpacity>
 
         <View
-          style={[
-            styles.cardTag,
-            {
-              backgroundColor: remaining.bgColor,
-              paddingHorizontal: 8,
-              paddingVertical: 4,
-              borderRadius: 6,
-            },
-          ]}
-        >
-          <Text style={{ color: remaining.color, fontWeight: '500', fontSize:11 }}>
-            {remaining.text}
-          </Text>
-        </View>
-      </Pressable>
+        style={[
+          styles.cardTag,
+          {
+            backgroundColor: remaining.bgColor,
+            paddingHorizontal: 8,
+            paddingVertical: 4,
+            borderRadius: 6,
+          },
+        ]}
+      >
+        <Text style={{ color: remaining.color, fontWeight: '500', fontSize:11 }}>
+          {remaining.text}
+        </Text>
+      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -254,18 +202,8 @@ const ScheduleScreen = () => {
         data={schedules}
         renderItem={renderItem}
         keyExtractor={(item) => item._id}
-        contentContainerStyle={{ paddingVertical: 8}}
-        onEndReachedThreshold={0.05}
-        onMomentumScrollEnd={loadMore}
-        scrollEventThrottle={16} 
-        ListFooterComponent={
-          loadingMore ? (
-            <ActivityIndicator size="small" color="#0066FF" style={{ marginVertical: 10 }} />
-          ) : null
-        }
+        contentContainerStyle={{ paddingVertical: 8 }}
       />
-
-      <View style={styles.block}></View>
 
       {/* Nút thêm mới */}
       <TouchableOpacity

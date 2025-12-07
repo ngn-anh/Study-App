@@ -6,6 +6,7 @@ import ButtonCustom from "../ButtonCustom";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../types/data";
 import { ClockIcon, QuestionIcon } from "phosphor-react-native";
+import { IMAGE_DEFAULT } from "../../constants/images";
 
 interface Props {
     exam?: Exam;
@@ -16,9 +17,12 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 const ItemExam = (props: Props) => {
     const { exam } = props;
     const navigation = useNavigation<NavigationProps>();
+
+    const imageExam = exam?.image || IMAGE_DEFAULT.EXAM;
+
     const handleButtonPress = () => {
         console.log("loanhtm exam: ", exam);
-        navigation.navigate('PracticeExamDetailScreen', { exam: exam });
+        navigation.navigate('PracticeExamDetailScreen', { examId: exam?._id });
     };
 
     return (
@@ -27,7 +31,7 @@ const ItemExam = (props: Props) => {
                 style={styles.container}
                 onPress={() => handleButtonPress()}
             >
-                <Image source={{ uri: exam?.image }} style={styles.image} />
+                <Image source={{ uri: imageExam }} style={styles.image} />
                 <View style={styles.content}>
                     {/* Header: title + subject */}
                     <View style={styles.headerRow}>
@@ -42,7 +46,7 @@ const ItemExam = (props: Props) => {
                         <View style={styles.iconGroup}>
                             {/* <Image source={require("../../assets/icons/group.png")} style={styles.icon} /> */}
                             <QuestionIcon style={styles.icon} />
-                            <Text style={styles.iconText}>{exam?.number + " câu"}</Text>
+                            <Text style={styles.iconText}>{exam?.numberQuestion + " câu"}</Text>
                         </View>
                         <View style={styles.iconGroup}>
                             {/* <Image source={require("../../assets/icons/like.png")} style={styles.icon} /> */}
