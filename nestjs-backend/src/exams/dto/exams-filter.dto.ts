@@ -1,3 +1,4 @@
+export const a='1';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsOptional, IsString, IsEnum, IsArray, IsInt, Min } from 'class-validator';
 import { Type, Transform } from 'class-transformer';

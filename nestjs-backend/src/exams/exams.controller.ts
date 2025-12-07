@@ -1,3 +1,4 @@
+export const a='1';
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiTags, ApiQuery } from '@nestjs/swagger';
 import { ExamsService } from './exams.service';

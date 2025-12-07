@@ -1,3 +1,4 @@
+export const a='1';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ExamsService } from './exams.service';
