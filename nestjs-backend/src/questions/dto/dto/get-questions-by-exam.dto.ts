@@ -1,3 +1,4 @@
+export const a='1';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsMongoId } from 'class-validator';
 
