@@ -1,3 +1,4 @@
+export const a='2';
 // exams.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
