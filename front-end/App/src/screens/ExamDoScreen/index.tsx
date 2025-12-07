@@ -1,3 +1,4 @@
+export const a = '1';
 import React, { useEffect, useState, useRef } from "react";
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { useNavigation, useRoute, RouteProp, NavigationProp } from "@react-navigation/native";
@@ -222,11 +223,11 @@ export default function ExamDoScreen() {
       if (!userDataStr) throw new Error("Không tìm thấy thông tin người dùng");
       const userData = JSON.parse(userDataStr);
 
-      console.log('questions',questions)
-      console.log('selectedAnswersRef.current',selectedAnswersRef.current)
+      console.log('questions', questions)
+      console.log('selectedAnswersRef.current', selectedAnswersRef.current)
       const answersPayload = questions.map(q => {
         const selectedIndex = selectedAnswersRef.current[q.id]; // <-- luôn lấy ref
-        console.log('selectedIndex',selectedIndex)
+        console.log('selectedIndex', selectedIndex)
         if (selectedIndex == null) return { answer_question_id: null, is_correct: false };
         const selectedAnswer = q.answers[selectedIndex];
         return {
@@ -369,8 +370,8 @@ export default function ExamDoScreen() {
         content={modalData.content ?? ""}
         cancelText={modalData.cancelText ?? "Hủy"}
         confirmText={modalData.confirmText ?? "Xác Nhận"}
-        onCancel={modalData.onCancel ?? (() => {})}
-        onConfirm={modalData.onConfirm ?? (() => {})}
+        onCancel={modalData.onCancel ?? (() => { })}
+        onConfirm={modalData.onConfirm ?? (() => { })}
         type={modalData.type}
         isButtonOk={modalData.isButtonOk ?? true}
       />
