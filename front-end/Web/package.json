@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@ant-design/pro-components": "^2.8.10",
-    "antd": "^6.0.0",
+    "antd": "^5.13.0",
     "axios": "^1.12.2",
     "phosphor-react": "^1.4.1",
     "rc-field-form": "^2.7.1",

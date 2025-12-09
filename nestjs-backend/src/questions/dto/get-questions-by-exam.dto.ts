@@ -1,11 +1,11 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsMongoId, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsMongoId, IsOptional } from 'class-validator';
 
 export class GetQuestionsByExamDto {
   @ApiProperty({
     description: 'Exam ID cần lấy câu hỏi',
-    example: '6908a903bc2ae0fd775ccad6'
+    example: '6908a903bc2ae0fd775ccad6',
   })
   @IsMongoId()
   exam_id: string;
@@ -13,7 +13,7 @@ export class GetQuestionsByExamDto {
   @ApiPropertyOptional({
     description: 'Đảo ngẫu nhiên thứ tự câu hỏi',
     example: 'true',
-    default: 'false'
+    default: 'false',
   })
   @IsOptional()
   @IsBoolean()
@@ -27,7 +27,7 @@ export class GetQuestionsByExamDto {
   @ApiPropertyOptional({
     description: 'Đảo ngẫu nhiên thứ tự câu trả lời',
     example: 'false',
-    default: 'false'
+    default: 'false',
   })
   @IsOptional()
   @IsBoolean()

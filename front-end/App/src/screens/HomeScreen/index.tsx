@@ -10,27 +10,28 @@ import { ConfirmModal } from "../../components/ConfirmModal";
 import { BellRingingIcon } from "phosphor-react-native";
 import { updateNotificationSetting } from "../../api/notificationSetting";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Class, Exam, Subject, UserInfo } from "../../types/typeObj";
+import { Class, Exam, Subject, User, UserInfo } from "../../types/typeObj";
 import { getClassById } from "../../api/class";
 import { getSubjectByClass } from "../../api/subject";
 import { LIMIT, TYPE_EXAM } from "../../constants";
 import { getExams } from "../../api/exam";
+import { toggleExamLike } from "../../api/likeExam";
 // import { showMessage } from 'react-native-flash-message';
 
 const HomeScreen: React.FC = () => {
-  const [user, setUser] = useState<UserInfo | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [classInfo, setClassInfo] = useState<Class | null>(null);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [exams, setExams] = useState<Exam[]>([]);
   const [page, setPage] = useState<number>(1);
 
-  const getUserData = async (): Promise<UserInfo | null> => {
+  const getUserData = async (): Promise<User | null> => {
     try {
       const userDataString = await AsyncStorage.getItem("userData");
       if (userDataString !== null) {
         const userData = JSON.parse(userDataString);
-        setUser(userData);
-        return userData;
+        setUser(userData?.user);
+        return userData?.user;
       } else {
         console.log('Không tìm thấy user data');
         return null;
@@ -92,12 +93,13 @@ const HomeScreen: React.FC = () => {
   };
 
   const fetchExams = useCallback(async () => {
-    if (!user?.id || !classInfo?.code) return;
+    if (!user?.id || !classInfo?.id) return;
 
     try {
       // setLoading(true);
       const params = {
-        currentClassCode: classInfo.code,
+        // currentClassCode: classInfo.code,
+        class_id: classInfo.id,
         type: TYPE_EXAM.THI_THU,
         user_id: user.id,
         page: page,
@@ -108,6 +110,7 @@ const HomeScreen: React.FC = () => {
       const res = await getExams(params);
 
       setExams(res.data || []);
+      console.log("loanhtm exam home: ", res.data);
     } catch (err) {
       console.error("Lỗi khi tải danh sách bài thi:", err);
     } finally {
@@ -115,7 +118,7 @@ const HomeScreen: React.FC = () => {
     }
   }, [user, classInfo, page]);
 
-  const loadClassInfo = useCallback(async (userData: UserInfo) => {
+  const loadClassInfo = useCallback(async (userData: User) => {
     if (userData.class_id) {
       await fetchGetClassById(userData.class_id);
     }
@@ -173,6 +176,71 @@ const HomeScreen: React.FC = () => {
   const handleDisableNotification = () => {
     setShowNotiModal(false);
   };
+
+  const handleToggleLike = async (examId: string, currentlyLiked: number) => {
+    if (!user?.id) {
+      console.warn("User chưa đăng nhập → không thể like");
+      return;
+    }
+
+    const newLikeState = currentlyLiked === 1 ? 0 : 1;   // đổi 1 ↔ 0
+
+    try {
+      const params = {
+        user_id: user.id,
+        exam_id: examId,
+        is_liked: newLikeState,
+      };
+      // ---- 2️⃣ Gọi API ----
+      const resp = await toggleExamLike(params);
+
+      if (resp.errorCode === 0) {
+        // ---- 1️⃣ Optimistic UI (cập nhật ngay trên UI) ----
+        setExams(prev =>
+          prev.map(e =>
+            e._id === examId
+              ? {
+                ...e,
+                is_liked: newLikeState,
+                total_like: e.total_like ?? 0 + (newLikeState === 1 ? 1 : -1),
+              }
+              : e
+          )
+        );
+      } else {
+        // ---- Nếu API trả lỗi → rollback UI ----
+        setExams(prev =>
+          prev.map(e =>
+            e._id === examId
+              ? {
+                ...e,
+                is_liked: currentlyLiked,
+                total_like: e.total_like ?? 0 + (currentlyLiked === 1 ? 1 : -1),
+              }
+              : e
+          )
+        );
+        console.warn("Like API error:", resp.message);
+      }
+      // Nếu muốn **re‑fetch** list thay vì optimistic, thay thế đoạn trên bằng:
+      // await fetchExams();
+    } catch (err) {
+      // ---- Mạng lỗi → rollback UI ----
+      setExams(prev =>
+        prev.map(e =>
+          e._id === examId
+            ? {
+              ...e,
+              is_liked: currentlyLiked,
+              total_like: e.total_like ?? 0 + (currentlyLiked === 1 ? 1 : -1),
+            }
+            : e
+        )
+      );
+      console.error("❌ toggleLike failed:", err);
+    }
+  };
+
   return (
     <LinearGradient
       colors={["#170A66", "#3169a8ff", "#fff"]}
@@ -217,12 +285,14 @@ const HomeScreen: React.FC = () => {
           {/* Subject section */}
           <SubjectList
             subjects={subjects}
+            classInfo={classInfo}
           />
 
           {/* Exam section */}
           <View style={styles.examSection}>
             <ExamList
               exams={exams}
+              onToggleLike={handleToggleLike}
             />
           </View>
 

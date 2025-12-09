@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { Question, QuestionDocument } from './schemas/questions.schema';
-import { AnswerQuestion, AnswerQuestionDocument } from 'src/answer-questions/schemas/answer-questions.schema';
+import {
+  AnswerQuestion,
+  AnswerQuestionDocument,
+} from 'src/answer-questions/schemas/answer-questions.schema';
 import { Exam, ExamDocument } from 'src/exams/schemas/exams.schema';
 import { shuffleArray } from 'src/utils';
 
@@ -10,16 +13,17 @@ import { shuffleArray } from 'src/utils';
 export class QuestionsService {
   constructor(
     @InjectModel(Question.name) private questionModel: Model<QuestionDocument>,
-    @InjectModel(AnswerQuestion.name) private answerModel: Model<AnswerQuestionDocument>,
+    @InjectModel(AnswerQuestion.name)
+    private answerModel: Model<AnswerQuestionDocument>,
     @InjectModel(Exam.name) private examModel: Model<ExamDocument>,
-  ) { }
+  ) {}
 
   async findByExamId(
     examId: string,
     options?: {
       reverseQuestion?: boolean;
       reverseAnswer?: boolean;
-    }
+    },
   ) {
     const { reverseQuestion = false, reverseAnswer = false } = options || {};
 
@@ -39,7 +43,7 @@ export class QuestionsService {
       .select('-created_at -updated_at -deleted_at')
       .lean();
 
-    const questionIds = questions.map(q => q._id);
+    const questionIds = questions.map((q) => q._id);
 
     // Lấy đáp án
     const answers = await this.answerModel
@@ -52,8 +56,10 @@ export class QuestionsService {
     //   ...q,
     //   answers: answers.filter(a => a.question_id.toString() === q._id.toString()),
     // }));
-    let questionsWithAnswers = questions.map(q => {
-      let questionAnswers = answers.filter(a => a.question_id.toString() === q._id.toString());
+    let questionsWithAnswers = questions.map((q) => {
+      let questionAnswers = answers.filter(
+        (a) => a.question_id.toString() === q._id.toString(),
+      );
 
       // Đảo thứ tự câu trả lời nếu reverseAnswer = true
       if (reverseAnswer) {

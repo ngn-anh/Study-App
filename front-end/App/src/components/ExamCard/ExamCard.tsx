@@ -9,6 +9,8 @@ interface ExamCardProps {
   likes?: number;
   participants?: number;
   done?: boolean; // trạng thái đã làm/chưa
+  isLiked?: boolean;               // true = đã like
+  onPressLike?: () => void;
   onPressButton?: () => void;
 }
 
@@ -20,6 +22,8 @@ const ExamCard: React.FC<ExamCardProps> = ({
   participants,
   // done = false,
   done,
+  isLiked,
+  onPressLike,
   onPressButton,
 }) => {
   return (
@@ -52,10 +56,36 @@ const ExamCard: React.FC<ExamCardProps> = ({
         {/* Footer: buttons */}
         <View style={styles.footerRow}>
           <View style={styles.iconRow}>
-            <View style={styles.iconGroupLink}>
+            {/* <View style={styles.iconGroupLink}>
               <Image source={require("../../assets/icons/like.png")} style={styles.iconLink} />
               <Text style={styles.linkText}>Thích</Text>
-            </View>
+            </View> */}
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={onPressLike}
+              style={styles.iconGroupLink}
+            >
+              {/* Icon thay đổi: filled nếu liked, outline nếu chưa */}
+              <Image
+                source={
+                  isLiked
+                    ? require("../../assets/icons/like.png") // <--- thêm ảnh này
+                    : require("../../assets/icons/like.png")
+                }
+                style={[
+                  styles.iconLink,
+                  { tintColor: isLiked ? "#1669EF" : "#555" },
+                ]}
+              />
+              <Text
+                style={[
+                  styles.linkText,
+                  { color: isLiked ? "#1669EF" : "#555" },
+                ]}
+              >
+                {isLiked ? "Đã thích" : "Thích"}
+              </Text>
+            </TouchableOpacity>
             <View style={styles.iconGroupLink}>
               <Image source={require("../../assets/icons/share.png")} style={styles.iconLink} />
               <Text style={styles.linkText}>Chia sẻ</Text>

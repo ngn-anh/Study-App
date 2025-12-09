@@ -4,17 +4,21 @@ import { SubjectsService } from './subjects.service';
 import { SubjectsController } from './subjects.controller';
 import { Class, ClassSchema } from 'src/classes/schemas/classes.schema';
 import { Subject, SubjectSchema } from './schemas/subjects.schema';
-import { SubjectClass, SubjectClassSchema } from 'src/subjects-classes/schemas/subjects-classes.schema';
+import {
+  SubjectClass,
+  SubjectClassSchema,
+} from 'src/subjects-classes/schemas/subjects-classes.schema';
 
 @Module({
-    imports: [
-        MongooseModule.forFeature([
-            { name: Subject.name, schema: SubjectSchema },
-            { name: Class.name, schema: ClassSchema },
-            { name: SubjectClass.name, schema: SubjectClassSchema },
-        ]),
-    ],
-    controllers: [SubjectsController],
-    providers: [SubjectsService],
+  imports: [
+    MongooseModule.forFeature([
+      { name: Subject.name, schema: SubjectSchema },
+      { name: Class.name, schema: ClassSchema },
+      { name: SubjectClass.name, schema: SubjectClassSchema },
+    ]),
+  ],
+  controllers: [SubjectsController],
+  providers: [SubjectsService],
+  exports: [SubjectsService],
 })
-export class SubjectsModule { }
+export class SubjectsModule {}

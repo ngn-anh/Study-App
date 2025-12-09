@@ -1,4 +1,3 @@
-export const a='2';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ClassesService } from './classes.service';

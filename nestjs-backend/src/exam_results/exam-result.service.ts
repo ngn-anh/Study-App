@@ -18,7 +18,7 @@ export class ExamResultService {
     private readonly answerQuestionModel: Model<AnswerQuestion>,
     @InjectModel(Question.name)
     private readonly questionModel: Model<Question>,
-  ) {}
+  ) { }
 
   async getExamResultDetail(userId: string, examId: string) {
     // Tìm kết quả bài thi mới nhất của user
@@ -142,4 +142,74 @@ export class ExamResultService {
     return { questions: mappedQuestions };
   }
 
+  async getAllExamResultDetail(userId: string, examId: string) {
+    // Tìm 10 kết quả bài thi gần nhất
+    const results = await this.examResultModel
+      .find({
+        user_id: new Types.ObjectId(userId),
+        exam_id: new Types.ObjectId(examId),
+        deleted_at: null,
+      })
+      .sort({ created_at: -1 })
+      .limit(10)
+      .lean();
+
+    if (!results.length) {
+      return [];
+    }
+
+    // Mảng để lưu kết quả cuối cùng
+    const examResults = <any>[];
+
+    // Xử lý TỪNG result trong mảng results
+    for (const result of results) {
+      // Lấy danh sách câu trả lời CHO result HIỆN TẠI
+      const answers = await this.examResultAnswerModel.find({
+        exam_result_id: result._id,  // Lấy answers cho result này
+        deleted_at: null,
+      });
+
+      const total_question = result.total_question;
+      const total_correct = answers.filter(a => a.is_correct).length;
+      const total_wrong = answers.filter(a => a.is_correct === false).length;
+      const total_not_done = total_question - (total_correct + total_wrong);
+
+      // Tính thời gian làm bài (giây) CHO result HIỆN TẠI
+      let durationSec = 0;
+      let duration_text = '';
+
+      if (result.time_start && result.time_end) {
+        const start = new Date(result.time_start).getTime();
+        const end = new Date(result.time_end).getTime();
+
+        durationSec = Math.max(0, Math.floor((end - start) / 1000));
+
+        const minutes = Math.floor(durationSec / 60);
+        const seconds = durationSec % 60;
+
+        duration_text = `${minutes}p${seconds.toString().padStart(2, "0")}s`;
+      }
+
+      // Tạo object kết quả CHO result HIỆN TẠI
+      const examResultItem = {
+        exam_result_id: result._id,
+        exam_id: result.exam_id,
+        user_id: userId,
+        total_question,
+        total_correct,
+        total_wrong,
+        total_not_done,
+        is_finish: result.is_finish,
+        time_start: result.time_start,
+        time_end: result.time_end,
+        durationSec,
+        duration_text,
+      };
+
+      // Thêm vào mảng kết quả
+      examResults.push(examResultItem);
+    }
+
+    return examResults;  // Trả về mảng 10 kết quả
+  }
 }

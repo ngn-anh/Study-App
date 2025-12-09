@@ -3,28 +3,46 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { ExamsFilterDto, ExamStatus, SortOrder } from './dto/exams-filter.dto';
 import { Exam, ExamDocument } from './schemas/exams.schema';
-import { SubjectClass, SubjectClassDocument } from '../subjects-classes/schemas/subjects-classes.schema';
+import {
+  SubjectClass,
+  SubjectClassDocument,
+} from '../subjects-classes/schemas/subjects-classes.schema';
 import { Subject, SubjectDocument } from 'src/subjects/schemas/subjects.schema';
 import { Class, ClassDocument } from 'src/classes/schemas/classes.schema';
 import { SubmitExamDto } from './dto/submit-exam.dto';
-import { ExamResultAnswer, ExamResultAnswerDocument } from 'src/exam_result_answers/schemas/exam_result_answers.schema';
-import { ExamResult, ExamResultDocument } from 'src/exam_results/schemas/exam_results.schema';
+import {
+  ExamResultAnswer,
+  ExamResultAnswerDocument,
+} from 'src/exam_result_answers/schemas/exam_result_answers.schema';
+import {
+  ExamResult,
+  ExamResultDocument,
+} from 'src/exam_results/schemas/exam_results.schema';
 import { GetExamRankDto } from './dto/get-exam-rank.dto';
-import { Question, QuestionDocument } from 'src/questions/schemas/questions.schema';
-import { LikeExam, LikeExamDocument } from 'src/like-exam/schemas/like-exam.schema';
+import {
+  Question,
+  QuestionDocument,
+} from 'src/questions/schemas/questions.schema';
+import {
+  LikeExam,
+  LikeExamDocument,
+} from 'src/like-exam/schemas/like-exam.schema';
 
 @Injectable()
 export class ExamsService {
   constructor(
     @InjectModel(Exam.name) private examModel: Model<ExamDocument>,
-    @InjectModel(SubjectClass.name) private subjectClassModel: Model<SubjectClassDocument>,
+    @InjectModel(SubjectClass.name)
+    private subjectClassModel: Model<SubjectClassDocument>,
     @InjectModel(Class.name) private classModel: Model<ClassDocument>,
     @InjectModel(Subject.name) private subjectModel: Model<SubjectDocument>,
-    @InjectModel(ExamResultAnswer.name) private examResultAnswerModel: Model<ExamResultAnswerDocument>,
-    @InjectModel(ExamResult.name) private examResultModel: Model<ExamResultDocument>,
+    @InjectModel(ExamResultAnswer.name)
+    private examResultAnswerModel: Model<ExamResultAnswerDocument>,
+    @InjectModel(ExamResult.name)
+    private examResultModel: Model<ExamResultDocument>,
     @InjectModel(Question.name) private questionModel: Model<QuestionDocument>,
     @InjectModel(LikeExam.name) private likeExamModel: Model<LikeExamDocument>,
-  ) { }
+  ) {}
 
   async getExams(filterDto: ExamsFilterDto) {
     const {
@@ -62,7 +80,7 @@ export class ExamsService {
         .find({ code: { $in: subjectCodes } })
         .select('_id')
         .lean();
-      subjectIds = subjectDocs.map(s => s._id.toString());
+      subjectIds = subjectDocs.map((s) => s._id.toString());
     }
 
     // --- (3) Lấy subjectClassIds ---
@@ -70,7 +88,9 @@ export class ExamsService {
     if (classId) {
       const query: any = { class_id: new Types.ObjectId(classId) };
       if (subjectIds.length) {
-        query.subject_id = { $in: subjectIds.map(id => new Types.ObjectId(id)) };
+        query.subject_id = {
+          $in: subjectIds.map((id) => new Types.ObjectId(id)),
+        };
       }
 
       const subjectClassDocs = await this.subjectClassModel
@@ -78,7 +98,7 @@ export class ExamsService {
         .select('_id')
         .lean();
 
-      subjectClassIds = subjectClassDocs.map(sc => sc._id.toString());
+      subjectClassIds = subjectClassDocs.map((sc) => sc._id.toString());
       if (!subjectClassIds.length) return { data: [], total: 0, page, limit };
     }
 
@@ -86,7 +106,7 @@ export class ExamsService {
     const examQuery: any = { deleted_at: null };
     if (subjectClassIds.length) {
       examQuery.subject_class_id = {
-        $in: subjectClassIds.map(id => new Types.ObjectId(id)),
+        $in: subjectClassIds.map((id) => new Types.ObjectId(id)),
       };
     }
 
@@ -126,7 +146,7 @@ export class ExamsService {
     ]);
 
     // --- (5) Lấy danh sách exam_id ---
-    const examIds = data.map(e => e._id);
+    const examIds = data.map((e) => e._id);
 
     // --- (6) Lấy số người tham gia cho mỗi exam ---
     // const results = await this.examResultModel.aggregate([
@@ -142,16 +162,19 @@ export class ExamsService {
 
     // --- (7) Map exam_id → số lượng người tham gia ---
     const participantsMap = new Map<string, number>(
-      results.map(r => [r._id.toString(), r.participants])
+      results.map((r) => [r._id.toString(), r.participants]),
     );
 
     // --- (8) Nếu có user_id, lấy danh sách exam user đã làm ---
     let userDoneSet = new Set<string>();
     if (user_id && Types.ObjectId.isValid(user_id)) {
       const doneExams = await this.examResultModel
-        .find({ user_id: new Types.ObjectId(user_id), exam_id: { $in: examIds } })
+        .find({
+          user_id: new Types.ObjectId(user_id),
+          exam_id: { $in: examIds },
+        })
         .distinct('exam_id');
-      userDoneSet = new Set(doneExams.map(id => id.toString()));
+      userDoneSet = new Set(doneExams.map((id) => id.toString()));
     }
 
     // --- (9) Lấy số lượng câu hỏi cho mỗi exam ---
@@ -159,20 +182,20 @@ export class ExamsService {
       {
         $match: {
           exam_id: { $in: examIds },
-          deleted_at: null
-        }
+          deleted_at: null,
+        },
       },
       {
         $group: {
           _id: '$exam_id',
-          numberQuestion: { $sum: 1 }
-        }
-      }
+          numberQuestion: { $sum: 1 },
+        },
+      },
     ]);
 
     // --- (10) Map exam_id → số lượng câu hỏi ---
     const questionsMap = new Map<string, number>(
-      questionsCount.map(q => [q._id.toString(), q.numberQuestion])
+      questionsCount.map((q) => [q._id.toString(), q.numberQuestion]),
     );
 
     // --- (11) Lấy số lượng like cho mỗi exam ---
@@ -187,25 +210,25 @@ export class ExamsService {
       const likedExams = await this.likeExamModel
         .find({
           user_id: new Types.ObjectId(user_id),
-          exam_id: { $in: examIds }
+          exam_id: { $in: examIds },
         })
         .distinct('exam_id');
-      userLikedSet = new Set(likedExams.map(id => id.toString()));
+      userLikedSet = new Set(likedExams.map((id) => id.toString()));
     }
 
     const likesMap = new Map<string, number>(
-      likesCount.map(l => [l._id.toString(), l.total_like])
+      likesCount.map((l) => [l._id.toString(), l.total_like]),
     );
 
     // --- (13) Map dữ liệu trả về ---
-    const mappedData = data.map(exam => {
+    const mappedData = data.map((exam) => {
       const subjectClass = exam.subject_class_id as any; // vì populate -> Object
       const subject = subjectClass?.subject_id
         ? {
-          code: subjectClass.subject_id.code,
-          name: subjectClass.subject_id.name,
-          description: subjectClass.subject_id.description,
-        }
+            code: subjectClass.subject_id.code,
+            name: subjectClass.subject_id.name,
+            description: subjectClass.subject_id.description,
+          }
         : null;
 
       return {
@@ -234,10 +257,9 @@ export class ExamsService {
     return { data: mappedData, total, page, limit };
   }
 
-
   async submitExam(dto: SubmitExamDto) {
     // Tính tổng đúng
-    const total_correct = dto.answers.filter(a => a.is_correct).length;
+    const total_correct = dto.answers.filter((a) => a.is_correct).length;
     const total_question = dto.answers.length;
 
     // Convert string ISO sang Date rõ ràng
@@ -259,11 +281,12 @@ export class ExamsService {
     // Lọc bỏ các câu không có answer_question_id
     const validAnswers = dto.answers.filter(
       (a): a is { answer_question_id: string; is_correct: boolean } =>
-        typeof a.answer_question_id === "string" && a.answer_question_id.trim() !== ""
+        typeof a.answer_question_id === 'string' &&
+        a.answer_question_id.trim() !== '',
     );
 
     // Lưu từng câu trả lời vào exam_result_answer
-    const answersToSave = validAnswers.map(a => ({
+    const answersToSave = validAnswers.map((a) => ({
       exam_result_id: examResult._id,
       answer_question_id: new Types.ObjectId(a.answer_question_id),
       is_correct: a.is_correct,
@@ -373,10 +396,10 @@ export class ExamsService {
     const subjectClass = (exam.subject_class_id as any) ?? null;
     const subject = subjectClass?.subject_id
       ? {
-        code: subjectClass.subject_id.code,
-        name: subjectClass.subject_id.name,
-        description: subjectClass.subject_id.description,
-      }
+          code: subjectClass.subject_id.code,
+          name: subjectClass.subject_id.name,
+          description: subjectClass.subject_id.description,
+        }
       : null;
 
     // ----- 7. Kết quả trả về -----
@@ -406,7 +429,8 @@ export class ExamsService {
   async getExamRank(dto: GetExamRankDto) {
     const { examId, userId, searchName } = dto;
 
-    if (!Types.ObjectId.isValid(examId)) throw new NotFoundException('Exam not found');
+    if (!Types.ObjectId.isValid(examId))
+      throw new NotFoundException('Exam not found');
 
     // Lấy tất cả kết quả bài thi
     let results = await this.examResultModel
@@ -415,13 +439,19 @@ export class ExamsService {
       .lean();
 
     // Lọc bỏ kết quả không có user
-    results = results.filter(r => r.user_id);
+    results = results.filter((r) => r.user_id);
 
     // Map dữ liệu
-    const mapped = results.map(r => {
-      const durationMs = new Date(r.time_end).getTime() - new Date(r.time_start).getTime();
-      const score = r.total_question > 0 ? (r.total_correct / r.total_question) * 100 : 0;
-      const user = r.user_id as unknown as { _id: Types.ObjectId; username: string; avatar: string };
+    const mapped = results.map((r) => {
+      const durationMs =
+        new Date(r.time_end).getTime() - new Date(r.time_start).getTime();
+      const score =
+        r.total_question > 0 ? (r.total_correct / r.total_question) * 100 : 0;
+      const user = r.user_id as unknown as {
+        _id: Types.ObjectId;
+        username: string;
+        avatar: string;
+      };
       return {
         name: user.username,
         avatar: user.avatar,
@@ -452,10 +482,11 @@ export class ExamsService {
 
     // Chỉ filter search sau khi đã tính rank
     const final = searchName
-      ? ranked.filter(r => r.name.toLowerCase().includes(searchName.toLowerCase()))
+      ? ranked.filter((r) =>
+          r.name.toLowerCase().includes(searchName.toLowerCase()),
+        )
       : ranked;
 
     return final;
   }
-
 }

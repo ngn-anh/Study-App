@@ -5,11 +5,13 @@ import { LikeExamController } from './like-exam.controller';
 import { LikeExamService } from './like-exam.service';
 
 @Module({
-    imports: [
-        MongooseModule.forFeature([{ name: LikeExam.name, schema: LikeExamSchema }]),
-    ],
-    controllers: [LikeExamController],
-    providers: [LikeExamService],
-    exports: [LikeExamService],
+  imports: [
+    MongooseModule.forFeature([
+      { name: LikeExam.name, schema: LikeExamSchema },
+    ]),
+  ],
+  controllers: [LikeExamController],
+  providers: [LikeExamService],
+  exports: [LikeExamService],
 })
-export class LikeExamModule { }
+export class LikeExamModule {}

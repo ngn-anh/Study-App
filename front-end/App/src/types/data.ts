@@ -13,10 +13,10 @@ export type RootStackParamList = {
   Login: undefined;
   Register: undefined;
   MainTabs: {
-  screen: keyof MainTabsParamList;
-  params?: any;
-} | undefined;
-  Home: {showNotificationPopup?: boolean} | undefined;
+    screen: keyof MainTabsParamList;
+    params?: any;
+  } | undefined;
+  Home: { showNotificationPopup?: boolean } | undefined;
   Service: undefined;
   Profile: undefined;
   ScheduleScreen: undefined;
@@ -34,7 +34,7 @@ export type RootStackParamList = {
   ExamResultScreen: { examId: string, userId: string };
   ExamRankScreen: { examId: string, userId: string };
   ExamDetailResultScreen: { examResultId: string }
-  PracticeExamScreen: { subjectId?: string, subjectCode?: string, classCode?: string };
+  PracticeExamScreen: { subjectId?: string, subjectCode?: string, classCode?: string, classId?: string };
   PracticeExamDetailScreen: { examId?: string };
   PracticeExamSettingScreen: { examId?: string };
   NotificationScreen: undefined;

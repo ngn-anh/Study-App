@@ -4,7 +4,7 @@ import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity } from "react
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../types/data";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Subject } from "../../types/typeObj";
+import { Class, Subject } from "../../types/typeObj";
 
 // const subjects = [
 //   {
@@ -140,20 +140,21 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 interface props {
   subjects: Subject[];
+  classInfo?: Class | null;
 }
 
 const SubjectList = (props: props) => {
-  const { subjects } = props;
+  const { subjects, classInfo } = props;
 
   const navigation = useNavigation<NavigationProps>();
 
-  const renderItem = ({ item }: { item: typeof subjects[0] }) => (
+  const renderItem = ({ item }: { item: Subject }) => (
     // <View style={styles.item}>
     <TouchableOpacity
       style={styles.item}
-      onPress={() => navigation.navigate('PracticeExamScreen', { subjectId: item.id })}
+      onPress={() => navigation.navigate('PracticeExamScreen', { subjectId: item.id, subjectCode: item.code, classCode: classInfo?.code, classId: classInfo?.id })}
     >
-      <Image source={item.image} style={styles.icon} />
+      <Image source={{ uri: item.image }} style={styles.icon} />
       <Text style={styles.text}>{item.name}</Text>
     </TouchableOpacity>
     // </View >

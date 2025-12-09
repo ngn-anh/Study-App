@@ -53,3 +53,10 @@ export const getExamDetailResult = async (
   const res = await axios.get(`${API_URL}/exam-result/${examResultId}`);
   return res.data;
 };
+
+export const getAllExamResultDetail = async (user_id: string, exam_id: string) => {
+  const res = await api.get(`/exam-result/all-detail`, {
+    params: { user_id, exam_id },
+  });
+  return res.data;
+};

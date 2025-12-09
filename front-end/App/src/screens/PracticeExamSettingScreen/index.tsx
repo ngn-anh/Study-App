@@ -12,7 +12,7 @@ import SettingExam from "../../components/SettingExam";
 import InstructionDoExam from "../../components/InstructionDoExam";
 import { Icons } from "../../constants/icons";
 import { useCallback, useEffect, useState } from "react";
-import { Exam, UserInfo } from "../../types/typeObj";
+import { Exam, User, UserInfo } from "../../types/typeObj";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getExamInfo } from "../../api/exam";
 
@@ -27,7 +27,7 @@ const PracticeExamSettingScreen = (props: Props) => {
   const { examId } = route.params;
   const navigation = useNavigation<NavigationProps>();
 
-  const [user, setUser] = useState<UserInfo | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [examInfo, setExamInfo] = useState<Exam | null>(null);
   const [reverseQuestion, setReverseQuestion] = useState<boolean>(false);
   const [reverseAnswer, setReverseAnswer] = useState<boolean>(false);
@@ -38,7 +38,7 @@ const PracticeExamSettingScreen = (props: Props) => {
       const userDataString = await AsyncStorage.getItem("userData");
       if (userDataString !== null) {
         const userData = JSON.parse(userDataString);
-        setUser(userData);
+        setUser(userData?.user);
       } else {
         console.log('Không tìm thấy user data');
       }

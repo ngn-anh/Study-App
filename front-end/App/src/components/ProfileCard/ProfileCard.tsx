@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 import { styles } from "./ProfileCard.styles";
-import { Class, UserInfo } from "../../types/typeObj";
+import { Class, User, UserInfo } from "../../types/typeObj";
 import { IMAGE_DEFAULT } from "../../constants/images";
 
 interface ProfileCardProps {
-  user: UserInfo | null;
+  user: User | null;
   classInfo: Class | null;
   // name: string;
   // email: string;

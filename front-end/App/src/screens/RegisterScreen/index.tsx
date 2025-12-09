@@ -56,7 +56,7 @@ const RegisterScreen: React.FC = () => {
       return;
     }
 
-try {
+    try {
       const result = await registerUser({
         username,
         email,

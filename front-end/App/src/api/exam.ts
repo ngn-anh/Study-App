@@ -1,15 +1,15 @@
 // src/api/exam.ts
-import { API_URL } from "@env";
-import axios from "axios";
-import { api } from "./api";
+import { API_URL } from '@env';
+import axios from 'axios';
+import { api } from './api';
 
 export interface ExamsFilter {
-  status?: "ongoing" | "upcoming"; // ExamStatus
-  name?: string;                   // tìm kiếm theo tên
-  sort?: "newest" | "oldest";      // SortOrder
-  currentClassCode?: string;       // mã lớp
-  subjectCodes?: string[];         // danh sách môn học
-  type?: number;                   // 1 hoặc 2
+  status?: 'ongoing' | 'upcoming'; // ExamStatus
+  name?: string; // tìm kiếm theo tên
+  sort?: 'newest' | 'oldest'; // SortOrder
+  currentClassCode?: string; // mã lớp
+  subjectCodes?: string[]; // danh sách môn học
+  type?: number; // 1 hoặc 2
   page?: number;
   limit?: number;
 }
@@ -38,20 +38,21 @@ export const getExams = async (params: {
   sort?: 'newest' | 'oldest';
   subjectCodes?: string[];
   name?: string;
-  // currentClassCode?: string; // Ngân mới sửa chỗ này thành truyền class_id, sửa lại logic gọi hàm này truyền class_id hoặc classCode
+  // currentClassCode?: string; // Ngân mới sửa chỗ này thành truyền class_id, thống nhất sửa lại logic gọi hàm này truyền class_id hoặc classCode
   class_id?: string;
   page?: number;
   limit?: number;
   userId?: string;
+  type?: number;
 }) => {
   const response = await axios.get(`${API_URL}/exams`, {
     params,
-    paramsSerializer: (params) => {
+    paramsSerializer: params => {
       const searchParams = new URLSearchParams();
       Object.entries(params).forEach(([key, value]) => {
         if (value === undefined || value === null) return;
         if (Array.isArray(value)) {
-          value.forEach((v) => searchParams.append(key, v));
+          value.forEach(v => searchParams.append(key, v));
         } else {
           searchParams.append(key, String(value));
         }
@@ -84,7 +85,11 @@ export const getExamInfo = async (examId: string) => {
   return res.data;
 };
 
-export const getExamRank = async (params: { examId: string; userId: string; searchName?: string }) => {
+export const getExamRank = async (params: {
+  examId: string;
+  userId: string;
+  searchName?: string;
+}) => {
   console.log(params);
   const { data } = await axios.get(`${API_URL}/exams/rank`, { params });
   return data;

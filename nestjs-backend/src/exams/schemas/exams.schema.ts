@@ -4,7 +4,10 @@ import { Document, Types } from 'mongoose';
 
 export type ExamDocument = Exam & Document;
 
-@Schema({ collection: 'exams', timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } })
+@Schema({
+  collection: 'exams',
+  timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
+})
 export class Exam {
   @Prop({ type: Types.ObjectId, ref: 'SubjectClass', required: true })
   subject_class_id: Types.ObjectId;

@@ -35,18 +35,22 @@ import { Exam } from "../../types/typeObj";
 
 interface props {
   exams: Exam[];
+  onToggleLike: (examId: string, currentlyLiked: number) => void;
 }
 
 const ExamList = (props: props) => {
-  const { exams } = props;
+  const { exams, onToggleLike } = props;
   const renderItem = ({ item }: { item: typeof exams[0] }) => (
     <ExamCard
+      key={item._id}
       title={item.name}
       subject={item.subject}
       imageUrl={item.image}
       likes={item.total_like}
       participants={item.participants}
       done={item.is_done} // truyền trạng thái đã làm
+      isLiked={item.is_liked === 1}
+      onPressLike={() => onToggleLike(item._id, item.is_liked ?? 0)}
       onPressButton={() =>
         console.log(item.is_done ? `Xem kết quả ${item.name}` : `Vào thi ${item.name}`)
       }

@@ -14,15 +14,17 @@ import { BullModule } from '@nestjs/bull';
 import { ClassesModule } from './classes/classes.module';
 import { LikeExamModule } from './like-exam/like-exam.module';
 import { PdfModule } from './pdf/pdf.module';
-import { ClassModule } from './classes/class.module';
+// import { ClassModule } from './classes/class.module';
 import { NotificationSettingModule } from './notification-setting/notification-setting.module';
-import { SubjectModule } from './subjects/subject.module';
+// import { SubjectModule } from './subjects/subject.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),           // Load .env
-    MongooseModule.forRoot(process.env.MONGO_URI || 'mongodb://localhost:27017/Mobile'),      // Kết nối MongoDB
-    // MongooseModule.forRoot('mongodb://localhost:27017/DATN'),
+    ConfigModule.forRoot({ isGlobal: true }), // Load .env
+    // MongooseModule.forRoot(
+    //   process.env.MONGO_URI || 'mongodb://localhost:27017/StudyApp',
+    // ), // Kết nối MongoDB
+    MongooseModule.forRoot('mongodb://localhost:27017/StudyApp'),
     BullModule.forRoot({
       redis: {
         host: '127.0.0.1',
@@ -41,9 +43,9 @@ import { SubjectModule } from './subjects/subject.module';
     ClassesModule,
     LikeExamModule,
     PdfModule,
-    ClassModule,
+    // ClassModule,
     NotificationSettingModule,
-    SubjectModule,
+    SubjectsModule,
   ],
   controllers: [],
   providers: [],

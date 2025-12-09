@@ -1,9 +1,10 @@
-export const a='2';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { Class, ClassDocument } from './schemas/classes.schema';
 import { GetClassByCodeDto } from './dto/get-class-by-code.dto';
+import { CreateClassDto } from './dto/create-class.dto';
+import { UpdateClassDto } from './dto/update-class.dto';
 
 @Injectable()
 export class ClassesService {
@@ -150,5 +151,43 @@ export class ClassesService {
                 message: this.ERROR_MESSAGES_getClassById.INTERNAL_ERROR,
             };
         }
+    }
+
+    async create(dto: CreateClassDto) {
+        try {
+            const created = new this.classModel(dto);
+            return await created.save();
+        } catch (error: any) {
+            // duplicate code
+            if (error.code === 11000) {
+                throw new BadRequestException('Class code already exists');
+            }
+            throw error;
+        }
+    }
+
+    async findAll() {
+        return this.classModel
+            .find({ deleted_at: null })
+            .select('-created_at -updated_at -deleted_at')
+            .sort({ created_at: -1 })
+            .lean();
+    }
+
+    async findOne(id: string) {
+        return this.classModel
+            .findById(id)
+            .select('-created_at -updated_at -deleted_at')
+            .lean();
+    }
+
+    async update(id: string, dto: UpdateClassDto) {
+        return this.classModel.findByIdAndUpdate(id, dto, { new: true });
+    }
+
+    async remove(id: string) {
+        return this.classModel.findByIdAndUpdate(id, {
+            deleted_at: new Date(),
+        });
     }
 }

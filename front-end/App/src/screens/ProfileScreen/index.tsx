@@ -81,7 +81,7 @@ const ProfileScreen = ({ navigation }: any) => {
       const userDataStr = await AsyncStorage.getItem('userData');
       if (userDataStr) {
         const userData = JSON.parse(userDataStr);
-        setUser(userData.user); // 
+        setUser(userData?.user); // 
       }
     } catch (error) {
       console.log('Error loading user data:', error);

@@ -1,5 +1,12 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsString, IsEnum, IsArray, IsInt, Min } from 'class-validator';
+import {
+  IsOptional,
+  IsString,
+  IsEnum,
+  IsArray,
+  IsInt,
+  Min,
+} from 'class-validator';
 import { Type, Transform } from 'class-transformer';
 
 export enum ExamStatus {
@@ -23,7 +30,10 @@ export class ExamsFilterDto {
   @IsString()
   name?: string;
 
-  @ApiPropertyOptional({ enum: SortOrder, description: 'Sắp xếp theo thời gian' })
+  @ApiPropertyOptional({
+    enum: SortOrder,
+    description: 'Sắp xếp theo thời gian',
+  })
   @IsOptional()
   @IsEnum(SortOrder)
   sort?: SortOrder;
@@ -34,7 +44,10 @@ export class ExamsFilterDto {
   // currentClassCode?: string;
   class_id?: string;
 
-  @ApiPropertyOptional({ type: [String], description: 'Danh sách mã môn học (FE gửi)' })
+  @ApiPropertyOptional({
+    type: [String],
+    description: 'Danh sách mã môn học (FE gửi)',
+  })
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
@@ -59,7 +72,10 @@ export class ExamsFilterDto {
   @Min(1)
   page?: number = 1;
 
-  @ApiPropertyOptional({ description: 'Số lượng bản ghi trên 1 trang', default: 10 })
+  @ApiPropertyOptional({
+    description: 'Số lượng bản ghi trên 1 trang',
+    default: 10,
+  })
   @IsOptional()
   @Type(() => Number)
   @IsInt()

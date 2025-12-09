@@ -7,7 +7,9 @@ export class GetExamRankDto {
   @IsString()
   examId: string;
 
-  @ApiPropertyOptional({ description: 'ID user hiện tại (để đánh dấu bản ghi của mình)' })
+  @ApiPropertyOptional({
+    description: 'ID user hiện tại (để đánh dấu bản ghi của mình)',
+  })
   @IsString()
   userId: string;
 

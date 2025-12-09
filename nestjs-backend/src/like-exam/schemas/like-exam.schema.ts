@@ -5,11 +5,11 @@ export type LikeExamDocument = LikeExam & Document;
 
 @Schema({ collection: 'like_exams', timestamps: true })
 export class LikeExam {
-    @Prop({ type: Types.ObjectId, ref: 'User', required: true })
-    user_id: Types.ObjectId;
+  @Prop({ type: Types.ObjectId, ref: 'User', required: true })
+  user_id: Types.ObjectId;
 
-    @Prop({ type: Types.ObjectId, ref: 'Exam', required: true })
-    exam_id: Types.ObjectId;
+  @Prop({ type: Types.ObjectId, ref: 'Exam', required: true })
+  exam_id: Types.ObjectId;
 }
 
 export const LikeExamSchema = SchemaFactory.createForClass(LikeExam);
