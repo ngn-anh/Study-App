@@ -282,6 +282,7 @@ const HomeScreen: React.FC = () => {
           <View style={styles.examSection}>
             <ExamList
               exams={exams}
+              user={user}
               onToggleLike={handleToggleLike}
             />
           </View>

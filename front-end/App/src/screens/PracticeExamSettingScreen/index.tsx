@@ -68,7 +68,12 @@ const PracticeExamSettingScreen = (props: Props) => {
 
   const handlePressStart = () => {
     // navigation.navigate('PracticeExamDetailScreen', { exam: exam });
-    navigation.navigate("ExamDoScreen", { examId: examId + '' });
+    navigation.navigate("ExamDoScreen", {
+      examId: examId + '',
+      reverseQuestion: reverseQuestion,
+      reverseAnswer: reverseAnswer,
+      durationSetting: durationSetting
+    });
   }
 
   /* --------------------------------------------------------------
@@ -85,6 +90,10 @@ const PracticeExamSettingScreen = (props: Props) => {
     [examInfo]
   );
 
+  const handleGoBack = () => {
+    navigation.goBack();
+  };
+
   console.log("loanhtm examInfo: ", examInfo);
 
   return (
@@ -92,6 +101,7 @@ const PracticeExamSettingScreen = (props: Props) => {
       <Header
         data={examInfo}
         title="Chi tiết đề thi"
+        handleGoBack={handleGoBack}
       />
       <ScrollView>
         <View style={styles.content}>

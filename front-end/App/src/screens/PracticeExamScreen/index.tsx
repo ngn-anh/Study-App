@@ -1,7 +1,7 @@
 import { FlatList, ScrollView, Text, View, ActivityIndicator, Image } from "react-native";
 import { styles } from "./index.styles";
 import ExpandDesSubject from "../../components/ExpandDesSubject";
-import { RouteProp } from "@react-navigation/native";
+import { RouteProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../types/data";
 import Header from "../../components/Header";
 import SearchBar from "../../components/Search";
@@ -13,7 +13,6 @@ import { getExams } from "../../api/exam";
 import { FileCIcon, FileIcon, FilePdfIcon } from "phosphor-react-native";
 import { Icons } from "../../constants/icons";
 
-
 type Props = {
   route: RouteProp<RootStackParamList, 'PracticeExamScreen'>;
 };
@@ -21,6 +20,9 @@ type Props = {
 const PracticeExamScreen = (props: Props) => {
   const { route } = props;
   const { subjectId, subjectCode, classCode, classId } = route.params;
+
+  const navigation = useNavigation();
+
   const [exams, setExams] = useState<Exam[]>([]);
   const [totalExam, setTotalExam] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
@@ -34,7 +36,8 @@ const PracticeExamScreen = (props: Props) => {
 
   // Fetch exams khi page thay đổi
   const fetchExams = useCallback(async (isLoadMore: boolean = false) => {
-    if (!subjectId && !classId) return;
+    // if (!subjectId && !classId) return;
+    if (!subjectCode && !classId) return;
     if (isFetchingRef.current) return;
 
     const targetPage = isLoadMore ? page + 1 : 1;
@@ -80,7 +83,7 @@ const PracticeExamScreen = (props: Props) => {
       setLoadingMore(false);
       isFetchingRef.current = false;
     }
-  }, [subjectId, classId, subjectCode, page]);
+  }, [classId, subjectCode, page]);
 
   // Fetch exams khi component mount
   useEffect(() => {
@@ -93,6 +96,11 @@ const PracticeExamScreen = (props: Props) => {
     setExams([]);
     fetchExams();
   }, [subjectId, classId]);
+
+  const handleGoBack = () => {
+    console.log("go back");
+    navigation.goBack();
+  };
 
   // Xử lý load more khi scroll đến cuối
   const handleScroll = (event: any) => {
@@ -117,62 +125,14 @@ const PracticeExamScreen = (props: Props) => {
     }
   };
 
-  /** --------------------------------------------------------------
-   *  Toggle like / unlike cho exam hiện tại
-   * -------------------------------------------------------------- */
-  // const handleToggleLike = async () => {
-  //   if (!user?.id || !examInfo) {
-  //     console.warn("User hoặc examInfo chưa sẵn sàng");
-  //     return;
-  //   }
-
-  //   const currentlyLiked = examInfo.is_like ?? 0;          // 0 or 1
-  //   const newLikeState = currentlyLiked === 1 ? 0 : 1;    // flip
-
-  //   try {
-  //     setLiking(true);
-
-  //     // ---- 1️⃣ optimistic UI -------------------------------------------------
-  //     setExamInfo(prev => ({
-  //       ...prev!,
-  //       is_like: newLikeState,
-  //       total_like: (prev?.total_like ?? 0) + (newLikeState === 1 ? 1 : -1),
-  //     }));
-
-  //     // ---- 2️⃣ gọi API --------------------------------------------------------
-  //     const resp = await toggleExamLike(user.id, examInfo._id, newLikeState);
-
-  //     if (resp.errorCode !== 0) {
-  //       // API báo lỗi → rollback
-  //       setExamInfo(prev => ({
-  //         ...prev!,
-  //         is_like: currentlyLiked,
-  //         total_like:
-  //           (prev?.total_like ?? 0) + (currentlyLiked === 1 ? 1 : -1),
-  //       }));
-  //       console.warn("Like API error:", resp.message);
-  //     }
-  //     // nếu muốn luôn reload lại dữ liệu mới nhất từ server:
-  //     // await fetchGetExamInfo();
-  //   } catch (err) {
-  //     // network error → rollback
-  //     setExamInfo(prev => ({
-  //       ...prev!,
-  //       is_like: currentlyLiked,
-  //       total_like:
-  //         (prev?.total_like ?? 0) + (currentlyLiked === 1 ? 1 : -1),
-  //     }));
-  //     console.error("❌ toggleLike failed:", err);
-  //   } finally {
-  //     setLiking(false);
-  //   }
-  // };
-
   const renderItemExam = ({ item, index }: { item: Exam; index: number }) => {
     const isSingleItem = exams.length === 1;
     return (
       <View style={{ flex: isSingleItem ? 1 : 0.5 }}>
-        <ItemExam exam={item} />
+        <ItemExam
+          exam={item}
+        // subjectCode={subjectCode}
+        />
       </View>
     );
   };
@@ -205,6 +165,7 @@ const PracticeExamScreen = (props: Props) => {
       <Header
         data={exams?.[0]?.subject}
         title={exams?.[0]?.subject?.name || "Luyện thi"}
+        handleGoBack={handleGoBack}
       />
 
       <ScrollView

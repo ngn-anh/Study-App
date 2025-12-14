@@ -1,43 +1,29 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { styles } from "./ExamCard.styles";
+import { Exam } from "../../types/typeObj";
 
 interface ExamCardProps {
-  title?: string;
-  subject?: string;
-  imageUrl?: string;
-  likes?: number;
-  participants?: number;
-  done?: boolean; // trạng thái đã làm/chưa
-  isLiked?: number;               // true = đã like
+  exam?: Exam | null;
   onPressLike?: () => void;
-  onPressButton?: () => void;
+  onPressButton: (item: Exam) => void;
 }
 
 const ExamCard: React.FC<ExamCardProps> = ({
-  title,
-  subject,
-  imageUrl,
-  likes,
-  participants,
-  // done = false,
-  done,
-  isLiked,
+  exam,
   onPressLike,
   onPressButton,
 }) => {
   return (
     <View style={styles.container}>
-      {/* Image */}
-      <Image source={{ uri: imageUrl }} style={styles.image} />
+      <Image source={{ uri: exam?.image }} style={styles.image} />
 
-      {/* Content */}
       <View style={styles.content}>
         {/* Header: title + subject */}
         <View style={styles.headerRow}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>{exam?.name}</Text>
           <View style={styles.subjectTag}>
-            <Text style={styles.subjectText}>{subject}</Text>
+            <Text style={styles.subjectText}>{exam?.subject?.name}</Text>
           </View>
         </View>
 
@@ -45,21 +31,17 @@ const ExamCard: React.FC<ExamCardProps> = ({
         <View style={styles.iconInfo}>
           <View style={styles.iconGroup}>
             <Image source={require("../../assets/icons/group.png")} style={styles.icon} />
-            <Text style={styles.iconText}>{participants}</Text>
+            <Text style={styles.iconText}>{exam?.participants}</Text>
           </View>
           <View style={styles.iconGroup}>
             <Image source={require("../../assets/icons/like.png")} style={styles.icon} />
-            <Text style={styles.iconText}>{likes}</Text>
+            <Text style={styles.iconText}>{exam?.total_like}</Text>
           </View>
         </View>
 
         {/* Footer: buttons */}
         <View style={styles.footerRow}>
           <View style={styles.iconRow}>
-            {/* <View style={styles.iconGroupLink}>
-              <Image source={require("../../assets/icons/like.png")} style={styles.iconLink} />
-              <Text style={styles.linkText}>Thích</Text>
-            </View> */}
             <TouchableOpacity
               activeOpacity={0.7}
               onPress={onPressLike}
@@ -67,22 +49,22 @@ const ExamCard: React.FC<ExamCardProps> = ({
             >
               <Image
                 source={
-                  (isLiked == 1)
+                  (exam?.is_liked == 1)
                     ? require("../../assets/icons/like.png") // <--- thêm ảnh này
                     : require("../../assets/icons/like.png")
                 }
                 style={[
                   styles.iconLink,
-                  { tintColor: (isLiked == 1) ? "#1669EF" : "#555" },
+                  { tintColor: (exam?.is_liked == 1) ? "#1669EF" : "#555" },
                 ]}
               />
               <Text
                 style={[
                   styles.linkText,
-                  { color: (isLiked == 1) ? "#1669EF" : "#555" },
+                  { color: (exam?.is_liked == 1) ? "#1669EF" : "#555" },
                 ]}
               >
-                {(isLiked == 1) ? "Đã thích" : "Thích"}
+                {(exam?.is_liked == 1) ? "Đã thích" : "Thích"}
               </Text>
             </TouchableOpacity>
             <View style={styles.iconGroupLink}>
@@ -93,13 +75,13 @@ const ExamCard: React.FC<ExamCardProps> = ({
 
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={onPressButton}
+            onPress={() => exam && onPressButton(exam)}
             style={[
               styles.button,
-              { backgroundColor: done ? "#6B57BE" : "#22A112" },
+              { backgroundColor: exam?.is_done ? "#6B57BE" : "#22A112" },
             ]}
           >
-            <Text style={styles.buttonText}>{done ? "Xem kết quả" : "Vào thi"}</Text>
+            <Text style={styles.buttonText}>{exam?.is_done ? "Xem kết quả" : "Vào thi"}</Text>
           </TouchableOpacity>
         </View>
       </View>

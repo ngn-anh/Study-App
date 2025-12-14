@@ -104,9 +104,9 @@ export default function ExamListScreen() {
           limit: LIMIT,
           type: TYPE_EXAM.THI_THU
         };
-        console.log("loanhtm thi thu: ", params);
-        const res = await getExams(params);
 
+        const res = await getExams(params);
+        console.log("loanhtm res: ", res);
         // setExams(res.data || []);
         if (reset) {
           setExams(res.data || []);

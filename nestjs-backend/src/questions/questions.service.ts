@@ -30,7 +30,7 @@ export class QuestionsService {
     // Lấy thông tin exam
     const exam = await this.examModel
       .findById(examId)
-      .select('_id name duration')
+      .select('_id name duration type')
       .lean();
 
     if (!exam) {

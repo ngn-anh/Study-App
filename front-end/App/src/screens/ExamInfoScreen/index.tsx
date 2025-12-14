@@ -99,7 +99,10 @@ export default function ExamInfoScreen() {
         <TouchableOpacity
           onPress={() =>
             navigation.navigate("ExamDoScreen", {
-              examId
+              examId,
+              reverseQuestion: false,
+              reverseAnswer: false,
+              durationSetting: examInfo?.duration ?? null,
             })
           }
         >

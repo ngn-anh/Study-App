@@ -10,19 +10,24 @@ import { IMAGE_DEFAULT } from "../../constants/images";
 
 interface Props {
     exam?: Exam;
+    // subjectCode?: string;
 }
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 const ItemExam = (props: Props) => {
     const { exam } = props;
+    // const { exam, subjectCode } = props;
     const navigation = useNavigation<NavigationProps>();
 
     const imageExam = exam?.image || IMAGE_DEFAULT.EXAM;
 
     const handleButtonPress = () => {
         console.log("loanhtm exam: ", exam);
-        navigation.navigate('PracticeExamDetailScreen', { examId: exam?._id });
+        navigation.navigate('PracticeExamDetailScreen', {
+            examId: exam?._id,
+            // subjectCode: subjectCode
+        });
     };
 
     return (

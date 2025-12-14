@@ -472,4 +472,61 @@
   },
   "deleted_at": null,
   "section": 2
+},
+{
+  "_id": {
+    "$oid": "693eee1dfe3739ab34a077ab"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad2"
+  },
+  "image": null,
+  "description": "Tính giới hạn: lim (x → 0) (sin(5x) / x).",
+  "difficulty": 3,
+  "created_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "deleted_at": null,
+  "section": 2
+},
+{
+  "_id": {
+    "$oid": "693eee1dfe3739ab34a077ac"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad2"
+  },
+  "image": null,
+  "description": "Giải phương trình: 2x^2 - 5x + 3 = 0.",
+  "difficulty": 3,
+  "created_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "693eee1dfe3739ab34a077ad"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad2"
+  },
+  "image": null,
+  "description": "Tính tích phân: ∫(2x) dx từ 0 đến 3.",
+  "difficulty": 3,
+  "created_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "deleted_at": null,
+  "section": 2
 }]

@@ -1,12 +1,9 @@
 // npm install rn-fetch-blob react-native-share
-import { Alert, FlatList, Image, Linking, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./index.styles";
 import { RouteProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../types/data";
-// import Header from "../../components/Header";
-// import ItemExam from "../../components/ItemExam";
-import { verticalScale } from "../../utils/responsive";
-import { CalendarDotsIcon, ClockIcon, EyeIcon, FileArrowDownIcon, QuestionIcon, ShareFatIcon } from "phosphor-react-native";
+import { CalendarDotsIcon, ClockIcon, FileArrowDownIcon, QuestionIcon, ShareFatIcon } from "phosphor-react-native";
 // import ButtonCustom from "../../components/ButtonCustom";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Icons } from "../../constants/icons";
@@ -16,12 +13,12 @@ import PreviewExam from "../../components/PreviewExam/index";
 import HistoryExamUser from "../../components/HistoryExamUser/index";
 import Header from "../../components/Header/index";
 import { formatDate } from "../../utils/time";
-import { Exam, UserInfo } from "../../types/typeObj";
+import { Exam, User, UserInfo } from "../../types/typeObj";
 import { getExamInfo } from "../../api/exam";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // import pdfService from "../../api/pdf";
-import { HeartStraightIcon, HeartStraightBreakIcon } from "phosphor-react-native";
 import { toggleExamLike } from "../../api/likeExam";
+import { SUBMITTED_EXAM } from "../../constants";
 
 type Props = {
   route: RouteProp<RootStackParamList, 'PracticeExamDetailScreen'>;
@@ -29,10 +26,6 @@ type Props = {
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
-// enum TabKey {
-//   Preview = "preview", // Xem trước
-//   History = "history", // Lịch sử thi
-// }
 const TabKey = {
   Preview: "preview",
   History: "history",
@@ -40,7 +33,8 @@ const TabKey = {
 
 const PracticeExamDetailScreen = (props: Props) => {
   const { route } = props;
-  const { examId } = route.params;
+  const { examId, subjectCode, submitted } = route.params;
+  console.log("loanhtm examId, subjectCode, submitted: ", examId, subjectCode, submitted)
   const navigation = useNavigation<NavigationProps>();
 
   const [user, setUser] = useState<User | null>(null);
@@ -90,6 +84,14 @@ const PracticeExamDetailScreen = (props: Props) => {
 
   // const fileNamePdf = `${exam?.name ?? ''}.pdf`;
   const [activeTab, setActiveTab] = useState<string>(TabKey.Preview);
+
+  useEffect(() => {
+    if (!!submitted && submitted == SUBMITTED_EXAM.DE_LUYEN) {
+      setActiveTab(TabKey.History);
+    } else {
+      setActiveTab(TabKey.Preview);
+    }
+  }, [submitted]);
 
   const handlePressDoExam = () => {
     navigation.navigate('PracticeExamSettingScreen', { examId: examInfo?._id });
@@ -152,6 +154,18 @@ const PracticeExamDetailScreen = (props: Props) => {
     }
   };
 
+  const handleGoBack = () => {
+    // navigation.navigate("PracticeExamScreen", {
+    //   // subjectId?: string;
+    //   subjectCode: subjectCode,
+    //   classId: user?.class_id,
+    // })
+    if (!!submitted && submitted == SUBMITTED_EXAM.DE_LUYEN) {
+      navigation.navigate("MainTabs");
+    } else {
+      navigation.goBack();
+    }
+  }
 
   const onSelectTab = (tab: string) => () => setActiveTab(tab);
 
@@ -361,6 +375,7 @@ const PracticeExamDetailScreen = (props: Props) => {
       <Header
         data={examInfo}
         title="Chi tiết đề thi"
+        handleGoBack={handleGoBack}
       />
       <ScrollView>
         <View style={styles.content}>

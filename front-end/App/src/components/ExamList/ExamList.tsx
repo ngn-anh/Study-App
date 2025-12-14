@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import ExamCard from "../ExamCard/ExamCard";
-import { Exam } from "../../types/typeObj";
+import { Exam, User } from "../../types/typeObj";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../types/data";
+import { useNavigation } from "@react-navigation/native";
 
 // const exams = [
 //   {
@@ -33,27 +36,37 @@ import { Exam } from "../../types/typeObj";
 //   },
 // ];
 
+type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 interface props {
   exams: Exam[];
+  user?: User | null;
   onToggleLike: (examId: string, currentlyLiked: number) => void;
 }
 
 const ExamList = (props: props) => {
-  const { exams, onToggleLike } = props;
+  const { exams, user, onToggleLike } = props;
+
+  const navigation = useNavigation<NavigationProps>();
+
+  const onPressButton = (item: Exam) => {
+    if (item.is_done) {
+      navigation.navigate("ExamResultScreen", {
+        examId: item._id,
+        userId: user?.id || '',
+      });
+    } else {
+      navigation.navigate("ExamInfoScreen", {
+        examId: item._id,
+      });
+    }
+  }
+
   const renderItem = ({ item }: { item: Exam }) => (
     <ExamCard
       key={item._id}
-      title={item.name}
-      subject={item?.subject?.name ?? ''}
-      imageUrl={item.image}
-      likes={item.total_like}
-      participants={item.participants}
-      done={item.is_done} // truyền trạng thái đã làm
-      isLiked={item.is_liked}
+      exam={item}
       onPressLike={() => onToggleLike(item._id, item.is_liked ?? 0)}
-      onPressButton={() =>
-        console.log(item.is_done ? `Xem kết quả ${item.name}` : `Vào thi ${item.name}`)
-      }
+      onPressButton={onPressButton}
     />
   );
 

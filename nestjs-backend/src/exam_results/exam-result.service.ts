@@ -6,7 +6,6 @@ import { ExamResult } from './schemas/exam_results.schema';
 import { AnswerQuestion } from 'src/answer-questions/schemas/answer-questions.schema';
 import { Question } from 'src/questions/schemas/questions.schema';
 
-
 @Injectable()
 export class ExamResultService {
   constructor(
@@ -18,7 +17,7 @@ export class ExamResultService {
     private readonly answerQuestionModel: Model<AnswerQuestion>,
     @InjectModel(Question.name)
     private readonly questionModel: Model<Question>,
-  ) { }
+  ) {}
 
   async getExamResultDetail(userId: string, examId: string) {
     // Tìm kết quả bài thi mới nhất của user
@@ -42,8 +41,8 @@ export class ExamResultService {
     });
 
     const total_question = result.total_question;
-    const total_correct = answers.filter(a => a.is_correct).length;
-    const total_wrong = answers.filter(a => a.is_correct === false).length;
+    const total_correct = answers.filter((a) => a.is_correct).length;
+    const total_wrong = answers.filter((a) => a.is_correct === false).length;
     const total_not_done = total_question - (total_correct + total_wrong);
 
     // Tính thời gian làm bài (giây)
@@ -59,8 +58,7 @@ export class ExamResultService {
       const minutes = Math.floor(durationSec / 60);
       const seconds = durationSec % 60;
 
-      duration_text = `${minutes}p${seconds.toString().padStart(2, "0")}s`;
-
+      duration_text = `${minutes}p${seconds.toString().padStart(2, '0')}s`;
     }
     return {
       exam_result_id: result._id,
@@ -95,34 +93,47 @@ export class ExamResultService {
 
     // 4. Lấy tất cả đáp án của các câu hỏi này
     const answerQuestions = await this.answerQuestionModel
-      .find({ question_id: { $in: questions.map(q => q._id) }, deleted_at: null })
+      .find({
+        question_id: { $in: questions.map((q) => q._id) },
+        deleted_at: null,
+      })
       .lean();
 
-    const mappedQuestions = questions.map(q => {
+    const mappedQuestions = questions.map((q) => {
       const answers = answerQuestions
-        .filter(aq => aq.question_id.toString() === q._id.toString())
-        .map(aq => ({
+        .filter((aq) => aq.question_id.toString() === q._id.toString())
+        .map((aq) => ({
           _id: aq._id,
           description: aq.description,
           is_correct: aq.is_correct,
           explanation: aq.explanation,
         }));
 
-      const userAnswerObj = resultAnswers.find(
-        ra => answers.some(a => a._id.toString() === ra.answer_question_id.toString())
+      const userAnswerObj = resultAnswers.find((ra) =>
+        answers.some(
+          (a) => a._id.toString() === ra.answer_question_id.toString(),
+        ),
       );
 
       let userAnswerIndex: number | undefined = undefined;
-      let correctAnswerIndex = answers.findIndex(a => a.is_correct);
+      let correctAnswerIndex = answers.findIndex((a) => a.is_correct);
 
       if (userAnswerObj) {
-        userAnswerIndex = answers.findIndex(a => a._id.toString() === userAnswerObj.answer_question_id.toString());
+        userAnswerIndex = answers.findIndex(
+          (a) =>
+            a._id.toString() === userAnswerObj.answer_question_id.toString(),
+        );
       }
 
-      const correctAnswerId = answers.filter(a => a.is_correct).map(a => a._id);
+      const correctAnswerId = answers
+        .filter((a) => a.is_correct)
+        .map((a) => a._id);
       let userAnswerId: any[] | undefined = undefined;
       if (userAnswerObj) {
-        const userAnswerTemp = answers.find(a => a._id.toString() === userAnswerObj.answer_question_id.toString());
+        const userAnswerTemp = answers.find(
+          (a) =>
+            a._id.toString() === userAnswerObj.answer_question_id.toString(),
+        );
         userAnswerId = userAnswerTemp ? [userAnswerTemp._id] : []; // Trả về mảng ID
       }
 
@@ -130,7 +141,7 @@ export class ExamResultService {
         id: q._id,
         text: q.description,
         image: q.image || null,
-        options: answers.map(a => a.description),
+        options: answers.map((a) => a.description),
         answers,
         correctAnswerIndex: correctAnswerIndex,
         userAnswerIndex: userAnswerIndex,
@@ -143,7 +154,7 @@ export class ExamResultService {
   }
 
   async getAllExamResultDetail(userId: string, examId: string) {
-    // Tìm 10 kết quả bài thi gần nhất
+    // Tìm 20 kết quả bài thi gần nhất
     const results = await this.examResultModel
       .find({
         user_id: new Types.ObjectId(userId),
@@ -151,7 +162,7 @@ export class ExamResultService {
         deleted_at: null,
       })
       .sort({ created_at: -1 })
-      .limit(10)
+      .limit(20)
       .lean();
 
     if (!results.length) {
@@ -165,13 +176,13 @@ export class ExamResultService {
     for (const result of results) {
       // Lấy danh sách câu trả lời CHO result HIỆN TẠI
       const answers = await this.examResultAnswerModel.find({
-        exam_result_id: result._id,  // Lấy answers cho result này
+        exam_result_id: result._id, // Lấy answers cho result này
         deleted_at: null,
       });
 
       const total_question = result.total_question;
-      const total_correct = answers.filter(a => a.is_correct).length;
-      const total_wrong = answers.filter(a => a.is_correct === false).length;
+      const total_correct = answers.filter((a) => a.is_correct).length;
+      const total_wrong = answers.filter((a) => a.is_correct === false).length;
       const total_not_done = total_question - (total_correct + total_wrong);
 
       // Tính thời gian làm bài (giây) CHO result HIỆN TẠI
@@ -187,7 +198,7 @@ export class ExamResultService {
         const minutes = Math.floor(durationSec / 60);
         const seconds = durationSec % 60;
 
-        duration_text = `${minutes}p${seconds.toString().padStart(2, "0")}s`;
+        duration_text = `${minutes}p${seconds.toString().padStart(2, '0')}s`;
       }
 
       // Tạo object kết quả CHO result HIỆN TẠI
@@ -210,6 +221,6 @@ export class ExamResultService {
       examResults.push(examResultItem);
     }
 
-    return examResults;  // Trả về mảng 10 kết quả
+    return examResults; // Trả về mảng 20 kết quả
   }
 }
