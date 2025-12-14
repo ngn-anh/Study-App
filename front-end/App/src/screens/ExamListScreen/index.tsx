@@ -25,6 +25,7 @@ import { getExams } from "../../api/exam";
 import { RootStackParamList } from "../../types/data";
 import SuccessModal from "../../components/SuccessModal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { TYPE_EXAM } from "../../constants";
 
 type RouteProps = RouteProp<RootStackParamList, "ExamListScreen">;
 
@@ -101,8 +102,9 @@ export default function ExamListScreen() {
           // limit: 10,
           page: reset ? 1 : page,
           limit: LIMIT,
+          type: TYPE_EXAM.THI_THU
         };
-
+        console.log("loanhtm thi thu: ", params);
         const res = await getExams(params);
 
         // setExams(res.data || []);

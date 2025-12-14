@@ -21,10 +21,10 @@ import { NotificationSettingModule } from './notification-setting/notification-s
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }), // Load .env
-    // MongooseModule.forRoot(
-    //   process.env.MONGO_URI || 'mongodb://localhost:27017/StudyApp',
-    // ), // Kết nối MongoDB
-    MongooseModule.forRoot('mongodb://localhost:27017/StudyApp'),
+    MongooseModule.forRoot(
+      process.env.MONGO_URI || 'mongodb://localhost:27017/StudyApp',
+    ), // Kết nối MongoDB
+    // MongooseModule.forRoot('mongodb://localhost:27017/StudyApp'),
     BullModule.forRoot({
       redis: {
         host: '127.0.0.1',

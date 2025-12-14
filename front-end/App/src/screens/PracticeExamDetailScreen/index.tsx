@@ -29,10 +29,14 @@ type Props = {
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
-enum TabKey {
-  Preview = "preview", // Xem trước
-  History = "history", // Lịch sử thi
-}
+// enum TabKey {
+//   Preview = "preview", // Xem trước
+//   History = "history", // Lịch sử thi
+// }
+const TabKey = {
+  Preview: "preview",
+  History: "history",
+} as const;
 
 const PracticeExamDetailScreen = (props: Props) => {
   const { route } = props;
@@ -85,7 +89,7 @@ const PracticeExamDetailScreen = (props: Props) => {
   // }, []);
 
   // const fileNamePdf = `${exam?.name ?? ''}.pdf`;
-  const [activeTab, setActiveTab] = useState<TabKey>(TabKey.Preview);
+  const [activeTab, setActiveTab] = useState<string>(TabKey.Preview);
 
   const handlePressDoExam = () => {
     navigation.navigate('PracticeExamSettingScreen', { examId: examInfo?._id });
@@ -101,23 +105,24 @@ const PracticeExamDetailScreen = (props: Props) => {
     }
 
     const currentlyLiked = examInfo.is_liked ?? 0;          // 0 or 1
-    const newLikeState = currentlyLiked === 1 ? 0 : 1;    // flip
+    const newLikeState = (currentlyLiked === 1) ? 0 : 1;    // flip
 
     try {
       const param = {
         user_id: user.id,
         exam_id: examInfo._id,
-        is_liked: newLikeState,
+        is_liked: currentlyLiked,
       }
+      console.log("loanhtm param: ", param);
       // ---- 2️⃣ gọi API --------------------------------------------------------
       const resp = await toggleExamLike(param);
-
-      if (resp.errorCode !== 0) {
+      console.log("loanhtm resp: ", resp);
+      if (resp.errorCode === 0) {
         setLiking(true);
 
         setExamInfo(prev => ({
           ...prev!,
-          is_like: newLikeState,
+          is_liked: newLikeState,
           total_like: (prev?.total_like ?? 0) + (newLikeState === 1 ? 1 : -1),
         }));
       } else {
@@ -147,7 +152,8 @@ const PracticeExamDetailScreen = (props: Props) => {
     }
   };
 
-  const onSelectTab = (tab: TabKey) => () => setActiveTab(tab);
+
+  const onSelectTab = (tab: string) => () => setActiveTab(tab);
 
   // // ==================== PDF HANDLERS ====================
 
@@ -360,48 +366,39 @@ const PracticeExamDetailScreen = (props: Props) => {
         <View style={styles.content}>
           <View style={styles.infoExamContainer}>
             <Image source={{ uri: examInfo?.image }} style={styles.imageExam} />
-            <Text style={styles.nameExam}>{examInfo?.name ?? ''}</Text>
-            <View style={styles.iconRow}>
-              {/* <View style={styles.iconGroupLink}>
-                <Image source={require("../../assets/icons/like.png")} style={styles.iconLink} />
-                <Text style={styles.linkText}>Thích</Text>
-              </View> */}
-              {/* ==== LIKE / UNLIKE ==== */}
-              <TouchableOpacity
-                activeOpacity={0.7}
-                onPress={handleToggleLike}
-                disabled={liking}
-                style={styles.iconGroupLink}
-              >
-                {/* Icon: outline if not liked, filled if liked */}
-                {examInfo?.is_liked === 1 ? (
-                  <HeartStraightBreakIcon
-                    size={20}
-                    color={liking ? "#aaa" : "#e91e63"}   // red when liked
-                    weight="fill"
-                  />
-                ) : (
-                  <HeartStraightIcon
-                    size={20}
-                    color={liking ? "#aaa" : "#555"}
-                    weight="regular"
-                  />
-                )}
-                <Text
-                  style={[
-                    styles.linkText,
-                    {
-                      color: examInfo?.is_liked === 1 ? "#e91e63" : "#555",
-                      marginLeft: 4,
-                    },
-                  ]}
+            <View style={styles.nameLike}>
+              <Text style={styles.nameExam}>{examInfo?.name ?? ''}</Text>
+              <View style={styles.iconRow}>
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  onPress={handleToggleLike}
+                  style={styles.iconGroupLink}
                 >
-                  {examInfo?.is_liked === 1 ? "Đã Thích" : "Thích"}
-                </Text>
-              </TouchableOpacity>
-              <View style={styles.iconGroupLink}>
-                <Image source={require("../../assets/icons/share.png")} style={styles.iconLink} />
-                <Text style={styles.linkText}>Chia sẻ</Text>
+                  <Image
+                    source={
+                      Icons.LikeIcon
+                      // (examInfo?.is_liked == 1)
+                      //   ? Icons.LikeIcon
+                      //   : Icons.LikeIcon
+                    }
+                    style={[
+                      styles.iconLink,
+                      { tintColor: (examInfo?.is_liked == 1) ? "#1669EF" : "#555" },
+                    ]}
+                  />
+                  <Text
+                    style={[
+                      styles.linkText,
+                      { color: (examInfo?.is_liked == 1) ? "#1669EF" : "#555" },
+                    ]}
+                  >
+                    {(examInfo?.is_liked == 1) ? "Đã thích" : "Thích"}
+                  </Text>
+                </TouchableOpacity>
+                <View style={styles.iconGroupLink}>
+                  <Image source={Icons.ShareIcon} style={styles.iconLink} />
+                  <Text style={styles.linkText}>Chia sẻ</Text>
+                </View>
               </View>
             </View>
             <View style={styles.infoExam}>
@@ -459,12 +456,20 @@ const PracticeExamDetailScreen = (props: Props) => {
               </View>
               <View style={styles.downloadShare}>
                 <View style={styles.action}>
-                  <Image source={Icons.DownloadPdfIcon} style={styles.downloadShareIcon} />
-                  <FileArrowDownIcon style={{ width: 14, height: 18 }} color="#FFFFFF" weight="bold" />
+                  {/* <Image source={Icons.DownloadPdfIcon} style={styles.downloadShareIcon} /> */}
+                  <FileArrowDownIcon
+                    style={{ width: 14, height: 18 }}
+                    color="#FFFFFF"
+                  // weight="bold"
+                  />
                 </View>
                 <View style={styles.action}>
-                  <Image source={Icons.ShareOutlineIcon} style={styles.downloadShareIcon} />
-                  <ShareFatIcon style={{ width: 18, height: 15 }} color="#FFFFFF" weight="bold" />
+                  {/* <Image source={Icons.ShareOutlineIcon} style={styles.downloadShareIcon} /> */}
+                  <ShareFatIcon
+                    style={{ width: 18, height: 15 }}
+                    color="#FFFFFF"
+                  // weight="bold"
+                  />
                 </View>
               </View>
 
@@ -530,15 +535,6 @@ const PracticeExamDetailScreen = (props: Props) => {
             )}
           </View>
         </View>
-        {/* <SearchBar />
-        <FlatList
-          data={listExam}
-          renderItem={renderItemExam}
-          keyExtractor={(item) => item.id}
-          numColumns={2} // Hiển thị 2 item trên mỗi hàng
-          columnWrapperStyle={{ justifyContent: 'space-between' }} // Căn giữa các item
-          contentContainerStyle={{ paddingHorizontal: 10, paddingTop: verticalScale(20) }} // Thêm khoảng cách cho các item
-        /> */}
       </ScrollView >
     </View >
 

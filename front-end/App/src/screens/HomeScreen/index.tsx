@@ -10,7 +10,7 @@ import { ConfirmModal } from "../../components/ConfirmModal";
 import { BellRingingIcon } from "phosphor-react-native";
 import { updateNotificationSetting } from "../../api/notificationSetting";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Class, Exam, Subject, User, UserInfo } from "../../types/typeObj";
+import { Class, Exam, Subject, User } from "../../types/typeObj";
 import { getClassById } from "../../api/class";
 import { getSubjectByClass } from "../../api/subject";
 import { LIMIT, TYPE_EXAM } from "../../constants";
@@ -105,12 +105,10 @@ const HomeScreen: React.FC = () => {
         page: page,
         limit: LIMIT,
       };
-      console.log("home exam params", params);
 
       const res = await getExams(params);
 
       setExams(res.data || []);
-      console.log("loanhtm exam home: ", res.data);
     } catch (err) {
       console.error("Lỗi khi tải danh sách bài thi:", err);
     } finally {
@@ -183,17 +181,18 @@ const HomeScreen: React.FC = () => {
       return;
     }
 
-    const newLikeState = currentlyLiked === 1 ? 0 : 1;   // đổi 1 ↔ 0
+    const newLikeState = (currentlyLiked === 1) ? 0 : 1;   // đổi 1 ↔ 0
 
     try {
       const params = {
         user_id: user.id,
         exam_id: examId,
-        is_liked: newLikeState,
+        is_liked: currentlyLiked,
       };
+
+      console.log("home params likeExam: ", params);
       // ---- 2️⃣ Gọi API ----
       const resp = await toggleExamLike(params);
-
       if (resp.errorCode === 0) {
         // ---- 1️⃣ Optimistic UI (cập nhật ngay trên UI) ----
         setExams(prev =>
@@ -202,7 +201,7 @@ const HomeScreen: React.FC = () => {
               ? {
                 ...e,
                 is_liked: newLikeState,
-                total_like: e.total_like ?? 0 + (newLikeState === 1 ? 1 : -1),
+                total_like: (e.total_like ?? 0) + ((newLikeState === 1) ? 1 : -1),
               }
               : e
           )
@@ -215,7 +214,7 @@ const HomeScreen: React.FC = () => {
               ? {
                 ...e,
                 is_liked: currentlyLiked,
-                total_like: e.total_like ?? 0 + (currentlyLiked === 1 ? 1 : -1),
+                total_like: (e.total_like ?? 0) + ((currentlyLiked === 1) ? 1 : -1),
               }
               : e
           )
@@ -232,12 +231,12 @@ const HomeScreen: React.FC = () => {
             ? {
               ...e,
               is_liked: currentlyLiked,
-              total_like: e.total_like ?? 0 + (currentlyLiked === 1 ? 1 : -1),
+              total_like: (e.total_like ?? 0) + ((currentlyLiked === 1) ? 1 : -1),
             }
             : e
         )
       );
-      console.error("❌ toggleLike failed:", err);
+      console.error("ToggleLike failed:", err);
     }
   };
 
@@ -270,25 +269,16 @@ const HomeScreen: React.FC = () => {
             </TouchableOpacity>
           </View>
 
-          {/* Profile card */}
-          {/* <ProfileCard
-            name="Ngân Cute"
-            email="thungan16092003@gmail.com"
-            classLevel="Lớp 11"
-            avatarUrl="https://cdn-icons-png.flaticon.com/512/4140/4140048.png"
-          /> */}
           <ProfileCard
             user={user}
             classInfo={classInfo}
           />
 
-          {/* Subject section */}
           <SubjectList
             subjects={subjects}
             classInfo={classInfo}
           />
 
-          {/* Exam section */}
           <View style={styles.examSection}>
             <ExamList
               exams={exams}

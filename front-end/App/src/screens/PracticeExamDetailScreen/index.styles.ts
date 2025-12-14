@@ -24,14 +24,19 @@ export const styles = StyleSheet.create({
     flex: 1,
     height: verticalScale(160),
   },
+  nameLike: {
+    paddingVertical: verticalScale(10),
+    borderBottomWidth: 1,
+    borderColor: '#EEE8E8',
+    gap: scale(6),
+  },
   nameExam: {
-    marginTop: 20,
-    marginBottom: 12,
     fontSize: 16,
     color: '#000000',
     fontWeight: '500',
   },
   infoExam: {
+    paddingTop: 10,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -67,7 +72,9 @@ export const styles = StyleSheet.create({
   itemRight: {
     alignItems: 'center',
   },
-  itemValueRight: {},
+  itemValueRight: {
+    fontWeight: 700,
+  },
   itemDesRight: {},
   actionContainer: {},
 

@@ -169,15 +169,17 @@ const SubjectList = (props: props) => {
       </View>
 
       {/* Horizontal list */}
-      <FlatList
-        data={subjects}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-        horizontal
-        showsHorizontalScrollIndicator={true}
-        contentContainerStyle={styles.list}
-        ItemSeparatorComponent={() => <View style={{ width: 35 }} />} // khoảng cách giữa các item
-      />
+      <View style={styles.containSubs}>
+        <FlatList
+          data={subjects}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+          horizontal
+          showsHorizontalScrollIndicator={true}
+          contentContainerStyle={styles.list}
+          ItemSeparatorComponent={() => <View style={{ width: 30 }} />} // khoảng cách giữa các item
+        />
+      </View>
     </View>
   );
 };

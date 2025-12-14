@@ -1,24 +1,52 @@
-import { StyleSheet } from "react-native";
-import { scale, verticalScale } from "../../utils/responsive";
+import { StyleSheet } from 'react-native';
+import { scale, verticalScale } from '../../utils/responsive';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
 
   content: {
-    backgroundColor: "#001B5E",
+    backgroundColor: '#001B5E',
     padding: 16,
     borderRadius: 8,
     marginVertical: 16,
   },
 
   title: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 8,
+  },
+
+  text: {
+    fontSize: 14,
+    color: '#fff',
+    lineHeight: 20,
+  },
+
+  containTotalExam: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignContent: 'center',
+    gap: scale(10),
+    paddingVertical: verticalScale(8),
+    // borderWidth: 1,
+    // borderColor: '#fff',
+  },
+
+  fileFullIcon: {
+    width: 15,
+    height: 20,
+  },
+
+  totalExam: {
+    fontSize: 15,
+    color: '#E5FF00',
+    lineHeight: 20,
+    fontStyle: 'italic',
   },
 
   footerLoading: {
@@ -47,11 +75,10 @@ export const styles = StyleSheet.create({
 
   columnWrapper: {
     justifyContent: 'space-between',
-    // marginBottom: verticalScale(12),
+    // gap: 10,
   },
 
   listContent: {
-    paddingHorizontal: 10,
     paddingTop: verticalScale(20),
   },
 
@@ -67,6 +94,5 @@ export const styles = StyleSheet.create({
   emptyText: {
     fontSize: 16,
     color: '#000',
-  }
-
+  },
 });

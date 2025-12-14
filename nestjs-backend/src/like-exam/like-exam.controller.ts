@@ -4,11 +4,11 @@ import { LikeExamService } from './like-exam.service';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('LikeExam')
-@Controller('like-exam')
+@Controller('exams')
 export class LikeExamController {
   constructor(private readonly likeExamService: LikeExamService) {}
 
-  @Post()
+  @Post('like')
   async toggleLike(@Body() likeExamDto: LikeExamDto) {
     const result = await this.likeExamService.toggleLike(likeExamDto);
     return result;

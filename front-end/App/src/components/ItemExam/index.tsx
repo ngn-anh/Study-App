@@ -40,12 +40,12 @@ const ItemExam = (props: Props) => {
 
                     <View style={styles.iconInfo}>
                         <View style={styles.iconGroup}>
-                            <QuestionIcon style={styles.icon} />
-                            <Text style={styles.iconText}>{exam?.numberQuestion + " câu"}</Text>
+                            <QuestionIcon style={styles.icon} size={20} />
+                            <Text style={styles.iconText}>{`${exam?.numberQuestion ?? 0} câu`}</Text>
                         </View>
                         <View style={styles.iconGroup}>
-                            <ClockIcon style={styles.icon} />
-                            <Text style={styles.iconText}>{exam?.duration + " phút"}</Text>
+                            <ClockIcon style={styles.icon} size={20} />
+                            <Text style={styles.iconText}>{`${exam?.duration ?? 0} phút`}</Text>
                         </View>
                     </View>
                     <ButtonCustom

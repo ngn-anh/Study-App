@@ -40,16 +40,16 @@ interface props {
 
 const ExamList = (props: props) => {
   const { exams, onToggleLike } = props;
-  const renderItem = ({ item }: { item: typeof exams[0] }) => (
+  const renderItem = ({ item }: { item: Exam }) => (
     <ExamCard
       key={item._id}
       title={item.name}
-      subject={item.subject}
+      subject={item?.subject?.name ?? ''}
       imageUrl={item.image}
       likes={item.total_like}
       participants={item.participants}
       done={item.is_done} // truyền trạng thái đã làm
-      isLiked={item.is_liked === 1}
+      isLiked={item.is_liked}
       onPressLike={() => onToggleLike(item._id, item.is_liked ?? 0)}
       onPressButton={() =>
         console.log(item.is_done ? `Xem kết quả ${item.name}` : `Vào thi ${item.name}`)

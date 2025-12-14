@@ -212,26 +212,26 @@ const HistoryExamUser: React.FC<Props> = memo(({ examId, userId }) => {
     /* -------------------------------------------------
           Mock data – dùng khi không có API thật
           ------------------------------------------------- */
-    const mockData: ExamHistory[] = [
-        {
-            "exam_result_id": "690f10f71b908e644b126284",
-            "exam_id": "6908a903bc2ae0fd775ccad6",
-            "user_id": "690426dbdbf4313e26d816d5",
-            "total_question": 10,
-            "total_correct": 1,
-            "total_wrong": 2,
-            "total_not_done": 7,
-            "is_finish": true,
-            "time_start": "2025-11-08T09:44:13.888Z",
-            "time_end": "2025-11-08T09:44:21.906Z",
-            "durationSec": 8,
-            "duration_text": "0p08s"
-        },
-    ];
+    // const mockData: ExamHistory[] = [
+    //     {
+    //         "exam_result_id": "690f10f71b908e644b126284",
+    //         "exam_id": "6908a903bc2ae0fd775ccad6",
+    //         "user_id": "690426dbdbf4313e26d816d5",
+    //         "total_question": 10,
+    //         "total_correct": 1,
+    //         "total_wrong": 2,
+    //         "total_not_done": 7,
+    //         "is_finish": true,
+    //         "time_start": "2025-11-08T09:44:13.888Z",
+    //         "time_end": "2025-11-08T09:44:21.906Z",
+    //         "durationSec": 8,
+    //         "duration_text": "0p08s"
+    //     },
+    // ];
 
     const fetchHistory = async () => {
         if (!examId || !userId) {
-            setHistory(mockData);
+            // setHistory(mockData);
             setLoading(false);
             return;
         }
@@ -239,12 +239,13 @@ const HistoryExamUser: React.FC<Props> = memo(({ examId, userId }) => {
             const res = await getAllExamResultDetail(userId, examId);
 
             // API trả về là mảng ExamHistory[]
-            const data: ExamHistory[] = Array.isArray(res) ? res : mockData;
+            // const data: ExamHistory[] = Array.isArray(res) ? res : mockData;
+            const data: ExamHistory[] = Array.isArray(res) ? res : [];
             setHistory(data);
         } catch (e) {
             console.warn("Fetch exam history failed:", e);
             // Khi lỗi → fallback sang mock
-            setHistory(mockData);
+            // setHistory(mockData);
             setError("Không tải được dữ liệu, đang hiển thị mẫu.");
         } finally {
             setLoading(false);
@@ -281,7 +282,10 @@ const HistoryExamUser: React.FC<Props> = memo(({ examId, userId }) => {
     if (!history || history.length === 0) {
         return (
             <View style={styles.container}>
-                <Text style={styles.errorText}>Bạn chưa từng làm đề thi này. Bắt đầu làm bài ngay bạn nhé!</Text>
+                <Text style={styles.errorText}>
+                    Bạn chưa từng làm đề thi này. {"\n"}
+                    Bắt đầu làm bài ngay bạn nhé! 😊
+                </Text>
             </View>
         );
     }
@@ -297,7 +301,7 @@ const HistoryExamUser: React.FC<Props> = memo(({ examId, userId }) => {
     );
 
     const handleDetailResultExam = (examResultId: string) => {
-        console.log("laonhtm ExamDetailResultScreen: ", examResultId);
+        console.log("loanhtm ExamDetailResultScreen: ", examResultId);
         navigation.navigate('ExamDetailResultScreen', { examResultId: examResultId });
     }
 

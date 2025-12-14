@@ -85,6 +85,8 @@ const PracticeExamSettingScreen = (props: Props) => {
     [examInfo]
   );
 
+  console.log("loanhtm examInfo: ", examInfo);
+
   return (
     <View style={styles.container}>
       <Header

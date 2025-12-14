@@ -3,9 +3,9 @@
     "$oid": "6908a903bc2ae0fd775ccad2"
   },
   "subject_class_id": {
-    "$oid": "6908a903bc2ae0fd775ccabf"
+    "$oid": "6908a903bc2ae0fd775ccabe"
   },
-  "name": "Đề kiểm tra Toán lớp 12 - Ôn thi THPT",
+  "name": "Đề kiểm tra Toán lớp 11 - Ôn thi THPT (Đề thi thử 1)",
   "description": "Tổng hợp bài tập trắc nghiệm ôn thi tốt nghiệp.",
   "type": 1,
   "image": "https://example.com/math_exam_12.png",
@@ -15,7 +15,7 @@
     "$date": "2025-11-15T00:00:00.000Z"
   },
   "end_date": {
-    "$date": "2025-11-20T00:00:00.000Z"
+    "$date": "2025-12-30T00:00:00.000Z"
   },
   "created_at": {
     "$date": "2025-10-10T00:00:00.000Z"
@@ -33,9 +33,9 @@
   "subject_class_id": {
     "$oid": "6908a903bc2ae0fd775ccac0"
   },
-  "name": "Đề Ngữ văn lớp 10 - Tác phẩm Chí Phèo",
+  "name": "Đề Ngữ văn lớp 10 - Tác phẩm Chí Phèo (Đề thi thử 1)",
   "description": "Đề tự luận phân tích nhân vật Chí Phèo trong truyện Nam Cao.",
-  "type": 2,
+  "type": 1,
   "image": "https://example.com/lit_exam_10.png",
   "difficulty": 2,
   "duration": 90,
@@ -445,4 +445,144 @@
   },
   "deleted_at": null,
   "total_download": 60
+},
+{
+  "_id": {
+    "$oid": "693e41af8f83e935fec5498c"
+  },
+  "subject_class_id": {
+    "$oid": "6908a903bc2ae0fd775ccabf"
+  },
+  "name": "Đề kiểm tra Toán lớp 12 - Ôn thi THPT",
+  "description": "Tổng hợp bài tập trắc nghiệm ôn thi tốt nghiệp.",
+  "type": 1,
+  "image": "https://example.com/math_exam_12.png",
+  "difficulty": 3,
+  "duration": 90,
+  "start_date": {
+    "$date": "2025-11-15T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2025-11-20T00:00:00.000Z"
+  },
+  "created_at": {
+    "$date": "2025-10-10T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-10-10T00:00:00.000Z"
+  },
+  "deleted_at": null,
+  "total_download": 41
+},
+{
+  "_id": {
+    "$oid": "693e41af8f83e935fec5498d"
+  },
+  "subject_class_id": {
+    "$oid": "6908a903bc2ae0fd775ccac0"
+  },
+  "name": "Đề Ngữ văn lớp 10 - Tác phẩm Chí Phèo",
+  "description": "Đề tự luận phân tích nhân vật Chí Phèo trong truyện Nam Cao.",
+  "type": 2,
+  "image": "https://example.com/lit_exam_10.png",
+  "difficulty": 2,
+  "duration": 90,
+  "start_date": {
+    "$date": "2025-10-20T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2025-10-25T00:00:00.000Z"
+  },
+  "created_at": {
+    "$date": "2025-10-02T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-10-02T00:00:00.000Z"
+  },
+  "deleted_at": null,
+  "total_download": 56
+},
+{
+  "_id": {
+    "$oid": "693e464b8f83e935fec549a0"
+  },
+  "subject_class_id": {
+    "$oid": "6908a903bc2ae0fd775ccabe"
+  },
+  "name": "Đề kiểm tra Toán lớp 11 (Đề luyện 1)",
+  "description": "Tổng hợp bài tập trắc nghiệm luyện thi.",
+  "type": 2,
+  "image": "https://example.com/math_exam_11.png",
+  "difficulty": 3,
+  "duration": 90,
+  "start_date": {
+    "$date": "2025-11-15T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2025-11-20T00:00:00.000Z"
+  },
+  "created_at": {
+    "$date": "2025-10-10T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-10-10T00:00:00.000Z"
+  },
+  "deleted_at": null,
+  "total_download": 41
+},
+{
+  "_id": {
+    "$oid": "693e464b8f83e935fec549a1"
+  },
+  "subject_class_id": {
+    "$oid": "6908a903bc2ae0fd775ccabe"
+  },
+  "name": "Đề kiểm tra Toán lớp 11 (Đề luyện 2)",
+  "description": "Tổng hợp bài tập trắc nghiệm luyện thi.",
+  "type": 2,
+  "image": "https://example.com/math_exam_11.png",
+  "difficulty": 1,
+  "duration": 120,
+  "start_date": {
+    "$date": "2025-11-15T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2025-11-20T00:00:00.000Z"
+  },
+  "created_at": {
+    "$date": "2025-10-10T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-10-10T00:00:00.000Z"
+  },
+  "deleted_at": null,
+  "total_download": 70
+},
+{
+  "_id": {
+    "$oid": "693e464b8f83e935fec549a2"
+  },
+  "subject_class_id": {
+    "$oid": "6908a903bc2ae0fd775ccabe"
+  },
+  "name": "Đề kiểm tra Toán lớp 11 (Đề luyện 3)",
+  "description": "Tổng hợp bài tập trắc nghiệm ôn thi.",
+  "type": 1,
+  "image": "https://example.com/math_exam_11.png",
+  "difficulty": 2,
+  "duration": 45,
+  "start_date": {
+    "$date": "2025-11-15T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2025-11-20T00:00:00.000Z"
+  },
+  "created_at": {
+    "$date": "2025-10-10T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-10-10T00:00:00.000Z"
+  },
+  "deleted_at": null,
+  "total_download": 30
 }]

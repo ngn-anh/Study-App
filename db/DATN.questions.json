@@ -282,4 +282,194 @@
   },
   "deleted_at": null,
   "section": 1
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549b9"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Giải phương trình bậc hai: x² − 5x + 6 = 0.",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "deleted_at": null,
+  "section": 2
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549ba"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Tính giá trị của biểu thức: 2³ × 4².",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-07T11:31:10.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:31:10.588Z"
+  },
+  "deleted_at": null,
+  "section": 2
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549bb"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Cho cấp số cộng có số hạng đầu a₁ = 2, công sai d = 3. Tính a₅.",
+  "difficulty": 2,
+  "created_at": {
+    "$date": "2025-11-07T11:31:30.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:31:30.588Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549bc"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Tìm tập xác định của hàm số y = √(x − 2).",
+  "difficulty": 2,
+  "created_at": {
+    "$date": "2025-11-07T11:31:50.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:31:50.588Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549bd"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Giải bất phương trình: 2x − 5 > 3.",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-07T11:32:10.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:32:10.588Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549be"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Cho hàm số y = 2x + 1. Tính y khi x = −2.",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-07T11:32:30.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:32:30.588Z"
+  },
+  "deleted_at": null,
+  "section": 2
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549bf"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Tính đạo hàm của hàm số y = x³ − 3x² + 2.",
+  "difficulty": 3,
+  "created_at": {
+    "$date": "2025-11-07T11:32:50.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:32:50.588Z"
+  },
+  "deleted_at": null,
+  "section": 3
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549c0"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Cho tam giác có ba cạnh lần lượt là 3, 4, 5. Tam giác đó là tam giác gì?",
+  "difficulty": 2,
+  "created_at": {
+    "$date": "2025-11-07T11:33:10.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:33:10.588Z"
+  },
+  "deleted_at": null,
+  "section": 3
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549c1"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Giải phương trình lượng giác: sin x = 1/2.",
+  "difficulty": 3,
+  "created_at": {
+    "$date": "2025-11-07T11:33:30.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:33:30.588Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549c2"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Tính giới hạn: lim (x → 0) (sin x / x).",
+  "difficulty": 3,
+  "created_at": {
+    "$date": "2025-11-07T11:33:50.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:33:50.588Z"
+  },
+  "deleted_at": null,
+  "section": 2
 }]
