@@ -3,7 +3,7 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./index.styles";
 import { RouteProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../types/data";
-import { CalendarDotsIcon, ClockIcon, FileArrowDownIcon, QuestionIcon, ShareFatIcon } from "phosphor-react-native";
+import { CalendarDotsIcon, ClockIcon, EyeIcon, FileArrowDownIcon, QuestionIcon, ShareFatIcon } from "phosphor-react-native";
 // import ButtonCustom from "../../components/ButtonCustom";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Icons } from "../../constants/icons";
@@ -16,7 +16,7 @@ import { formatDate } from "../../utils/time";
 import { Exam, User, UserInfo } from "../../types/typeObj";
 import { getExamInfo } from "../../api/exam";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-// import pdfService from "../../api/pdf";
+import pdfService from "../../api/pdf";
 import { toggleExamLike } from "../../api/likeExam";
 import { SUBMITTED_EXAM } from "../../constants";
 
@@ -39,9 +39,9 @@ const PracticeExamDetailScreen = (props: Props) => {
 
   const [user, setUser] = useState<User | null>(null);
   const [examInfo, setExamInfo] = useState<Exam | null>(null);
-  // const [downloading, setDownloading] = useState(false);
-  // const [previewing, setPreviewing] = useState(false);
-  // const [sharingDeepLink, setSharingDeepLink] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+  const [previewing, setPreviewing] = useState(false);
+  const [sharingDeepLink, setSharingDeepLink] = useState(false);
 
   const [liking, setLiking] = useState(false);
 
@@ -171,20 +171,20 @@ const PracticeExamDetailScreen = (props: Props) => {
 
   // // ==================== PDF HANDLERS ====================
 
-  // // 1. Hiển thị menu options cho PDF
-  // const handlePDFOptions = async () => {
-  //   if (!examInfo) return;
+  // 1. Hiển thị menu options cho PDF
+  const handlePDFOptions = async () => {
+    if (!examInfo) return;
 
-  //   await pdfService.showPDFOptions(examInfo._id, examInfo.name || '', {
-  //     name: examInfo.name,
-  //     duration: examInfo.duration,
-  //     numberQuestion: examInfo.numberQuestion,
-  //     image: examInfo.image,
-  //     participants: examInfo.participants,
-  //     total_like: examInfo.total_like,
-  //     total_download: examInfo.total_download,
-  //   });
-  // };
+    await pdfService.showPDFOptions(examInfo._id, examInfo.name || '', {
+      name: examInfo.name,
+      duration: examInfo.duration,
+      numberQuestion: examInfo.numberQuestion,
+      image: examInfo.image,
+      participants: examInfo.participants,
+      total_like: examInfo.total_like,
+      total_download: examInfo.total_download,
+    });
+  };
 
   // // 2. Tải và mở PDF ngay
   // const handleDownloadAndOpen = async () => {
@@ -207,25 +207,25 @@ const PracticeExamDetailScreen = (props: Props) => {
   //   }
   // };
 
-  // // 3. Xem trước PDF
-  // const handlePreviewPDF = async () => {
-  //   if (!examInfo) return;
+  // 3. Xem trước PDF
+  const handlePreviewPDF = async () => {
+    if (!examInfo) return;
 
-  //   try {
-  //     setPreviewing(true);
+    try {
+      setPreviewing(true);
 
-  //     await pdfService.previewExamPDF(examInfo._id, examInfo.name || '', {
-  //       downloadFirst: false,
-  //       useBrowser: true,
-  //     });
+      await pdfService.previewExamPDF(examInfo._id, examInfo.name || '', {
+        downloadFirst: false,
+        useBrowser: true,
+      });
 
-  //   } catch (error) {
-  //     console.error('Lỗi xem trước PDF:', error);
-  //     Alert.alert('Lỗi', 'Không thể xem trước PDF');
-  //   } finally {
-  //     setPreviewing(false);
-  //   }
-  // };
+    } catch (error) {
+      console.error('Lỗi xem trước PDF:', error);
+      // Alert.alert('Lỗi', 'Không thể xem trước PDF');
+    } finally {
+      setPreviewing(false);
+    }
+  };
 
   // // 4. Chia sẻ thông tin đề thi
   // const handleShareExamInfo = async () => {
@@ -263,20 +263,20 @@ const PracticeExamDetailScreen = (props: Props) => {
   //   }
   // };
 
-  // // Chia sẻ app
-  // const handleShareApp = async () => {
-  //   try {
-  //     await pdfService.shareAppDownload(
-  //       examInfo?.name,
-  //       {
-  //         duration: examInfo?.duration,
-  //         numberQuestion: examInfo?.numberQuestion,
-  //       }
-  //     );
-  //   } catch (error) {
-  //     console.error('Lỗi chia sẻ app:', error);
-  //   }
-  // };
+  // Chia sẻ app
+  const handleShareApp = async () => {
+    try {
+      await pdfService.shareAppDownload(
+        examInfo?.name,
+        {
+          duration: examInfo?.duration,
+          numberQuestion: examInfo?.numberQuestion,
+        }
+      );
+    } catch (error) {
+      console.error('Lỗi chia sẻ app:', error);
+    }
+  };
 
   // // Trong PracticeExamDetailScreen.tsx
   // const handleShareDeepLink = async () => {
@@ -469,24 +469,61 @@ const PracticeExamDetailScreen = (props: Props) => {
                   {`${examInfo?.name ?? ''}.pdf`}
                 </Text>
               </View>
-              <View style={styles.downloadShare}>
-                <View style={styles.action}>
-                  {/* <Image source={Icons.DownloadPdfIcon} style={styles.downloadShareIcon} /> */}
+              {/* Nút tải PDF (menu options) */}
+              <TouchableOpacity
+                style={[
+                  styles.action,
+                  downloading && styles.actionDisabled
+                ]}
+                onPress={handlePDFOptions}
+                disabled={downloading}
+                activeOpacity={0.7}
+              >
+                {downloading ? (
+                  <Text style={styles.loadingText}>...</Text>
+                ) : (
                   <FileArrowDownIcon
                     style={{ width: 14, height: 18 }}
                     color="#FFFFFF"
-                  // weight="bold"
+                    weight="bold"
                   />
-                </View>
-                <View style={styles.action}>
-                  {/* <Image source={Icons.ShareOutlineIcon} style={styles.downloadShareIcon} /> */}
-                  <ShareFatIcon
+                )}
+              </TouchableOpacity>
+
+              {/* Nút xem trước */}
+              <TouchableOpacity
+                style={[
+                  styles.action,
+                  previewing && styles.actionDisabled
+                ]}
+                onPress={handlePreviewPDF}
+                disabled={previewing}
+                activeOpacity={0.7}
+              >
+                {previewing ? (
+                  <Text style={styles.loadingText}>...</Text>
+                ) : (
+                  <EyeIcon
                     style={{ width: 18, height: 15 }}
                     color="#FFFFFF"
-                  // weight="bold"
+                    weight="bold"
                   />
-                </View>
-              </View>
+                )}
+              </TouchableOpacity>
+
+              {/* Nút chia sẻ thông tin */}
+              <TouchableOpacity
+                style={styles.action}
+                // onPress={handleShareExamInfo}
+                onPress={handleShareApp}
+                activeOpacity={0.7}
+              >
+                <ShareFatIcon
+                  style={{ width: 18, height: 15 }}
+                  color="#FFFFFF"
+                  weight="bold"
+                />
+              </TouchableOpacity>
 
             </View>
 

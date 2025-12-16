@@ -37,6 +37,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.2",
     "node-fetch": "^3.3.2",
+    "pdfkit": "^0.17.2",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",
     "swagger-ui-express": "^5.0.1"
@@ -54,6 +55,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/mongoose": "^5.11.96",
     "@types/node": "^22.18.13",
+    "@types/pdfkit": "^0.17.4",
     "@types/supertest": "^6.0.2",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",

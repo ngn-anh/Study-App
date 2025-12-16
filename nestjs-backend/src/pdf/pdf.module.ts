@@ -3,13 +3,13 @@ import { MongooseModule } from '@nestjs/mongoose';
 // import { QuestionsService } from './questions.service';
 // import { QuestionsController } from './questions.controller';
 import { Question, QuestionSchema } from './schemas/questions.schema';
-import { AnswerQuestion, AnswerQuestionSchema } from 'src/answer-questions/schemas/answer-questions.schema';
+import {
+  AnswerQuestion,
+  AnswerQuestionSchema,
+} from 'src/answer-questions/schemas/answer-questions.schema';
 import { Exam, ExamSchema } from 'src/exams/schemas/exams.schema';
 import { PdfController } from './pdf.controller';
 import { PdfService } from './pdf.service';
-
-// npm install pdfkit
-// npm install @types/pdfkit --save-dev
 
 @Module({
   imports: [
@@ -22,4 +22,4 @@ import { PdfService } from './pdf.service';
   controllers: [PdfController],
   providers: [PdfService],
 })
-export class PdfModule { }
+export class PdfModule {}
