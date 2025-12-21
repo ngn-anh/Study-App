@@ -94,3 +94,8 @@ export const getExamRank = async (params: {
   const { data } = await axios.get(`${API_URL}/exams/rank`, { params });
   return data;
 };
+
+export const increaseExamDownload = async (examId: string) => {
+  const res = await api.post(`/exams/${examId}/increase-download`);
+  return res.data;
+};

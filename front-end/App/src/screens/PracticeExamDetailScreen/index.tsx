@@ -13,7 +13,7 @@ import HistoryExamUser from "../../components/HistoryExamUser/index";
 import Header from "../../components/Header/index";
 import { formatDate } from "../../utils/time";
 import { Exam, User, UserInfo } from "../../types/typeObj";
-import { getExamInfo } from "../../api/exam";
+import { getExamInfo, increaseExamDownload } from "../../api/exam";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import pdfService, { downloadExamPdf, previewExamPdf } from "../../api/pdf";
 import { toggleExamLike } from "../../api/likeExam";
@@ -183,6 +183,30 @@ const PracticeExamDetailScreen = (props: Props) => {
       if (!filePath) {
         throw new Error('Không tải được file');
       }
+
+      // const res = await increaseExamDownload(examId);
+
+      // if (res.errorCode === 0) {
+      //   setExamInfo((prev) =>
+      //     prev ? { ...prev, total_download: res.data } : prev
+      //   );
+      //   console.log("Tăng lượt download thành công");
+      // } else {
+      //   console.log("Tăng lượt download thất bại");
+      // }
+
+      increaseExamDownload(examId)
+        .then((res) => {
+          if (res?.errorCode === 0) {
+            setExamInfo((prev) =>
+              prev ? { ...prev, total_download: res.data } : prev
+            );
+            console.log("Tăng lượt download thành công");
+          } else {
+            console.log("Tăng lượt download thất bại");
+          }
+        })
+        .catch(() => { });
 
       // (OPTIONAL) Mở file ngay sau khi tải
       // RNFetchBlob.android.actionViewIntent(filePath, 'application/pdf');

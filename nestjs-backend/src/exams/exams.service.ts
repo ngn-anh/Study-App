@@ -489,4 +489,24 @@ export class ExamsService {
 
     return final;
   }
+
+  async increaseDownload(examId: string) {
+    const result = await this.examModel.findByIdAndUpdate(
+      examId,
+      {
+        $inc: { total_download: 1 },
+      },
+      { new: true, select: 'total_download' },
+    );
+
+    if (!result) {
+      throw new NotFoundException('Exam not found');
+    }
+
+    return {
+      errorCode: 0,
+      data: result.total_download,
+      message: 'Thành công',
+    };
+  }
 }

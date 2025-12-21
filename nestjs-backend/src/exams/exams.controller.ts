@@ -39,4 +39,9 @@ export class ExamsController {
     console.log('query', query);
     return this.examsService.getExamRank(query);
   }
+
+  @Post(':id/increase-download')
+  async increaseDownload(@Param('id') id: string) {
+    return this.examsService.increaseDownload(id);
+  }
 }
