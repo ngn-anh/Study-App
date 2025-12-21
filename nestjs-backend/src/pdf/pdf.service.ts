@@ -10,14 +10,23 @@ import { Exam, ExamDocument } from 'src/exams/schemas/exams.schema';
 // import * as PDFDocument from 'pdfkit';
 import PDFDocument from 'pdfkit';
 import { fontBold, fontItalic, fontRegular } from 'src/utils/fonts';
+import axios from 'axios';
+
+type ParsedBlock =
+  | { type: 'text'; value: string }
+  | { type: 'image'; value: string };
 
 @Injectable()
 export class PdfService {
   constructor(
-    @InjectModel(Question.name) private questionModel: Model<QuestionDocument>,
+    @InjectModel(Question.name)
+    private questionModel: Model<QuestionDocument>,
+
     @InjectModel(AnswerQuestion.name)
     private answerModel: Model<AnswerQuestionDocument>,
-    @InjectModel(Exam.name) private examModel: Model<ExamDocument>,
+
+    @InjectModel(Exam.name)
+    private examModel: Model<ExamDocument>,
   ) {}
 
   async findByExamId(examId: string) {
@@ -41,21 +50,20 @@ export class PdfService {
 
     // Lấy đáp án
     const answers = await this.answerModel
-      .find({ question_id: { $in: questionIds }, deleted_at: null })
+      .find({
+        question_id: { $in: questionIds },
+        deleted_at: null,
+      })
       .select('-created_at -updated_at -deleted_at')
       .lean();
 
-    let questionsWithAnswers = questions.map((q) => {
-      let questionAnswers = answers.filter(
+    const questionsWithAnswers = questions.map((q) => ({
+      ...q,
+      answers: answers.filter(
         (a) => a.question_id.toString() === q._id.toString(),
-      );
-      return {
-        ...q,
-        answers: questionAnswers,
-      };
-    });
+      ),
+    }));
 
-    // Trả về exam + questions
     return {
       exam,
       questions: questionsWithAnswers,
@@ -63,40 +71,39 @@ export class PdfService {
   }
 
   async generateExamPdf(examData: any): Promise<Buffer> {
-    return new Promise((resolve, reject) => {
-      try {
-        const chunks: Buffer[] = [];
+    const chunks: Buffer[] = [];
 
-        const doc = new PDFDocument({
-          margin: 50,
-          size: 'A4',
-          bufferPages: true,
-        });
-        // đăng ký font
-        doc.registerFont('regular', fontRegular);
-        doc.registerFont('bold', fontBold);
-        doc.registerFont('italic', fontItalic);
-
-        // set font mặc định
-        doc.font('regular');
-
-        doc.on('data', (chunk) => chunks.push(chunk));
-        doc.on('end', () => resolve(Buffer.concat(chunks)));
-        doc.on('error', (err) => reject(err));
-
-        // Nội dung PDF
-        this.addHeader(doc, examData.exam);
-        this.addInstructions(doc);
-        this.addQuestions(doc, examData.questions);
-
-        // Footer PHẢI gọi TRƯỚC doc.end()
-        this.addFooter(doc, examData.questions.length);
-
-        doc.end();
-      } catch (error) {
-        reject(error instanceof Error ? error : new Error(String(error)));
-      }
+    const doc = new PDFDocument({
+      margin: 50,
+      size: 'A4',
+      bufferPages: true,
     });
+
+    doc.registerFont('regular', fontRegular);
+    doc.registerFont('bold', fontBold);
+    doc.registerFont('italic', fontItalic);
+    doc.font('regular');
+
+    doc.on('data', (chunk) => chunks.push(chunk));
+
+    // ⬇️ CHỜ render xong PDF
+    const pdfBufferPromise = new Promise<Buffer>((resolve, reject) => {
+      doc.on('end', () => resolve(Buffer.concat(chunks)));
+      doc.on('error', reject);
+    });
+
+    // render nội dung
+    this.addHeader(doc, examData.exam);
+    this.addInstructions(doc);
+
+    // ✅ await hợp lệ
+    await this.addQuestions(doc, examData.questions);
+
+    this.addFooter(doc, examData.questions.length);
+
+    doc.end();
+
+    return pdfBufferPromise;
   }
 
   private addHeader(doc: PDFKit.PDFDocument, exam: any): void {
@@ -121,7 +128,7 @@ export class PdfService {
     doc.moveDown(2);
   }
 
-  private addFooter(doc: PDFKit.PDFDocument, totalQuestions: number): void {
+  private addFooter(doc: PDFKit.PDFDocument, totalQuestions: number) {
     const range = doc.bufferedPageRange();
     const start = range.start;
     const count = range.count;
@@ -142,7 +149,7 @@ export class PdfService {
     }
   }
 
-  private addInstructions(doc: PDFKit.PDFDocument): void {
+  private addInstructions(doc: PDFKit.PDFDocument) {
     doc
       .fontSize(12)
       .font('bold')
@@ -161,7 +168,10 @@ export class PdfService {
     this.addSeparator(doc);
   }
 
-  private addQuestions(doc: PDFKit.PDFDocument, questions: any[]): void {
+  private async addQuestions(
+    doc: PDFKit.PDFDocument,
+    questions: any[],
+  ): Promise<void> {
     // Tiêu đề phần câu hỏi
     doc
       .fontSize(16)
@@ -172,21 +182,17 @@ export class PdfService {
     doc.moveDown(1.5);
 
     // Duyệt qua từng câu hỏi
-    questions.forEach((question, index) => {
-      this.addSingleQuestion(doc, question, index + 1);
-
-      // Thêm khoảng cách giữa các câu hỏi
-      if (index < questions.length - 1) {
-        doc.moveDown(1);
-      }
-    });
+    for (let i = 0; i < questions.length; i++) {
+      await this.addSingleQuestion(doc, questions[i], i + 1);
+      doc.moveDown(1);
+    }
   }
 
-  private addSingleQuestion(
+  private async addSingleQuestion(
     doc: PDFKit.PDFDocument,
     question: any,
     questionNumber: number,
-  ): void {
+  ) {
     // Kiểm tra nếu cần sang trang mới
     if (doc.y > doc.page.height - 200) {
       doc.addPage();
@@ -210,11 +216,12 @@ export class PdfService {
     }
 
     // Hiển thị nội dung câu hỏi (description thay vì content)
-    doc
-      .fontSize(12)
-      .font('regular')
-      .fillColor('#34495e')
-      .text(question.description || question.content || '');
+    // doc
+    //   .fontSize(12)
+    //   .font('regular')
+    //   .fillColor('#34495e')
+    //   .text(question.description || question.content || '');
+    await this.renderDescription(doc, question.description || '');
 
     doc.moveDown(0.5);
 
@@ -266,7 +273,83 @@ export class PdfService {
     this.addQuestionSeparator(doc);
   }
 
-  private addSeparator(doc: PDFKit.PDFDocument): void {
+  private parseDescription(desc: string): ParsedBlock[] {
+    const blocks: ParsedBlock[] = [];
+    const regex = /\[(https?:\/\/[^\]]+)\]/g;
+
+    let lastIndex = 0;
+    let match: RegExpExecArray | null;
+
+    while ((match = regex.exec(desc)) !== null) {
+      if (match.index > lastIndex) {
+        blocks.push({
+          type: 'text',
+          value: desc.slice(lastIndex, match.index),
+        });
+      }
+
+      blocks.push({
+        type: 'image',
+        value: match[1],
+      });
+
+      lastIndex = regex.lastIndex;
+    }
+
+    if (lastIndex < desc.length) {
+      blocks.push({
+        type: 'text',
+        value: desc.slice(lastIndex),
+      });
+    }
+
+    return blocks;
+  }
+
+  private async renderDescription(
+    doc: PDFKit.PDFDocument,
+    description: string,
+  ) {
+    const blocks = this.parseDescription(description);
+
+    for (const block of blocks) {
+      if (block.type === 'text') {
+        doc.font('regular').fontSize(12).text(block.value, {
+          continued: false,
+        });
+      }
+
+      if (block.type === 'image') {
+        try {
+          const buffer = await this.loadImageBuffer(block.value);
+
+          if (doc.y > doc.page.height - 250) {
+            doc.addPage();
+          }
+
+          doc.moveDown(0.5);
+          doc.image(buffer, {
+            fit: [400, 250],
+            align: 'center',
+          });
+          doc.moveDown(0.5);
+        } catch {
+          doc.fontSize(9).fillColor('red').text('[Không tải được hình ảnh]');
+        }
+      }
+    }
+  }
+
+  private async loadImageBuffer(url: string): Promise<Buffer> {
+    const res = await axios.get(url, {
+      responseType: 'arraybuffer',
+      timeout: 10000,
+    });
+
+    return Buffer.from(res.data);
+  }
+
+  private addSeparator(doc: PDFKit.PDFDocument) {
     doc
       .moveTo(50, doc.y)
       .lineTo(doc.page.width - 50, doc.y)

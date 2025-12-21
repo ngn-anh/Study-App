@@ -1,5 +1,4 @@
-// npm install rn-fetch-blob react-native-share
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, Platform, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./index.styles";
 import { RouteProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../types/data";
@@ -16,9 +15,10 @@ import { formatDate } from "../../utils/time";
 import { Exam, User, UserInfo } from "../../types/typeObj";
 import { getExamInfo } from "../../api/exam";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import pdfService from "../../api/pdf";
+import pdfService, { downloadExamPdf, previewExamPdf } from "../../api/pdf";
 import { toggleExamLike } from "../../api/likeExam";
 import { SUBMITTED_EXAM } from "../../constants";
+import RNFetchBlob from 'react-native-blob-util';
 
 type Props = {
   route: RouteProp<RootStackParamList, 'PracticeExamDetailScreen'>;
@@ -169,206 +169,49 @@ const PracticeExamDetailScreen = (props: Props) => {
 
   const onSelectTab = (tab: string) => () => setActiveTab(tab);
 
-  // // ==================== PDF HANDLERS ====================
-
-  // 1. Hiển thị menu options cho PDF
-  const handlePDFOptions = async () => {
-    if (!examInfo) return;
-
-    await pdfService.showPDFOptions(examInfo._id, examInfo.name || '', {
-      name: examInfo.name,
-      duration: examInfo.duration,
-      numberQuestion: examInfo.numberQuestion,
-      image: examInfo.image,
-      participants: examInfo.participants,
-      total_like: examInfo.total_like,
-      total_download: examInfo.total_download,
-    });
-  };
-
-  // // 2. Tải và mở PDF ngay
-  // const handleDownloadAndOpen = async () => {
-  //   if (!examInfo) return;
-
-  //   try {
-  //     setDownloading(true);
-
-  //     await pdfService.downloadExamPDF(examInfo._id, examInfo.name || '', {
-  //       showAlert: true,
-  //       openAfterDownload: true,
-  //       shareAfterDownload: false,
-  //     });
-
-  //   } catch (error) {
-  //     console.error('Lỗi tải PDF:', error);
-  //     // Lỗi đã được xử lý trong service
-  //   } finally {
-  //     setDownloading(false);
-  //   }
-  // };
-
-  // 3. Xem trước PDF
-  const handlePreviewPDF = async () => {
-    if (!examInfo) return;
+  const handleDownloadPdf = async () => {
+    if (downloading) return;
 
     try {
-      setPreviewing(true);
+      setDownloading(true);
 
-      await pdfService.previewExamPDF(examInfo._id, examInfo.name || '', {
-        downloadFirst: false,
-        useBrowser: true,
-      });
-
-    } catch (error) {
-      console.error('Lỗi xem trước PDF:', error);
-      // Alert.alert('Lỗi', 'Không thể xem trước PDF');
-    } finally {
-      setPreviewing(false);
-    }
-  };
-
-  // // 4. Chia sẻ thông tin đề thi
-  // const handleShareExamInfo = async () => {
-  //   if (!examInfo) return;
-
-  //   try {
-  //     await pdfService.shareExamInfo({
-  //       name: examInfo.name || '',
-  //       duration: examInfo.duration || 0,
-  //       numberQuestion: examInfo.numberQuestion || 0,
-  //       image: examInfo.image,
-  //     });
-  //   } catch (error) {
-  //     console.error('Lỗi chia sẻ:', error);
-  //   }
-  // };
-
-  // // 5. Tải nhanh PDF (chỉ tải không mở)
-  // const handleQuickDownload = async () => {
-  //   if (!examInfo) return;
-
-  //   try {
-  //     setDownloading(true);
-
-  //     await pdfService.downloadExamPDF(examInfo._id, examInfo.name || '', {
-  //       showAlert: true,
-  //       openAfterDownload: false,
-  //       shareAfterDownload: false,
-  //     });
-
-  //   } catch (error) {
-  //     console.error('Lỗi tải PDF:', error);
-  //   } finally {
-  //     setDownloading(false);
-  //   }
-  // };
-
-  // Chia sẻ app
-  const handleShareApp = async () => {
-    try {
-      await pdfService.shareAppDownload(
-        examInfo?.name,
-        {
-          duration: examInfo?.duration,
-          numberQuestion: examInfo?.numberQuestion,
-        }
+      const filePath = await downloadExamPdf(
+        examId,        // id đề thi
+        examInfo?.name,      // tên file (không .pdf)
       );
+
+      if (!filePath) {
+        throw new Error('Không tải được file');
+      }
+
+      // (OPTIONAL) Mở file ngay sau khi tải
+      // RNFetchBlob.android.actionViewIntent(filePath, 'application/pdf');
+
     } catch (error) {
-      console.error('Lỗi chia sẻ app:', error);
+      console.error(error);
+      console.log('Lỗi', 'Không thể tải đề thi PDF');
+    } finally {
+      setDownloading(false);
     }
   };
 
-  // // Trong PracticeExamDetailScreen.tsx
-  // const handleShareDeepLink = async () => {
-  //   if (!examInfo) {
-  //     Alert.alert('Lỗi', 'Không có thông tin đề thi');
-  //     return;
-  //   }
+  const handlePreviewPdf = async () => {
+    try {
+      const filePath = await previewExamPdf(examId, examInfo?.name);
 
-  //   try {
-  //     setSharingDeepLink(true);
-
-  //     // Gọi hàm shareDeepLink từ pdfService
-  //     await pdfService.shareDeepLink(
-  //       examInfo._id,
-  //       examInfo.name || '',
-  //       examInfo,
-  //     );
-
-  //   } catch (error: any) {
-  //     // Nếu user cancel thì không hiển thị lỗi
-  //     if (error.message !== 'User did not share') {
-  //       console.error('Lỗi chia sẻ deep link:', error);
-
-  //       // Fallback: chia sẻ thông thường
-  //       Alert.alert(
-  //         'Thông báo',
-  //         'Không thể chia sẻ deep link. Chia sẻ link thông thường?',
-  //         [
-  //           { text: 'Hủy', style: 'cancel' },
-  //           {
-  //             text: 'Đồng ý',
-  //             onPress: () => pdfService.shareAppDownload(
-  //               examInfo?.name,
-  //               {
-  //                 duration: examInfo?.duration,
-  //                 numberQuestion: examInfo?.numberQuestion,
-  //               }
-  //             )
-  //           },
-  //         ]
-  //       );
-  //     }
-  //   } finally {
-  //     setSharingDeepLink(false);
-  //   }
-  // };
-
-  // // Hàm mở deep link trực tiếp
-  // const handleOpenDeepLink = async () => {
-  //   if (!examInfo) return;
-
-  //   try {
-  //     setSharingDeepLink(true);
-
-  //     // Tạo deep link từ config
-  //     const deepLink = `luyenthipro://exam/${examId}`;
-  //     const playStoreLink = 'https://play.google.com/store/apps/details?id=com.luyenthipro';
-  //     const appStoreLink = 'https://apps.apple.com/app/id1234567890';
-
-  //     // Kiểm tra xem có thể mở deep link không
-  //     const canOpen = await Linking.canOpenURL(deepLink);
-
-  //     if (canOpen) {
-  //       // Mở app bằng deep link
-  //       await Linking.openURL(deepLink);
-  //     } else {
-  //       // Nếu app chưa cài, chuyển đến cửa hàng app
-  //       Alert.alert(
-  //         'App chưa được cài đặt',
-  //         'Bạn cần cài đặt ứng dụng Luyện Thi để mở đề thi này.',
-  //         [
-  //           { text: 'Hủy', style: 'cancel' },
-  //           {
-  //             text: 'Tải app ngay',
-  //             onPress: () => {
-  //               if (Platform.OS === 'ios') {
-  //                 Linking.openURL(appStoreLink);
-  //               } else {
-  //                 Linking.openURL(playStoreLink);
-  //               }
-  //             }
-  //           },
-  //         ]
-  //       );
-  //     }
-  //   } catch (error) {
-  //     console.error('Lỗi mở deep link:', error);
-  //     Alert.alert('Lỗi', 'Không thể mở ứng dụng');
-  //   } finally {
-  //     setSharingDeepLink(false);
-  //   }
-  // };
+      if (Platform.OS === 'android') {
+        RNFetchBlob.android.actionViewIntent(
+          filePath,
+          'application/pdf',
+        );
+      } else {
+        RNFetchBlob.ios.openDocument(filePath);
+      }
+    } catch (error) {
+      console.error(error);
+      console.log('Lỗi', 'Không thể xem trước PDF');
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -475,7 +318,7 @@ const PracticeExamDetailScreen = (props: Props) => {
                   styles.action,
                   downloading && styles.actionDisabled
                 ]}
-                onPress={handlePDFOptions}
+                onPress={handleDownloadPdf}
                 disabled={downloading}
                 activeOpacity={0.7}
               >
@@ -496,7 +339,7 @@ const PracticeExamDetailScreen = (props: Props) => {
                   styles.action,
                   previewing && styles.actionDisabled
                 ]}
-                onPress={handlePreviewPDF}
+                onPress={handlePreviewPdf}
                 disabled={previewing}
                 activeOpacity={0.7}
               >
@@ -515,7 +358,7 @@ const PracticeExamDetailScreen = (props: Props) => {
               <TouchableOpacity
                 style={styles.action}
                 // onPress={handleShareExamInfo}
-                onPress={handleShareApp}
+                // onPress={handleShareApp}
                 activeOpacity={0.7}
               >
                 <ShareFatIcon
