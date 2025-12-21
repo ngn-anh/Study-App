@@ -1,56 +1,41 @@
 import RNFetchBlob from 'react-native-blob-util';
-import { Platform } from 'react-native';
+import { PermissionsAndroid, Platform } from 'react-native';
 import { API_URL } from '@env';
 
-export const downloadExamPdf = async (
-  examId: string,
-  name: string,
-  token?: string,
-) => {
+export const downloadExamPdf = async (examId: string, name: string) => {
   const { fs } = RNFetchBlob;
-
-  const dir =
-    Platform.OS === 'android' ? fs.dirs.DownloadDir : fs.dirs.DocumentDir;
-
-  const path = `${dir}/${name}.pdf`;
+  if (Platform.OS === 'android' && Platform.Version < 33) {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+    );
+    if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+      console.error('Không có quyền lưu file');
+    }
+  }
+  const safeName = name.replace(/[\/\\:*?"<>|]/g, '_');
+  const downloadPath = `${fs.dirs.DownloadDir}/${safeName}.pdf`;
 
   try {
-    const res = await RNFetchBlob.config({
-      fileCache: true,
-      path,
-      appendExt: 'pdf',
+    await RNFetchBlob.config({
+      fileCache: false,
       addAndroidDownloads: {
         useDownloadManager: true,
         notification: true,
-        path,
+        path: downloadPath,
+        title: `${safeName}.pdf`,
         description: 'Đang tải đề thi PDF',
         mime: 'application/pdf',
-        title: name,
+        mediaScannable: true,
       },
-    }).fetch(
-      'GET',
-      `${API_URL}/download-pdf/exam/${examId}/pdf`,
-      token
-        ? {
-            Authorization: `Bearer ${token}`,
-          }
-        : undefined,
-    );
-
-    console.log('Thành công', 'Đã tải đề thi PDF');
-
-    return res.path();
+    }).fetch('GET', `${API_URL}/download-pdf/exam/${examId}/pdf`);
+    console.log('loanhtm downloadPath: ', downloadPath);
+    return downloadPath;
   } catch (error) {
-    console.error(error);
-    console.log('Lỗi không tải được đề thi');
+    console.error('Không tải được đề thi', error);
   }
 };
 
-export const previewExamPdf = async (
-  examId: string,
-  name?: string,
-  token?: string,
-) => {
+export const previewExamPdf = async (examId: string, name?: string) => {
   const { fs } = RNFetchBlob;
 
   // file tạm
@@ -60,11 +45,7 @@ export const previewExamPdf = async (
     fileCache: true,
     path,
     appendExt: 'pdf',
-  }).fetch(
-    'GET',
-    `${API_URL}/download-pdf/exam/${examId}/preview`,
-    token ? { Authorization: `Bearer ${token}` } : undefined,
-  );
+  }).fetch('GET', `${API_URL}/download-pdf/exam/${examId}/preview`);
 
   return res.path();
 };

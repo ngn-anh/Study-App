@@ -15,7 +15,10 @@ import { formatDate } from "../../utils/time";
 import { Exam, User, UserInfo } from "../../types/typeObj";
 import { getExamInfo, increaseExamDownload } from "../../api/exam";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import pdfService, { downloadExamPdf, previewExamPdf } from "../../api/pdf";
+import {
+  downloadExamPdf,
+  previewExamPdf
+} from "../../api/pdf";
 import { toggleExamLike } from "../../api/likeExam";
 import { SUBMITTED_EXAM } from "../../constants";
 import RNFetchBlob from 'react-native-blob-util';
@@ -174,14 +177,16 @@ const PracticeExamDetailScreen = (props: Props) => {
 
     try {
       setDownloading(true);
+      if (!examId) return;
 
       const filePath = await downloadExamPdf(
-        examId,        // id đề thi
-        examInfo?.name,      // tên file (không .pdf)
+        examId,
+        examInfo?.name || "Đề thi",
       );
 
       if (!filePath) {
-        throw new Error('Không tải được file');
+        console.error("Lỗi không tải được file Pdf");
+        return;
       }
 
       // const res = await increaseExamDownload(examId);
@@ -212,14 +217,14 @@ const PracticeExamDetailScreen = (props: Props) => {
       // RNFetchBlob.android.actionViewIntent(filePath, 'application/pdf');
 
     } catch (error) {
-      console.error(error);
-      console.log('Lỗi', 'Không thể tải đề thi PDF');
+      console.error('Không thể tải đề thi PDF', error);
     } finally {
       setDownloading(false);
     }
   };
 
   const handlePreviewPdf = async () => {
+    if (!examId) return;
     try {
       const filePath = await previewExamPdf(examId, examInfo?.name);
 
