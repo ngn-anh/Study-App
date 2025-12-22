@@ -1,0 +1,60 @@
+[{
+  "_id": {
+    "$oid": "69468fa8eb8f1b7aa53371ec"
+  },
+  "code": "admin",
+  "name": "Quản trị viên",
+  "description": "Toàn quyền hệ thống",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-20T11:59:36.447Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-20T11:59:36.447Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69468fa8eb8f1b7aa53371ed"
+  },
+  "code": "staff",
+  "name": "Nhân viên",
+  "description": "Nhân viên quản lý và vận hành hệ thống",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-20T11:59:36.448Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-22T04:53:42.187Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69468fa8eb8f1b7aa53371ee"
+  },
+  "code": "student",
+  "name": "Học sinh",
+  "description": "Người học trong hệ thống",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-20T11:59:36.448Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-20T11:59:36.448Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "694936b2b409680679bd2547"
+  },
+  "code": "assistant",
+  "name": "Trợ lý",
+  "description": null,
+  "created_at": {
+    "$date": "2025-12-22T12:16:50.489Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-22T12:16:50.489Z"
+  },
+  "__v": 0
+}]

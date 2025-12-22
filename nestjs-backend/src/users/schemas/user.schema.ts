@@ -26,8 +26,8 @@ export class User {
   @Prop({ type: Types.ObjectId, ref: 'Class', required: true })
   class_id: Types.ObjectId;
 
-  @Prop({ default: 1 })
-  role: number;
+  @Prop({ default: 'student' })
+  role: string; // student | staff | admin
 
   @Prop()
   refresh_token?: string;

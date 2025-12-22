@@ -17,6 +17,9 @@ import { PdfModule } from './pdf/pdf.module';
 // import { ClassModule } from './classes/class.module';
 import { NotificationSettingModule } from './notification-setting/notification-setting.module';
 // import { SubjectModule } from './subjects/subject.module';
+import { RolesModule } from './roles/roles.module';
+import { PermissionsModule } from './permissions/permissions.module';
+import { RolePermissionsModule } from './role-permissions/role-permissions.module';
 
 @Module({
   imports: [
@@ -46,6 +49,10 @@ import { NotificationSettingModule } from './notification-setting/notification-s
     // ClassModule,
     NotificationSettingModule,
     SubjectsModule,
+    // SubjectModule,
+    RolesModule,
+    PermissionsModule,
+    RolePermissionsModule,
   ],
   controllers: [],
   providers: [],

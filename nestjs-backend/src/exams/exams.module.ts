@@ -8,8 +8,8 @@ import {
   SubjectClassSchema,
 } from 'src/subjects-classes/schemas/subjects-classes.schema';
 import { Class, ClassSchema } from 'src/classes/schemas/classes.schema';
-import { Subject } from 'rxjs';
-import { SubjectSchema } from 'src/subjects/schemas/subjects.schema';
+// import { Subject } from 'rxjs';
+import { Subject, SubjectSchema } from 'src/subjects/schemas/subjects.schema';
 import {
   ExamResult,
   ExamResultSchema,

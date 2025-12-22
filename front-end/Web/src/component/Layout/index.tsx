@@ -5,11 +5,13 @@ import { appRoutes } from "../../routes";
 import { canAccessRoute } from "../../auth";
 import logo from '../../assets/auth/logo.png'
 import styles from "./index.module.css";
+import { useState } from "react";
 
 const { Header, Sider, Content } = Layout;
 
 export default function DashboardLayout({ onLogout }: { onLogout: () => void }) {
   const navigate = useNavigate();
+  const [openKeys, setOpenKeys] = useState<string[]>([]);
   const location = useLocation();
   const userDataString = localStorage.getItem("userData");
   const userData = userDataString ? JSON.parse(userDataString) : null;
@@ -17,11 +19,45 @@ export default function DashboardLayout({ onLogout }: { onLogout: () => void }) 
   const username = userData?.user?.full_name || userData?.user?.username || "User";
   const avatarUrl = userData?.user?.avatar;
 
-  const userRole = "admin"; // mock — replace later
+  const userRole = userData?.user?.role;
 
-  const filteredMenu = appRoutes.filter((r: any) => canAccessRoute(r, userRole));
+  const filteredMenu = appRoutes
+  .filter((r: any) => canAccessRoute(r, userRole))
+  .map((r: any) => {
+    if (!r.children) return r;
 
-  const breadcrumbItem = appRoutes.find((r: any) => r.path === location.pathname);
+    return {
+      ...r,
+      children: r.children.filter((c: any) =>
+        canAccessRoute({ ...c, roles: r.roles }, userRole)
+      ),
+    };
+  })
+  .filter((r: any) => !r.children || r.children.length > 0);
+
+  const getBreadcrumbItems = () => {
+    let items: any[] = [];
+
+    for (const route of appRoutes) {
+      if (route.children) {
+        const child = route.children.find((c: any) => c.path === location.pathname);
+        if (child) {
+          items.push(route);
+          items.push(child);
+          return items;
+        }
+      }
+
+      if (route.path === location.pathname) {
+        items.push(route);
+        return items;
+      }
+    }
+
+    return items;
+  };
+
+  const breadcrumbItems = getBreadcrumbItems();
 
    const handleUserMenuClick = ({ key }: { key: string }) => {
     console.log(key)
@@ -50,7 +86,7 @@ export default function DashboardLayout({ onLogout }: { onLogout: () => void }) 
       style={{ background: "#f6f9fcff" }} 
       className={styles.customSider}
       width={260}          // width khi mở
-  collapsedWidth={80}  // width khi đóng
+      collapsedWidth={80}  // width khi đóng
       >
         <img src={logo} className={styles.logo} />
         <Menu
@@ -59,13 +95,30 @@ export default function DashboardLayout({ onLogout }: { onLogout: () => void }) 
           className={styles.dashboardMenu}
           style={{ background: "none" }}
           selectedKeys={[location.pathname]}
-          onClick={(e: any) => navigate(e.key)}
-          items={filteredMenu.map((r: any) => ({
-            key: r.path,
-            icon: <r.icon size={20} />,
-            label: r.label,
-          }))}
+          openKeys={openKeys}
+          onOpenChange={(keys) => setOpenKeys(keys)}
+          onClick={(e) => navigate(e.key)}
+          items={filteredMenu.map((r) => {
+            if (r.children) {
+              return {
+                key: r.path, // key menu cha
+                icon: <r.icon size={20} />,
+                label: r.label,
+                children: r.children.map((c: any) => ({
+                  key: c.path, // key con là path con
+                  label: c.label,
+                })),
+              };
+            }
+
+            return {
+              key: r.path,
+              icon: <r.icon size={20} />,
+              label: r.label,
+            };
+          })}
         />
+
       </Sider>
 
       <Layout>
@@ -91,17 +144,29 @@ export default function DashboardLayout({ onLogout }: { onLogout: () => void }) 
 
         <Content style={{ background: "#fff", padding: 24 }}>
           <Breadcrumb style={{ marginBottom: 16 }}>
-            {breadcrumbItem && <Breadcrumb.Item>{breadcrumbItem.breadcrumb}</Breadcrumb.Item>}
-          </Breadcrumb>
+          {breadcrumbItems.map((item, idx) => (
+            <Breadcrumb.Item key={idx}>{item.breadcrumb}</Breadcrumb.Item>
+          ))}
+        </Breadcrumb>
+
 
           <Routes>
-            {appRoutes.map((route: any) =>
-              canAccessRoute(route, userRole) ? (
-                <Route key={route.path} path={route.path} element={<route.element />} />
-              ) : (
-                <Route key={route.path} path={route.path} element={<Navigate to="/home" replace />} />
-              )
-            )}
+            {appRoutes.map((route: any) => {
+              if (!canAccessRoute(route, userRole)) {
+                return (
+                  <Route key={route.path} path={route.path} element={<Navigate to="/home" replace />} />
+                );
+              }
+
+              if (route.children) {
+                return route.children.map((child: any) => (
+                  <Route key={child.path} path={child.path} element={<child.element />} />
+                ));
+              }
+
+              return <Route key={route.path} path={route.path} element={<route.element />} />;
+            })}
+
             <Route path="*" element={<Navigate to="/home" replace />} />
           </Routes>
         </Content>
