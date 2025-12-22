@@ -134,7 +134,6 @@ const requestGetDataSource = async (param: any) => {
       dataIndex: 'code',
       key: 'code',
       width: 150,
-      fixed: 'left',
       align: 'left',
       render: (_?: any, row?: any) => {
         return (
@@ -147,7 +146,6 @@ const requestGetDataSource = async (param: any) => {
       dataIndex: 'description',
       key: 'description',
       width: 350,
-      fixed: 'left',
       align: 'left',
       render: (_?: any, row?: any) => {
         return (

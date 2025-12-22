@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Patch, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Patch, Delete, Query } from '@nestjs/common';
 import { ClassesService } from './class.service';
 import { CreateClassDto } from './dto/create-class.dto';
 import { UpdateClassDto } from './dto/update-class.dto';
@@ -13,8 +13,23 @@ export class ClassesController {
   }
 
   @Get()
-  findAll() {
-    return this.classesService.findAll();
+  findAll(@Query() query: any) {
+    return this.classesService.findAll(query);
+  }
+
+  @Get('program')
+  async getList(@Query() query) {
+    return this.classesService.getListClassWithSubjects(query);
+  }
+
+  @Get('program/:id')
+  async getDetailProgram(@Param('id') id: string) {
+    return this.classesService.getDetailProgram(id);
+  }
+
+  @Post('program')
+  async createProgram(@Body() body: { class_id: string; subject_ids: string[] }) {
+    return this.classesService.createProgram(body.class_id, body.subject_ids);
   }
 
   @Get(':id')
@@ -31,4 +46,5 @@ export class ClassesController {
   delete(@Param('id') id: string) {
     return this.classesService.remove(id);
   }
+
 }

@@ -44,12 +44,7 @@ const ProTableFixed = (props: any) => {
         bordered={props.bordered ?? false}
          locale={{
           emptyText: (
-            <div style={{ textAlign: "center", padding: "40px 0" }}>
-              <FileX size={50} weight="duotone" color="#cececeff" />
-              <div style={{ color: "#bbbbbbff", fontSize: 14 }}>
-                Không có dữ liệu
-              </div>
-            </div>
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={"Không có dữ liệu"} />
           ),
         }}
         headerTitle={false}

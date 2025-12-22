@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsOptional, IsEmail } from 'class-validator';
+import { IsString, IsOptional, IsEmail, IsNumber } from 'class-validator';
 
 export class UpdateProfileDto {
   @ApiProperty()
@@ -25,4 +25,9 @@ export class UpdateProfileDto {
   @IsOptional()
   @IsString()
   class_id?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  role?: string;
 }

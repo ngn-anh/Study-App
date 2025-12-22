@@ -6,7 +6,7 @@ export class UserEntity {
   avatar?: string;
   full_name?: string;
   class_id?: string;
-  role: number;
+  role: string;
   created_at?: Date;
   updated_at?: Date;
   deleted_at?: Date;
