@@ -17,6 +17,21 @@ export class ClassesController {
     return this.classesService.findAll(query);
   }
 
+  @Get('program')
+  async getList(@Query() query) {
+    return this.classesService.getListClassWithSubjects(query);
+  }
+
+  @Get('program/:id')
+  async getDetailProgram(@Param('id') id: string) {
+    return this.classesService.getDetailProgram(id);
+  }
+
+  @Post('program')
+  async createProgram(@Body() body: { class_id: string; subject_ids: string[] }) {
+    return this.classesService.createProgram(body.class_id, body.subject_ids);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.classesService.findOne(id);
@@ -31,4 +46,5 @@ export class ClassesController {
   delete(@Param('id') id: string) {
     return this.classesService.remove(id);
   }
+
 }

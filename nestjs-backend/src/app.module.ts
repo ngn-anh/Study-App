@@ -13,6 +13,9 @@ import { BullModule } from '@nestjs/bull';
 import { ClassModule } from './classes/class.module';
 import { NotificationSettingModule } from './notification-setting/notification-setting.module';
 import { SubjectModule } from './subjects/subject.module';
+import { RolesModule } from './roles/roles.module';
+import { PermissionsModule } from './permissions/permissions.module';
+import { RolePermissionsModule } from './role-permissions/role-permissions.module';
 
 
 @Module({
@@ -35,7 +38,10 @@ import { SubjectModule } from './subjects/subject.module';
     NotificationsModule,
     ClassModule,
     NotificationSettingModule,
-    SubjectModule
+    SubjectModule,
+    RolesModule,
+    PermissionsModule,
+    RolePermissionsModule,
   ],
   controllers: [],
   providers: [],
