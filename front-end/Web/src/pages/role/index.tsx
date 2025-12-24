@@ -1,4 +1,4 @@
-import { Button, message, Tooltip } from "antd";
+import { Button, message, Tooltip, Row, Col } from "antd";
 import PageContainerFixed from "../../component/PageContainerFixed";
 import { MagnifyingGlass, Plus, Trash, Lock, NotePencil, User } from "phosphor-react";
 import './index.less'
@@ -11,6 +11,8 @@ import CustomModal from "../../component/CustomModal";
 import { deleteRole, getRoles } from "../../api/role";
 import ConfigPermission from "./component/ConfigPermission";
 import CreateUpdateRole from "./component/CreateUpdateRole";
+import { PermissionGuard } from "../../components/PermissionGuard";
+import { hasPermission } from "../../utils/permission";
 
 
 export default function RolePage() {
@@ -166,34 +168,40 @@ const requestGetDataSource = async (param: any) => {
 
       return (
         <div className="cpn-action">
-          <Tooltip title={hasUsers ? 'Vai trò đang được sử dụng' : 'Sửa'}>
-            <NotePencil
-              color={hasUsers ? '#999' : '#0c4299'}
-              className={hasUsers ? 'cursor-not-allowed cpn-action-edit' : 'cursor-pointer cpn-action-edit'}
-              onClick={() => {
-                if (hasUsers) return;
-                setCurrentRoleCode(row.code);
-                setIsOpenRoleDrawer(true);
-              }}
-            />
-          </Tooltip>
+          {/* Button chỉnh sửa - cần quyền role.update */}
+          <PermissionGuard requiredPermissions="role.update">
+            <Tooltip title={hasUsers ? 'Vai trò đang được sử dụng' : 'Sửa'}>
+              <NotePencil
+                color={hasUsers ? '#999' : '#0c4299'}
+                className={hasUsers ? 'cursor-not-allowed cpn-action-edit' : 'cursor-pointer cpn-action-edit'}
+                onClick={() => {
+                  if (hasUsers) return;
+                  setCurrentRoleCode(row.code);
+                  setIsOpenRoleDrawer(true);
+                }}
+              />
+            </Tooltip>
+          </PermissionGuard>
 
-          <Tooltip
-            title={
-              hasUsers
-                ? 'Không thể xoá vai trò đang được sử dụng'
-                : 'Xoá vai trò'
-            }
-          >
-            <Trash
-              color={hasUsers ? '#999' : '#d63b3b'}
-              className={hasUsers ? 'cursor-not-allowed' : 'cursor-pointer'}
-              onClick={() => {
-                if (hasUsers) return;
-                onOpenDelete(row);
-              }}
-            />
-          </Tooltip>
+          {/* Button xoá - cần quyền role.delete */}
+          <PermissionGuard requiredPermissions="role.delete">
+            <Tooltip
+              title={
+                hasUsers
+                  ? 'Không thể xoá vai trò đang được sử dụng'
+                  : 'Xoá vai trò'
+              }
+            >
+              <Trash
+                color={hasUsers ? '#999' : '#d63b3b'}
+                className={hasUsers ? 'cursor-not-allowed' : 'cursor-pointer'}
+                onClick={() => {
+                  if (hasUsers) return;
+                  onOpenDelete(row);
+                }}
+              />
+            </Tooltip>
+          </PermissionGuard>
         </div>
       );
     }
@@ -206,53 +214,55 @@ const requestGetDataSource = async (param: any) => {
             header={{
                 title: "Danh sách vai trò",
                 extra: (
+                  <PermissionGuard requiredPermissions="role.create">
                     <Button
-                  size={'large'}
-                  type="primary"
-                  className="ant-btn-primary"
-                  onClick={() => {
-                    setCurrentRoleCode(undefined); // create
-                    setIsOpenRoleDrawer(true);
-                  }}
-                >
-                  <Plus weight="bold"/> <span>Vai Trò Mới</span>
-                </Button>
+                      size={'large'}
+                      type="primary"
+                      className="ant-btn-primary"
+                      onClick={() => {
+                        setCurrentRoleCode(undefined); // create
+                        setIsOpenRoleDrawer(true);
+                      }}
+                    >
+                      <Plus weight="bold"/> <span>Vai Trò Mới</span>
+                    </Button>
+                  </PermissionGuard>
                 )
             }}
     >
         <div className="role-list-page">
             <ProForm submitter={false} form={form} className="form-search">
-                <div>
-                    <ProFormText
-                    width={400}
-                    placeholder={"Nhập tên vai trò để tìm kiếm"}
-                    fieldProps={{
-                    prefix: <MagnifyingGlass color="#083070" weight="bold" />,
-                    //   onPressEnter: handleEnterSearch,
-                    }}
-                    name="name"
-                />
-                </div>
-                
-                <div className="ant-form-item">
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Button
-                        className="ant-btn-secondary"
-                        onClick={() => {
-                          setFilterParams({});
-                          form.resetFields();
+                <Row gutter={[16, 16]}>
+                  <Col span={10}>
+                        <ProFormText
+                        width="100%"
+                        placeholder={"Nhập tên vai trò để tìm kiếm"}
+                        fieldProps={{
+                        prefix: <MagnifyingGlass color="#083070" weight="bold" />,
                         }}
-                    >
-                        Xóa bộ lọc
-                    </Button>
-                    <Button
-                        className="ant-btn-primary"
-                        onClick={() => search(filter.current)}
-                    >
-                    Tìm kiếm
-                    </Button>
-                </div>
-            </div>
+                        name="name"
+                    />
+                    </Col>
+                  <Col span={14}>
+                        <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+                            <Button
+                                className="ant-btn-secondary"
+                                onClick={() => {
+                                  setFilterParams({});
+                                  form.resetFields();
+                                }}
+                            >
+                                Xóa bộ lọc
+                            </Button>
+                            <Button
+                                className="ant-btn-primary"
+                                onClick={() => search(filter.current)}
+                            >
+                            Tìm kiếm
+                            </Button>
+                        </div>
+                    </Col>
+                </Row>
             </ProForm>
         <div>
           <ProTableFixed

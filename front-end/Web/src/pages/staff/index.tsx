@@ -1,4 +1,4 @@
-import { Button, message, Tag, Tooltip } from "antd";
+import { Button, message, Tag, Tooltip, Row, Col } from "antd";
 import PageContainerFixed from "../../component/PageContainerFixed";
 import { Gear, MagnifyingGlass, Trash } from "phosphor-react";
 import './index.less'
@@ -11,6 +11,7 @@ import { STATUS_SUBJECT } from "../../utils/enum";
 import CustomModal from "../../component/CustomModal";
 import { deleteStaff, getStaff } from "../../api/staff";
 import ConfigStaffRoleDrawer from "./component/ConfigStaffDrawer";
+import { PermissionGuard } from "../../components/PermissionGuard";
 
 
 export default function StaffPage() {
@@ -154,22 +155,26 @@ const requestGetDataSource = async (param: any) => {
       return (
         row?.status == STATUS_SUBJECT.ACTIVE && (
           <div className="cpn-action">
-            <Tooltip title={"Cấu hình"} onClick={
-              ()=>{
-                console.log('row',row)
-                setIsOpenDrawer(true)
-                setIdStaff(row.id)
-              }
-            }>
-              <Gear color ="#0c4299" className="cpn-action-edit cursor-pointer" />
-            </Tooltip>
-            <Tooltip title="Xoá">
-              <Trash
-                color="#d63b3b"
-                className="cursor-pointer"
-                onClick={() => onOpenDelete(row)}
-              />
-            </Tooltip>
+            <PermissionGuard requiredPermissions="user.update">
+              <Tooltip title={"Cấu hình"} onClick={
+                ()=>{
+                  console.log('row',row)
+                  setIsOpenDrawer(true)
+                  setIdStaff(row.id)
+                }
+              }>
+                <Gear color ="#0c4299" className="cpn-action-edit cursor-pointer" />
+              </Tooltip>
+            </PermissionGuard>
+            <PermissionGuard requiredPermissions="user.delete">
+              <Tooltip title="Xoá">
+                <Trash
+                  color="#d63b3b"
+                  className="cursor-pointer"
+                  onClick={() => onOpenDelete(row)}
+                />
+              </Tooltip>
+            </PermissionGuard>
           </div>
         )
       )
@@ -185,49 +190,50 @@ const requestGetDataSource = async (param: any) => {
     >
         <div className="staff-list-page">
             <ProForm submitter={false} form={form} className="form-search">
-                <div>
-                    <ProFormText
-                    width={400}
-                    placeholder={"Nhập tên nhân viên hoặc tên tài khoản để tìm kiếm"}
-                    fieldProps={{
-                    prefix: <MagnifyingGlass color="#083070" weight="bold" />,
-                    //   onPressEnter: handleEnterSearch,
-                    }}
-                    name="name"
-                />
-                
-                <ProFormSelect
-                    width={240}
-                    name="status"
-                    placeholder={"Trạng thái"}
-                    fieldProps={{
-                    showSearch: true,
-                    showArrow: true,
-                    filterOption: filterOptions,
-                    }}
-                    options={optionStatus}
-                />
-                </div>
-                
-                <div className="ant-form-item">
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Button
-                        className="ant-btn-secondary"
-                        onClick={() => {
-                          setFilterParams({});
-                          form.resetFields();
+                <Row gutter={[16, 16]}>
+                    <Col span={8}>
+                        <ProFormText
+                        width="100%"
+                        placeholder={"Nhập tên nhân viên hoặc tên tài khoản để tìm kiếm"}
+                        fieldProps={{
+                        prefix: <MagnifyingGlass color="#083070" weight="bold" />,
                         }}
-                    >
-                        Xóa bộ lọc
-                    </Button>
-                    <Button
-                        className="ant-btn-primary"
-                        onClick={() => search(filter.current)}
-                    >
-                    Tìm kiếm
-                    </Button>
-                </div>
-            </div>
+                        name="name"
+                    />
+                    </Col>
+                    <Col span={6}>
+                        <ProFormSelect
+                            width="100%"
+                            name="status"
+                            placeholder={"Trạng thái"}
+                            fieldProps={{
+                            showSearch: true,
+                            showArrow: true,
+                            filterOption: filterOptions,
+                            }}
+                            options={optionStatus}
+                        />
+                    </Col>
+                    <Col span={10}>
+                        <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+                            <Button
+                                className="ant-btn-secondary"
+                                onClick={() => {
+                                  setFilterParams({});
+                                  form.resetFields();
+                                }}
+                            >
+                                Xóa bộ lọc
+                            </Button>
+                            <Button
+                                className="ant-btn-primary"
+                                onClick={() => search(filter.current)}
+                            >
+                            Tìm kiếm
+                            </Button>
+                        </div>
+                    </Col>
+                </Row>
             </ProForm>
         <div>
           <ProTableFixed

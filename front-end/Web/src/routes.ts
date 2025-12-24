@@ -14,7 +14,8 @@ export const appRoutes = [
     icon: House,           
     element: HomePage,
     breadcrumb: "Trang chủ",
-    roles: ["admin", "user"],
+    // Không cần permission hoặc để mặc định ai cũng vào được
+    requiredPermissions: [],
   },
   {
     path: "/subject",
@@ -22,7 +23,7 @@ export const appRoutes = [
     icon: BookOpen,
     element: SubjectPage,
     breadcrumb: "Quản lý môn học",
-    roles: ["admin"],
+    requiredPermissions: ["subject.read"],
   },
   {
     path: "/class",
@@ -30,47 +31,51 @@ export const appRoutes = [
     icon: Users,
     element: ClassPage,
     breadcrumb: "Quản lý lớp học",
-    roles: ["admin", "user"],
+    requiredPermissions: ["class.read"],
   },
   {
     path: "/user",
     label: "Quản lý người dùng",
     icon: User,
     breadcrumb: "Quản lý người dùng",
-    roles: ["admin"],
+    requiredPermissions: ["user.read"],
     children: [
       {
         path: "/user/student",
         label: "Danh sách học sinh",
         element: StudentPage,
         breadcrumb: "Danh sách học sinh",
+        requiredPermissions: ["user.read"],
       },
       {
         path: "/user/staff",
         label: "Danh sách nhân viên",
         element: StaffPage,
         breadcrumb: "Danh sách nhân viên",
+        requiredPermissions: ["user.read"],
       },
     ]
   },
   {
     path: "/config",
     label: "Cấu hình hệ thống",
-    icon: Gear ,
+    icon: Gear,
     breadcrumb: "Cấu hình hệ thống",
-    roles: ["admin", "user"],
+    requiredPermissions: ["role.read", "permission.read"],
     children: [
       {
         path: "/config/role",
         label: "Cấu hình vai trò",
         element: RolePage,
         breadcrumb: "Cấu hình vai trò",
+        requiredPermissions: ["role.read"],
       },
       {
         path: "/config/program",
         label: "Cấu hình chương trình học",
         element: ProgramPage,
         breadcrumb: "Cấu hình chương trình học",
+        requiredPermissions: ["program.read"],
       },
     ],
   },

@@ -48,7 +48,7 @@ import { RolePermissionsModule } from './role-permissions/role-permissions.modul
     PdfModule,
     // ClassModule,
     NotificationSettingModule,
-    SubjectsModule,
+    // SubjectsModule,
     // SubjectModule,
     RolesModule,
     PermissionsModule,

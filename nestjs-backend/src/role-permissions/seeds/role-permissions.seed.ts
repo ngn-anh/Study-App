@@ -28,6 +28,18 @@ export const ROLE_PERMISSIONS_SEED: Partial<RolePermission>[] = [
   { role_code: 'admin', permission_code: 'program.update' },
   { role_code: 'admin', permission_code: 'program.delete' },
 
+  // ROLE
+  { role_code: 'admin', permission_code: 'role.create' },
+  { role_code: 'admin', permission_code: 'role.read' },
+  { role_code: 'admin', permission_code: 'role.update' },
+  { role_code: 'admin', permission_code: 'role.delete' },
+
+  // PERMISSION
+  { role_code: 'admin', permission_code: 'permission.create' },
+  { role_code: 'admin', permission_code: 'permission.read' },
+  { role_code: 'admin', permission_code: 'permission.update' },
+  { role_code: 'admin', permission_code: 'permission.delete' },
+
   /* ================= STAFF ================= */
   // STAFF chỉ có quyền xem (READ)
 
@@ -42,4 +54,10 @@ export const ROLE_PERMISSIONS_SEED: Partial<RolePermission>[] = [
 
   // PROGRAM
   { role_code: 'staff', permission_code: 'program.read' },
+
+  // ROLE
+  { role_code: 'staff', permission_code: 'role.read' },
+
+  // PERMISSION
+  { role_code: 'staff', permission_code: 'permission.read' },
 ];
