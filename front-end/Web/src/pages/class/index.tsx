@@ -11,6 +11,7 @@ import CustomModal from "../../component/CustomModal";
 import { deleteClass, getClassDetail, getClasses } from "../../api/class";
 import CreateUpdateClass from "./component/createUpdateClassDrawer";
 import { STATUS_CLASS } from "../../utils/enum";
+import { PermissionGuard } from "../../components/PermissionGuard";
 
 
 export default function ClassPage() {
@@ -175,18 +176,22 @@ const requestGetDataSource = async (param: any) => {
       render: (_?: any, row?: any) => {
         return (
           <div className="cpn-action">
-            <Tooltip title={"Sửa"} onClick={
-              ()=>{
-                console.log('row',row)
-                setIdClass(row.id)
-                setIsOpenDrawer(true)
-              }
-            }>
-              <NotePencil color ="#0c4299" className="cpn-action-edit cursor-pointer" />
-            </Tooltip>
-            <Tooltip title="Xóa" >
-              <Trash color ="#d63b3bff" className="cursor-pointer" onClick={() => onOpenDelete(row.id)}/>
-            </Tooltip>
+            <PermissionGuard requiredPermissions="class.update">
+              <Tooltip title={"Sửa"} onClick={
+                ()=>{
+                  console.log('row',row)
+                  setIdClass(row.id)
+                  setIsOpenDrawer(true)
+                }
+              }>
+                <NotePencil color ="#0c4299" className="cpn-action-edit cursor-pointer" />
+              </Tooltip>
+            </PermissionGuard>
+            <PermissionGuard requiredPermissions="class.delete">
+              <Tooltip title="Xóa" >
+                <Trash color ="#d63b3bff" className="cursor-pointer" onClick={() => onOpenDelete(row.id)}/>
+              </Tooltip>
+            </PermissionGuard>
           </div>
         );
       },
@@ -198,17 +203,19 @@ const requestGetDataSource = async (param: any) => {
             header={{
                 title: "Quản Lý Lớp Học",
                 extra: (
-                    <Button
-                  size={'large'}
-                  type="primary"
-                  className="ant-btn-primary"
-                  onClick={() => {
-                   setIsOpenDrawer(true)
-                   setIdClass(undefined)
-                  }}
-                >
-                  <Plus weight="bold"/> <span>Lớp Học Mới</span>
-                </Button>
+                    <PermissionGuard requiredPermissions="class.create">
+                      <Button
+                        size={'large'}
+                        type="primary"
+                        className="ant-btn-primary"
+                        onClick={() => {
+                         setIsOpenDrawer(true)
+                         setIdClass(undefined)
+                        }}
+                      >
+                        <Plus weight="bold"/> <span>Lớp Học Mới</span>
+                      </Button>
+                    </PermissionGuard>
                 )
             }}
     >

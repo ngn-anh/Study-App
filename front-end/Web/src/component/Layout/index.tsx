@@ -2,7 +2,7 @@ import { Layout, Menu, Dropdown, Avatar, Breadcrumb } from "antd";
 import { useNavigate, useLocation, Routes, Route, Navigate } from "react-router-dom";
 import { User as UserIcon } from "phosphor-react";
 import { appRoutes } from "../../routes";
-import { canAccessRoute } from "../../auth";
+import { filterAccessibleRoutes, canAccessRoute } from "../../utils/routePermission";
 import logo from '../../assets/auth/logo.png'
 import styles from "./index.module.css";
 import { useState } from "react";
@@ -19,21 +19,8 @@ export default function DashboardLayout({ onLogout }: { onLogout: () => void }) 
   const username = userData?.user?.full_name || userData?.user?.username || "User";
   const avatarUrl = userData?.user?.avatar;
 
-  const userRole = userData?.user?.role;
-
-  const filteredMenu = appRoutes
-  .filter((r: any) => canAccessRoute(r, userRole))
-  .map((r: any) => {
-    if (!r.children) return r;
-
-    return {
-      ...r,
-      children: r.children.filter((c: any) =>
-        canAccessRoute({ ...c, roles: r.roles }, userRole)
-      ),
-    };
-  })
-  .filter((r: any) => !r.children || r.children.length > 0);
+  // Filter routes dựa trên permissions của user
+  const filteredMenu = filterAccessibleRoutes(appRoutes);
 
   const getBreadcrumbItems = () => {
     let items: any[] = [];
@@ -152,16 +139,25 @@ export default function DashboardLayout({ onLogout }: { onLogout: () => void }) 
 
           <Routes>
             {appRoutes.map((route: any) => {
-              if (!canAccessRoute(route, userRole)) {
+              // Check quyền truy cập route
+              if (!canAccessRoute(route)) {
                 return (
                   <Route key={route.path} path={route.path} element={<Navigate to="/home" replace />} />
                 );
               }
 
               if (route.children) {
-                return route.children.map((child: any) => (
-                  <Route key={child.path} path={child.path} element={<child.element />} />
-                ));
+                return route.children.map((child: any) => {
+                  // Check quyền truy cập cho child route
+                  if (!canAccessRoute(child)) {
+                    return (
+                      <Route key={child.path} path={child.path} element={<Navigate to="/home" replace />} />
+                    );
+                  }
+                  return (
+                    <Route key={child.path} path={child.path} element={<child.element />} />
+                  );
+                });
               }
 
               return <Route key={route.path} path={route.path} element={<route.element />} />;

@@ -11,6 +11,7 @@ import { STATUS_SUBJECT } from "../../utils/enum";
 import CustomModal from "../../component/CustomModal";
 import { deleteStudent, getStudents } from "../../api/student";
 import { getClasses } from "../../api/class";
+import { PermissionGuard } from "../../components/PermissionGuard";
 
 
 export default function StudentPage() {
@@ -175,13 +176,15 @@ const requestGetDataSource = async (param: any) => {
       return (
         row?.status == STATUS_SUBJECT.ACTIVE && (
           <div className="cpn-action">
-            <Tooltip title="Xoá">
-              <Trash
-                color="#d63b3b"
-                className="cursor-pointer"
-                onClick={() => onOpenDelete(row)}
-              />
-            </Tooltip>
+            <PermissionGuard requiredPermissions="user.delete">
+              <Tooltip title="Xoá">
+                <Trash
+                  color="#d63b3b"
+                  className="cursor-pointer"
+                  onClick={() => onOpenDelete(row)}
+                />
+              </Tooltip>
+            </PermissionGuard>
           </div>
         )
       )

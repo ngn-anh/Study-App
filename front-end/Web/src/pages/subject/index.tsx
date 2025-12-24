@@ -11,6 +11,7 @@ import { STATUS_SUBJECT } from "../../utils/enum";
 import { deleteSubject, getSubjectDetail, getSubjects } from "../../api/subject";
 import CreateUpdateSubject from "./component/createUpdateSubjectDrawer";
 import CustomModal from "../../component/CustomModal";
+import { PermissionGuard } from "../../components/PermissionGuard";
 
 
 export default function SubjectPage() {
@@ -185,18 +186,22 @@ const requestGetDataSource = async (param: any) => {
       render: (_?: any, row?: any) => {
         return (
           <div className="cpn-action">
-            <Tooltip title={"Sửa"} onClick={
-              ()=>{
-                console.log('row',row)
-                setIdSubject(row.id)
-                setIsOpenDrawer(true)
-              }
-            }>
-              <NotePencil color ="#0c4299" className="cpn-action-edit cursor-pointer" />
-            </Tooltip>
-            <Tooltip title="Xóa" >
-              <Trash color ="#d63b3bff" className="cursor-pointer" onClick={() => onOpenDelete(row.id)}/>
-            </Tooltip>
+            <PermissionGuard requiredPermissions="subject.update">
+              <Tooltip title={"Sửa"} onClick={
+                ()=>{
+                  console.log('row',row)
+                  setIdSubject(row.id)
+                  setIsOpenDrawer(true)
+                }
+              }>
+                <NotePencil color ="#0c4299" className="cpn-action-edit cursor-pointer" />
+              </Tooltip>
+            </PermissionGuard>
+            <PermissionGuard requiredPermissions="subject.delete">
+              <Tooltip title="Xóa" >
+                <Trash color ="#d63b3bff" className="cursor-pointer" onClick={() => onOpenDelete(row.id)}/>
+              </Tooltip>
+            </PermissionGuard>
           </div>
         );
       },
@@ -208,17 +213,19 @@ const requestGetDataSource = async (param: any) => {
             header={{
                 title: "Quản Lý Môn Học",
                 extra: (
-                    <Button
-                  size={'large'}
-                  type="primary"
-                  className="ant-btn-primary"
-                  onClick={() => {
-                   setIsOpenDrawer(true)
-                   setIdSubject(undefined)
-                  }}
-                >
-                  <Plus weight="bold"/> <span>Môn Học Mới</span>
-                </Button>
+                    <PermissionGuard requiredPermissions="subject.create">
+                      <Button
+                        size={'large'}
+                        type="primary"
+                        className="ant-btn-primary"
+                        onClick={() => {
+                         setIsOpenDrawer(true)
+                         setIdSubject(undefined)
+                        }}
+                      >
+                        <Plus weight="bold"/> <span>Môn Học Mới</span>
+                      </Button>
+                    </PermissionGuard>
                 )
             }}
     >

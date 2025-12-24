@@ -11,6 +11,7 @@ import { STATUS_SUBJECT } from "../../utils/enum";
 import CustomModal from "../../component/CustomModal";
 import { deleteStaff, getStaff } from "../../api/staff";
 import ConfigStaffRoleDrawer from "./component/ConfigStaffDrawer";
+import { PermissionGuard } from "../../components/PermissionGuard";
 
 
 export default function StaffPage() {
@@ -154,22 +155,26 @@ const requestGetDataSource = async (param: any) => {
       return (
         row?.status == STATUS_SUBJECT.ACTIVE && (
           <div className="cpn-action">
-            <Tooltip title={"Cấu hình"} onClick={
-              ()=>{
-                console.log('row',row)
-                setIsOpenDrawer(true)
-                setIdStaff(row.id)
-              }
-            }>
-              <Gear color ="#0c4299" className="cpn-action-edit cursor-pointer" />
-            </Tooltip>
-            <Tooltip title="Xoá">
-              <Trash
-                color="#d63b3b"
-                className="cursor-pointer"
-                onClick={() => onOpenDelete(row)}
-              />
-            </Tooltip>
+            <PermissionGuard requiredPermissions="user.update">
+              <Tooltip title={"Cấu hình"} onClick={
+                ()=>{
+                  console.log('row',row)
+                  setIsOpenDrawer(true)
+                  setIdStaff(row.id)
+                }
+              }>
+                <Gear color ="#0c4299" className="cpn-action-edit cursor-pointer" />
+              </Tooltip>
+            </PermissionGuard>
+            <PermissionGuard requiredPermissions="user.delete">
+              <Tooltip title="Xoá">
+                <Trash
+                  color="#d63b3b"
+                  className="cursor-pointer"
+                  onClick={() => onOpenDelete(row)}
+                />
+              </Tooltip>
+            </PermissionGuard>
           </div>
         )
       )

@@ -11,6 +11,8 @@ import CustomModal from "../../component/CustomModal";
 import { deleteRole, getRoles } from "../../api/role";
 import ConfigPermission from "./component/ConfigPermission";
 import CreateUpdateRole from "./component/CreateUpdateRole";
+import { PermissionGuard } from "../../components/PermissionGuard";
+import { hasPermission } from "../../utils/permission";
 
 
 export default function RolePage() {
@@ -166,34 +168,40 @@ const requestGetDataSource = async (param: any) => {
 
       return (
         <div className="cpn-action">
-          <Tooltip title={hasUsers ? 'Vai trò đang được sử dụng' : 'Sửa'}>
-            <NotePencil
-              color={hasUsers ? '#999' : '#0c4299'}
-              className={hasUsers ? 'cursor-not-allowed cpn-action-edit' : 'cursor-pointer cpn-action-edit'}
-              onClick={() => {
-                if (hasUsers) return;
-                setCurrentRoleCode(row.code);
-                setIsOpenRoleDrawer(true);
-              }}
-            />
-          </Tooltip>
+          {/* Button chỉnh sửa - cần quyền role.update */}
+          <PermissionGuard requiredPermissions="role.update">
+            <Tooltip title={hasUsers ? 'Vai trò đang được sử dụng' : 'Sửa'}>
+              <NotePencil
+                color={hasUsers ? '#999' : '#0c4299'}
+                className={hasUsers ? 'cursor-not-allowed cpn-action-edit' : 'cursor-pointer cpn-action-edit'}
+                onClick={() => {
+                  if (hasUsers) return;
+                  setCurrentRoleCode(row.code);
+                  setIsOpenRoleDrawer(true);
+                }}
+              />
+            </Tooltip>
+          </PermissionGuard>
 
-          <Tooltip
-            title={
-              hasUsers
-                ? 'Không thể xoá vai trò đang được sử dụng'
-                : 'Xoá vai trò'
-            }
-          >
-            <Trash
-              color={hasUsers ? '#999' : '#d63b3b'}
-              className={hasUsers ? 'cursor-not-allowed' : 'cursor-pointer'}
-              onClick={() => {
-                if (hasUsers) return;
-                onOpenDelete(row);
-              }}
-            />
-          </Tooltip>
+          {/* Button xoá - cần quyền role.delete */}
+          <PermissionGuard requiredPermissions="role.delete">
+            <Tooltip
+              title={
+                hasUsers
+                  ? 'Không thể xoá vai trò đang được sử dụng'
+                  : 'Xoá vai trò'
+              }
+            >
+              <Trash
+                color={hasUsers ? '#999' : '#d63b3b'}
+                className={hasUsers ? 'cursor-not-allowed' : 'cursor-pointer'}
+                onClick={() => {
+                  if (hasUsers) return;
+                  onOpenDelete(row);
+                }}
+              />
+            </Tooltip>
+          </PermissionGuard>
         </div>
       );
     }
@@ -206,17 +214,19 @@ const requestGetDataSource = async (param: any) => {
             header={{
                 title: "Danh sách vai trò",
                 extra: (
+                  <PermissionGuard requiredPermissions="role.create">
                     <Button
-                  size={'large'}
-                  type="primary"
-                  className="ant-btn-primary"
-                  onClick={() => {
-                    setCurrentRoleCode(undefined); // create
-                    setIsOpenRoleDrawer(true);
-                  }}
-                >
-                  <Plus weight="bold"/> <span>Vai Trò Mới</span>
-                </Button>
+                      size={'large'}
+                      type="primary"
+                      className="ant-btn-primary"
+                      onClick={() => {
+                        setCurrentRoleCode(undefined); // create
+                        setIsOpenRoleDrawer(true);
+                      }}
+                    >
+                      <Plus weight="bold"/> <span>Vai Trò Mới</span>
+                    </Button>
+                  </PermissionGuard>
                 )
             }}
     >
