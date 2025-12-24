@@ -1,4 +1,4 @@
-import { Button, message, Tooltip } from "antd";
+import { Button, message, Tooltip, Row, Col } from "antd";
 import PageContainerFixed from "../../component/PageContainerFixed";
 import { MagnifyingGlass, Plus, Trash, Lock, NotePencil, User } from "phosphor-react";
 import './index.less'
@@ -232,37 +232,37 @@ const requestGetDataSource = async (param: any) => {
     >
         <div className="role-list-page">
             <ProForm submitter={false} form={form} className="form-search">
-                <div>
-                    <ProFormText
-                    width={400}
-                    placeholder={"Nhập tên vai trò để tìm kiếm"}
-                    fieldProps={{
-                    prefix: <MagnifyingGlass color="#083070" weight="bold" />,
-                    //   onPressEnter: handleEnterSearch,
-                    }}
-                    name="name"
-                />
-                </div>
-                
-                <div className="ant-form-item">
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Button
-                        className="ant-btn-secondary"
-                        onClick={() => {
-                          setFilterParams({});
-                          form.resetFields();
+                <Row gutter={[16, 16]}>
+                  <Col span={10}>
+                        <ProFormText
+                        width="100%"
+                        placeholder={"Nhập tên vai trò để tìm kiếm"}
+                        fieldProps={{
+                        prefix: <MagnifyingGlass color="#083070" weight="bold" />,
                         }}
-                    >
-                        Xóa bộ lọc
-                    </Button>
-                    <Button
-                        className="ant-btn-primary"
-                        onClick={() => search(filter.current)}
-                    >
-                    Tìm kiếm
-                    </Button>
-                </div>
-            </div>
+                        name="name"
+                    />
+                    </Col>
+                  <Col span={14}>
+                        <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+                            <Button
+                                className="ant-btn-secondary"
+                                onClick={() => {
+                                  setFilterParams({});
+                                  form.resetFields();
+                                }}
+                            >
+                                Xóa bộ lọc
+                            </Button>
+                            <Button
+                                className="ant-btn-primary"
+                                onClick={() => search(filter.current)}
+                            >
+                            Tìm kiếm
+                            </Button>
+                        </div>
+                    </Col>
+                </Row>
             </ProForm>
         <div>
           <ProTableFixed

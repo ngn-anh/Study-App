@@ -86,8 +86,11 @@ export default function AuthForm(props: {setUserData: any}) {
             const res = await register(data);
             // Lưu vào localStorage
             localStorage.setItem("userData", JSON.stringify(res));
-            console.log("REGISTER SUCCESS:", res.data);
+            props.setUserData(res);
             setErrors({})
+            console.log("REGISTER SUCCESS:", res.data);
+            // Redirect về home sau đăng ký thành công
+            navigate("/home", { replace: true });
 
         } catch (e: any) {
             setError(e.response?.data?.message || "Có lỗi xảy ra");
