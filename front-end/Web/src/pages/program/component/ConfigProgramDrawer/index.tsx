@@ -135,7 +135,7 @@ const ConfigProgramDrawer = (props: {
                 options={optionSubject}
                 mode='multiple'
                 fieldProps={{
-                    maxTagCount:2
+                    maxTagCount:"responsive"
                 }}
             />
         </div>

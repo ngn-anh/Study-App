@@ -1,14 +1,33 @@
 import { Injectable, BadRequestException, UnauthorizedException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { UsersService } from '../users/users.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { UserEntity } from '../users/entities/user.entity';
+import { RolePermission } from '../role-permissions/schemas/role-permissions.schema';
 import * as jwt from 'jsonwebtoken';
 import { toUserEntity } from 'src/common/utils/user.utils';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    @InjectModel(RolePermission.name)
+    private rolePermissionModel: Model<RolePermission>,
+  ) {}
+
+  // ------------------------------------------------
+  // LẤY PERMISSIONS CỦA USER
+  // ------------------------------------------------
+  private async getUserPermissions(roleCode: string): Promise<string[]> {
+    const rolePermissions = await this.rolePermissionModel
+      .find({ role_code: roleCode })
+      .select('permission_code')
+      .lean();
+    
+    return rolePermissions.map(rp => rp.permission_code);
+  }
 
   // ------------------------------------------------
   // TẠO TOKEN
@@ -35,7 +54,7 @@ export class AuthService {
   // ------------------------------------------------
   // REGISTER
   // ------------------------------------------------
-  async register(dto: RegisterDto): Promise<{ token: string; refreshToken: string; user: UserEntity }> {
+  async register(dto: RegisterDto): Promise<{ token: string; refreshToken: string; user: any }> {
     const existingUser = await this.usersService.findByUsername(dto.username);
     if (existingUser) throw new BadRequestException('Username already exists');
 
@@ -52,17 +71,23 @@ export class AuthService {
     userDoc.token_expired = tokenExpired;
     await userDoc.save();
 
+    // Lấy permissions của user
+    const permissions = await this.getUserPermissions(userDoc.role);
+
     return {
       token: accessToken,
       refreshToken,
-      user: toUserEntity(userDoc),
+      user: {
+        ...toUserEntity(userDoc),
+        permissions,
+      },
     };
   }
 
   // ------------------------------------------------
   // LOGIN
   // ------------------------------------------------
-  async login(dto: LoginDto): Promise<{ token: string; refreshToken: string; user: UserEntity }> {
+  async login(dto: LoginDto): Promise<{ token: string; refreshToken: string; user: any }> {
     const userDoc = await this.usersService.validateUser(dto.username, dto.password);
     if (!userDoc) throw new BadRequestException('Invalid credentials');
 
@@ -73,10 +98,16 @@ export class AuthService {
     userDoc.token_expired = tokenExpired;
     await userDoc.save();
 
+    // Lấy permissions của user
+    const permissions = await this.getUserPermissions(userDoc.role);
+
     return {
       token: accessToken,
       refreshToken,
-      user: toUserEntity(userDoc),
+      user: {
+        ...toUserEntity(userDoc),
+        permissions,
+      },
     };
   }
 
@@ -108,10 +139,16 @@ export class AuthService {
     userDoc.token_expired = tokenExpired;
     await userDoc.save();
 
+    // Lấy permissions của user
+    const permissions = await this.getUserPermissions(userDoc.role);
+
     return {
       token: accessToken,
       refreshToken: newRefresh,
-      user: toUserEntity(userDoc),
+      user: {
+        ...toUserEntity(userDoc),
+        permissions,
+      },
     };
   }
 }

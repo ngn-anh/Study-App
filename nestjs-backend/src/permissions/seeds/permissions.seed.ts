@@ -104,4 +104,56 @@ export const PERMISSIONS_SEED: Partial<Permission>[] = [
     module: 'program',
     action: 'delete',
   },
+
+  /* ================= ROLE ================= */
+  {
+    code: 'role.create',
+    name: 'Tạo vai trò',
+    module: 'role',
+    action: 'create',
+  },
+  {
+    code: 'role.read',
+    name: 'Xem vai trò',
+    module: 'role',
+    action: 'read',
+  },
+  {
+    code: 'role.update',
+    name: 'Cập nhật vai trò',
+    module: 'role',
+    action: 'update',
+  },
+  {
+    code: 'role.delete',
+    name: 'Xoá vai trò',
+    module: 'role',
+    action: 'delete',
+  },
+
+  /* ================= PERMISSION ================= */
+  {
+    code: 'permission.create',
+    name: 'Tạo quyền',
+    module: 'permission',
+    action: 'create',
+  },
+  {
+    code: 'permission.read',
+    name: 'Xem quyền',
+    module: 'permission',
+    action: 'read',
+  },
+  {
+    code: 'permission.update',
+    name: 'Cập nhật quyền',
+    module: 'permission',
+    action: 'update',
+  },
+  {
+    code: 'permission.delete',
+    name: 'Xoá quyền',
+    module: 'permission',
+    action: 'delete',
+  },
 ];
