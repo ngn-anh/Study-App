@@ -10,7 +10,7 @@ import {
 import { ApiTags } from '@nestjs/swagger';
 import { RolePermissionsService } from './role-permissions.service';
 import { AssignPermissionsDto } from './dto/assign-permissions.dto';
-import { UpdateRolePermissionsDto } from './dto/update-role-permissions.dto';
+import { UpdateRolePermissionsPayloadDto } from './dto/update-role-permissions.dto';
 
 @ApiTags('role-permissions')
 @Controller('role-permissions')
@@ -41,7 +41,7 @@ export class RolePermissionsController {
   @Put(':role_code')
   update(
     @Param('role_code') role_code: string,
-    @Body() dto: UpdateRolePermissionsDto,
+    @Body() dto: UpdateRolePermissionsPayloadDto,
   ) {
     return this.rolePermissionsService.update(role_code, dto);
   }

@@ -129,9 +129,6 @@ export const ExamRankScreen = () => {
             {item.rank == 1 && <Image source={require("../../assets/images/rank_1.png")} style={styles.image} />}
             {item.rank == 2 && <Image source={require("../../assets/images/rank_2.png")} style={styles.image} />}
             {item.rank == 3 && <Image source={require("../../assets/images/rank_3.png")} style={styles.image} />}
-            {item.rank == 1 && <Image source={require("../../assets/images/rank_1.png")} style={styles.image} />}
-            {item.rank == 2 && <Image source={require("../../assets/images/rank_2.png")} style={styles.image} />}
-            {item.rank == 3 && <Image source={require("../../assets/images/rank_3.png")} style={styles.image} />}
           </View>
         )}
       />

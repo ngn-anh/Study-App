@@ -10,8 +10,18 @@ export interface ClassItem {
 }
 
 export const getClasses = async (): Promise<ClassItem[]> => {
-  const response = await axios.get(`${API_URL}/classes`);
-  return response.data;
+  const response = await axios.get(`${API_URL}/classes`, {
+    // Grab a reasonable page size so the picker has data without pagination.
+    params: { page: 1, limit: 100 },
+  });
+
+  const payload = response.data;
+
+  if (Array.isArray(payload)) return payload;
+  if (Array.isArray(payload?.data)) return payload.data;
+
+  // Fallback to empty array to avoid runtime crash when API shape changes.
+  return [];
 };
 
 export const getClassById = async (id: string) => {

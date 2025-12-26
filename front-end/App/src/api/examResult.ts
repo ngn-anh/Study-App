@@ -51,7 +51,19 @@ export const getExamDetailResult = async (
   examResultId: string
 ): Promise<ExamDetailResult> => {
   const res = await axios.get(`${API_URL}/exam-result/${examResultId}`);
-  return res.data;
+  
+  // Map backend response to frontend interface
+  const mappedQuestions = res.data.questions.map((q: any) => ({
+    id: q.id,
+    text: q.text,
+    image: q.image,
+    options: q.options,
+    answers: q.answers,
+    correctAnswer: q.correctAnswerIndex,  // Map từ backend
+    userAnswer: q.userAnswerIndex,        // Map từ backend
+  }));
+  
+  return { questions: mappedQuestions };
 };
 
 export const getAllExamResultDetail = async (user_id: string, exam_id: string) => {

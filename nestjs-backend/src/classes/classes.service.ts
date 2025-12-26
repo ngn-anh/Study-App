@@ -180,14 +180,6 @@ export class ClassesService {
     }
   }
 
-  //   async findAll() {
-  //     return this.classModel
-  //       .find({ deleted_at: null })
-  //       .select('-created_at -updated_at -deleted_at')
-  //       .sort({ created_at: -1 })
-  //       .lean();
-  //   }
-
   async findAll(query?: any) {
     const { page = 1, limit = 20, name, status } = query;
 

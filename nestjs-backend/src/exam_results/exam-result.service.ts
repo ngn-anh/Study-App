@@ -86,6 +86,8 @@ export class ExamResultService {
       .find({ exam_result_id: examResult._id })
       .lean();
 
+    console.log('resultAnswers:', JSON.stringify(resultAnswers, null, 2));
+
     // 3. Lấy tất cả câu hỏi của bài thi
     const questions = await this.questionModel
       .find({ exam_id: examResult.exam_id, deleted_at: null })

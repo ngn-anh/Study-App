@@ -6,7 +6,7 @@ import {
   RolePermissionDocument,
 } from './schemas/role-permissions.schema';
 import { AssignPermissionsDto } from './dto/assign-permissions.dto';
-import { UpdateRolePermissionsDto } from './dto/update-role-permissions.dto';
+import { UpdateRolePermissionsPayloadDto } from './dto/update-role-permissions.dto';
 
 @Injectable()
 export class RolePermissionsService {
@@ -43,7 +43,7 @@ export class RolePermissionsService {
   }
 
   /** Update permissions của role (xoá cũ → thêm mới) */
-  async update(role_code: string, dto: UpdateRolePermissionsDto): Promise<any> {
+  async update(role_code: string, dto: UpdateRolePermissionsPayloadDto): Promise<any> {
     await this.rolePermissionModel.deleteMany({ role_code });
 
     const docs = dto.permissions.map((permission) => ({
