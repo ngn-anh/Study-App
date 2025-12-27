@@ -20,6 +20,7 @@ import { NotificationSettingModule } from './notification-setting/notification-s
 import { RolesModule } from './roles/roles.module';
 import { PermissionsModule } from './permissions/permissions.module';
 import { RolePermissionsModule } from './role-permissions/role-permissions.module';
+import { SubjectsClassesModule } from './subjects-classes/subjects-classes.module';
 
 @Module({
   imports: [
@@ -53,6 +54,7 @@ import { RolePermissionsModule } from './role-permissions/role-permissions.modul
     RolesModule,
     PermissionsModule,
     RolePermissionsModule,
+    SubjectsClassesModule,
   ],
   controllers: [],
   providers: [],

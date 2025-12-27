@@ -518,7 +518,7 @@ export class ClassesService {
 
       // Format response data
       const formattedClasses = classes.map((item) => ({
-        id: item._id,
+        _id: item._id,
         name: item.name,
         code: item.code,
         description: item.description,

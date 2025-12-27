@@ -28,12 +28,12 @@ export const deleteSubject = (id: string) => {
   return api.delete(`/subjects/${id}`);
 };
 
-export const getSubjectsByClass = (classId: string) => {
-  // const res = await api.get(`/subjects/by-class`, {
+export const getSubjectsByClass = async (classId: string) => {
+  const res = await api.get(`/subjects/by-class`, {
+    params: { class_id: classId },
+  });
+  return res.data;
+  // return api.get(`/subjects/by-class`, {
   //   params: { class_id: classId }
   // });
-  // return res.data;
-  return api.get(`/subjects/by-class`, {
-    params: { class_id: classId }
-  });
 };

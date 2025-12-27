@@ -1,5 +1,5 @@
 export type Subject = {
-  id: string;
+  _id: string;
   name: string;
   code: string;
   description?: string;
@@ -70,7 +70,7 @@ export type UserInfo = {
 };
 
 export type Class = {
-  id: string;
+  _id: string;
   name: string;
   code: string;
   description?: string;

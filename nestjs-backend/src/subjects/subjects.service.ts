@@ -45,7 +45,7 @@ export class SubjectsService {
   async getSubjectsByClass(getSubjectsByClassDto: GetSubjectsByClassDto) {
     try {
       const { class_id } = getSubjectsByClassDto;
-
+      console.log('loanhtm class_id: ', class_id);
       // Kiểm tra tham số
       if (!class_id) {
         return {
@@ -99,7 +99,7 @@ export class SubjectsService {
 
       // Format response data
       const formattedSubjects = subjects.map((subject) => ({
-        id: subject._id,
+        _id: subject._id,
         name: subject.name,
         code: subject.code,
         description: subject.description,
@@ -121,6 +121,7 @@ export class SubjectsService {
       };
     }
   }
+
   async findAll(query: any) {
     const page = Number(query.page) || 1;
     const limit = Number(query.limit) || 10;
