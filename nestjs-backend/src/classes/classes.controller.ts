@@ -24,6 +24,16 @@ export class ClassesController {
     return await this.classesService.getClassByCode(getClassByCodeDto);
   }
 
+  @Get('program')
+  async getList(@Query() query) {
+    return this.classesService.getListClassWithSubjects(query);
+  }
+
+  @Get('program/:id')
+  async getDetailProgram(@Param('id') id: string) {
+    return this.classesService.getDetailProgram(id);
+  }
+
   @Get(':id')
   async getClassById(@Param('id') id: string) {
     return this.classesService.getClassById(id);
@@ -41,16 +51,6 @@ export class ClassesController {
   @Get()
   findAll(@Query() query: any) {
     return this.classesService.findAll(query);
-  }
-
-  @Get('program')
-  async getList(@Query() query) {
-    return this.classesService.getListClassWithSubjects(query);
-  }
-
-  @Get('program/:id')
-  async getDetailProgram(@Param('id') id: string) {
-    return this.classesService.getDetailProgram(id);
   }
 
   @Post('program')

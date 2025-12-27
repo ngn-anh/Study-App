@@ -59,8 +59,8 @@ export const getExamDetailResult = async (
     image: q.image,
     options: q.options,
     answers: q.answers,
-    correctAnswer: q.correctAnswerIndex,  // Map từ backend
-    userAnswer: q.userAnswerIndex,        // Map từ backend
+    correctAnswer: q.correctAnswerIndex,
+    userAnswer: q.userAnswerIndex       
   }));
   
   return { questions: mappedQuestions };

@@ -36,8 +36,9 @@ const TabKey = {
 
 const PracticeExamDetailScreen = (props: Props) => {
   const { route } = props;
-  const { examId, subjectCode, submitted } = route.params;
-  console.log("loanhtm examId, subjectCode, submitted: ", examId, subjectCode, submitted)
+  // const { examId, subjectCode, submitted } = route.params;
+  const { examId, submitted } = route.params;
+  console.log("loanhtm examId,  submitted: ", examId, submitted)
   const navigation = useNavigation<NavigationProps>();
 
   const [user, setUser] = useState<User | null>(null);
@@ -181,24 +182,13 @@ const PracticeExamDetailScreen = (props: Props) => {
 
       const filePath = await downloadExamPdf(
         examId,
-        examInfo?.name || "Đề thi",
+        examInfo?.name || "Đề thi"
       );
 
       if (!filePath) {
         console.error("Lỗi không tải được file Pdf");
         return;
-      }
-
-      // const res = await increaseExamDownload(examId);
-
-      // if (res.errorCode === 0) {
-      //   setExamInfo((prev) =>
-      //     prev ? { ...prev, total_download: res.data } : prev
-      //   );
-      //   console.log("Tăng lượt download thành công");
-      // } else {
-      //   console.log("Tăng lượt download thất bại");
-      // }
+      };
 
       increaseExamDownload(examId)
         .then((res) => {

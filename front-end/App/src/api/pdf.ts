@@ -17,7 +17,7 @@ export const downloadExamPdf = async (examId: string, name: string) => {
 
   try {
     await RNFetchBlob.config({
-      fileCache: false,
+      // fileCache: false,
       addAndroidDownloads: {
         useDownloadManager: true,
         notification: true,

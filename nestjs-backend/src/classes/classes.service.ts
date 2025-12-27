@@ -271,7 +271,7 @@ export class ClassesService {
       // Join bảng trung gian subject_class
       {
         $lookup: {
-          from: 'subject_classes',
+          from: 'subjects_classes',
           localField: '_id',
           foreignField: 'class_id',
           as: 'subject_class',
