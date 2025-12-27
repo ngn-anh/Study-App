@@ -7,7 +7,7 @@ interface ISubjectFilter {
   status?: number;
 }
 
-export const getSubjects = async (params: ISubjectFilter) => {
+export const getSubjects = async (params?: ISubjectFilter) => {
   const res = await api.get("/subjects", { params });
   return res.data;
 };
@@ -26,4 +26,14 @@ export const updateSubject = (id: string, data: any) => {
 
 export const deleteSubject = (id: string) => {
   return api.delete(`/subjects/${id}`);
+};
+
+export const getSubjectsByClass = (classId: string) => {
+  // const res = await api.get(`/subjects/by-class`, {
+  //   params: { class_id: classId }
+  // });
+  // return res.data;
+  return api.get(`/subjects/by-class`, {
+    params: { class_id: classId }
+  });
 };

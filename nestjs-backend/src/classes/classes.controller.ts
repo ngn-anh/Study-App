@@ -13,6 +13,7 @@ import { GetClassByCodeDto } from './dto/get-class-by-code.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateClassDto } from './dto/create-class.dto';
 import { UpdateClassDto } from './dto/update-class.dto';
+import { GetClassesBySubjectDto } from './dto/get-classes-by-subject.dto';
 
 @ApiTags('Classes')
 @Controller('classes')
@@ -22,6 +23,15 @@ export class ClassesController {
   @Get('by-code')
   async getClassByCode(@Query() getClassByCodeDto: GetClassByCodeDto) {
     return await this.classesService.getClassByCode(getClassByCodeDto);
+  }
+
+  @Get('by-subject')
+  async getClassesBySubject(
+    @Query() getClassesBySubjectDto: GetClassesBySubjectDto,
+  ) {
+    return await this.classesService.getClassesBySubject(
+      getClassesBySubjectDto,
+    );
   }
 
   @Get('program')

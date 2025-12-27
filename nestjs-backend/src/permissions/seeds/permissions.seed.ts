@@ -1,4 +1,4 @@
-import { Permission } from "../schemas/permissions.schema";
+import { Permission } from '../schemas/permissions.schema';
 
 export const PERMISSIONS_SEED: Partial<Permission>[] = [
   /* ================= USER ================= */
@@ -154,6 +154,32 @@ export const PERMISSIONS_SEED: Partial<Permission>[] = [
     code: 'permission.delete',
     name: 'Xoá quyền',
     module: 'permission',
+    action: 'delete',
+  },
+
+  /* ================= EXAM ================= */
+  {
+    code: 'exam.create',
+    name: 'Tạo bài thi',
+    module: 'exam',
+    action: 'create',
+  },
+  {
+    code: 'exam.read',
+    name: 'Xem bài thi',
+    module: 'exam',
+    action: 'read',
+  },
+  {
+    code: 'exam.update',
+    name: 'Cập nhật bài thi',
+    module: 'exam',
+    action: 'update',
+  },
+  {
+    code: 'exam.delete',
+    name: 'Xoá bài thi',
+    module: 'exam',
     action: 'delete',
   },
 ];

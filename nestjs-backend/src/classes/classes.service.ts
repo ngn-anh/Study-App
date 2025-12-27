@@ -11,6 +11,7 @@ import {
 } from 'src/subjects-classes/schemas/subjects-classes.schema';
 import { Subject, SubjectDocument } from 'src/subjects/schemas/subjects.schema';
 import { removeAccentsRegex } from 'src/helper';
+import { GetClassesBySubjectDto } from './dto/get-classes-by-subject.dto';
 
 @Injectable()
 export class ClassesService {
@@ -52,6 +53,24 @@ export class ClassesService {
     MISSING_PARAM: 'Thiếu tham số classId',
     ID_NOT_FOUND: 'Không tìm thấy lớp học',
     INVALID_ID: 'ID không hợp lệ',
+    INTERNAL_ERROR: 'Lỗi hệ thống',
+  };
+
+  private readonly ERROR_CODES_getClassesBySubject = {
+    SUCCESS: 0,
+    MISSING_PARAM: 1,
+    INVALID_SUBJECT_ID: 2,
+    SUBJECT_NOT_FOUND: 3,
+    NO_CLASSES_FOUND: 4,
+    INTERNAL_ERROR: 99,
+  };
+
+  private readonly ERROR_MESSAGES_getClassesBySubject = {
+    SUCCESS: 'Thành công',
+    MISSING_PARAM: 'Thiếu tham số subject_id',
+    INVALID_SUBJECT_ID: 'subject_id không hợp lệ',
+    SUBJECT_NOT_FOUND: 'Không tìm thấy môn học',
+    NO_CLASSES_FOUND: 'Không tìm thấy lớp học nào',
     INTERNAL_ERROR: 'Lỗi hệ thống',
   };
 
@@ -441,5 +460,84 @@ export class ClassesService {
       added: subjectsToAdd.map((x) => x.toString()),
       removed: subjectsToRemove.map((x) => x.subject_id.toString()),
     };
+  }
+
+  async getClassesBySubject(getClassesBySubjectDto: GetClassesBySubjectDto) {
+    try {
+      const { subject_id } = getClassesBySubjectDto;
+      // Kiểm tra tham số
+      if (!subject_id) {
+        return {
+          errorCode: this.ERROR_CODES_getClassesBySubject.MISSING_PARAM,
+          data: null,
+          message: this.ERROR_MESSAGES_getClassesBySubject.MISSING_PARAM,
+        };
+      }
+      // Kiểm tra subject_id có hợp lệ không
+      if (!Types.ObjectId.isValid(subject_id)) {
+        return {
+          errorCode: this.ERROR_CODES_getClassesBySubject.INVALID_SUBJECT_ID,
+          data: null,
+          message: this.ERROR_MESSAGES_getClassesBySubject.INVALID_SUBJECT_ID,
+        };
+      }
+
+      // Lấy danh sách subject-class mapping
+      const subjectClassMappings = await this.subjectClassModel
+        .find({ subject_id: new Types.ObjectId(subject_id) })
+        .exec();
+
+      if (subjectClassMappings.length === 0) {
+        return {
+          errorCode: this.ERROR_CODES_getClassesBySubject.NO_CLASSES_FOUND,
+          data: [],
+          message: this.ERROR_MESSAGES_getClassesBySubject.NO_CLASSES_FOUND,
+        };
+      }
+
+      // Lấy danh sách class_id từ mapping
+      const classIds = subjectClassMappings.map((sc) => sc.class_id);
+
+      // Lấy danh sách môn học (chỉ lấy những môn không bị xóa)
+      const classes = await this.classModel
+        .find({
+          _id: { $in: classIds },
+          deleted_at: null,
+          status: 1,
+        })
+        .select('-__v')
+        .exec();
+
+      if (classes.length === 0) {
+        return {
+          errorCode: this.ERROR_CODES_getClassesBySubject.NO_CLASSES_FOUND,
+          data: [],
+          message: this.ERROR_MESSAGES_getClassesBySubject.NO_CLASSES_FOUND,
+        };
+      }
+
+      // Format response data
+      const formattedClasses = classes.map((item) => ({
+        id: item._id,
+        name: item.name,
+        code: item.code,
+        description: item.description,
+        // status: item.status,
+      }));
+
+      return {
+        errorCode: this.ERROR_CODES_getClassesBySubject.SUCCESS,
+        data: formattedClasses,
+        total: formattedClasses.length,
+        message: this.ERROR_MESSAGES_getClassesBySubject.SUCCESS,
+      };
+    } catch (error) {
+      console.error('Error in getSubjectsByClass:', error);
+      return {
+        errorCode: this.ERROR_CODES_getClassesBySubject.INTERNAL_ERROR,
+        data: null,
+        message: this.ERROR_MESSAGES_getClassesBySubject.INTERNAL_ERROR,
+      };
+    }
   }
 }
