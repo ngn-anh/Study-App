@@ -22,22 +22,59 @@ export default function DashboardLayout({ onLogout }: { onLogout: () => void }) 
   // Filter routes dựa trên permissions của user
   const filteredMenu = filterAccessibleRoutes(appRoutes);
 
+  // const getBreadcrumbItems = () => {
+  //   let items: any[] = [];
+
+  //   for (const route of appRoutes) {
+  //     if (route.children) {
+  //       const child = route.children.find((c: any) => c.path === location.pathname);
+  //       if (child) {
+  //         items.push(route);
+  //         items.push(child);
+  //         return items;
+  //       }
+  //     }
+
+  //     if (route.path === location.pathname) {
+  //       items.push(route);
+  //       return items;
+  //     }
+  //   }
+
+  //   return items;
+  // };
+
+  const normalizePath = (path: string) => {
+    // Bỏ :param trong route động
+    return path.replace(/:\w+/g, "");
+  };
+
   const getBreadcrumbItems = () => {
-    let items: any[] = [];
+    const items: any[] = [];
 
     for (const route of appRoutes) {
+      // 1️⃣ Match route cha (/exam)
+      if (
+        location.pathname === route.path ||
+        location.pathname.startsWith(route.path + "/")
+      ) {
+        items.push(route);
+      }
+
+      // 2️⃣ Match route con có param (/exam/:examId/question)
       if (route.children) {
-        const child = route.children.find((c: any) => c.path === location.pathname);
+        const child = route.children.find((c: any) =>
+          location.pathname.startsWith(normalizePath(c.path))
+        );
+
         if (child) {
-          items.push(route);
+          // tránh push trùng cha
+          if (!items.find((i) => i.path === route.path)) {
+            items.push(route);
+          }
           items.push(child);
           return items;
         }
-      }
-
-      if (route.path === location.pathname) {
-        items.push(route);
-        return items;
       }
     }
 
@@ -46,34 +83,32 @@ export default function DashboardLayout({ onLogout }: { onLogout: () => void }) 
 
   const breadcrumbItems = getBreadcrumbItems();
 
-   const handleUserMenuClick = ({ key }: { key: string }) => {
+  const handleUserMenuClick = ({ key }: { key: string }) => {
     console.log(key)
     if (key === "logout") {
-        // Xoá dữ liệu đăng nhập
-        localStorage.removeItem("userData"); // nếu lưu info user
-        onLogout();
-        // Chuyển hướng về login
-        navigate("/login", { replace: true });
+      // Xoá dữ liệu đăng nhập
+      localStorage.removeItem("userData"); // nếu lưu info user
+      onLogout();
+      // Chuyển hướng về login
+      navigate("/login", { replace: true });
     }
-    };
+  };
 
   const userMenu = {
-        items: [
-            { key: "logout", label: "Đăng xuất" },
-        ],
-        onClick: handleUserMenuClick,
-    };
-
-   
+    items: [
+      { key: "logout", label: "Đăng xuất" },
+    ],
+    onClick: handleUserMenuClick,
+  };
 
   return (
     <Layout style={{ height: "100vh" }}>
-      <Sider 
-      collapsible 
-      style={{ background: "#f6f9fcff" }} 
-      className={styles.customSider}
-      width={260}          // width khi mở
-      collapsedWidth={80}  // width khi đóng
+      <Sider
+        collapsible
+        style={{ background: "#f6f9fcff" }}
+        className={styles.customSider}
+        width={260}          // width khi mở
+        collapsedWidth={80}  // width khi đóng
       >
         <img src={logo} className={styles.logo} />
         <Menu
@@ -122,20 +157,43 @@ export default function DashboardLayout({ onLogout }: { onLogout: () => void }) 
           <div style={{ fontSize: 20, fontWeight: 600 }}>LOGO</div>
 
           <Dropdown menu={userMenu} placement="bottomRight">
-          <div style={{ display: "flex", alignItems: "center", cursor: "pointer", gap: 8 }}>
-            <Avatar src={avatarUrl} icon={!avatarUrl && <UserIcon size={20} />} />
-            <span style={{ fontWeight: 500 }}>{username}</span>
-          </div>
-        </Dropdown>
+            <div style={{ display: "flex", alignItems: "center", cursor: "pointer", gap: 8 }}>
+              <Avatar src={avatarUrl} icon={!avatarUrl && <UserIcon size={20} />} />
+              <span style={{ fontWeight: 500 }}>{username}</span>
+            </div>
+          </Dropdown>
         </Header>
 
         <Content style={{ background: "#fff", padding: 24 }}>
           <Breadcrumb style={{ marginBottom: 16 }}>
-          {breadcrumbItems.map((item, idx) => (
-            <Breadcrumb.Item key={idx}>{item.breadcrumb}</Breadcrumb.Item>
-          ))}
-        </Breadcrumb>
+            {breadcrumbItems.map((item, idx) => (
+              <Breadcrumb.Item key={idx}>{item.breadcrumb}</Breadcrumb.Item>
+            ))}
+          </Breadcrumb>
+          {/* <Breadcrumb style={{ marginBottom: 16 }}>
+            {breadcrumbItems.map((item, idx) => {
+              const isActive =
+                location.pathname === item.path ||
+                location.pathname.startsWith(item.path + "/");
 
+              const showActiveStyle =
+                breadcrumbItems.length > 1 && isActive;
+
+              return (
+                <Breadcrumb.Item key={idx}>
+                  <span
+                    className={`ant-breadcrumb-link ${showActiveStyle ? "breadcrumb-active" : ""
+                      }`}
+                    onClick={() => {
+                      if (!isActive) navigate(item.path);
+                    }}
+                  >
+                    {item.breadcrumb}
+                  </span>
+                </Breadcrumb.Item>
+              );
+            })}
+          </Breadcrumb> */}
 
           <Routes>
             {appRoutes.map((route: any) => {
@@ -165,6 +223,7 @@ export default function DashboardLayout({ onLogout }: { onLogout: () => void }) 
 
             <Route path="*" element={<Navigate to="/home" replace />} />
           </Routes>
+
         </Content>
       </Layout>
     </Layout>

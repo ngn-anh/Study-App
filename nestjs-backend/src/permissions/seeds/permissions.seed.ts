@@ -182,4 +182,30 @@ export const PERMISSIONS_SEED: Partial<Permission>[] = [
     module: 'exam',
     action: 'delete',
   },
+
+  /* ================= QUESTION ================= */
+  {
+    code: 'question.create',
+    name: 'Tạo câu hỏi',
+    module: 'question',
+    action: 'create',
+  },
+  {
+    code: 'question.read',
+    name: 'Xem câu hỏi',
+    module: 'question',
+    action: 'read',
+  },
+  {
+    code: 'question.update',
+    name: 'Cập nhật câu hỏi',
+    module: 'question',
+    action: 'update',
+  },
+  {
+    code: 'question.delete',
+    name: 'Xoá câu hỏi',
+    module: 'question',
+    action: 'delete',
+  },
 ];

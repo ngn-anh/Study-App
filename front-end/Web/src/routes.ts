@@ -1,12 +1,4 @@
-import {
-  House,
-  BookOpen,
-  Users,
-  User,
-  Bell,
-  Gear,
-  Files,
-} from "phosphor-react";
+import { House, BookOpen, Users, User, Gear } from "phosphor-react";
 import HomePage from "./pages/homepage";
 import SubjectPage from "./pages/subject";
 import ClassPage from "./pages/class";
@@ -15,6 +7,8 @@ import StudentPage from "./pages/student";
 import StaffPage from "./pages/staff";
 import RolePage from "./pages/role";
 import ExamPage from "./pages/Exam";
+import QuestionPage from "./pages/Question";
+import ExamLayout from "./component/ExamLayout";
 
 export const appRoutes = [
   {
@@ -50,6 +44,25 @@ export const appRoutes = [
     breadcrumb: "Quản lý đề thi",
     requiredPermissions: ["exam.read"],
   },
+  // {
+  //   path: "/exam",
+  //   label: "Quản lý đề thi",
+  //   icon: BookOpen,
+  //   element: ExamLayout, // 👈 layout
+  //   breadcrumb: "Quản lý đề thi",
+  //   requiredPermissions: ["exam.read"],
+  //   children: [
+  //     {
+  //       index: true, // /exam
+  //       element: ExamPage,
+  //     },
+  //     {
+  //       path: ":examId/question",
+  //       element: QuestionPage,
+  //       requiredPermissions: ["question.read"],
+  //     },
+  //   ],
+  // },
   {
     path: "/user",
     label: "Quản lý người dùng",

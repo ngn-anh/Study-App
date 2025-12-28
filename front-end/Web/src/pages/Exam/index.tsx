@@ -2,7 +2,7 @@ import "./index.less";
 import { Button, Col, Row, Tag, Tooltip, message } from "antd";
 import PageContainerFixed from "../../component/PageContainerFixed";
 import ProTableFixed from "../../component/ProTableFixed";
-import { Plus, NotePencil, Trash, MagnifyingGlass } from "phosphor-react";
+import { Plus, NotePencil, Trash, MagnifyingGlass, Question, CircleWavyQuestion } from "phosphor-react";
 import { useRef, useState } from "react";
 import {
     getExams,
@@ -14,6 +14,7 @@ import { PermissionGuard } from "../../components/PermissionGuard";
 import CreateUpdateExam from "./components/createUpdateExamDrawer";
 import type { Exam } from "../../types/typeObj";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 const ExamPage = () => {
     const actionRef = useRef<any>();
@@ -21,6 +22,8 @@ const ExamPage = () => {
     const [examId, setExamId] = useState<string | undefined>();
     const [examDetail, setExamDetail] = useState<Exam>();
     const [openDelete, setOpenDelete] = useState(false);
+
+    const navigate = useNavigate();
 
     const requestGetDataSource = async (param: any) => {
         const res = await getExams({
@@ -52,11 +55,27 @@ const ExamPage = () => {
         setOpenDelete(true);
     };
 
+    const handleAddExam = () => {
+        setExamId(undefined);
+        setIsOpenDrawer(true);
+    }
+
+    const handleEditExam = (examId: string) => {
+        setExamId(examId);
+        setIsOpenDrawer(true);
+    }
+
     const handleDelete = async () => {
         // await deleteExam(examId);
         message.success("Xóa đề thi thành công");
         setOpenDelete(false);
         actionRef.current?.reload();
+    };
+
+    const handleOpenQuestion = (examId: string) => {
+        // setExamId(examId);
+        // setIsOpenDrawer(true);
+        navigate(`/exam/${examId}/question`);
     };
 
     const columns = [
@@ -79,7 +98,7 @@ const ExamPage = () => {
         {
             title: "Tên đề thi",
             dataIndex: "name",
-            width: 250,
+            width: 230,
             fixed: "left",
             render: (text: string) => {
                 return (
@@ -90,7 +109,7 @@ const ExamPage = () => {
         {
             title: "Loại đề thi",
             dataIndex: "type",
-            width: 120,
+            width: 70,
             render: (v: number) =>
                 v === 1 ? (
                     <Tag color="blue">Thi thử</Tag>
@@ -101,7 +120,7 @@ const ExamPage = () => {
         {
             title: "Thời gian thi (phút)",
             dataIndex: "duration",
-            width: 150,
+            width: 100,
             align: "center",
             render: (text: string) => {
                 return (
@@ -112,7 +131,7 @@ const ExamPage = () => {
         {
             title: "Bắt đầu",
             dataIndex: "startDate",
-            width: 180,
+            width: 100,
             render: (text: Date) => {
                 return (
                     <div className="startDate-exam">
@@ -126,7 +145,7 @@ const ExamPage = () => {
         {
             title: "Kết thúc",
             dataIndex: "endDate",
-            width: 180,
+            width: 100,
             render: (text: Date) => {
                 return (
                     <div className="endDate-exam">
@@ -139,19 +158,28 @@ const ExamPage = () => {
         },
         {
             title: "Tác vụ",
-            width: 90,
+            width: 80,
             fixed: "right",
             align: "center",
             render: (_text: string, row: any) => (
                 <div className="cpn-action">
                     <PermissionGuard requiredPermissions="exam.update">
+                        {/* <PermissionGuard requiredPermissions="question.read"> */}
+                        <Tooltip title="Danh sách câu hỏi">
+                            <Question
+                                className="cursor-pointer"
+                                color="#22A112"
+                                size={15}
+                                onClick={() => handleOpenQuestion(row.id)}
+                            />
+                        </Tooltip>
+                    </PermissionGuard>
+                    <PermissionGuard requiredPermissions="exam.update">
                         <Tooltip title="Sửa">
                             <NotePencil
                                 className="cursor-pointer"
-                                onClick={() => {
-                                    setExamId(row.id);
-                                    setIsOpenDrawer(true);
-                                }}
+                                color="#0c4299"
+                                onClick={() => handleEditExam(row.id)}
                             />
                         </Tooltip>
                     </PermissionGuard>
@@ -159,6 +187,7 @@ const ExamPage = () => {
                         <Tooltip title="Xóa">
                             <Trash
                                 className="cursor-pointer"
+                                color="#d63b3bff"
                                 onClick={() => onOpenDelete(row.id)}
                             />
                         </Tooltip>
@@ -176,10 +205,7 @@ const ExamPage = () => {
                     <PermissionGuard requiredPermissions="exam.create">
                         <Button
                             type="primary"
-                            onClick={() => {
-                                setExamId(undefined);
-                                setIsOpenDrawer(true);
-                            }}
+                            onClick={handleAddExam}
                         >
                             <Plus /> Tạo đề thi
                         </Button>

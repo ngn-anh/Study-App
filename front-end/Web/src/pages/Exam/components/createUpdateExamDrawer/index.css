@@ -44,9 +44,9 @@
   /* 2 cột bằng nhau */
   gap: 16px;
   width: 100%;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .startDate {
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }

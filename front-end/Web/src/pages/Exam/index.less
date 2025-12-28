@@ -26,6 +26,33 @@
 
 .cpn-action {
   display: flex;
-  gap: 6px;
+  gap: 10px;
   justify-content: center;
+}
+
+.page-title-breadcrumb {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.breadcrumb-item {
+    cursor: pointer;
+    color: #000000;
+    transition: all 0.2s ease;
+}
+
+.breadcrumb-item:hover {
+    color: #0c4299;
+}
+
+.breadcrumb-item.active {
+    color: #0c4299;
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    margin: 0 6px;
+    color: #000000;
 }
