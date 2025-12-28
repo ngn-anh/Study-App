@@ -26,7 +26,7 @@ export type Subject = {
 
 export type Exam = {
   _id: string;
-  subject_class_id: string;
+  subject_class_id?: string;
   name?: string;
   description?: string;
   type?: string;
@@ -82,7 +82,7 @@ export type Class = {
 
 export type Answer = {
   _id: string;
-  question_id: string;
+  question_id?: string;
   description: string;
   image?: string | null;
   is_correct?: boolean;

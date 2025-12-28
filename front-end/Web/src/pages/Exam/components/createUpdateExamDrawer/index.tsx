@@ -306,28 +306,6 @@ const CreateUpdateExam = ({ isOpenDrawer, setIsOpenDrawer, examId, setExamId, ac
                 }}
             >
                 <div>
-                    {/* Ảnh minh họa */}
-                    {/* <ProForm.Item label="Ảnh minh họa đề thi" name="image">
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                            {previewImage && (
-                                <img
-                                    src={previewImage}
-                                    alt="Preview"
-                                    style={{ width: 150, height: 100, objectFit: 'cover', borderRadius: 4 }}
-                                />
-                            )}
-                            <Upload
-                                accept="image/*"
-                                showUploadList={false}
-                                beforeUpload={(file) => {
-                                    handleSelectImage(file);
-                                    return false; // prevent auto upload
-                                }}
-                            >
-                                <Button icon={<UploadSimple />}>Chọn ảnh</Button>
-                            </Upload>
-                        </div>
-                    </ProForm.Item> */}
                     <ProForm.Item
                         label="Ảnh minh họa đề thi"
                         name="image"

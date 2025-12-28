@@ -208,4 +208,30 @@ export const PERMISSIONS_SEED: Partial<Permission>[] = [
     module: 'question',
     action: 'delete',
   },
+
+  /* ================= ANSWER ================= */
+  {
+    code: 'answer.create',
+    name: 'Tạo đáp án',
+    module: 'answer',
+    action: 'create',
+  },
+  {
+    code: 'answer.read',
+    name: 'Xem đáp án',
+    module: 'answer',
+    action: 'read',
+  },
+  {
+    code: 'answer.update',
+    name: 'Cập nhật đáp án',
+    module: 'answer',
+    action: 'update',
+  },
+  {
+    code: 'answer.delete',
+    name: 'Xoá đáp án',
+    module: 'answer',
+    action: 'delete',
+  },
 ];

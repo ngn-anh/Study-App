@@ -1,8 +1,8 @@
 import "./index.less";
-import { Button, Col, Row, Tag, Tooltip, message } from "antd";
+import { Button, Col, Row, Tag, Tooltip, Upload, message } from "antd";
 import PageContainerFixed from "../../component/PageContainerFixed";
 import ProTableFixed from "../../component/ProTableFixed";
-import { Plus, NotePencil, Trash, MagnifyingGlass, Question, CircleWavyQuestion } from "phosphor-react";
+import { Plus, NotePencil, Trash, Question, FileArrowUp, MagnifyingGlass } from "phosphor-react";
 import { useRef, useState } from "react";
 import {
     getExams,
@@ -15,6 +15,9 @@ import CreateUpdateExam from "./components/createUpdateExamDrawer";
 import type { Exam } from "../../types/typeObj";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
+import QuestionModal from "../Question";
+import * as XLSX from "xlsx";
+import { ProForm, ProFormSelect, ProFormText } from "@ant-design/pro-components";
 
 const ExamPage = () => {
     const actionRef = useRef<any>();
@@ -22,6 +25,13 @@ const ExamPage = () => {
     const [examId, setExamId] = useState<string | undefined>();
     const [examDetail, setExamDetail] = useState<Exam>();
     const [openDelete, setOpenDelete] = useState(false);
+    const [openQuestion, setOpenQuestion] = useState(false);
+    const [filterParams, setFilterParams] = useState<{
+        name?: string;
+        type?: number;
+        sort?: "newest" | "oldest";
+    }>({});
+
 
     const navigate = useNavigate();
 
@@ -29,9 +39,10 @@ const ExamPage = () => {
         const res = await getExams({
             page: param.current,
             limit: param.pageSize,
+            name: filterParams.name,
+            type: filterParams.type,
+            sort: filterParams.sort, // backend cần nhận param này để sort
         });
-
-        console.log("res exam: ", res);
 
         return {
             data: res.data.map((e: Exam) => ({
@@ -47,6 +58,7 @@ const ExamPage = () => {
             total: res.total || 0,
         };
     };
+
 
     const onOpenDelete = async (id: string) => {
         const res = await getExamDetail(id);
@@ -73,9 +85,31 @@ const ExamPage = () => {
     };
 
     const handleOpenQuestion = (examId: string) => {
-        // setExamId(examId);
+        setExamId(examId);
+        setOpenQuestion(true);
         // setIsOpenDrawer(true);
-        navigate(`/exam/${examId}/question`);
+        // navigate(`/exam/${examId}/question`);
+    };
+
+    const handleImportExcel = async (examId: string, file: File) => {
+        try {
+            const data = await file.arrayBuffer();
+            const workbook = XLSX.read(data);
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            const jsonData: any[] = XLSX.utils.sheet_to_json(sheet, { defval: "" });
+
+            console.log("Excel data for examId:", examId, jsonData);
+
+            // TODO: map jsonData thành định dạng câu hỏi & gọi API tạo câu hỏi cho examId
+            // await createQuestionsBulk(examId, jsonData);
+
+            message.success(`Import ${jsonData.length} câu hỏi cho đề thi thành công!`);
+            actionRef.current?.reload();
+        } catch (err) {
+            console.error(err);
+            message.error("Import Excel thất bại");
+        }
     };
 
     const columns = [
@@ -163,6 +197,22 @@ const ExamPage = () => {
             align: "center",
             render: (_text: string, row: any) => (
                 <div className="cpn-action">
+                    {/* Import Excel */}
+                    <PermissionGuard requiredPermissions="question.create">
+                        <Tooltip title="Import Excel">
+                            <Upload
+                                accept=".xlsx,.xls"
+                                showUploadList={false}
+                                beforeUpload={(file) => {
+                                    handleImportExcel(row.id, file);
+                                    return false; // ngăn upload tự submit
+                                }}
+                            >
+                                <FileArrowUp className="cursor-pointer" size={16} color="#1890ff" />
+                            </Upload>
+                        </Tooltip>
+                    </PermissionGuard>
+
                     <PermissionGuard requiredPermissions="exam.update">
                         {/* <PermissionGuard requiredPermissions="question.read"> */}
                         <Tooltip title="Danh sách câu hỏi">
@@ -214,50 +264,68 @@ const ExamPage = () => {
             }}
         >
             <div className="subject-list-page">
-                {/* <ProForm submitter={false} form={form} className="form-search">
-                    <Row gutter={[16, 16]}>
-                        <Col span={8}>
-                            <ProFormText
-                                placeholder={"Nhập tên môn học để tìm kiếm"}
-                                fieldProps={{
-                                    prefix: <MagnifyingGlass color="#083070" weight="bold" />,
-                                }}
-                                name="name"
-                            />
-                        </Col>
-                        <Col span={6}>
+                {/* Search */}
+                <ProForm
+                    submitter={false}
+                    layout="inline"
+                    style={{ marginBottom: 16, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}
+                    onFinish={(values) => {
+                        setFilterParams(values);
+                        actionRef.current?.reload();
+                    }}
+                >
+                    {/* Tìm theo tên */}
+                    <ProFormText
+                        name="name"
+                        placeholder="Tìm theo tên đề thi"
+                        fieldProps={{
+                            prefix: <MagnifyingGlass color="#083070" weight="bold" />,
+                            allowClear: true,
+                        }}
+                        style={{ minWidth: 200 }}
+                    />
+
+                    {/* Gộp Loại đề + Thời gian */}
+                    <ProForm.Group>
+                        <div style={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
                             <ProFormSelect
-                                name="status"
-                                placeholder={"Trạng thái"}
-                                fieldProps={{
-                                    showSearch: true,
-                                    showArrow: true,
-                                    filterOption: filterOptions,
-                                }}
-                                options={optionStatus}
+                                name="type"
+                                placeholder="Loại đề thi"
+                                options={[
+                                    { label: "Thi thử", value: 1 },
+                                    { label: "Đề luyện", value: 2 },
+                                ]}
+                                allowClear
+                                style={{ minWidth: 150 }}
                             />
-                        </Col>
-                        <Col span={10}>
-                            <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
-                                <Button
-                                    className="ant-btn-secondary"
-                                    onClick={() => {
-                                        setFilterParams({});
-                                        form.resetFields();
-                                    }}
-                                >
-                                    Xóa bộ lọc
-                                </Button>
-                                <Button
-                                    className="ant-btn-primary"
-                                    onClick={() => search(filter.current)}
-                                >
-                                    Tìm kiếm
-                                </Button>
-                            </div>
-                        </Col>
-                    </Row>
-                </ProForm> */}
+                            <ProFormSelect
+                                name="sort"
+                                placeholder="Thời gian"
+                                options={[
+                                    { label: "Mới nhất", value: "newest" },
+                                    { label: "Cũ nhất", value: "oldest" },
+                                ]}
+                                allowClear
+                                style={{ minWidth: 150 }}
+                            />
+                        </div>
+                    </ProForm.Group>
+
+                    {/* Buttons căn phải */}
+                    <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
+                        <Button
+                            onClick={() => {
+                                setFilterParams({});
+                                actionRef.current?.reload();
+                            }}
+                        >
+                            Xóa bộ lọc
+                        </Button>
+                        <Button type="primary" htmlType="submit">
+                            Tìm kiếm
+                        </Button>
+                    </div>
+                </ProForm>
 
                 <div>
                     <ProTableFixed
@@ -270,6 +338,16 @@ const ExamPage = () => {
                         tableAlertRender={false}
                     />
                 </div>
+
+                {/* Modal Question */}
+                <QuestionModal
+                    open={openQuestion}
+                    examId={examId}
+                    onClose={() => {
+                        setOpenQuestion(false);
+                        setExamId(undefined);
+                    }}
+                />
 
                 <CreateUpdateExam
                     isOpenDrawer={isOpenDrawer}

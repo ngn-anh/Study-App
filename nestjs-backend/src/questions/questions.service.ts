@@ -83,4 +83,39 @@ export class QuestionsService {
       questions: questionsWithAnswers,
     };
   }
+
+  async findById(questionId: string) {
+    // 1. Validate ObjectId
+    if (!Types.ObjectId.isValid(questionId)) {
+      return null;
+    }
+
+    /* =======================
+     * 2. Lấy câu hỏi
+     * ======================= */
+    const question = await this.questionModel
+      .findOne({
+        _id: new Types.ObjectId(questionId),
+        deleted_at: null,
+      })
+      .select('-created_at -updated_at -deleted_at')
+      .lean();
+
+    if (!question) {
+      return null;
+    }
+
+    const answers = await this.answerModel
+      .find({
+        question_id: question._id,
+        deleted_at: null,
+      })
+      .select('-created_at -updated_at -deleted_at')
+      .lean();
+
+    return {
+      ...question,
+      answers,
+    };
+  }
 }
