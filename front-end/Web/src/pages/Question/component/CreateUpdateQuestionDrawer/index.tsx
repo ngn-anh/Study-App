@@ -243,7 +243,7 @@ const CreateUpdateQuestionDrawer = ({
                 <ProFormTextArea
                     name="description"
                     label="Nội dung câu hỏi"
-                    placeholder={"Nhập nội dung caao hỏi"}
+                    placeholder={"Nhập nội dung câu hỏi"}
                     rules={[{ required: true, message: "Vui lòng nhập câu hỏi" }]}
                     fieldProps={{ rows: 4, disabled: viewOnly }}
                 />
