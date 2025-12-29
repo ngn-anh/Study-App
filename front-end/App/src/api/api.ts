@@ -4,6 +4,7 @@ import { navigationRef } from '../navigation/RootNavigation';
 import { Alert } from 'react-native';
 import { API_URL } from '@env';
 
+// const API_URL = 'http://localhost:3000'; // hoặc IP máy thật nếu trên thiết bị
 
 export const api = axios.create({
   baseURL: API_URL,

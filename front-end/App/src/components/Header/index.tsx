@@ -6,16 +6,22 @@ import { styles } from "./index.styles";
 interface Props {
     data?: any,
     title?: string,
+    handleGoBack: () => void;
 }
 
 const Header = (props: Props) => {
-    const { data, title } = props;
-    const navigation = useNavigation();
+    const { data, title, handleGoBack } = props;
+    // const navigation = useNavigation();
+
+    // const onBackPress = () => {
+    //     handleGoBack();
+    // };
+
     return (
         <>
             <View style={styles.header}>
                 <View style={styles.headerLeft}>
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <TouchableOpacity onPress={() => handleGoBack()}>
                         <ArrowLeftIcon size={24} color="#083070" />
                     </TouchableOpacity>
                     <Text style={styles.headerTitle}>{!!title ? title : data?.name}</Text>

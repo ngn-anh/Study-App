@@ -21,11 +21,11 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
   content = "",
   cancelText = "Hủy",
   confirmText = "Xác nhận",
-  onCancel = () => {},
-  onConfirm = () => {},
+  onCancel = () => {  },
+  onConfirm = () => {  },
   type = "confirm",
   isButtonOk = true, // mặc định hiển thị button OK
-  headerIcon 
+  headerIcon
 }) => {
   const mainColor = type === "warning" ? "#ff1c1cff" : "#083070";
 
@@ -34,10 +34,10 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
       <View style={styles.overlay}>
         <View style={[styles.modalContainer, { borderColor: mainColor }]}>
           <View style={styles.cpn_title}>
-              {headerIcon ? <View>{headerIcon}</View> : null}
-              <Text style={[styles.title, { color: mainColor }]}>{title}</Text>
+            {headerIcon ? <View>{headerIcon}</View> : null}
+            <Text style={[styles.title, { color: mainColor }]}>{title}</Text>
           </View>
-          
+
           <Text style={styles.content}>{content}</Text>
 
           <View style={styles.actionContainer}>
@@ -51,13 +51,13 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
             </TouchableOpacity>
 
             {isButtonOk ? (
-            <TouchableOpacity
-              onPress={onConfirm}
-              style={[styles.confirmBtn, { backgroundColor: mainColor }]}
-            >
-              <Text style={styles.confirmText}>{confirmText}</Text>
-            </TouchableOpacity>
-          ) : null}
+                <TouchableOpacity
+                  onPress={onConfirm}
+                  style={[styles.confirmBtn, { backgroundColor: mainColor }]}
+                >
+                  <Text style={styles.confirmText}>{confirmText}</Text>
+                </TouchableOpacity>
+              ) : null}
           </View>
         </View>
       </View>

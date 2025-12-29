@@ -1,4 +1,4 @@
-import { House, BookOpen, Users, User, Bell, Gear } from "phosphor-react";
+import { House, BookOpen, Users, User, Gear } from "phosphor-react";
 import HomePage from "./pages/homepage";
 import SubjectPage from "./pages/subject";
 import ClassPage from "./pages/class";
@@ -6,12 +6,14 @@ import ProgramPage from "./pages/program";
 import StudentPage from "./pages/student";
 import StaffPage from "./pages/staff";
 import RolePage from "./pages/role";
+import ExamPage from "./pages/Exam";
+import QuestionPage from "./pages/Question";
 
 export const appRoutes = [
   {
     path: "/home",
     label: "Trang chủ",
-    icon: House,           
+    icon: House,
     element: HomePage,
     breadcrumb: "Trang chủ",
     // Không cần permission hoặc để mặc định ai cũng vào được
@@ -34,6 +36,14 @@ export const appRoutes = [
     requiredPermissions: ["class.read"],
   },
   {
+    path: "/exam",
+    label: "Quản lý đề thi",
+    icon: BookOpen,
+    element: ExamPage,
+    breadcrumb: "Quản lý đề thi",
+    requiredPermissions: ["exam.read"],
+  },
+  {
     path: "/user",
     label: "Quản lý người dùng",
     icon: User,
@@ -54,7 +64,7 @@ export const appRoutes = [
         breadcrumb: "Danh sách nhân viên",
         requiredPermissions: ["user.read"],
       },
-    ]
+    ],
   },
   {
     path: "/config",

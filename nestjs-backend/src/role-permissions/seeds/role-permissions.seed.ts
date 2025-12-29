@@ -1,4 +1,4 @@
-import { RolePermission } from "../schemas/role-permissions.schema";
+import { RolePermission } from '../schemas/role-permissions.schema';
 
 export const ROLE_PERMISSIONS_SEED: Partial<RolePermission>[] = [
   /* ================= ADMIN ================= */
@@ -40,6 +40,24 @@ export const ROLE_PERMISSIONS_SEED: Partial<RolePermission>[] = [
   { role_code: 'admin', permission_code: 'permission.update' },
   { role_code: 'admin', permission_code: 'permission.delete' },
 
+  // EXAM
+  { role_code: 'admin', permission_code: 'exam.create' },
+  { role_code: 'admin', permission_code: 'exam.read' },
+  { role_code: 'admin', permission_code: 'exam.update' },
+  { role_code: 'admin', permission_code: 'exam.delete' },
+
+  // QUESTION
+  { role_code: 'admin', permission_code: 'question.create' },
+  { role_code: 'admin', permission_code: 'question.read' },
+  { role_code: 'admin', permission_code: 'question.update' },
+  { role_code: 'admin', permission_code: 'question.delete' },
+
+  // ANSWER
+  { role_code: 'admin', permission_code: 'answer.create' },
+  { role_code: 'admin', permission_code: 'answer.read' },
+  { role_code: 'admin', permission_code: 'answer.update' },
+  { role_code: 'admin', permission_code: 'answer.delete' },
+
   /* ================= STAFF ================= */
   // STAFF chỉ có quyền xem (READ)
 
@@ -60,4 +78,13 @@ export const ROLE_PERMISSIONS_SEED: Partial<RolePermission>[] = [
 
   // PERMISSION
   { role_code: 'staff', permission_code: 'permission.read' },
+
+  // EXAM
+  { role_code: 'staff', permission_code: 'exam.read' },
+
+  // QUESTION
+  { role_code: 'staff', permission_code: 'question.read' },
+
+  // ANSWER
+  { role_code: 'staff', permission_code: 'answer.read' },
 ];

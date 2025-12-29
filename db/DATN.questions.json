@@ -1,0 +1,532 @@
+[{
+  "_id": {
+    "$oid": "690dd86a1e4d52743251d885"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFlpfC7Xq14JaD8Zdf34Y7Jhi2vw0mBCJfhA&s",
+  "description": "Đâu là thủ đô của Việt Nam?",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "deleted_at": null,
+  "section": 3
+},
+{
+  "_id": {
+    "$oid": "690dd86a1e4d52743251d886"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "image": null,
+  "description": "Kết quả của phép tính 15 × 3 là bao nhiêu?",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "690dd86a1e4d52743251d887"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "image": "https://e1.pngegg.com/pngimages/285/967/png-clipart-cochon-porcelet-dessin-mignon-sanglier-rose-rouge-nez.png",
+  "description": "Tác giả của truyện ngắn 'Lão Hạc' là ai?",
+  "difficulty": 2,
+  "created_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "690dd86a1e4d52743251d888"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4Ob_4zGR7xk04byYSqUOgqFTWPMwAKuEpFQ&s",
+  "description": "Nguyên tử oxy có bao nhiêu electron?",
+  "difficulty": 2,
+  "created_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "690dd86a1e4d52743251d889"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMFi1dDdPOGO2E8D8FOcME9VZZOTZwnqK2CQ&s",
+  "description": "Thành phần chính của không khí là gì?",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "690dd86a1e4d52743251d88a"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "image": null,
+  "description": "Trong tam giác vuông, tổng hai góc nhọn bằng bao nhiêu độ?",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "deleted_at": null,
+  "section": 2
+},
+{
+  "_id": {
+    "$oid": "690dd86a1e4d52743251d88b"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "image": "https://example.com/images/question7.png",
+  "description": "Sông nào dài nhất Việt Nam?",
+  "difficulty": 2,
+  "created_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "deleted_at": null,
+  "section": 2
+},
+{
+  "_id": {
+    "$oid": "690dd86a1e4d52743251d88c"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "image": "https://example.com/images/question8.png",
+  "description": "Ai là người đặt nền móng cho thuyết tiến hóa?",
+  "difficulty": 3,
+  "created_at": {
+    "$date": "2025-11-07T11:30:50.589Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:30:50.589Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "690dd86a1e4d52743251d88d"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "image": "https://example.com/images/question9.png",
+  "description": "Hệ điều hành nào được sử dụng phổ biến trên điện thoại Android?",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-07T11:30:50.589Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:30:50.589Z"
+  },
+  "deleted_at": null,
+  "section": 3
+},
+{
+  "_id": {
+    "$oid": "690dd86a1e4d52743251d88e"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "image": "https://example.com/images/question10.png",
+  "description": "Thế giới có bao nhiêu châu lục?",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-07T11:30:50.589Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:30:50.589Z"
+  },
+  "deleted_at": null,
+  "section": 2
+},
+{
+  "_id": {
+    "$oid": "6925258ed2b1c9fa89a6b4f9"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad8"
+  },
+  "image": "https://example.com/images/history_question1.png",
+  "description": "Ai là vị vua đầu tiên của nhà Nguyễn?",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "6925258ed2b1c9fa89a6b4fa"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad8"
+  },
+  "image": "https://example.com/images/history_question2.png",
+  "description": "Trận Điện Biên Phủ kết thúc vào năm nào?",
+  "difficulty": 2,
+  "created_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "6925258ed2b1c9fa89a6b4fb"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad8"
+  },
+  "image": "https://example.com/images/history_question3.png",
+  "description": "Vua Quang Trung tên thật là gì?",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "6925258ed2b1c9fa89a6b4fc"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad8"
+  },
+  "image": "https://example.com/images/history_question4.png",
+  "description": "Chiến thắng Bạch Đằng năm 938 do ai lãnh đạo?",
+  "difficulty": 2,
+  "created_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "6925258ed2b1c9fa89a6b4fd"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad8"
+  },
+  "image": "https://example.com/images/history_question5.png",
+  "description": "Hội nghị Diên Hồng diễn ra dưới thời vua nào?",
+  "difficulty": 3,
+  "created_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-25T03:33:49.589Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549b9"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Giải phương trình bậc hai: x² − 5x + 6 = 0.",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:30:50.588Z"
+  },
+  "deleted_at": null,
+  "section": 2
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549ba"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Tính giá trị của biểu thức: 2³ × 4².",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-07T11:31:10.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:31:10.588Z"
+  },
+  "deleted_at": null,
+  "section": 2
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549bb"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Cho cấp số cộng có số hạng đầu a₁ = 2, công sai d = 3. Tính a₅.",
+  "difficulty": 2,
+  "created_at": {
+    "$date": "2025-11-07T11:31:30.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:31:30.588Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549bc"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Tìm tập xác định của hàm số y = √(x − 2).",
+  "difficulty": 2,
+  "created_at": {
+    "$date": "2025-11-07T11:31:50.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:31:50.588Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549bd"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Giải bất phương trình: 2x − 5 > 3.",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-07T11:32:10.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:32:10.588Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549be"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Cho hàm số y = 2x + 1. Tính y khi x = −2.",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-11-07T11:32:30.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:32:30.588Z"
+  },
+  "deleted_at": null,
+  "section": 2
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549bf"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Tính đạo hàm của hàm số y = x³ − 3x² + 2.",
+  "difficulty": 3,
+  "created_at": {
+    "$date": "2025-11-07T11:32:50.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:32:50.588Z"
+  },
+  "deleted_at": null,
+  "section": 3
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549c0"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Cho tam giác có ba cạnh lần lượt là 3, 4, 5. Tam giác đó là tam giác gì?",
+  "difficulty": 2,
+  "created_at": {
+    "$date": "2025-11-07T11:33:10.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:33:10.588Z"
+  },
+  "deleted_at": null,
+  "section": 3
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549c1"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Giải phương trình lượng giác: sin x = 1/2.",
+  "difficulty": 3,
+  "created_at": {
+    "$date": "2025-11-07T11:33:30.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:33:30.588Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "693e8d168f83e935fec549c2"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "image": null,
+  "description": "Tính giới hạn: lim (x → 0) (sin x / x).",
+  "difficulty": 3,
+  "created_at": {
+    "$date": "2025-11-07T11:33:50.588Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:33:50.588Z"
+  },
+  "deleted_at": null,
+  "section": 2
+},
+{
+  "_id": {
+    "$oid": "693eee1dfe3739ab34a077ab"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad2"
+  },
+  "image": null,
+  "description": "Tính giới hạn: lim (x → 0) (sin(5x) / x).",
+  "difficulty": 3,
+  "created_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "deleted_at": null,
+  "section": 2
+},
+{
+  "_id": {
+    "$oid": "693eee1dfe3739ab34a077ac"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad2"
+  },
+  "image": null,
+  "description": "Giải phương trình: 2x^2 - 5x + 3 = 0.",
+  "difficulty": 3,
+  "created_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "693eee1dfe3739ab34a077ad"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad2"
+  },
+  "image": null,
+  "description": "Tính tích phân: ∫(2x) dx từ 0 đến 3.",
+  "difficulty": 3,
+  "created_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "deleted_at": null,
+  "section": 2
+}]

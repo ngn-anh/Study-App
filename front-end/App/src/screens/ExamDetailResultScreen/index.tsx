@@ -29,6 +29,7 @@ export default function ExamDetailResultScreen() {
     const fetchData = async () => {
       try {
         const data = await getExamDetailResult(examResultId);
+        console.log("ExamDetailResult data:", JSON.stringify(data, null, 2));
         setQuestions(data.questions);
       } catch (error) {
         console.error("Lỗi khi fetch dữ liệu:", error);

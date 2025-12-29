@@ -1,4 +1,4 @@
-import { Permission } from "../schemas/permissions.schema";
+import { Permission } from '../schemas/permissions.schema';
 
 export const PERMISSIONS_SEED: Partial<Permission>[] = [
   /* ================= USER ================= */
@@ -154,6 +154,84 @@ export const PERMISSIONS_SEED: Partial<Permission>[] = [
     code: 'permission.delete',
     name: 'Xoá quyền',
     module: 'permission',
+    action: 'delete',
+  },
+
+  /* ================= EXAM ================= */
+  {
+    code: 'exam.create',
+    name: 'Tạo bài thi',
+    module: 'exam',
+    action: 'create',
+  },
+  {
+    code: 'exam.read',
+    name: 'Xem bài thi',
+    module: 'exam',
+    action: 'read',
+  },
+  {
+    code: 'exam.update',
+    name: 'Cập nhật bài thi',
+    module: 'exam',
+    action: 'update',
+  },
+  {
+    code: 'exam.delete',
+    name: 'Xoá bài thi',
+    module: 'exam',
+    action: 'delete',
+  },
+
+  /* ================= QUESTION ================= */
+  {
+    code: 'question.create',
+    name: 'Tạo câu hỏi',
+    module: 'question',
+    action: 'create',
+  },
+  {
+    code: 'question.read',
+    name: 'Xem câu hỏi',
+    module: 'question',
+    action: 'read',
+  },
+  {
+    code: 'question.update',
+    name: 'Cập nhật câu hỏi',
+    module: 'question',
+    action: 'update',
+  },
+  {
+    code: 'question.delete',
+    name: 'Xoá câu hỏi',
+    module: 'question',
+    action: 'delete',
+  },
+
+  /* ================= ANSWER ================= */
+  {
+    code: 'answer.create',
+    name: 'Tạo đáp án',
+    module: 'answer',
+    action: 'create',
+  },
+  {
+    code: 'answer.read',
+    name: 'Xem đáp án',
+    module: 'answer',
+    action: 'read',
+  },
+  {
+    code: 'answer.update',
+    name: 'Cập nhật đáp án',
+    module: 'answer',
+    action: 'update',
+  },
+  {
+    code: 'answer.delete',
+    name: 'Xoá đáp án',
+    module: 'answer',
     action: 'delete',
   },
 ];

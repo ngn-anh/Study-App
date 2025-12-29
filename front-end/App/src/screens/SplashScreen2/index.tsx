@@ -7,7 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SplashScreen2 = () => {
   const navigation = useNavigation();
-  
+
   const isTokenValid = async () => {
     const data = await AsyncStorage.getItem("userData");
     console.log(data)
@@ -20,7 +20,7 @@ const SplashScreen2 = () => {
   };
 
 
-   useEffect(() => {
+  useEffect(() => {
     const checkAuth = async () => {
       const valid = await isTokenValid();
 

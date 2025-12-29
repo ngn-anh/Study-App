@@ -82,8 +82,8 @@ export const UpdateProfileModal: React.FC<Props> = ({
           <View style={styles.selectWrapper}>
             <Picker selectedValue={classId} onValueChange={setClassId} style={styles.picker}>
               <Picker.Item label="-- Chọn lớp --" value="" style={styles.pickerItem} />
-              {classes.map((c) => (
-                <Picker.Item key={c._id} label={c.name} value={c._id}  style={styles.pickerItem}/>
+              {classes?.map((c) => (
+                <Picker.Item key={c?._id} label={c?.name} value={c?._id}  style={styles.pickerItem}/>
               ))}
             </Picker>
           </View>

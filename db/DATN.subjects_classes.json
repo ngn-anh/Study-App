@@ -1,0 +1,176 @@
+[{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccac3"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccab6"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab1"
+  }
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccac5"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccab6"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab3"
+  }
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccabd"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccab4"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab1"
+  }
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccaca"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccab8"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab2"
+  }
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccacb"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccabc"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab3"
+  }
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccabe"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccab4"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab2"
+  }
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccac1"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccab5"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab2"
+  }
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccac7"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccab7"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab2"
+  }
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccac8"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccab9"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab3"
+  }
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccabf"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccab4"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab3"
+  }
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccac9"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccaba"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab1"
+  }
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccac0"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccab5"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab1"
+  }
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccac2"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccab5"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab3"
+  }
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccac6"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccab7"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab1"
+  }
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccac4"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccab6"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab2"
+  }
+},
+{
+  "_id": {
+    "$oid": "6924373adbfaf34f8b926ae9"
+  },
+  "subject_id": {
+    "$oid": "6908a903bc2ae0fd775ccab4"
+  },
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab2"
+  }
+}]

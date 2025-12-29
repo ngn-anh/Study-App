@@ -13,8 +13,12 @@ async function bootstrap() {
   const app = await NestFactory.createApplicationContext(AppModule);
 
   const roleModel = app.get<Model<Role>>(getModelToken(Role.name));
-  const permissionModel = app.get<Model<Permission>>(getModelToken(Permission.name));
-  const rolePermissionModel = app.get<Model<RolePermission>>(getModelToken(RolePermission.name));
+  const permissionModel = app.get<Model<Permission>>(
+    getModelToken(Permission.name),
+  );
+  const rolePermissionModel = app.get<Model<RolePermission>>(
+    getModelToken(RolePermission.name),
+  );
 
   console.log('🌱 Seeding database...');
 

@@ -1,0 +1,2551 @@
+[{
+  "_id": {
+    "$oid": "671fa1070000000000000001"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Math Exam Reminder",
+  "note": "Review chapters 1–3 before the test",
+  "due_date": {
+    "$date": "2025-11-03T00:00:00.000Z"
+  },
+  "due_time": "22:00",
+  "remind_date": {
+    "$date": "2025-11-01T00:00:00.000Z"
+  },
+  "remind_time": "21:30",
+  "repeat_mode": "none",
+  "created_at": {
+    "$date": "2025-04-01T09:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-01T17:50:00.511Z"
+  },
+  "deleted_at": {
+    "$date": "2025-11-01T17:50:00.511Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "671fa1070000000000000002"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "English Exam Reminder",
+  "note": "Practice listening and grammar exercises",
+  "due_date": {
+    "$date": "2025-11-10T00:00:00.000Z"
+  },
+  "due_time": "13:30",
+  "remind_date": {
+    "$date": "2025-11-09T00:00:00.000Z"
+  },
+  "remind_time": "09:00",
+  "repeat_mode": "daily",
+  "created_at": {
+    "$date": "2025-04-02T09:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-04-02T09:15:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "671fa1070000000000000003"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "History Exam Reminder",
+  "note": "Summarize key events and timelines",
+  "due_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "due_time": "15:00",
+  "remind_date": {
+    "$date": "2025-10-14T00:00:00.000Z"
+  },
+  "remind_time": "10:00",
+  "repeat_mode": "daily",
+  "created_at": {
+    "$date": "2025-04-03T09:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T12:48:00.933Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "6906135227849a2dcdf3172b"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Code exam",
+  "note": "Fighting fighting hrydehddfdfd",
+  "due_date": {
+    "$date": "2025-11-10T00:00:00.000Z"
+  },
+  "due_time": "06:00",
+  "remind_date": {
+    "$date": "2025-11-01T00:00:00.000Z"
+  },
+  "remind_time": "22:00",
+  "repeat_mode": "daily",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-01T14:04:02.410Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-04T13:06:12.971Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6906149627849a2dcdf31730"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Math Exam,",
+  "note": "note",
+  "due_date": {
+    "$date": "2025-11-02T00:00:00.000Z"
+  },
+  "due_time": "23:00",
+  "remind_date": {
+    "$date": "2025-11-01T00:00:00.000Z"
+  },
+  "remind_time": "22:08",
+  "repeat_mode": "daily",
+  "deleted_at": {
+    "$date": "2025-11-01T17:44:46.200Z"
+  },
+  "created_at": {
+    "$date": "2025-11-01T14:09:26.038Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-01T17:44:46.202Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690619e227849a2dcdf31763"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Dance Exam",
+  "note": "Dance exam",
+  "due_date": {
+    "$date": "2025-11-05T00:00:00.000Z"
+  },
+  "due_time": "21:30",
+  "remind_date": {
+    "$date": "2025-11-01T00:00:00.000Z"
+  },
+  "remind_time": "21:30",
+  "repeat_mode": "none",
+  "deleted_at": {
+    "$date": "2025-11-01T17:50:00.511Z"
+  },
+  "created_at": {
+    "$date": "2025-11-01T14:32:02.669Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-01T17:50:00.511Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690641d79a0e07950f4635d2"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Physic Exam",
+  "note": "hehe",
+  "due_date": {
+    "$date": "2025-11-11T00:00:00.000Z"
+  },
+  "due_time": "00:21",
+  "remind_date": {
+    "$date": "2025-11-02T00:00:00.000Z"
+  },
+  "remind_time": "00:21",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-01T17:22:31.555Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-01T17:26:34.879Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690a2112d6b31b844970691d"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Đề tiếng Anh lớp 11 - Unit 6",
+  "note": "Thi tiêngs anh",
+  "due_date": {
+    "$date": "2025-11-08T00:00:00.000Z"
+  },
+  "due_time": "07:00",
+  "remind_date": {
+    "$date": "2025-11-04T00:00:00.000Z"
+  },
+  "remind_time": "22:48",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-04T15:51:46.101Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-04T15:51:46.101Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690a26b3d6b31b844970693f"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Đề kiểm tra Toán lớp 11 - Giữa kỳ 1",
+  "note": "",
+  "due_date": {
+    "$date": "2025-11-10T00:00:00.000Z"
+  },
+  "due_time": "07:00",
+  "remind_date": {
+    "$date": "2025-11-04T00:00:00.000Z"
+  },
+  "remind_time": "23:15",
+  "repeat_mode": "daily",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-04T16:15:47.976Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-04T16:15:47.976Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690a28c5d6b31b8449706990"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "note": "",
+  "due_date": {
+    "$date": "2025-11-18T00:00:00.000Z"
+  },
+  "due_time": "07:00",
+  "remind_date": {
+    "$date": "2025-11-04T00:00:00.000Z"
+  },
+  "remind_time": "23:24",
+  "repeat_mode": "daily",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-04T16:24:37.301Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-04T16:24:37.301Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690a2983d6b31b84497069b3"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Đề tiếng Anh lớp 11 - Unit 7",
+  "note": "",
+  "due_date": {
+    "$date": "2025-11-08T00:00:00.000Z"
+  },
+  "due_time": "07:00",
+  "remind_date": {
+    "$date": "2025-11-04T00:00:00.000Z"
+  },
+  "remind_time": "23:27",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-04T16:27:47.786Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-04T16:27:47.786Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690f400875b64f22f7ea139d"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "note": "h",
+  "due_date": {
+    "$date": "2025-11-18T00:00:00.000Z"
+  },
+  "due_time": "07:00",
+  "remind_date": {
+    "$date": "2025-11-08T00:00:00.000Z"
+  },
+  "remind_time": "20:05",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-08T13:05:12.036Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T13:05:12.036Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69145466e591d437414c2ebd"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "Test notification + MongoDB record",
+  "due_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "due_time": "16:40",
+  "remind_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "remind_time": "16:44",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T09:33:26.225Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T09:33:26.225Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6914548de591d437414c2ec4"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "Test notification + MongoDB record",
+  "due_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "due_time": "16:40",
+  "remind_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "remind_time": "16:35",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T09:34:05.939Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T09:34:05.939Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69145811812cba3f748b28bc"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "Test notification + MongoDB record",
+  "due_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "due_time": "16:40",
+  "remind_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "remind_time": "16:50",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T09:49:05.453Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T09:49:05.453Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691458cc61d8bb5b6aef7382"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "Test notification + MongoDB record",
+  "due_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "due_time": "16:40",
+  "remind_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "remind_time": "16:53",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T09:52:12.580Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T09:52:12.580Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69145f364e9929d36829168c"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "Test notification + MongoDB record",
+  "due_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "due_time": "16:40",
+  "remind_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "remind_time": "17:20",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T10:19:34.620Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T10:19:34.620Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69145fb3c8098f22b126e381"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "Test notification + MongoDB record",
+  "due_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "due_time": "16:40",
+  "remind_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "remind_time": "17:22",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T10:21:39.911Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T10:21:39.911Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691461073c4f40cd69395e7a"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "Test notification + MongoDB record",
+  "due_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "due_time": "16:40",
+  "remind_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "remind_time": "17:28",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T10:27:19.316Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T10:27:19.316Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691463ae3c4f40cd69395e81"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "Test notification + MongoDB record",
+  "due_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "due_time": "16:40",
+  "remind_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "remind_time": "17:39",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T10:38:38.910Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T10:38:38.910Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6914646f3c4f40cd69395e86"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "Test notification + MongoDB record",
+  "due_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "due_time": "16:40",
+  "remind_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "remind_time": "17:39",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T10:41:51.806Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T10:41:51.806Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691464993c4f40cd69395e8b"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "Test notification + MongoDB record",
+  "due_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "due_time": "16:40",
+  "remind_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "remind_time": "17:39",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T10:42:33.326Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T10:42:33.326Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69146b1a3fff6bf63987c224"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "Test notification + MongoDB record",
+  "due_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "due_time": "16:40",
+  "remind_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "remind_time": "17:39",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T11:10:18.722Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T11:10:18.722Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69146d813fff6bf63987c229"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "Test notification + MongoDB record",
+  "due_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "due_time": "16:40",
+  "remind_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "remind_time": "17:39",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T11:20:33.195Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T11:20:33.195Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69146dbe3fff6bf63987c22e"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "Test notification + MongoDB record",
+  "due_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "due_time": "16:40",
+  "remind_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "remind_time": "17:39",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-12T11:21:34.030Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-12T11:21:34.030Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691554c3e1c70dbf4d8cdd45"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJS",
+  "due_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "due_time": "17:00",
+  "remind_date": {
+    "$date": "2025-11-12T00:00:00.000Z"
+  },
+  "remind_time": "16:50",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T03:47:15.804Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T03:47:15.804Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69155556e1c70dbf4d8cdd47"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJS",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "19:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "17:50",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T03:49:42.020Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T03:49:42.020Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915b96a0660ca441e53549c"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJS",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "19:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "17:50",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T10:56:42.515Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T10:56:42.515Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915bf0ee29072b020ef1e4a"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJS",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "19:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "18:21",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T11:20:46.387Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T11:20:46.387Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915bf92799b373625b3f36d"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJS",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "19:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "18:21",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-13T11:22:58.190Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T11:22:58.190Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915c09dc5b4b7f60682d853"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJS",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "19:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "18:28",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T11:27:25.434Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T11:27:25.434Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915c0f5c5b4b7f60682d858"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "19:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "18:29",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T11:28:53.238Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T11:28:53.238Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915c110c5b4b7f60682d85d"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "19:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "18:30",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T11:29:20.647Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T11:29:20.647Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915c86eaf13bb70e5f2fa51"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:01",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T12:00:46.723Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T12:00:46.723Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915c894af13bb70e5f2fa56"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:02",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T12:01:24.186Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T12:01:24.186Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915caef9879d2c474b697b2"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:12",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T12:11:27.372Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T12:11:27.372Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915cb279879d2c474b697b7"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:13",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T12:12:23.945Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T12:12:23.945Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915cc0b9879d2c474b697bc"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:17",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T12:16:11.539Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T12:16:11.539Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915ccb79879d2c474b697c3"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:20",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T12:19:03.990Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T12:19:03.990Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d3a59879d2c474b697c8"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:49",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T12:48:37.445Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T12:48:37.445Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d53811fc4e2aa9cae3bd"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T12:55:20.693Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T12:55:20.693Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d57811fc4e2aa9cae3c2"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T12:56:24.321Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T12:56:24.321Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d5f111fc4e2aa9cae3c7"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T12:58:25.999Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T12:58:25.999Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d5ff11fc4e2aa9cae3cc"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T12:58:39.335Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T12:58:39.335Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d6a611fc4e2aa9cae3d1"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminder",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:01:26.881Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:01:26.881Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d6b211fc4e2aa9cae3d6"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminded4564r",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:01:38.519Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:01:38.519Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d71611fc4e2aa9cae3db"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminded4564r",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:03:18.196Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:03:18.196Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d77811fc4e2aa9cae3e0"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminded4564r",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:04:56.758Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:04:56.758Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d7e9dd8ad8e2c78e0116"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminded4564r",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:06:49.899Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:06:49.899Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d824555d49b36093b9f0"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminded4564r",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:07:48.446Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:07:48.446Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d9e4555d49b36093b9f5"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminded4564r",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:15:16.616Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:15:16.616Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d9ed555d49b36093b9fa"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Test Reminded4564r",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:15:25.576Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:15:25.576Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915d9fd555d49b36093b9ff"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:15:41.698Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:15:41.698Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915de2d0ce62beeff94b80a"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:33:33.209Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:33:33.209Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915de340ce62beeff94b80f"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:33:40.134Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:33:40.134Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915decf0ce62beeff94b814"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:36:15.277Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:36:15.277Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915df2b0ce62beeff94b819"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:37:47.061Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:37:47.061Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915dfe20ce62beeff94b81e"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:40:50.627Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:40:50.627Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915dfe70ce62beeff94b823"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:40:55.191Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:40:55.191Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e3020ce62beeff94b828"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:54:10.781Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:54:10.781Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e3080ce62beeff94b82d"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T13:54:16.418Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T13:54:16.418Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e47d0ce62beeff94b832"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T14:00:29.372Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T14:00:29.372Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e4840ce62beeff94b837"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T14:00:36.108Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T14:00:36.108Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e4f80ce62beeff94b83c"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T14:02:32.814Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T14:02:32.814Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e4fe0ce62beeff94b841"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T14:02:38.659Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T14:02:38.659Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e67a0ce62beeff94b846"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T14:08:58.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T14:08:58.417Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e6820ce62beeff94b84b"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T14:09:06.124Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T14:09:06.124Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e6960ce62beeff94b850"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T14:09:26.758Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T14:09:26.758Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e6e60ce62beeff94b855"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T14:10:46.043Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T14:10:46.043Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6915e7840ce62beeff94b85a"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "hello",
+  "note": "FCM test from NestJSjhkj",
+  "due_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "due_time": "21:00",
+  "remind_date": {
+    "$date": "2025-11-13T00:00:00.000Z"
+  },
+  "remind_time": "19:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-13T14:13:24.019Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-13T14:13:24.019Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6918011b38580285af8d0765"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "title": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "note": "Thi tưu",
+  "due_date": {
+    "$date": "2025-11-18T00:00:00.000Z"
+  },
+  "due_time": "07:00",
+  "remind_date": {
+    "$date": "2025-11-17T00:00:00.000Z"
+  },
+  "remind_time": "19:36",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-15T04:27:07.335Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:35:18.772Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6918016238580285af8d0773"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "title": "Thi toán",
+  "note": "Thi thi",
+  "due_date": {
+    "$date": "2025-11-15T00:00:00.000Z"
+  },
+  "due_time": "15:27",
+  "remind_date": {
+    "$date": "2025-11-15T00:00:00.000Z"
+  },
+  "remind_time": "13:59",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-15T04:28:18.720Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T06:58:11.997Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691823a2fbcf8d04b51edea6"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "title": "Test repeat",
+  "note": "hkjdgd",
+  "due_date": {
+    "$date": "2025-11-17T00:00:00.000Z"
+  },
+  "due_time": "13:53",
+  "remind_date": {
+    "$date": "2025-11-15T00:00:00.000Z"
+  },
+  "remind_time": "14:14",
+  "repeat_mode": "daily",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-15T06:54:26.345Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-15T07:12:16.302Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6918288f19564f7b4973a484"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "title": "Test",
+  "note": "Hello",
+  "due_date": {
+    "$date": "2025-11-18T00:00:00.000Z"
+  },
+  "due_time": "14:14",
+  "remind_date": {
+    "$date": "2025-11-15T00:00:00.000Z"
+  },
+  "remind_time": "19:47",
+  "repeat_mode": "daily",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-15T07:15:27.847Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:47:03.636Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b078d67be4201a8df75ad"
+  },
+  "user_id": {
+    "$oid": "690428e8dbf4313e26d816d8"
+  },
+  "title": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "note": "",
+  "due_date": {
+    "$date": "2025-11-18T00:00:00.000Z"
+  },
+  "due_time": "07:00",
+  "remind_date": {
+    "$date": "2025-11-17T00:00:00.000Z"
+  },
+  "remind_time": "18:37",
+  "repeat_mode": "none",
+  "deleted_at": {
+    "$date": "2025-11-17T12:49:31.878Z"
+  },
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-17T11:31:25.340Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:49:31.878Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b09b667be4201a8df75d9"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "title": "gdfhdcr",
+  "note": "hello",
+  "due_date": {
+    "$date": "2025-11-19T00:00:00.000Z"
+  },
+  "due_time": "18:40",
+  "remind_date": {
+    "$date": "2025-11-17T00:00:00.000Z"
+  },
+  "remind_time": "19:48",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-17T11:40:38.833Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:47:32.810Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b0a2367be4201a8df75e6"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "title": "dghfg",
+  "note": "hello",
+  "due_date": {
+    "$date": "2025-11-18T00:00:00.000Z"
+  },
+  "due_time": "18:42",
+  "remind_date": {
+    "$date": "2025-11-17T00:00:00.000Z"
+  },
+  "remind_time": "18:43",
+  "repeat_mode": "daily",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-17T11:42:27.305Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T12:46:43.850Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b19f16e1a2c6334cefc7e"
+  },
+  "user_id": {
+    "$oid": "690428e8dbf4313e26d816d8"
+  },
+  "title": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "note": "hello123",
+  "due_date": {
+    "$date": "2025-11-18T00:00:00.000Z"
+  },
+  "due_time": "07:00",
+  "remind_date": {
+    "$date": "2025-11-17T00:00:00.000Z"
+  },
+  "remind_time": "20:26",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-17T12:49:53.616Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T13:25:21.898Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691b1a891d4e447ba35736ce"
+  },
+  "user_id": {
+    "$oid": "690428e8dbf4313e26d816d8"
+  },
+  "title": "Lịch thi toán",
+  "note": "",
+  "due_date": {
+    "$date": "2025-11-20T00:00:00.000Z"
+  },
+  "due_time": "19:51",
+  "remind_date": {
+    "$date": "2025-11-17T00:00:00.000Z"
+  },
+  "remind_time": "20:29",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-17T12:52:25.698Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T13:28:19.540Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6921711e82aa0a7ae9cf9c20"
+  },
+  "user_id": {
+    "$oid": "691dd03b4f9c7f0a8095add3"
+  },
+  "title": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "note": "hello",
+  "due_date": {
+    "$date": "2025-12-18T00:00:00.000Z"
+  },
+  "due_time": "07:00",
+  "remind_date": {
+    "$date": "2025-11-22T00:00:00.000Z"
+  },
+  "remind_time": "16:44",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-22T08:15:26.112Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-22T09:43:15.056Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692443da4a3e2a796f76ceb5"
+  },
+  "user_id": {
+    "$oid": "691dd03b4f9c7f0a8095add3"
+  },
+  "title": "Đề Ngữ văn lớp 10 - Tác phẩm Chí Phèo",
+  "note": "",
+  "due_date": {
+    "$date": "2025-12-20T00:00:00.000Z"
+  },
+  "due_time": "07:00",
+  "remind_date": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  },
+  "remind_time": "23:38",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-24T11:39:06.979Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:39:06.979Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692444174a3e2a796f76cecb"
+  },
+  "user_id": {
+    "$oid": "691dd03b4f9c7f0a8095add3"
+  },
+  "title": "Thi toán",
+  "note": "",
+  "due_date": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  },
+  "due_time": "20:39",
+  "remind_date": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  },
+  "remind_time": "19:39",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-24T11:40:07.003Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:40:07.003Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6924443a4a3e2a796f76cecf"
+  },
+  "user_id": {
+    "$oid": "691dd03b4f9c7f0a8095add3"
+  },
+  "title": "Thi anh",
+  "note": "",
+  "due_date": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  },
+  "due_time": "18:45",
+  "remind_date": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  },
+  "remind_time": "16:40",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-24T11:40:42.273Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:40:42.273Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692444544a3e2a796f76ced7"
+  },
+  "user_id": {
+    "$oid": "691dd03b4f9c7f0a8095add3"
+  },
+  "title": "Thi sinh",
+  "note": "",
+  "due_date": {
+    "$date": "2025-11-25T00:00:00.000Z"
+  },
+  "due_time": "18:40",
+  "remind_date": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  },
+  "remind_time": "18:40",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-24T11:41:08.388Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:41:08.388Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6924446d4a3e2a796f76cedf"
+  },
+  "user_id": {
+    "$oid": "691dd03b4f9c7f0a8095add3"
+  },
+  "title": "Thi văn",
+  "note": "",
+  "due_date": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  },
+  "due_time": "20:41",
+  "remind_date": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  },
+  "remind_time": "18:41",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-24T11:41:33.639Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:41:33.639Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692444864a3e2a796f76cee7"
+  },
+  "user_id": {
+    "$oid": "691dd03b4f9c7f0a8095add3"
+  },
+  "title": "Thi tiếng anh",
+  "note": "",
+  "due_date": {
+    "$date": "2025-11-25T00:00:00.000Z"
+  },
+  "due_time": "18:41",
+  "remind_date": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  },
+  "remind_time": "18:41",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-24T11:41:58.608Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:41:58.608Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692444a44a3e2a796f76ceef"
+  },
+  "user_id": {
+    "$oid": "691dd03b4f9c7f0a8095add3"
+  },
+  "title": "Thi công dân",
+  "note": "",
+  "due_date": {
+    "$date": "2025-11-28T00:00:00.000Z"
+  },
+  "due_time": "18:42",
+  "remind_date": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  },
+  "remind_time": "18:42",
+  "repeat_mode": "daily",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-24T11:42:28.009Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:42:28.009Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692444b84a3e2a796f76cf09"
+  },
+  "user_id": {
+    "$oid": "691dd03b4f9c7f0a8095add3"
+  },
+  "title": "Đề Ngữ văn lớp 10 - Tác phẩm Chí Phèo",
+  "note": "",
+  "due_date": {
+    "$date": "2025-12-20T00:00:00.000Z"
+  },
+  "due_time": "07:00",
+  "remind_date": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  },
+  "remind_time": "18:42",
+  "repeat_mode": "daily",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-24T11:42:48.105Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:42:48.105Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692444d84a3e2a796f76cf2e"
+  },
+  "user_id": {
+    "$oid": "691dd03b4f9c7f0a8095add3"
+  },
+  "title": "Đề Ngữ văn lớp 12 - Tác phẩm Chí Phèo",
+  "note": "",
+  "due_date": {
+    "$date": "2025-12-20T00:00:00.000Z"
+  },
+  "due_time": "07:00",
+  "remind_date": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  },
+  "remind_time": "18:43",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-24T11:43:20.392Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:43:20.392Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6924450f4a3e2a796f76cf42"
+  },
+  "user_id": {
+    "$oid": "691dd03b4f9c7f0a8095add3"
+  },
+  "title": "Thi vật lý",
+  "note": "",
+  "due_date": {
+    "$date": "2025-11-25T00:00:00.000Z"
+  },
+  "due_time": "18:43",
+  "remind_date": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  },
+  "remind_time": "18:43",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-24T11:44:15.639Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:44:15.639Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692447ee03a54e6c8677f333"
+  },
+  "user_id": {
+    "$oid": "691dd03b4f9c7f0a8095add3"
+  },
+  "title": "Thi thi",
+  "note": "",
+  "due_date": {
+    "$date": "2025-11-25T00:00:00.000Z"
+  },
+  "due_time": "18:56",
+  "remind_date": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  },
+  "remind_time": "18:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-24T11:56:30.988Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:56:30.988Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692447fc03a54e6c8677f33f"
+  },
+  "user_id": {
+    "$oid": "691dd03b4f9c7f0a8095add3"
+  },
+  "title": "Thi test",
+  "note": "",
+  "due_date": {
+    "$date": "2025-11-27T00:00:00.000Z"
+  },
+  "due_time": "18:56",
+  "remind_date": {
+    "$date": "2025-11-24T00:00:00.000Z"
+  },
+  "remind_time": "18:56",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "fqHWAiS-TcagVCrYifWmS3:APA91bG7ZYOYfblJCvVUjcFgLoLjaWDOcEzO36S3ZwppC5m7WKfRN6iPQI_wmGnw431s7MebH0s91SGLxDxbBvQyTZqjzyuZaIk5UCCTLilMePR4IPb6mYM",
+  "created_at": {
+    "$date": "2025-11-24T11:56:44.852Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-24T11:56:44.852Z"
+  },
+  "__v": 0
+}]

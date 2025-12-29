@@ -9,6 +9,7 @@ import { RolePermission } from '../role-permissions/schemas/role-permissions.sch
 import * as jwt from 'jsonwebtoken';
 import { toUserEntity } from 'src/common/utils/user.utils';
 
+
 @Injectable()
 export class AuthService {
   constructor(

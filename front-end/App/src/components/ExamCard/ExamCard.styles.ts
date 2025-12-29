@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     shadowOffset: { width: 0, height: 2 },
-    marginTop:verticalScale(40),
+    marginTop: verticalScale(40),
     padding: scale(14),
     width: verticalScale(345),
   },
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     height: verticalScale(140),
   },
   content: {
-     marginTop: verticalScale(12),
+    marginTop: verticalScale(12),
   },
   headerRow: {
     flexDirection: "row",
@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: verticalScale(10),
   },
-  iconInfo:{
+  iconInfo: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: verticalScale(10),
@@ -80,7 +80,7 @@ export const styles = StyleSheet.create({
     width: scale(14),
     height: scale(14),
     marginRight: scale(6),
-    tintColor: "#1669EF",
+    // tintColor: "#1669EF",
   },
   iconText: {
     fontSize: moderateScale(12),

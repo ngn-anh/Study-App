@@ -1,0 +1,67 @@
+[{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccab2"
+  },
+  "name": "Lớp 11",
+  "code": "CLASS_11",
+  "description": "Lớp 11 chương trình phổ thông trung học.",
+  "created_at": {
+    "$date": "2025-01-01T08:05:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-01-01T08:05:00.000Z"
+  },
+  "deleted_at": null,
+  "status": 1
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccab3"
+  },
+  "name": "Lớp 12",
+  "code": "CLASS_12",
+  "description": "Lớp 12 chương trình phổ thông trung học.",
+  "created_at": {
+    "$date": "2025-01-01T08:10:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-01-01T08:10:00.000Z"
+  },
+  "deleted_at": null,
+  "status": 1
+},
+{
+  "_id": {
+    "$oid": "6908a903bc2ae0fd775ccab1"
+  },
+  "name": "Lớp 10",
+  "code": "CLASS_10",
+  "description": "Lớp 10 chương trình phổ thông trung học.",
+  "created_at": {
+    "$date": "2025-01-01T08:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-01-01T08:00:00.000Z"
+  },
+  "deleted_at": null,
+  "status": 1
+},
+{
+  "_id": {
+    "$oid": "6934b0b58850293edefda0d7"
+  },
+  "name": "Lớp 9",
+  "code": "CLASS_9",
+  "status": 1,
+  "created_at": {
+    "$date": "2025-12-06T22:39:49.151Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-06T22:47:37.881Z"
+  },
+  "__v": 0,
+  "description": "Lớp 9 ",
+  "deleted_at": {
+    "$date": "2025-12-06T22:47:37.880Z"
+  }
+}]

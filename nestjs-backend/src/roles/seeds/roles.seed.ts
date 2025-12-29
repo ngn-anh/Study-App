@@ -1,4 +1,4 @@
-import { Role } from "../schemas/role.schema";
+import { Role } from '../schemas/role.schema';
 
 export const ROLES_SEED: Partial<Role>[] = [
   {

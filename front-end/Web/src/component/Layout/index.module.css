@@ -2,12 +2,12 @@
   margin-bottom: 16px;
 }
 
-.logo{
+.logo {
   width: 100px;
 }
- 
+
 .customSider :global(.ant-menu-item-selected) {
-     color: rgb(9, 80, 195);
+  color: rgb(9, 80, 195);
 }
 
 /* Trigger bo tròn */
@@ -18,12 +18,14 @@
   background: #ffffff !important;
   border: 1px solid #e2e8f0;
   position: absolute;
-  right: -16px;           /* nửa chiều rộng để thò ra ngoài */
-  top: 80px;             /* chỉnh vị trí theo giao diện */
+  right: -16px;
+  /* nửa chiều rộng để thò ra ngoài */
+  top: 80px;
+  /* chỉnh vị trí theo giao diện */
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: #475569 !important;
   font-size: 14px !important;
   transition: all 0.2s ease;
@@ -33,4 +35,21 @@
 .customSider :global(.ant-layout-sider-trigger:hover) {
   background: #f1f5f9 !important;
   color: #1e293b !important;
+}
+
+:global(.ant-breadcrumb-link) {
+  cursor: pointer;
+  /* font-weight: 600; */
+  color: #1f1f1f;
+  transition: all 0.2s ease;
+}
+
+:global(.ant-breadcrumb-link:hover) {
+  color: #0c4299;
+}
+
+:global(.breadcrumb-active) {
+  color: #0c4299 !important;
+  text-decoration: underline;
+  font-weight: 600;
 }

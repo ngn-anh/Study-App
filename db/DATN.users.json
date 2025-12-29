@@ -1,0 +1,245 @@
+[{
+  "_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "username": "ngan1",
+  "password": "$2b$10$2V42d83JvvSmRyQvGjcWm.5ClLHeeKgmKqyFCqWq1/rAGDVdbs3Ge",
+  "email": "ngan1@gmail.com",
+  "phone": null,
+  "avatar": null,
+  "role": 1,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-10-31T03:02:51.306Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-26T12:50:29.601Z"
+  },
+  "__v": 0,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDQyNmRiZGJmNDMxM2UyNmQ4MTZkNSIsInVzZXJuYW1lIjoibmdhbjEiLCJyb2xlIjoxLCJpYXQiOjE3NjQxNjE0MjksImV4cCI6MTc2NDc2NjIyOX0._QyCmb-HqKVAcjkLoZivos5Lk_hir_kSgscsd-tslqE",
+  "token_expired": 1764165029,
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab2"
+  }
+},
+{
+  "_id": {
+    "$oid": "690428e8dbf4313e26d816d8"
+  },
+  "username": "ngan2",
+  "password": "$2b$10$WY3VVlRvXPcAaxdQAXM4U.kGevI3caYnHAiLRscY4mZufal5dlpY2",
+  "email": "ngan2@gmail.com",
+  "phone": null,
+  "avatar": null,
+  "role": 1,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-10-31T03:11:36.067Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-17T13:20:43.219Z"
+  },
+  "__v": 0,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDQyOGU4ZGJmNDMxM2UyNmQ4MTZkOCIsInVzZXJuYW1lIjoibmdhbjIiLCJyb2xlIjoxLCJpYXQiOjE3NjMzODU2NDMsImV4cCI6MTc2Mzk5MDQ0M30.ydDMmQ6iWoCieeD1R8jhflvefgAcmC2y68euvt6zftI",
+  "token_expired": 1763389243,
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab2"
+  }
+},
+{
+  "_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "username": "loan",
+  "password": "$2b$10$6IeWI/AAdlc3M3jWg/5cR.OYR01s4Zmm/j8t1ehWjVxWNfb1Z.GF.",
+  "email": "mailoanlt21@gmail.com",
+  "phone": null,
+  "avatar": null,
+  "role": 1,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-03T17:17:41.758Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-27T06:57:06.964Z"
+  },
+  "__v": 0,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDhlM2I1YzhmM2Y4N2FhMzAzMjE4MyIsInVzZXJuYW1lIjoibG9hbiIsInJvbGUiOjEsImlhdCI6MTc2NDIyNjYyNiwiZXhwIjoxNzY0ODMxNDI2fQ.N-HrR3orvIVESPasQt5OC_5NecwkCJUXxisoqYthTgY",
+  "token_expired": 1764230226,
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab2"
+  }
+},
+{
+  "_id": {
+    "$oid": "691dd03b4f9c7f0a8095add3"
+  },
+  "username": "thungan",
+  "password": "$2b$10$GvUMgRaZ4V1qTrjTS7on1.D99hfAWrU3CychlS4oNmCi73mP8.YWK",
+  "email": "thungan@gmail.com",
+  "phone": "0888716903",
+  "avatar": "file:///data/user/0/com.app/cache/rn_image_picker_lib_temp_75be6360-bba2-4093-b8e8-020dd55d423f.jpg",
+  "full_name": "Nguyễn Thị Thu Ngân ",
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab1"
+  },
+  "role": 1,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-19T14:12:11.027Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-19T16:50:16.471Z"
+  },
+  "__v": 0,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWRkMDNiNGY5YzdmMGE4MDk1YWRkMyIsInVzZXJuYW1lIjoidGh1bmdhbiIsInJvbGUiOjEsImlhdCI6MTc2MzU2ODU4OSwiZXhwIjoxNzY0MTczMzg5fQ.ExzCNRL6_-1Gwsq6JPro02z3t02cANytI6ezB_Jm4TY",
+  "token_expired": 1763572189
+},
+{
+  "_id": {
+    "$oid": "691de89c2c0c7d231cadcf99"
+  },
+  "username": "ngan",
+  "password": "$2b$10$hqWKRLaseRQpDRKHpHtQruuAk0CT6zM0pSHfbaG88vzu7Bz21T8RS",
+  "email": "ngan@gmail.com",
+  "phone": null,
+  "avatar": null,
+  "full_name": null,
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab1"
+  },
+  "role": 1,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-19T15:56:12.224Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-19T15:56:12.396Z"
+  },
+  "__v": 0,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWRlODljMmMwYzdkMjMxY2FkY2Y5OSIsInVzZXJuYW1lIjoibmdhbiIsInJvbGUiOjEsImlhdCI6MTc2MzU2Nzc3MiwiZXhwIjoxNzY0MTcyNTcyfQ.XE9HyvL_xlVvGq3ShfyudEr2l6B7lVWpkSay8vOjRdA",
+  "token_expired": 1763571372
+},
+{
+  "_id": {
+    "$oid": "691ff0fc7e44fdba02c9196e"
+  },
+  "username": "long",
+  "password": "$2b$10$jw8mCgSBkNh0S/P5b4mJ4e1Wj/X0fABHqEthD/nyRlw6tXulWm3Qm",
+  "email": "long@gmail.com",
+  "phone": null,
+  "avatar": null,
+  "full_name": null,
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab2"
+  },
+  "role": 1,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-21T04:56:28.005Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-21T04:56:28.176Z"
+  },
+  "__v": 0,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWZmMGZjN2U0NGZkYmEwMmM5MTk2ZSIsInVzZXJuYW1lIjoibG9uZyIsInJvbGUiOjEsImlhdCI6MTc2MzcwMDk4OCwiZXhwIjoxNzY0MzA1Nzg4fQ.kpfJLJi3tn1VyDbIkdKcUeibqcF7DePAQvpex6wJN6w",
+  "token_expired": 1763704588
+},
+{
+  "_id": {
+    "$oid": "691ff17a7e44fdba02c91975"
+  },
+  "username": "1",
+  "password": "$2b$10$A3KAk6Kj2IhofZeuRwk49OlbJVS7aXmulu3ol24B.X98rLbGUEkd.",
+  "email": "1@gmail.com",
+  "phone": null,
+  "avatar": null,
+  "full_name": null,
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab2"
+  },
+  "role": 1,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-21T04:58:34.180Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-26T12:37:18.131Z"
+  },
+  "__v": 0,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWZmMTdhN2U0NGZkYmEwMmM5MTk3NSIsInVzZXJuYW1lIjoiMSIsInJvbGUiOjEsImlhdCI6MTc2NDE2MDYzOCwiZXhwIjoxNzY0NzY1NDM4fQ.PNlLp0QYr3cQ7mIGShDwK49QyYHPFu0PZivtfcAbRdg",
+  "token_expired": 1764164238
+},
+{
+  "_id": {
+    "$oid": "691ff37d7e44fdba02c9197c"
+  },
+  "username": "2",
+  "password": "$2b$10$2/EvFppWHHV7QXpehv0ms.gpLf0rFmR6eJ03FpnT5GpF/npLDJ7.m",
+  "email": "2@gmail.com",
+  "phone": "",
+  "avatar": null,
+  "full_name": "hello",
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab1"
+  },
+  "role": 1,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-21T05:07:09.988Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-22T09:19:15.582Z"
+  },
+  "__v": 0,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MWZmMzdkN2U0NGZkYmEwMmM5MTk3YyIsInVzZXJuYW1lIjoiMiIsInJvbGUiOjEsImlhdCI6MTc2MzgwMzE1NSwiZXhwIjoxNzY0NDA3OTU1fQ.qs8FjQxV5BQShXvoDCv9v6kXI-xTpCZtJGH_rFd8HHQ",
+  "token_expired": 1763806755
+},
+{
+  "_id": {
+    "$oid": "692182ac8387c49434a79623"
+  },
+  "username": "na",
+  "password": "$2b$10$GGaXV5vHmYeJZc1lhg6bXuP3m1.NGEUBCgPwNvmaNsyMgKUx4FJOy",
+  "email": "na@gmail.com",
+  "phone": null,
+  "avatar": null,
+  "full_name": null,
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab1"
+  },
+  "role": 1,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-22T09:30:20.889Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-22T09:30:20.960Z"
+  },
+  "__v": 0,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjE4MmFjODM4N2M0OTQzNGE3OTYyMyIsInVzZXJuYW1lIjoibmEiLCJyb2xlIjoxLCJpYXQiOjE3NjM4MDM4MjAsImV4cCI6MTc2NDQwODYyMH0.KvnWtwn0Mc3tYhpyp87PzN1AzULgdvvsIozPTrq9Qw4",
+  "token_expired": 1763807420
+},
+{
+  "_id": {
+    "$oid": "6926f8561e7e87fcbf05fbeb"
+  },
+  "username": "admin",
+  "password": "$2b$10$8REoNhYqmfO0W/VULZShe.5vXobctHxigsn1bvmypAD2aoIw2zw.S",
+  "email": "admin@gmail.com",
+  "phone": null,
+  "avatar": null,
+  "full_name": null,
+  "class_id": null,
+  "role": 2,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-26T12:53:42.766Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-06T21:49:30.146Z"
+  },
+  "__v": 0,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjZmODU2MWU3ZTg3ZmNiZjA1ZmJlYiIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoyLCJpYXQiOjE3NjUwNTc3NzAsImV4cCI6MTc2NTY2MjU3MH0.vyI5v1khPNB0xwqmqy8HSG1BZ6ePcfx4ZyO8Th51Tm8",
+  "token_expired": 1765061370
+}]

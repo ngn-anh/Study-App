@@ -50,7 +50,7 @@ const ScheduleScreen = () => {
 
 
   // Lấy danh sách lịch hẹn
- const fetchSchedules = async (reset = false) => {
+  const fetchSchedules = async (reset = false) => {
     try {
       if (reset) {
         setInitialLoad(false);  // chặn loadMore khi reset
@@ -131,10 +131,10 @@ const ScheduleScreen = () => {
     }
   };
 
-  const handleDelete = async() => {
+  const handleDelete = async () => {
     if (selectedIds.length === 0) return;
-   try {
-    console.log('selectedIds',selectedIds)
+    try {
+      console.log('selectedIds', selectedIds)
       // Gọi API BE xóa mềm nhiều lịch hẹn
       await deleteManySchedules(selectedIds);
 
@@ -193,7 +193,7 @@ const ScheduleScreen = () => {
             },
           ]}
         >
-          <Text style={{ color: remaining.color, fontWeight: '500', fontSize:11 }}>
+          <Text style={{ color: remaining.color, fontWeight: '500', fontSize: 11 }}>
             {remaining.text}
           </Text>
         </View>
@@ -254,10 +254,10 @@ const ScheduleScreen = () => {
         data={schedules}
         renderItem={renderItem}
         keyExtractor={(item) => item._id}
-        contentContainerStyle={{ paddingVertical: 8}}
+        contentContainerStyle={{ paddingVertical: 8 }}
         onEndReachedThreshold={0.05}
         onMomentumScrollEnd={loadMore}
-        scrollEventThrottle={16} 
+        scrollEventThrottle={16}
         ListFooterComponent={
           loadingMore ? (
             <ActivityIndicator size="small" color="#0066FF" style={{ marginVertical: 10 }} />

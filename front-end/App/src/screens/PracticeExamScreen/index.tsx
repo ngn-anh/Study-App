@@ -1,13 +1,17 @@
-import { FlatList, ScrollView, Text, View } from "react-native";
+import { FlatList, ScrollView, Text, View, ActivityIndicator, Image } from "react-native";
 import { styles } from "./index.styles";
 import ExpandDesSubject from "../../components/ExpandDesSubject";
-import { RouteProp } from "@react-navigation/native";
+import { RouteProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../types/data";
 import Header from "../../components/Header";
 import SearchBar from "../../components/Search";
 import ItemExam from "../../components/ItemExam";
-import { verticalScale } from "../../utils/responsive";
 import { Exam } from "../../types/typeObj";
+import { useCallback, useEffect, useState, useRef } from "react";
+import { LIMIT, TYPE_EXAM } from "../../constants";
+import { getExams } from "../../api/exam";
+import { FileCIcon, FileIcon, FilePdfIcon } from "phosphor-react-native";
+import { Icons } from "../../constants/icons";
 
 type Props = {
   route: RouteProp<RootStackParamList, 'PracticeExamScreen'>;
@@ -15,88 +19,197 @@ type Props = {
 
 const PracticeExamScreen = (props: Props) => {
   const { route } = props;
-  const { subject } = route.params;
+  const { subjectId, subjectCode, classCode, classId } = route.params;
 
-  const listExam: Exam[] = [
-    {
-      id: "1",
-      image: "https://res.cloudinary.com/dr0ncakbs/image/upload/v1762674778/exam_w1rblh.png",
-      name: "Đề thi tốt nghiệp THPT môn Toán -  Đề số 1",
-      number: 50,
-      duration: 120,
-      createdAt: "2023-11-05T10:00:00Z",
-      difficulty: 3
-    },
-    {
-      id: "2",
-      image: "https://res.cloudinary.com/dr0ncakbs/image/upload/v1762674778/exam_w1rblh.png",
-      name: "Đề thi tốt nghiệp THPT môn Toán -  Đề số 2",
-      number: 40,
-      duration: 90,
-      createdAt: "2023-11-06T14:30:00Z",
-      difficulty: 2
-    },
-    {
-      id: "3",
-      image: "https://res.cloudinary.com/dr0ncakbs/image/upload/v1762674778/exam_w1rblh.png",
-      name: "Đề thi tốt nghiệp THPT môn Toán -  Đề số 3",
-      number: 30,
-      duration: 60,
-      createdAt: "2023-11-05T09:15:00Z",
-      difficulty: 4
-    },
-    {
-      id: "4",
-      image: "https://res.cloudinary.com/dr0ncakbs/image/upload/v1762674778/exam_w1rblh.png",
-      name: "Đề thi tốt nghiệp THPT môn Toán -  Đề số 4",
-      number: 50,
-      duration: 120,
-      createdAt: "2023-11-03T11:45:00Z",
-      difficulty: 3
-    },
-    {
-      id: "5",
-      image: "https://res.cloudinary.com/dr0ncakbs/image/upload/v1762674778/exam_w1rblh.png",
-      name: "Đề thi tốt nghiệp THPT môn Toán -  Đề số 5",
-      number: 45,
-      duration: 100,
-      createdAt: "2023-11-02T08:00:00Z",
-      difficulty: 5
+  const navigation = useNavigation();
+
+  const [exams, setExams] = useState<Exam[]>([]);
+  const [totalExam, setTotalExam] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [loadingMore, setLoadingMore] = useState<boolean>(false);
+  const [hasMore, setHasMore] = useState<boolean>(true);
+
+  const scrollViewRef = useRef<ScrollView>(null);
+  const isFetchingRef = useRef<boolean>(false);
+  const [liking, setLiking] = useState(false);
+
+  // Fetch exams khi page thay đổi
+  const fetchExams = useCallback(async (isLoadMore: boolean = false) => {
+    // if (!subjectId && !classId) return;
+    if (!subjectCode && !classId) return;
+    if (isFetchingRef.current) return;
+
+    const targetPage = isLoadMore ? page + 1 : 1;
+
+    try {
+      isFetchingRef.current = true;
+
+      if (isLoadMore) {
+        setLoadingMore(true);
+      } else {
+        setLoading(true);
+      }
+
+      const params = {
+        // status?: 'ongoing' | 'upcoming';
+        // sort?: 'newest' | 'oldest';
+        subjectCodes: !!subjectCode ? [subjectCode] : undefined,
+        class_id: classId,
+        page: targetPage,
+        limit: LIMIT,
+        type: TYPE_EXAM.DE_LUYEN,
+      };
+
+      console.log("loanhtm list exam practice param: ", params);
+      const res = await getExams(params);
+      console.log("loanhtm list exam practice res: ", res);
+      if (isLoadMore) {
+        // Load more: append data
+        setExams(prev => [...prev, ...(res.data || [])]);
+        setPage(targetPage);
+      } else {
+        // Load mới: replace data
+        setExams(res.data || []);
+        setPage(1);
+      }
+
+      setTotalExam(res.total || 0);
+      setHasMore((res.data?.length || 0) === LIMIT);
+    } catch (err) {
+      console.error("Lỗi khi tải danh sách bài thi:", err);
+    } finally {
+      setLoading(false);
+      setLoadingMore(false);
+      isFetchingRef.current = false;
     }
-  ]
+  }, [classId, subjectCode, page]);
 
-  const renderItemExam = ({ item }: any) => {
-    const isSingleItem = listExam.length === 1;
+  // Fetch exams khi component mount
+  useEffect(() => {
+    fetchExams();
+  }, []);
+
+  // Reset page và fetch lại khi params thay đổi
+  useEffect(() => {
+    setPage(1);
+    setExams([]);
+    fetchExams();
+  }, [subjectId, classId]);
+
+  const handleGoBack = () => {
+    console.log("go back");
+    navigation.goBack();
+  };
+
+  // Xử lý load more khi scroll đến cuối
+  const handleScroll = (event: any) => {
+    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
+
+    // Kiểm tra nếu đã scroll đến gần cuối
+    const paddingToBottom = 50; // Khoảng cách từ cuối để trigger load more
+    const isCloseToBottom =
+      layoutMeasurement.height + contentOffset.y >=
+      contentSize.height - paddingToBottom;
+
+    // Nếu scroll đến gần cuối và không đang loading, còn data để load
+    if (isCloseToBottom && !loading && !loadingMore && hasMore) {
+      handleLoadMore();
+    }
+  };
+
+  // Xử lý load more
+  const handleLoadMore = () => {
+    if (!loading && !loadingMore && hasMore) {
+      fetchExams(true);
+    }
+  };
+
+  const renderItemExam = ({ item, index }: { item: Exam; index: number }) => {
+    const isSingleItem = exams.length === 1;
     return (
       <View style={{ flex: isSingleItem ? 1 : 0.5 }}>
-        <ItemExam exam={item} />
+        <ItemExam
+          exam={item}
+        // subjectCode={subjectCode}
+        />
+      </View>
+    );
+  };
+
+  // Hiển thị loading indicator khi load more
+  const renderFooter = () => {
+    if (!loadingMore) return null;
+
+    return (
+      <View style={styles.footerLoading}>
+        <ActivityIndicator size="small" color="#007AFF" />
+        <Text style={{ marginLeft: 10 }}>Đang tải thêm...</Text>
+      </View>
+    );
+  };
+
+  // Hiển thị empty state
+  const renderEmpty = () => {
+    if (loading) return null;
+
+    return (
+      <View style={styles.emptyContainer}>
+        <Text style={styles.emptyText} >Không có đề thi nào.</Text>
       </View>
     );
   };
 
   return (
     <View style={styles.container}>
-      <Header data={subject} />
-      <ScrollView>
-        {/* <View> */}
+      <Header
+        data={exams?.[0]?.subject}
+        title={exams?.[0]?.subject?.name || "Luyện thi"}
+        handleGoBack={handleGoBack}
+      />
+
+      <ScrollView
+        ref={scrollViewRef}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+      >
         <View style={styles.content}>
-          <Text style={styles.title}>Làm chủ môn {subject?.name}</Text>
-          <ExpandDesSubject text={subject?.description.trim() || ''} numberOfLines={5} />
+          <Text style={styles.title}>{`Làm chủ môn ${exams?.[0]?.subject?.name ?? ""}`}</Text>
+          <Text style={styles.text}>Bộ đề được biên soạn theo chuẩn chương trình mới nhất</Text>
+          <View style={styles.containTotalExam}>
+            {/* <FileIcon style={{ width: 12, height: 20 }} color="#E5FF00" /> */}
+            <Image source={Icons.FileFullIcon} style={styles.fileFullIcon} />
+            <Text style={styles.totalExam}> {`${totalExam ?? 0} đề thi`}</Text>
+          </View>
+          <ExpandDesSubject text={exams?.[0]?.subject?.description?.trim() || ''} numberOfLines={5} />
         </View>
         <SearchBar />
-        <FlatList
-          data={listExam}
-          renderItem={renderItemExam}
-          keyExtractor={(item) => item.id}
-          numColumns={2} // Hiển thị 2 item trên mỗi hàng
-          columnWrapperStyle={{ justifyContent: 'space-between' }} // Căn giữa các item
-          contentContainerStyle={{ paddingHorizontal: 10, paddingTop: verticalScale(20) }} // Thêm khoảng cách cho các item
-        />
-      </ScrollView >
-      {/* </View> */}
-    </View>
 
+        <FlatList
+          data={exams}
+          renderItem={renderItemExam}
+          keyExtractor={(item) => item._id}
+          numColumns={2}
+          columnWrapperStyle={styles.columnWrapper}
+          contentContainerStyle={styles.listContent}
+          ListFooterComponent={renderFooter}
+          ListEmptyComponent={renderEmpty}
+          scrollEnabled={false} // Vẫn giữ false vì có ScrollView bên ngoài
+          showsVerticalScrollIndicator={false}
+        />
+      </ScrollView>
+
+      {/* Hiển thị loading khi fetch lần đầu */}
+      {loading && exams.length === 0 && (
+        <View style={styles.fullScreenLoading}>
+          <ActivityIndicator size="large" color="#007AFF" />
+          <Text style={{ marginTop: 10 }}>Đang tải đề thi...</Text>
+        </View>
+      )}
+    </View>
   );
-}
+};
 
 export default PracticeExamScreen;

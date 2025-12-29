@@ -7,7 +7,7 @@ interface IClassFilter {
   status?: number;
 }
 
-export const getClasses = async (params: IClassFilter) => {
+export const getClasses = async (params?: IClassFilter) => {
   const res = await api.get("/classes", { params });
   return res.data;
 };
@@ -40,4 +40,11 @@ export const getDetailProgram = async (id: string) => {
 
 export const createProgram = (class_id: string, subject_ids: string[]) => {
   return api.post("/classes/program", { class_id, subject_ids });
+};
+
+export const getClassesBySubject = async (subjectId: string) => {
+    const res = await api.get(`/classes/by-subject`, {
+        params: { subject_id: subjectId }
+    });
+    return res.data;
 };

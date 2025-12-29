@@ -7,23 +7,33 @@ interface ISubjectFilter {
   status?: number;
 }
 
-export const getSubjects = async (params: ISubjectFilter) => {
-  const res = await api.get("/subject", { params });
+export const getSubjects = async (params?: ISubjectFilter) => {
+  const res = await api.get("/subjects", { params });
   return res.data;
 };
 
 export const createSubject = (data: any) => {
-  return api.post("/subject", data);
+  return api.post("/subjects", data);
 };
 
 export const getSubjectDetail = (id: string) => {
-  return api.get(`/subject/${id}`);
+  return api.get(`/subjects/${id}`);
 };
 
 export const updateSubject = (id: string, data: any) => {
-  return api.put(`/subject/${id}`, data);
+  return api.put(`/subjects/${id}`, data);
 };
 
 export const deleteSubject = (id: string) => {
-  return api.delete(`/subject/${id}`);
+  return api.delete(`/subjects/${id}`);
+};
+
+export const getSubjectsByClass = async (classId: string) => {
+  const res = await api.get(`/subjects/by-class`, {
+    params: { class_id: classId },
+  });
+  return res.data;
+  // return api.get(`/subjects/by-class`, {
+  //   params: { class_id: classId }
+  // });
 };

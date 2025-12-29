@@ -25,13 +25,14 @@ import { getExams } from "../../api/exam";
 import { RootStackParamList } from "../../types/data";
 import SuccessModal from "../../components/SuccessModal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { TYPE_EXAM } from "../../constants";
 
 type RouteProps = RouteProp<RootStackParamList, "ExamListScreen">;
 
 export default function ExamListScreen() {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const route = useRoute<RouteProps>();
-  const {showSuccessModal} = route.params || {};
+  const { showSuccessModal } = route.params || {};
   const [showModal, setShowModal] = useState(false);
   const [userId, setUserId] = useState<string>("");
   const [classId, setClassId] = useState<string>("");
@@ -56,7 +57,7 @@ export default function ExamListScreen() {
   const [showFilter, setShowFilter] = useState(false);
   const [tempTime, setTempTime] = useState<"newest" | "oldest" | null>(null);
   const [tempSubjects, setTempSubjects] = useState<string[]>([]);
-  
+
 
   useEffect(() => {
     if (showSuccessModal) {
@@ -71,7 +72,7 @@ export default function ExamListScreen() {
       const userData = JSON.parse(userDataStr);
       if (userData?.user?.id) setUserId(userData.user.id);
       if (userData?.user?.class_id) setClassId(userData.user.class_id)
-      
+
     })();
   }, []);
 
@@ -94,14 +95,19 @@ export default function ExamListScreen() {
           sort: selectedTime ?? undefined,
           subjectCodes: selectedSubjects.length > 0 ? selectedSubjects : undefined,
           name: searchText ?? undefined,
+          // currentClassCode: "CLASS_11",
           class_id: classId,
           user_id: userId,
+          // page: 1,
+          // limit: 10,
           page: reset ? 1 : page,
           limit: LIMIT,
+          type: TYPE_EXAM.THI_THU
         };
 
         const res = await getExams(params);
-
+        console.log("loanhtm res: ", res);
+        // setExams(res.data || []);
         if (reset) {
           setExams(res.data || []);
         } else {
@@ -121,7 +127,8 @@ export default function ExamListScreen() {
         setLoadingMore(false);
       }
     },
-    [activeTab, selectedTime, selectedSubjects, searchText, userId, page]
+    // [activeTab, selectedTime, selectedSubjects, searchText, userId]
+    [activeTab, selectedTime, selectedSubjects, searchText, classId, userId, page]
   );
 
   const loadMore = () => {
@@ -206,7 +213,7 @@ export default function ExamListScreen() {
           <Image source={{ uri: item.image || undefined }} style={styles.thumbnail} />
         </View>
         <View style={styles.cardRight}>
-          <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{item.name ?? ""}</Text>
+          <Text style={styles.title}>{item.name ?? ""}</Text>
 
           <View style={styles.timeRow}>
             <Clock size={14} color="#5D697E" />
@@ -226,39 +233,39 @@ export default function ExamListScreen() {
             </View>
 
             {/* Nút hành động */}
-          {activeTab === "ongoing" ? (
-            item.is_done ? (
-              <TouchableOpacity
-                style={styles.seeBtn}
-                onPress={() =>
-                  navigation.navigate("ExamResultScreen", { examId: item._id, userId:userId })
-                }
-              >
-                <Text style={styles.joinText}>Xem kết quả</Text>
-              </TouchableOpacity>
+            {activeTab === "ongoing" ? (
+              item.is_done ? (
+                <TouchableOpacity
+                  style={styles.seeBtn}
+                  onPress={() =>
+                    navigation.navigate("ExamResultScreen", { examId: item._id, userId: userId })
+                  }
+                >
+                  <Text style={styles.joinText}>Xem kết quả</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.joinBtn}
+                  onPress={() =>
+                    navigation.navigate("ExamInfoScreen", { examId: item._id })
+                  }
+                >
+                  <Text style={styles.joinText}>Vào thi</Text>
+                </TouchableOpacity>
+              )
             ) : (
               <TouchableOpacity
-                style={styles.joinBtn}
+                style={styles.remindBtn}
                 onPress={() =>
-                  navigation.navigate("ExamInfoScreen", { examId: item._id })
+                  navigation.navigate("CreateUpdateSchedule", {
+                    name: item.name,
+                    due_date: item.start_date,
+                  })
                 }
               >
-                <Text style={styles.joinText}>Vào thi</Text>
+                <Text style={styles.remindText}>Nhắc tôi</Text>
               </TouchableOpacity>
-            )
-          ) : (
-            <TouchableOpacity
-              style={styles.remindBtn}
-              onPress={() =>
-                navigation.navigate("CreateUpdateSchedule", {
-                  name: item.name,
-                  due_date: item.start_date,
-                })
-              }
-            >
-              <Text style={styles.remindText}>Nhắc tôi</Text>
-            </TouchableOpacity>
-          )}
+            )}
           </View>
         </View>
       </View>
@@ -271,21 +278,21 @@ export default function ExamListScreen() {
       <View style={styles.header}>
         <View style={styles.headerLeft}>
           <TouchableOpacity onPress={() => navigation.reset({
-                index: 0,
-                routes: [
-                  {
-                    name: "MainTabs",
-                    state: {
-                      index: 0, // chọn tab Service
-                      routes: [
-                        { name: "Service" },
-                        { name: "Home" },
-                        { name: "Profile" },
-                      ],
-                    },
-                  },
-                ],
-              })}>
+            index: 0,
+            routes: [
+              {
+                name: "MainTabs",
+                state: {
+                  index: 0, // chọn tab Service
+                  routes: [
+                    { name: "Service" },
+                    { name: "Home" },
+                    { name: "Profile" },
+                  ],
+                },
+              },
+            ],
+          })}>
             <CaretLeft size={20} color="#083070" weight="bold" />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Thi Thử</Text>
@@ -349,7 +356,7 @@ export default function ExamListScreen() {
         />
       )}
 
-       <View style={styles.block}></View>
+      <View style={styles.block}></View>
 
       {/* Modal filter */}
       <RNModal

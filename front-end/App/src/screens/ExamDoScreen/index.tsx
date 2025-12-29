@@ -6,7 +6,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootStackParamList } from "../../types/data";
 import { styles } from "./index.styles";
 import { ConfirmModal } from "../../components/ConfirmModal";
-import { getExamQuestions, submitExam } from "../../api/exam";
+import { submitExam } from "../../api/exam";
+import { getQuestionsByExam } from "../../api/question";
+import { formatTime } from "../../utils/time";
+import { SUBMITTED_EXAM, TYPE_EXAM } from "../../constants";
 
 type RouteProps = RouteProp<RootStackParamList, "ExamDoScreen">;
 
@@ -31,11 +34,17 @@ type Question = {
 export default function ExamDoScreen() {
   const route = useRoute<RouteProps>();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const { examId } = route.params;
-
+  const {
+    examId,
+    reverseQuestion: reverseQuestion,
+    reverseAnswer: reverseAnswer,
+    durationSetting: durationSetting,
+  } = route.params;
+  console.log("loanhtm route.params: ", route.params);
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [duration, setDuration] = useState(15);
-  const [timeLeft, setTimeLeft] = useState(duration * 60);
+  const [duration, setDuration] = useState<number | null>(null);
+  const [exam, setExam] = useState(null);
+  const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: string]: number | null }>({});
   const [skippedQuestions, setSkippedQuestions] = useState<string[]>([]);
@@ -47,40 +56,56 @@ export default function ExamDoScreen() {
   const timeStartRef = useRef<Date | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);;
   const scrollViewRef = useRef<ScrollView>(null);
+  const [timeElapsed, setTimeElapsed] = useState<number>(0);
+  const elapsedTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
 
   const DOT_WIDTH = 35;
   const DOT_MARGIN = 4;
   const SCROLL_OFFSET = 20;
 
+  const fetchQuestions = async () => {
+    try {
+      setLoading(true);
+      // const data = await getExamQuestions(examId);
+      const res = await getQuestionsByExam(
+        examId,
+        reverseQuestion,
+        reverseAnswer
+      );
+      const data = res.data;
+      console.log("loanhtm params do Exam: ", examId,
+        reverseQuestion,
+        reverseAnswer
+      );
+
+      setExam(data.exam);
+
+      if (durationSetting !== null) {
+        setDuration(data.exam.duration);
+        setTimeLeft(durationSetting !== null ? (data.exam.duration * 60) : null);
+      }
+      console.log("loanhtm data do Exam: ", data);
+      const mapped = data.questions.map((q: any) => ({
+        id: q._id,
+        text: q.description,
+        image: q.image || undefined,
+        options: q.answers?.map((a: any) => a.description),
+        correctAnswer: q.answers.findIndex((a: any) => a.is_correct),
+        answers: q.answers,
+      }));
+      setQuestions(mapped);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Fetch questions
   useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        setLoading(true);
-        const data = await getExamQuestions(examId);
-
-        if (data.exam?.duration) {
-          setDuration(data.exam.duration);
-          setTimeLeft(data.exam.duration * 60);
-        }
-
-        const mapped = data.questions.map((q: any) => ({
-          id: q._id,
-          text: q.description,
-          image: q.image || undefined,
-          options: q.answers?.map((a: any) => a.description),
-          correctAnswer: q.answers.findIndex((a: any) => a.is_correct),
-          answers: q.answers,
-        }));
-        setQuestions(mapped);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchQuestions();
-  }, [examId]);
+  }, [examId, reverseQuestion, reverseAnswer]);
 
   const currentQuestion = questions[currentIndex];
 
@@ -97,40 +122,86 @@ export default function ExamDoScreen() {
     }
   }, [currentIndex]);
 
-  // Timer chỉ bắt đầu khi questions đã load
+  // // Timer chỉ bắt đầu khi questions đã load
+  // useEffect(() => {
+  //   // Không khởi động timer nếu chưa có câu hỏi hoặc thời gian = null (không giới hạn)
+  //   if (questions.length === 0 || duration === null || timeLeft === null) return;
+
+  //   const now = new Date();
+  //   timeStartRef.current = now; // lưu ref
+
+  //   // Xóa timer cũ (nếu còn)
+  //   if (timerRef.current) clearInterval(timerRef.current);
+
+  //   timerRef.current = setInterval(() => {
+  //     setTimeLeft(prev => {
+  //       if (prev === null) return null;
+  //       if (prev <= 1) {
+  //         if (timerRef.current) {
+  //           clearInterval(timerRef.current);
+  //           timerRef.current = null;
+  //         }
+  //         handleAutoSubmit();
+  //         return 0;
+  //       }
+  //       return prev - 1;
+  //     });
+  //   }, 1000);
+
+  //   return () => {
+  //     if (timerRef.current) {
+  //       clearInterval(timerRef.current);
+  //       timerRef.current = null;
+  //     }
+  //   };
+  // }, [questions]);
+  // // }, [questions, duration]);
   useEffect(() => {
-    if (questions.length === 0) return; // chưa có câu hỏi => không chạy
+    if (questions.length === 0) return;
 
     const now = new Date();
-    timeStartRef.current = now; // lưu ref
+    timeStartRef.current = now;
 
-    timerRef.current = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 1) {
-          if (timerRef.current) {
-            clearInterval(timerRef.current);
+    // clear tất cả timer cũ
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    if (elapsedTimerRef.current) {
+      clearInterval(elapsedTimerRef.current);
+      elapsedTimerRef.current = null;
+    }
+
+    // ⏱ CÓ GIỚI HẠN → ĐẾM LÙI
+    if (durationSetting !== null && timeLeft !== null) {
+      timerRef.current = setInterval(() => {
+        setTimeLeft(prev => {
+          if (prev === null) return null;
+          if (prev <= 1) {
+            clearInterval(timerRef.current!);
             timerRef.current = null;
+            handleAutoSubmit();
+            return 0;
           }
-          handleAutoSubmit();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
+          return prev - 1;
+        });
+      }, 1000);
+    }
+
+    // ♾ KHÔNG GIỚI HẠN → ĐẾM TIẾN
+    if (durationSetting === null) {
+      setTimeElapsed(0);
+      elapsedTimerRef.current = setInterval(() => {
+        setTimeElapsed(prev => prev + 1);
+      }, 1000);
+    }
 
     return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
+      if (timerRef.current) clearInterval(timerRef.current);
+      if (elapsedTimerRef.current) clearInterval(elapsedTimerRef.current);
     };
   }, [questions]);
 
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60);
-    const s = seconds % 60;
-    return `${m}:${s < 10 ? "0" + s : s}`;
-  };
 
   const handleSelectOption = (index: number) => {
     setSelectedAnswers(prev => {
@@ -147,6 +218,16 @@ export default function ExamDoScreen() {
     }
     if (currentIndex < questions.length - 1) setCurrentIndex(prev => prev + 1);
   };
+
+  const handleGoBack = () => {
+    if (Number(exam?.type) == TYPE_EXAM.DE_LUYEN) {
+      navigation.navigate("PracticeExamDetailScreen", {
+        examId,
+      });
+    } else {
+      navigation.navigate("ExamListScreen" as never)
+    }
+  }
 
   const handleNext = () => {
     if (selectedAnswers[currentQuestion.id] === undefined) {
@@ -167,19 +248,20 @@ export default function ExamDoScreen() {
   const handleBack = () => {
     setModalData({
       visible: true,
-      title: "Thoát Bài Thi",
+      title: "Thoát bài thi",
       content: "Dữ liệu sẽ không được lưu. Bạn có chắc muốn thoát bài thi?",
-      cancelText: "Tiếp Tục Làm",
+      cancelText: "Tiếp tục làm",
       confirmText: "Thoát",
       onCancel: () => setModalData({ visible: false }),
-      onConfirm: () => navigation.navigate("ExamListScreen" as never),
+      // onConfirm: () => navigation.navigate("ExamListScreen" as never),
+      onConfirm: () => handleGoBack(),
       type: "warning",
     });
   };
 
   const handleSubmit = () => {
     const unanswered = questions.filter(q => selectedAnswers[q.id] === undefined);
-
+    console.log("loanhtm submit exam");
     if (unanswered.length > 0) {
       setModalData({
         visible: true,
@@ -217,16 +299,18 @@ export default function ExamDoScreen() {
       timerRef.current = null;
     }
 
+    if (elapsedTimerRef.current) {
+      clearInterval(elapsedTimerRef.current);
+      elapsedTimerRef.current = null;
+    }
+
     try {
       const userDataStr = await AsyncStorage.getItem("userData");
       if (!userDataStr) throw new Error("Không tìm thấy thông tin người dùng");
       const userData = JSON.parse(userDataStr);
 
-      console.log('questions',questions)
-      console.log('selectedAnswersRef.current',selectedAnswersRef.current)
       const answersPayload = questions.map(q => {
-        const selectedIndex = selectedAnswersRef.current[q.id]; // <-- luôn lấy ref
-        console.log('selectedIndex',selectedIndex)
+        const selectedIndex = selectedAnswersRef.current[q.id];
         if (selectedIndex == null) return { answer_question_id: null, is_correct: false };
         const selectedAnswer = q.answers[selectedIndex];
         return {
@@ -243,14 +327,21 @@ export default function ExamDoScreen() {
         time_end: new Date().toISOString(),
       };
 
-      console.log("payload", payload);
-
       await submitExam(payload);
 
-      navigation.navigate("ExamResultScreen", {
-        examId,
-        userId: userData.user.id,
-      });
+      if (Number(exam?.type) == TYPE_EXAM.THI_THU) {
+        navigation.navigate("ExamResultScreen", {
+          examId,
+          userId: userData.user.id,
+        });
+      } else if (Number(exam?.type) == TYPE_EXAM.DE_LUYEN) {
+        navigation.navigate("PracticeExamDetailScreen", {
+          examId,
+          submitted: SUBMITTED_EXAM.DE_LUYEN,
+        });
+      }
+
+
     } catch (err) {
       console.error(err);
       setModalData({
@@ -281,7 +372,14 @@ export default function ExamDoScreen() {
           <TouchableOpacity onPress={handleBack}>
             <CaretLeft size={20} color="#083070" weight="bold" />
           </TouchableOpacity>
-          <Text style={styles.timerText}>{formatTime(timeLeft)}</Text>
+          {/* <Text style={styles.timerText}>
+            {timeLeft !== null ? formatTime(timeLeft) : "--:--"}
+          </Text> */}
+          <Text style={styles.timerText}>
+            {durationSetting !== null
+              ? formatTime(timeLeft ?? 0)
+              : formatTime(timeElapsed)}
+          </Text>
         </View>
 
         <TouchableOpacity onPress={handleSubmit} disabled={submitting}>
@@ -369,8 +467,8 @@ export default function ExamDoScreen() {
         content={modalData.content ?? ""}
         cancelText={modalData.cancelText ?? "Hủy"}
         confirmText={modalData.confirmText ?? "Xác Nhận"}
-        onCancel={modalData.onCancel ?? (() => {})}
-        onConfirm={modalData.onConfirm ?? (() => {})}
+        onCancel={modalData.onCancel ?? (() => { })}
+        onConfirm={modalData.onConfirm ?? (() => { })}
         type={modalData.type}
         isButtonOk={modalData.isButtonOk ?? true}
       />

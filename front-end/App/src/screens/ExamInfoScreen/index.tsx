@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useNavigation, useRoute, RouteProp, NavigationProp } from "@react-navigation/native";
-import { CaretLeft, Clock, Student, ThumbsUp, ArrowRight } from "phosphor-react-native";
+import { CaretLeft, ArrowRight } from "phosphor-react-native";
 import { RootStackParamList } from "../../types/data";
 import { styles } from "./index.styles";
 import { getExamInfo } from "../../api/exam";
 import InstructionDoExam from "../../components/InstructionDoExam";
 import ShortInfoExam from "../../components/ShortInfoExam";
+import { Exam } from "../../types/typeObj";
 
 type RouteProps = RouteProp<RootStackParamList, "ExamInfoScreen">;
 
@@ -16,25 +17,13 @@ export default function ExamInfoScreen() {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { examId } = route.params;
 
-  const [examInfo, setExamInfo] = useState<{
-    name: string;
-    image?: string;
-    participants: number;
-    duration: number;
-    likes: number;
-  } | null>(null);
+  const [examInfo, setExamInfo] = useState<Exam | null>(null);
 
   useEffect(() => {
     const fetchExamInfo = async () => {
       try {
         const data = await getExamInfo(examId);
-        setExamInfo({
-          name: data.name,
-          image: data.image,
-          participants: data.participants,
-          duration: data.duration, // thay status bằng duration
-          likes: 120, // tạm fix cứng
-        });
+        setExamInfo(data);
       } catch (err) {
         console.error("Không lấy được thông tin bài thi:", err);
       }
@@ -57,13 +46,16 @@ export default function ExamInfoScreen() {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <CaretLeft size={20} color="#083070" weight="bold" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>{examInfo.name}</Text>
+        <Text style={styles.headerTitle}>{examInfo?.name}</Text>
       </View>
 
       {/* Body */}
       <View style={styles.body}>
-        <ShortInfoExam
+        {/* <ShortInfoExam
           exam={{ id: examId }}
+        /> */}
+        <ShortInfoExam
+          exam={examInfo}
         />
         {/* Hình ảnh */}
         {/* <Image source={{ uri: examInfo.image }} style={styles.image} /> */}
@@ -107,7 +99,10 @@ export default function ExamInfoScreen() {
         <TouchableOpacity
           onPress={() =>
             navigation.navigate("ExamDoScreen", {
-              examId
+              examId,
+              reverseQuestion: false,
+              reverseAnswer: false,
+              durationSetting: examInfo?.duration ?? null,
             })
           }
         >
