@@ -11,6 +11,7 @@ import {
 } from "../../../../api/question";
 import PermissionGuard from '../../../../components/PermissionGuard';
 import { NotePencil, Trash } from 'phosphor-react';
+import CustomModal from '../../../../component/CustomModal';
 
 const { Paragraph } = Typography;
 
@@ -37,6 +38,10 @@ const CreateUpdateQuestionDrawer = ({
     const isEdit = !!questionId && !viewOnly;
     const [editingAnswerId, setEditingAnswerId] = useState<string | null>(null);
     const [backupAnswers, setBackupAnswers] = useState<Answer[]>([]);
+
+    const [openDeleteAnswer, setOpenDeleteAnswer] = useState(false);
+    const [answerSelected, setAnswerSelected] = useState<Answer | null>(null);
+
 
     // Load chi tiết câu hỏi khi edit
     useEffect(() => {
@@ -145,6 +150,22 @@ const CreateUpdateQuestionDrawer = ({
         message.success("Xóa đáp án thành công");
     };
 
+    const onOpenDeleteAnswer = (answer: Answer) => {
+        setAnswerSelected(answer);
+        setOpenDeleteAnswer(true);
+    };
+
+    const handleConfirmDeleteAnswer = () => {
+        if (!answerSelected) return;
+
+        setAnswers((prev) => prev.filter((a) => a._id !== answerSelected._id));
+        message.success("Xóa đáp án thành công");
+
+        setOpenDeleteAnswer(false);
+        setAnswerSelected(null);
+    };
+
+
     const answerColumns = [
         {
             title: "STT",
@@ -209,7 +230,8 @@ const CreateUpdateQuestionDrawer = ({
                                 className="cursor-pointer"
                                 color="#d63b3b"
                                 size={16}
-                                onClick={() => handleDeleteAnswer(row._id)}
+                                // onClick={() => handleDeleteAnswer(row._id)}
+                                onClick={() => onOpenDeleteAnswer(row)}
                             />
                         </Tooltip>
                     </PermissionGuard>
@@ -374,6 +396,21 @@ const CreateUpdateQuestionDrawer = ({
                     )}
                 </div>
             )}
+            <CustomModal
+                open={openDeleteAnswer}
+                title="Xóa đáp án"
+                type="warning"
+                content={
+                    <>
+                        Bạn có chắc muốn xóa đáp án này không?
+                    </>
+                }
+                handleOk={handleConfirmDeleteAnswer}
+                handleCancel={() => {
+                    setOpenDeleteAnswer(false);
+                    setAnswerSelected(null);
+                }}
+            />
 
         </Drawer >
     );
