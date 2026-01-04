@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { ExamsFilterDto, ExamStatus, SortOrder } from './dto/exams-filter.dto';
@@ -27,6 +31,8 @@ import {
   LikeExam,
   LikeExamDocument,
 } from 'src/like-exam/schemas/like-exam.schema';
+import { CreateExamDto } from './dto/create-exam.dto';
+import { UpdateExamDto } from './dto/update-exam.dto';
 
 @Injectable()
 export class ExamsService {
@@ -331,14 +337,20 @@ export class ExamsService {
 
     // ----- Lấy exam + populate subject_class + subject -----
     const exam = await this.examModel
-      .findOne({ _id: examId, deleted_at: null })
+      .findById({ _id: examId, deleted_at: null })
       .populate({
         path: 'subject_class_id',
         select: '_id subject_id',
-        populate: {
-          path: 'subject_id',
-          select: 'code name description',
-        },
+        populate: [
+          {
+            path: 'subject_id',
+            select: '_id code name description',
+          },
+          {
+            path: 'class_id',
+            select: '_id code name',
+          },
+        ],
       })
       .lean();
 
@@ -396,9 +408,18 @@ export class ExamsService {
     const subjectClass = (exam.subject_class_id as any) ?? null;
     const subject = subjectClass?.subject_id
       ? {
+          _id: subjectClass.subject_id._id,
           code: subjectClass.subject_id.code,
           name: subjectClass.subject_id.name,
           description: subjectClass.subject_id.description,
+        }
+      : null;
+
+    const classInfo = subjectClass?.class_id
+      ? {
+          _id: subjectClass.class_id._id,
+          code: subjectClass.class_id.code,
+          name: subjectClass.class_id.name,
         }
       : null;
 
@@ -418,6 +439,7 @@ export class ExamsService {
       created_at: (exam as any).created_at,
       updated_at: (exam as any).updated_at,
       subject,
+      class: classInfo,
       participants,
       numberQuestion,
       is_done,
@@ -508,5 +530,101 @@ export class ExamsService {
       data: result.total_download,
       message: 'Thành công',
     };
+  }
+
+  async createExam(dto: CreateExamDto) {
+    const startDate = new Date(dto.startDate);
+    const endDate = new Date(dto.endDate);
+
+    if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+      throw new BadRequestException('Ngày bắt đầu hoặc kết thúc không hợp lệ');
+    }
+
+    if (endDate < startDate) {
+      throw new BadRequestException('Ngày kết thúc phải >= ngày bắt đầu');
+    }
+
+    return this.examModel.create({
+      subject_class_id: dto.subjectClassId,
+      image: dto.image ?? '',
+      name: dto.name ?? '',
+      description: dto.description ?? '',
+      type: Number(dto.type),
+      difficulty: Number(dto.difficulty),
+      duration: Number(dto.duration),
+      start_date: startDate,
+      end_date: endDate,
+      total_download: 0,
+    });
+  }
+
+  async updateExam(id: string, dto: UpdateExamDto) {
+    const exam = await this.examModel.findById({
+      _id: id,
+      deleted_at: null,
+    });
+    if (!exam) {
+      throw new NotFoundException('Không tìm thấy đề thi');
+    }
+
+    const updateData: Exam = {
+      name: dto.name,
+      type: dto.type,
+      subject_class_id: new Types.ObjectId(dto.subjectClassId),
+    };
+
+    if (dto.description !== undefined) updateData.description = dto.description;
+    if (dto.difficulty !== undefined) {
+      updateData.difficulty = Number(dto.difficulty);
+    }
+    if (dto.duration !== undefined) updateData.duration = Number(dto.duration);
+    if (dto.image !== undefined) updateData.image = dto.image;
+
+    if (dto.startDate) {
+      const startDate = new Date(dto.startDate);
+      if (isNaN(startDate.getTime())) {
+        throw new BadRequestException('Ngày bắt đầu không hợp lệ');
+      }
+      updateData.start_date = startDate;
+    }
+
+    if (dto.endDate) {
+      const endDate = new Date(dto.endDate);
+      if (isNaN(endDate.getTime())) {
+        throw new BadRequestException('Ngày kết thúc không hợp lệ');
+      }
+      updateData.end_date = endDate;
+    }
+
+    if (
+      updateData.start_date &&
+      updateData.end_date &&
+      updateData.end_date < updateData.start_date
+    ) {
+      throw new BadRequestException('Ngày kết thúc phải >= ngày bắt đầu');
+    }
+
+    return this.examModel.findByIdAndUpdate(
+      id,
+      { $set: updateData },
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
+  }
+
+  async deleteExam(id: string) {
+    const updatedExam = await this.examModel.findByIdAndUpdate(
+      { _id: id, deleted_at: null },
+      { $set: { deleted_at: new Date() } },
+      { new: true },
+    );
+
+    if (!updatedExam) {
+      throw new NotFoundException('Không tìm thấy đề thi hoặc đã bị xóa');
+    }
+
+    return updatedExam;
   }
 }

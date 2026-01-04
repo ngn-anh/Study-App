@@ -7,24 +7,21 @@ import {
     ProFormSelect,
     ProForm,
     ProFormDateTimePicker,
-    // viVNIntl,
-    // ProFormSwitch
 } from "@ant-design/pro-components";
 import viVN from 'antd/locale/vi_VN';
 import { getSubjects, getSubjectsByClass } from "../../../../api/subject";
 import { getClasses, getClassesBySubject } from "../../../../api/class";
 import { getBySubjectClass } from "../../../../api/subject-class";
 import {
+    createExam,
     getExamDetail,
-    // createExam,
-    // updateExam
+    updateExam,
 } from "../../../../api/exam";
-import type { Class, Subject } from "../../../../types/typeObj";
+import type { Class, Exam, Subject } from "../../../../types/typeObj";
 import ProDrawerForm from "../../../../component/ProDrawerForm";
 import { UploadSimple } from 'phosphor-react';
 import dayjs from "dayjs";
-// import 'dayjs/locale/vi';
-// dayjs.locale('vi');
+import type { NotificationInstance } from "antd/es/notification/interface";
 
 interface Props {
     isOpenDrawer: boolean;
@@ -32,10 +29,12 @@ interface Props {
     examId?: string;
     setExamId?: (id?: string) => void;
     actionRef?: any;
+    notify: NotificationInstance;
 }
 
-const CreateUpdateExam = ({ isOpenDrawer, setIsOpenDrawer, examId, setExamId, actionRef }: Props) => {
+const CreateUpdateExam = ({ isOpenDrawer, setIsOpenDrawer, examId, setExamId, actionRef, notify }: Props) => {
     const [form] = Form.useForm();
+
     const [disableButtonSubmit, setDisableButtonSubmit] = useState(true);
 
     const [subjects, setSubjects] = useState<Subject[]>([]);
@@ -43,21 +42,19 @@ const CreateUpdateExam = ({ isOpenDrawer, setIsOpenDrawer, examId, setExamId, ac
     const [allSubjects, setAllSubjects] = useState<Subject[]>([]);
     const [allClasses, setAllClasses] = useState<Class[]>([]);
     const [subjectClassId, setSubjectClassId] = useState<string | null>(null);
+    const [initialValues, setInitialValues] = useState<Exam>();
 
-    const CLOUDINARY_NAME = import.meta.env.CLOUDINARY_NAME;
-    // const CLOUDINARY_UPLOAD_PRESET = import.meta.env.CLOUDINARY_UPLOAD_PRESET;
-    const CLOUDINARY_UPLOAD_PRESET = "exam-datn";
+    const VITE_CLOUDINARY_NAME = import.meta.env.VITE_CLOUDINARY_NAME;
+    const VITE_CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 
     const [examImage, setExamImage] = useState<File | null>(null);
     const [previewImage, setPreviewImage] = useState<string | null>(null);
+    const [isImageChanged, setIsImageChanged] = useState(false);
 
     // Chọn ảnh
     const handleSelectImage = (file: File) => {
         setExamImage(file);
-        // form.setFieldValue('image', file);
-        // const reader = new FileReader();
-        // reader.onload = () => setPreviewImage(reader.result as string);
-        // reader.readAsDataURL(file);
+        setIsImageChanged(true);
         const reader = new FileReader();
         reader.onload = () => setPreviewImage(reader.result as string); // hiển thị preview
         reader.readAsDataURL(file);
@@ -65,39 +62,46 @@ const CreateUpdateExam = ({ isOpenDrawer, setIsOpenDrawer, examId, setExamId, ac
 
     // Upload lên Cloudinary khi submit
     const uploadImage = async (): Promise<string | null> => {
-        if (!examImage) return null;
+        if (!examImage) return previewImage; // giữ ảnh cũ
 
         const formData = new FormData();
         formData.append("file", examImage);
-        formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+        formData.append("upload_preset", VITE_CLOUDINARY_UPLOAD_PRESET);
+        formData.append("folder", "exams");
 
-        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME}/image/upload`, {
-            method: "POST",
-            body: formData,
-        });
+        const res = await fetch(
+            `https://api.cloudinary.com/v1_1/${VITE_CLOUDINARY_NAME}/image/upload`,
+            {
+                method: "POST",
+                body: formData,
+            }
+        );
 
         const data = await res.json();
-        console.log("Cloudinary response:", data);
-        return data.secure_url || null; // trả về url ảnh
+        return data.secure_url || '';
     };
-
 
     /** Close drawer */
     const onClose = () => {
         setIsOpenDrawer(false);
-        setExamId?.(undefined);
-        form.resetFields();
-        setDisableButtonSubmit(true);
-        setSubjects(allSubjects);
-        setClasses(allClasses);
-        setSubjectClassId(null);
-        setExamImage(null);
-        setPreviewImage(null);
     };
+
+    useEffect(() => {
+        if (!isOpenDrawer) {
+            form.resetFields();
+            setDisableButtonSubmit(true);
+            setSubjects(allSubjects);
+            setClasses(allClasses);
+            setSubjectClassId(null);
+            setIsImageChanged(false);
+            setExamImage(null);
+            setPreviewImage(null);
+        }
+    }, [isOpenDrawer]);
 
     /** Load subjects & classes khi drawer mở */
     useEffect(() => {
-        if (!isOpenDrawer) return;
+        if (!isOpenDrawer || examId) return;
 
         const fetchInit = async () => {
             try {
@@ -109,52 +113,94 @@ const CreateUpdateExam = ({ isOpenDrawer, setIsOpenDrawer, examId, setExamId, ac
                 setAllSubjects(subRes.data);
                 setAllClasses(clsRes.data);
             } catch (err) {
-                message.error("Không tải được danh sách môn / lớp");
+                console.error(err);
+                notify.error({
+                    message: `Không tải được danh sách môn học/lớp học`,
+                    placement: "topRight",
+                });
             }
         };
 
         fetchInit();
     }, [isOpenDrawer]);
 
-    /** Load detail khi edit */
+    const isFormChanged = () => {
+        if (!initialValues) return false;
+
+        const current = form.getFieldsValue();
+
+        return Object.keys(initialValues).some((key) => {
+            const initVal = initialValues[key];
+            const currVal = current[key];
+
+            if (dayjs.isDayjs(initVal) && dayjs.isDayjs(currVal)) {
+                return !initVal.isSame(currVal);
+            }
+
+            return initVal !== currVal;
+        });
+    };
+
+    /** Load detail exam khi edit */
     const getDetail = async () => {
         if (!examId) return;
 
         try {
             const res = await getExamDetail(examId);
-            const data = res.data.data;
+            const data = res.data;
 
-            form.setFieldsValue({
+            if (data.image) {
+                setPreviewImage(data.image);
+                setExamImage(null);
+            }
+
+            await Promise.all([
+                getSubjects().then(res => {
+                    setSubjects(res.data);
+                    setAllSubjects(res.data);
+                }),
+                getClasses().then(res => {
+                    setClasses(res.data);
+                    setAllClasses(res.data);
+                }),
+            ]);
+
+            const formValues = {
                 name: data.name,
                 description: data.description,
                 type: data.type,
                 difficulty: data.difficulty,
                 duration: data.duration,
-                startDate: dayjs(data.startDate),
-                endDate: dayjs(data.endDate),
+                startDate: dayjs(data.start_date),
+                endDate: dayjs(data.end_date),
                 subjectId: data.subject?._id,
                 classId: data.class?._id,
-            });
+            };
+            form.setFieldsValue(formValues);
+            setInitialValues(formValues);
 
-            if (data.subject && data.class) {
-                const resSC = await getBySubjectClass(data.class._id, data.subject._id);
-                setSubjectClassId(resSC.data.data._id);
-            }
         } catch (err) {
-            message.error("Không tải được chi tiết đề thi");
+            console.error(err);
+            notify.success({
+                message: `Không tải được chi tiết đề thi. Vui lòng thử lại sau`,
+                placement: "topRight",
+            });
         }
     };
 
     useEffect(() => {
-        if (isOpenDrawer) {
-            if (examId) {
-                getDetail();
-            } else {
-                form.resetFields();
-                setDisableButtonSubmit(true);
-            }
+        if (!isOpenDrawer) return;
+
+        if (examId) {
+            getDetail();
+        } else {
+            form.resetFields();
+            setPreviewImage(null);
+            setExamImage(null);
+            setDisableButtonSubmit(true);
         }
     }, [isOpenDrawer, examId]);
+
 
     /** Handle subject/class changes */
     const handleSubjectChange = async (subjectId: string) => {
@@ -198,10 +244,9 @@ const CreateUpdateExam = ({ isOpenDrawer, setIsOpenDrawer, examId, setExamId, ac
             setSubjectClassId(null);
             return;
         }
-        console.log("loanhtm subjectId: ", subjectId, "classId: ", classId);
+
         try {
             const res = await getBySubjectClass(classId, subjectId);
-            console.log("loanhtm getBySubjectClass: ", res);
             if (res.errorCode == 0) {
                 console.log("res.data._id: ", res.data._id);
                 setSubjectClassId(res.data._id);
@@ -212,7 +257,6 @@ const CreateUpdateExam = ({ isOpenDrawer, setIsOpenDrawer, examId, setExamId, ac
         }
     };
 
-    /** On change form to enable/disable submit */
     const onChangeForm = () => {
         const values = form.getFieldsValue();
         const disable =
@@ -223,61 +267,92 @@ const CreateUpdateExam = ({ isOpenDrawer, setIsOpenDrawer, examId, setExamId, ac
             !values.endDate ||
             !values.subjectId ||
             !values.classId;
-        setDisableButtonSubmit(disable);
+
+        const isChanged = examId
+            ? (isFormChanged() || isImageChanged) // update
+            : true; // create → chỉ cần đủ field là được submit
+
+        setDisableButtonSubmit(disable || !isChanged);
     };
 
     const onSubmit = async () => {
-        console.log(">>>")
         try {
             const values = await form.validateFields();
 
-            // Lấy trực tiếp mapping từ API
             const resSC = await getBySubjectClass(values.classId, values.subjectId);
             const scId = resSC.data._id;
 
             if (!scId) {
-                message.error("Vui lòng chọn môn và lớp hợp lệ");
+                notify.error({
+                    message: `Vui lòng chọn môn và lớp hợp lệ!`,
+                    placement: "topRight",
+                });
                 return;
             }
 
-            console.log(">>>3")
             // Upload ảnh minh họa
             const imageUrl = await uploadImage();
             console.log("loanhtm imageUrl: ", imageUrl);
             const payload = {
                 name: values.name,
                 description: values.description || '',
-                type: values.type,
-                difficulty: values.difficulty,
-                duration: values.duration,
+                type: Number(values.type),
+                difficulty: Number(values.difficulty),
+                duration: Number(values.duration),
                 startDate: dayjs(values.startDate).toISOString(),
                 endDate: dayjs(values.endDate).toISOString(),
                 subjectClassId: scId,
-                image: imageUrl, // thêm đường dẫn ảnh
+                image: imageUrl ?? '',
             };
 
             if (examId) {
-                // await updateExam(examId, payload);
-                console.log("updateExam: ", payload);
-                message.success("Cập nhật đề thi thành công!");
+                const res = await updateExam(examId, payload);
+                if (res.status === 200) {
+                    notify.success({
+                        message: `Cập nhật ${payload.name} thành công!`,
+                        placement: "topRight",
+                    });
+                } else {
+                    notify.error({
+                        message: `Có lỗi xảy ra. Vui lòng thử lại sau.`,
+                        placement: "topRight",
+                    });
+                }
             } else {
-                // await createExam(payload);
-                console.log("createExam: ", payload);
-                message.success("Tạo đề thi thành công!");
+                const res = await createExam(payload);
+                if (res.status === 201) {
+                    notify.success({
+                        message: `Tạo đề thi mới thành công!`,
+                        placement: "topRight",
+                    });
+                } else {
+                    notify.error({
+                        message: `Có lỗi xảy ra. Vui lòng thử lại sau.`,
+                        placement: "topRight",
+                    });
+                }
             }
 
             onClose();
             actionRef?.current?.reload();
         } catch (err) {
-            console.log("Lỗi khi lưu đề thi");
-            // message.error("Lỗi khi lưu đề thi");
+            console.error(err);
+            notify.error({
+                message: `Có lỗi xảy ra. Vui lòng thử lại sau.`,
+                placement: "topRight",
+            });
         }
     };
+
+    useEffect(() => {
+        if (!examId) return;
+        onChangeForm();
+    }, [isImageChanged]);
 
     return (
         <ConfigProvider locale={viVN}>
             <ProDrawerForm
-                titleHeader={examId ? "Chỉnh sửa đề kiểm tra" : "Tạo đề kiểm tra mới"}
+                titleHeader={examId ? "Chỉnh sửa đề thi" : "Tạo đề thi mới"}
                 subTitleHeader={
                     <>
                         Vui lòng điền đầy đủ vào các mục có dấu (<span className="color-red">*</span>)
@@ -325,18 +400,8 @@ const CreateUpdateExam = ({ isOpenDrawer, setIsOpenDrawer, examId, setExamId, ac
                                 showUploadList={false}
                                 beforeUpload={(file) => {
                                     handleSelectImage(file);
-                                    return false; // prevent auto upload
+                                    return false;
                                 }}
-                            // accept="image/*"
-                            // showUploadList={false} // ẩn list
-                            // maxCount={1}
-                            // beforeUpload={(file) => {
-                            //     setExamImage(file); // lưu file để upload
-                            //     const reader = new FileReader();
-                            //     reader.onload = () => setPreviewImage(reader.result as string); // lưu preview
-                            //     reader.readAsDataURL(file);
-                            //     return false; // prevent auto upload
-                            // }}
                             >
                                 <Button icon={<UploadSimple />}>Chọn ảnh</Button>
                             </Upload>
@@ -372,7 +437,13 @@ const CreateUpdateExam = ({ isOpenDrawer, setIsOpenDrawer, examId, setExamId, ac
                             label="Thời lượng (phút)"
                             name="duration"
                             placeholder="Nhập thời lượng"
-                            rules={[{ required: true, message: "Vui lòng nhập thời lượng!" }]}
+                            rules={[
+                                { required: true, message: "Vui lòng nhập thời lượng!" },
+                                {
+                                    pattern: /^[0-9]+$/,
+                                    message: "Vui lòng nhập số!",
+                                },
+                            ]}
                         />
 
                         <ProFormSelect
@@ -428,7 +499,7 @@ const CreateUpdateExam = ({ isOpenDrawer, setIsOpenDrawer, examId, setExamId, ac
                             fieldProps={{
                                 showTime: true,
                                 format: 'DD/MM/YYYY HH:mm',
-                                defaultValue: dayjs(), // mặc định là ngày giờ hiện tại
+                                // defaultValue: dayjs(), // mặc định là ngày giờ hiện tại
                                 onChange: (value) => {
                                     // Khi startDate thay đổi, validate lại endDate
                                     const endDate = form.getFieldValue('endDate');
@@ -467,7 +538,7 @@ const CreateUpdateExam = ({ isOpenDrawer, setIsOpenDrawer, examId, setExamId, ac
                             fieldProps={{
                                 showTime: true,
                                 format: 'DD/MM/YYYY HH:mm',
-                                defaultValue: dayjs(), // mặc định là ngày giờ hiện tại
+                                // defaultValue: dayjs(), // mặc định là ngày giờ hiện tại
                             }}
                         />
                     </div>
