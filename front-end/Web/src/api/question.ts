@@ -37,6 +37,7 @@ export const createManyQuestion = async (payload: {
     description?: string;
     difficulty?: number;
     section?: number | string;
+    image?: string;
     answers?: {
       description?: string;
       is_correct?: boolean;

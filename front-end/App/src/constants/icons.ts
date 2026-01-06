@@ -11,4 +11,7 @@ export const Icons = {
   FileFullIcon: require('../assets/icons/file-full.png'),
   LikeIcon: require('../assets/icons/like.png'),
   ShareIcon: require('../assets/icons/share.png'),
+  WarningIcon: require('../assets/icons/warning.png'),
+  ErrorIcon: require('../assets/icons/error.png'),
+  SuccessIcon: require('../assets/icons/success.png'),
 };

@@ -191,6 +191,7 @@ export class QuestionsService {
           description: q.description,
           difficulty: q.difficulty,
           section: q.section,
+          image: q.image,
         })),
       );
 

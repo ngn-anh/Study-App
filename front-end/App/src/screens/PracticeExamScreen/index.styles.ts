@@ -69,7 +69,7 @@ export const styles = StyleSheet.create({
 
   scrollContent: {
     flexGrow: 1,
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
     paddingBottom: verticalScale(20),
   },
 
@@ -94,5 +94,102 @@ export const styles = StyleSheet.create({
   emptyText: {
     fontSize: 16,
     color: '#000',
+  },
+
+  clearFilterBtn: {
+    marginTop: verticalScale(12),
+    paddingHorizontal: scale(16),
+    paddingVertical: verticalScale(8),
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#1669EF',
+  },
+
+  clearFilterText: {
+    color: '#1669EF',
+    fontSize: 14,
+    fontWeight: '500',
+  },
+
+  filterModalContent: {
+    backgroundColor: '#fff',
+    paddingTop: verticalScale(8),
+    paddingHorizontal: scale(16),
+    paddingBottom: verticalScale(20),
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    maxHeight: '70%',
+  },
+
+  modalHandle: {
+    width: 40,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: '#D1D5DB',
+    alignSelf: 'center',
+    marginBottom: verticalScale(12),
+  },
+
+  filterModalTitle: {
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000',
+    marginBottom: verticalScale(12),
+  },
+
+  filterSectionTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: verticalScale(8),
+  },
+
+  filterOption: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: verticalScale(12),
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0F0F0',
+  },
+
+  filterOptionText: {
+    fontSize: 15,
+    color: '#000',
+  },
+  filterButtons: {
+    flexDirection: 'row',
+    marginTop: verticalScale(16),
+    gap: scale(12),
+  },
+
+  resetBtn: {
+    flex: 1,
+    paddingVertical: verticalScale(12),
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#1669EF',
+    alignItems: 'center',
+  },
+
+  resetText: {
+    color: '#1669EF',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+
+  applyBtn: {
+    flex: 1,
+    paddingVertical: verticalScale(12),
+    borderRadius: 8,
+    backgroundColor: '#1669EF',
+    alignItems: 'center',
+  },
+
+  applyText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: '600',
   },
 });

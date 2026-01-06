@@ -102,8 +102,8 @@ const CreateUpdateQuestionDrawer = ({
         if (!questionId) {
             form.resetFields();
             setAnswers([]);
-            // setPreviewQuestionImage(null);   // ✅ reset ảnh preview
-            // setQuestionImage(null);          // ✅ reset file ảnh mới
+            setPreviewQuestionImage(null);   // ✅ reset ảnh preview
+            setQuestionImage(null);          // ✅ reset file ảnh mới
             // setCroppingImage(null);          // ✅ reset cropper
             // setCrop({ x: 0, y: 0 });         // ✅ reset crop vị trí
             // setZoom(1);
@@ -187,21 +187,32 @@ const CreateUpdateQuestionDrawer = ({
                 explanation: a.explanation,
             }))
         );
+
+        if (importQuestion.image) {
+            setPreviewQuestionImage(importQuestion?.image);
+        }
     }, [open, isImportEdit, importQuestion]);
 
-    const handleSubmitImportQuestion = (values: any) => {
+    const handleSubmitImportQuestion = async (values: any) => {
         if (!importQuestion) return;
+        try {
+            const imageUrl = await uploadQuestionImage();
 
-        onImportUpdated?.({
-            ...importQuestion,
-            description: values.description,
-            difficulty: values.difficulty,
-            section: values.section,
-            answers,
-        });
+            onImportUpdated?.({
+                ...importQuestion,
+                description: values.description,
+                difficulty: values.difficulty,
+                section: values.section,
+                answers,
+                image: imageUrl || importQuestion.image,
+            });
 
-        message.success("Cập nhật câu hỏi import thành công");
-        handleCloseDrawer();
+            message.success("Cập nhật câu hỏi import thành công");
+            handleCloseDrawer();
+        } catch (error) {
+            console.error(error);
+            message.error("Có lỗi xảy ra khi cập nhật ảnh câu hỏi import");
+        }
     };
 
     const handleCloseDrawer = () => {
@@ -332,16 +343,44 @@ const CreateUpdateQuestionDrawer = ({
     //     };
     //     reader.readAsDataURL(file);
     // };
+
     const handleSelectQuestionImage = (file: File) => {
+        // THÊM: Validate kích thước
+        const maxSize = 5 * 1024 * 1024; // 5MB
+        if (file.size > maxSize) {
+            message.error("Kích thước ảnh không được vượt quá 5MB");
+            return false;
+        }
+
+        // THÊM: Validate loại file
+        const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        if (!validTypes.includes(file.type)) {
+            message.error("Chỉ chấp nhận file ảnh (JPEG, PNG, GIF, WebP)");
+            return false;
+        }
+
         setQuestionImage(file);
         setIsImageChanged(true);
         const reader = new FileReader();
         reader.onload = () => setPreviewQuestionImage(reader.result as string);
         reader.readAsDataURL(file);
+        return false;
     };
 
     const uploadQuestionImage = async (): Promise<string | null> => {
-        if (!questionImage) return previewQuestionImage; // giữ ảnh cũ nếu không đổi
+        // Xử lý cho import Excel: giữ ảnh cũ nếu không thay đổi
+        if (isImportEdit && importQuestion?.image && !isImageChanged) {
+            return importQuestion?.image;
+        }
+
+        // Xử lý cho database: giữ ảnh cũ nếu không thay đổi
+        if (previewQuestionImage && !questionImage && !isImageChanged) {
+            return previewQuestionImage;
+        }
+
+        if (!questionImage) return null;
+
+        // if (!questionImage) return previewQuestionImage; // giữ ảnh cũ nếu không đổi
 
         const formData = new FormData();
         formData.append("file", questionImage);
