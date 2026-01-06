@@ -5,9 +5,10 @@ import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import SubjectList from "../../components/SubjectList/SubjectList";
 import LinearGradient from "react-native-linear-gradient";
 import ExamList from "../../components/ExamList/ExamList";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useNavigation, NavigationProp } from "@react-navigation/native";
 import { ConfirmModal } from "../../components/ConfirmModal";
 import { BellRingingIcon } from "phosphor-react-native";
+import { getUnreadNotificationCount } from "../../api/notification";
 import { updateNotificationSetting } from "../../api/notificationSetting";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Class, Exam, Subject, User } from "../../types/typeObj";
@@ -16,7 +17,7 @@ import { getSubjectByClass } from "../../api/subject";
 import { LIMIT, TYPE_EXAM } from "../../constants";
 import { getExams } from "../../api/exam";
 import { toggleExamLike } from "../../api/likeExam";
-// import { showMessage } from 'react-native-flash-message';
+import { RootStackParamList } from "../../types/data";
 
 const HomeScreen: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -24,6 +25,8 @@ const HomeScreen: React.FC = () => {
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [exams, setExams] = useState<Exam[]>([]);
   const [page, setPage] = useState<number>(1);
+  const [unreadNotificationCount, setUnreadNotificationCount] = useState<number>(0);
+  const screenNavigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const getUserData = async (): Promise<User | null> => {
     try {
@@ -45,13 +48,6 @@ const HomeScreen: React.FC = () => {
   const route = useRoute<any>();
   const [showNotiModal, setShowNotiModal] = useState(false);
   const showPopup = route.params?.showNotificationPopup;
-
-  useEffect(() => {
-    if (showPopup) {
-      setShowNotiModal(true);
-    }
-    console.log('route.params', route.params)
-  }, []);
 
   const fetchGetClassById = async (classId: string) => {
     try {
@@ -122,16 +118,34 @@ const HomeScreen: React.FC = () => {
     }
   }, []);
 
+  // Fetch unread notification count
+  const fetchUnreadNotificationCount = useCallback(async (userId: string) => {
+    try {
+      const count = await getUnreadNotificationCount(userId);
+      setUnreadNotificationCount(count);
+    } catch (err) {
+      console.error("Error fetching unread notification count:", err);
+    }
+  }, []);
+
   // Effect chính - khởi tạo
   useEffect(() => {
     const initializeData = async () => {
       const userData = await getUserData();
       if (userData) {
         await loadClassInfo(userData);
+        await fetchUnreadNotificationCount(userData.id);
       }
     };
     initializeData();
-  }, []);
+  }, [loadClassInfo, fetchUnreadNotificationCount]);
+
+  useEffect(() => {
+    if (showPopup) {
+      setShowNotiModal(true);
+    }
+    console.log('route.params', route.params)
+  }, [showPopup, route.params]);
 
   // Effect khi có classInfo -> load subjects và exams
   useEffect(() => {
@@ -256,16 +270,20 @@ const HomeScreen: React.FC = () => {
                 source={require("../../assets/icons/option.png")}
                 style={styles.bellIcon}
               />
-              {/* <Text style={styles.username}>Nguyễn Thị Thu Ngân</Text> */}
             </View>
-            <TouchableOpacity style={styles.notification}>
+            <TouchableOpacity 
+              style={styles.notification}
+              onPress={() => screenNavigation.navigate("NotificationScreen")}
+            >
               <Image
                 source={require("../../assets/icons/bell.png")}
                 style={styles.bellIcon}
               />
-              <View style={styles.badge}>
-                <Text style={styles.badgeText}>24</Text>
-              </View>
+              {unreadNotificationCount > 0 && (
+                <View style={styles.badge}>
+                  <Text style={styles.badgeText}>{unreadNotificationCount}</Text>
+                </View>
+              )}
             </TouchableOpacity>
           </View>
 

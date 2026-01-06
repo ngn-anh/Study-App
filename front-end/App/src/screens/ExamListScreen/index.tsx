@@ -15,6 +15,7 @@ import {
   Clock,
   Student,
   Check,
+  Star,
 } from "phosphor-react-native";
 import { NavigationProp, RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { getSubjectTagStyle } from "../../utils/getSubjectTagStyle";
@@ -22,6 +23,7 @@ import { styles } from "./index.styles";
 import { SUBJECTS } from "../../constants/subjects";
 import RNModal from "react-native-modal";
 import { getExams } from "../../api/exam";
+import { getSubjectByClass } from "../../api/subject";
 import { RootStackParamList } from "../../types/data";
 import SuccessModal from "../../components/SuccessModal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -43,20 +45,24 @@ export default function ExamListScreen() {
   // --- Data ---
   const [exams, setExams] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [expandedTitles, setExpandedTitles] = useState<Set<string>>(new Set());
+  const [subjects, setSubjects] = useState<any[]>([]);
 
   // --- Filter states ---
   const [selectedTime, setSelectedTime] = useState<"newest" | "oldest" | null>(null);
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
+  const [selectedDifficulty, setSelectedDifficulty] = useState<number | null>(null);
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
-  const LIMIT = 8;
+  const LIMIT = 5;
 
   // --- Modal temp states ---
   const [showFilter, setShowFilter] = useState(false);
   const [tempTime, setTempTime] = useState<"newest" | "oldest" | null>(null);
   const [tempSubjects, setTempSubjects] = useState<string[]>([]);
+  const [tempDifficulty, setTempDifficulty] = useState<number | null>(null);
 
 
   useEffect(() => {
@@ -76,6 +82,25 @@ export default function ExamListScreen() {
     })();
   }, []);
 
+  // Fetch subjects từ API
+  const fetchSubjects = useCallback(async () => {
+    if (!classId) return;
+    try {
+      const res = await getSubjectByClass(classId);
+      console.log('res',res)
+      const activeSubjects = res.data;
+      setSubjects(activeSubjects);
+    } catch (err) {
+      console.error("❌ Lỗi khi tải môn học:", err);
+    }
+  }, [classId]);
+
+  useEffect(() => {
+    if (classId) {
+      fetchSubjects();
+    }
+  }, [classId]);
+
   // --- Fetch exams ---
   const fetchExams = useCallback(
     async (reset = false) => {
@@ -94,12 +119,10 @@ export default function ExamListScreen() {
           status: activeTab,
           sort: selectedTime ?? undefined,
           subjectCodes: selectedSubjects.length > 0 ? selectedSubjects : undefined,
+          difficulty: selectedDifficulty ?? undefined,
           name: searchText ?? undefined,
-          // currentClassCode: "CLASS_11",
           class_id: classId,
           user_id: userId,
-          // page: 1,
-          // limit: 10,
           page: reset ? 1 : page,
           limit: LIMIT,
           type: TYPE_EXAM.THI_THU
@@ -144,7 +167,7 @@ export default function ExamListScreen() {
   useEffect(() => {
     if (!userId || !classId) return;
     fetchExams(true); // reset = true, load page 1
-  }, [activeTab, selectedTime, selectedSubjects, searchText, userId, classId]);
+  }, [activeTab, selectedTime, selectedSubjects, selectedDifficulty, searchText, userId, classId]);
 
 
   // --- Handle tab change ---
@@ -152,6 +175,7 @@ export default function ExamListScreen() {
     setActiveTab(tab);
     setSelectedTime(null);
     setSelectedSubjects([]);
+    setSelectedDifficulty(null);
     setSearchText("");
     setPage(1); // reset page
   };
@@ -171,6 +195,7 @@ export default function ExamListScreen() {
   const openFilterModal = () => {
     setTempTime(selectedTime);
     setTempSubjects([...selectedSubjects]);
+    setTempDifficulty(selectedDifficulty);
     setShowFilter(true);
   };
   const toggleTempSubject = (code: string) => {
@@ -181,11 +206,48 @@ export default function ExamListScreen() {
   const handleResetModal = () => {
     setTempTime(null);
     setTempSubjects([]);
+    setTempDifficulty(null);
   };
   const handleApply = () => {
     setSelectedTime(tempTime);
     setSelectedSubjects(tempSubjects);
+    setSelectedDifficulty(tempDifficulty);
     setShowFilter(false);
+  };
+
+  // --- Format date time ---
+  const formatDateTime = (dateString: string) => {
+    const date = new Date(dateString);
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+    return `${hours}:${minutes} - ${day}/${month}/${year}`;
+  };
+
+  // --- Difficulty helpers ---
+  const getDifficultyCount = (difficulty: number) => {
+    const map: { [key: number]: number } = { 1: 1, 2: 2, 3: 3 };
+    return map[difficulty] ?? 0;
+  };
+
+  const renderDifficultyStars = (difficulty: number) => {
+    const count = getDifficultyCount(difficulty);
+    const starColor = "#FBBF24"; // vàng
+
+    return (
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
+        <Text style={{ fontSize: 12, color: "#6B7280" }}>Độ khó:</Text>
+        {count === 0 ? (
+          <Text style={{ fontSize: 12, color: "#6B7280" }}>-</Text>
+        ) : (
+          Array.from({ length: count }).map((_, idx) => (
+            <Star key={idx} size={14} color={starColor} weight="fill" />
+          ))
+        )}
+      </View>
+    );
   };
 
   // --- Render exam item ---
@@ -206,6 +268,23 @@ export default function ExamListScreen() {
       activeTab === "ongoing"
         ? `Kết thúc vào ${diffDays} ngày`
         : `Bắt đầu sau ${diffDays} ngày`;
+    
+    const startTimeText = formatDateTime(item.start_date);
+    const endTimeText = formatDateTime(item.end_date);
+    
+    const isTitleExpanded = expandedTitles.has(item._id);
+    
+    const toggleTitle = () => {
+      setExpandedTitles(prev => {
+        const newSet = new Set(prev);
+        if (newSet.has(item._id)) {
+          newSet.delete(item._id);
+        } else {
+          newSet.add(item._id);
+        }
+        return newSet;
+      });
+    };
 
     return (
       <View style={styles.card}>
@@ -213,19 +292,45 @@ export default function ExamListScreen() {
           <Image source={{ uri: item.image || undefined }} style={styles.thumbnail} />
         </View>
         <View style={styles.cardRight}>
-          <Text style={styles.title}>{item.name ?? ""}</Text>
+          <TouchableOpacity onPress={toggleTitle}>
+            <Text 
+              style={styles.title} 
+              numberOfLines={isTitleExpanded ? undefined : 1} 
+              ellipsizeMode="tail"
+            >
+              {item.name ?? ""}
+            </Text>
+          </TouchableOpacity>
 
+          {/* Row bắt đầu */}
           <View style={styles.timeRow}>
             <Clock size={14} color="#5D697E" />
-            <Text style={styles.time}>{timeText}</Text>
+            <Text style={styles.time}>Bắt đầu: {startTimeText}</Text>
+          </View>
 
-            {activeTab === "ongoing" && (
+          {/* Row kết thúc */}
+          <View style={styles.timeRow}>
+            <Clock size={14} color="#5D697E" />
+            <Text style={styles.time}>Kết thúc: {endTimeText}</Text>
+          </View>
+
+          {/* Row participants và difficulty (chỉ hiện khi ongoing) */}
+          {activeTab === "ongoing" && (
+            <View style={{ flexDirection: "row", alignItems: "center", gap:20, marginTop: 6 }}>
+              {renderDifficultyStars(item.difficulty)}
               <View style={styles.participantRow}>
                 <Student size={16} color="#6B7280" weight="duotone" />
                 <Text style={styles.participantText}>{item.participants?.toString() ?? "0"}</Text>
               </View>
-            )}
-          </View>
+            </View>
+          )}
+
+          {/* Row difficulty (chỉ hiện khi upcoming) */}
+          {activeTab === "upcoming" && (
+            <View style={{ marginTop: 6 }}>
+              {renderDifficultyStars(item.difficulty)}
+            </View>
+          )}
 
           <View style={styles.bottomRow}>
             <View style={[styles.subjectTag, { backgroundColor: tagStyle.backgroundColor }]}>
@@ -345,9 +450,13 @@ export default function ExamListScreen() {
           data={exams}
           keyExtractor={(item) => item._id}
           renderItem={renderExamItem}
-          // contentContainerStyle={{ paddingBottom: 100 }}
           onEndReached={loadMore}
           onEndReachedThreshold={0.05}
+          ListEmptyComponent={
+            <Text style={{ textAlign: "center", marginTop: 40, color: "#6B7280", fontSize: 14 }}>
+              Không có kết quả
+            </Text>
+          }
           ListFooterComponent={
             loadingMore ? (
               <Text style={{ textAlign: 'center', paddingVertical: 10 }}>Đang tải thêm...</Text>
@@ -364,7 +473,7 @@ export default function ExamListScreen() {
         onBackdropPress={() => setShowFilter(false)}
         style={{ justifyContent: "flex-end", margin: 0 }}
       >
-        <View style={{ backgroundColor: "#fff", borderTopLeftRadius: 20, borderTopRightRadius: 20, padding: 20, maxHeight: "80%" }}>
+        <View style={{ backgroundColor: "#fff", borderTopLeftRadius: 20, borderTopRightRadius: 20, padding: 20, maxHeight: "90%" }}>
           <View style={{ alignItems: "center", marginBottom: 12 }}>
             <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: "#ccc" }} />
           </View>
@@ -385,11 +494,27 @@ export default function ExamListScreen() {
               </TouchableOpacity>
             ))}
 
+             <Text style={styles.filterSectionTitle}>Độ khó</Text>
+            {[
+              { label: "Dễ", value: 1 },
+              { label: "Trung bình", value: 2 },
+              { label: "Khó", value: 3 },
+            ].map((opt) => (
+              <TouchableOpacity
+                key={String(opt.value)}
+                style={styles.filterOption}
+                onPress={() => setTempDifficulty(opt.value)}
+              >
+                <Text style={styles.filterOptionText}>{opt.label}</Text>
+                {tempDifficulty === opt.value && <Check size={16} color="#1669EF" weight="bold" />}
+              </TouchableOpacity>
+            ))}
+
             <Text style={styles.filterSectionTitle}>Môn học</Text>
-            {Object.values(SUBJECTS).map((subj) => {
+            {subjects.map((subj) => {
               const tagStyle = getSubjectTagStyle(subj.code);
               return (
-                <TouchableOpacity key={subj.code} style={styles.filterOption} onPress={() => toggleTempSubject(subj.code)}>
+                <TouchableOpacity key={subj._id} style={styles.filterOption} onPress={() => toggleTempSubject(subj.code)}>
                   <Text style={[styles.filterOptionText, { color: tagStyle.color || "#374151" }]}>{subj.name}</Text>
                   {tempSubjects.includes(subj.code) && <Check size={16} color="#1669EF" weight="bold" />}
                 </TouchableOpacity>

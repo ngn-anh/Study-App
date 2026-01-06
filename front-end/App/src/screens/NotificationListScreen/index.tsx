@@ -17,6 +17,7 @@ const NotificationListScreen = () => {
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [totalNotifications, setTotalNotifications] = useState(0);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
@@ -52,6 +53,7 @@ const NotificationListScreen = () => {
       if (reset) {
         setNotifications(res.notifications);
         setNotificationTypeName(res.notification_type_name);
+        setTotalNotifications(res.total);
       } else {
         setNotifications(prev => {
           const map = new Map();
@@ -109,7 +111,7 @@ const NotificationListScreen = () => {
           </TouchableOpacity>
           <Text style={styles.headerTitle}>
             {notificationTypeName}
-            <Text style={styles.headerCount}> ({notifications.length})</Text>
+            <Text style={styles.headerCount}> ({totalNotifications})</Text>
           </Text>
         </View>
         <TouchableOpacity onPress={() => setShowConfirmModal(true)}>
@@ -127,6 +129,11 @@ const NotificationListScreen = () => {
           onEndReached={loadMore}
           onEndReachedThreshold={0.05}
           contentContainerStyle={styles.componentCard}
+          ListEmptyComponent={
+                      <Text style={{ textAlign: "center", marginTop: 40, color: "#6B7280", fontSize: 14 }}>
+                        Không có thông báo nhắc nhở nào
+                      </Text>
+                    }
           ListFooterComponent={loadingMore ? <Text style={{ textAlign: 'center', padding: 10 }}>Đang tải thêm...</Text> : null}
           renderItem={({ item }) => (
             <TouchableOpacity

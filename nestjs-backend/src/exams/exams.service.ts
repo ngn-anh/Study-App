@@ -62,12 +62,12 @@ export class ExamsService {
       name,
       sort,
       type,
-      // currentClassCode,
       class_id,
       subjectCodes,
       page = 1,
       limit = 10,
       user_id,
+      difficulty,
     } = filterDto;
 
     const now = new Date();
@@ -131,6 +131,7 @@ export class ExamsService {
 
     if (type) examQuery.type = type;
     if (name) examQuery.name = { $regex: name, $options: 'i' };
+    if (difficulty) examQuery.difficulty = Number(difficulty);
 
     let sortOption: any = {};
 
@@ -245,7 +246,7 @@ export class ExamsService {
 
       return {
         _id: exam._id,
-        subject_class_id: exam.subject_class_id._id,
+        subject_class_id: subjectClass?._id || null,
         name: exam.name,
         description: exam.description,
         type: exam.type,

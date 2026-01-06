@@ -7,8 +7,10 @@ import {
   ScrollView,
   Modal,
   Pressable,
-  Switch
+  Switch,
+  Alert
 } from 'react-native';
+import { CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   ArrowLeftIcon,
@@ -123,32 +125,62 @@ const ProfileScreen = ({ navigation }: any) => {
           return;
         }
         if (response.assets && response.assets.length > 0) {
-          const pickedImageUri = response.assets[0].uri;
+          const asset = response.assets[0];
+          const pickedImageUri = asset.uri;
 
-          // Update local state
-          setUser(prev => ({ ...prev, avatar: pickedImageUri }));
-
-          // Update server
           try {
+            // Upload to Cloudinary
+            const formData = new FormData();
+            formData.append('file', {
+              uri: pickedImageUri,
+              type: asset.type || 'image/jpeg',
+              name: asset.fileName || 'avatar.jpg',
+            } as any);
+            formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET || 'exam-datn');
+            formData.append('folder', 'avatars');
+
+            const cloudinaryResponse = await fetch(
+              `https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME || 'loanhtm'}/image/upload`,
+              {
+                method: 'POST',
+                body: formData,
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                },
+              }
+            );
+
+            const cloudinaryData = await cloudinaryResponse.json();
+            const cloudinaryUrl = cloudinaryData.secure_url;
+
+            if (!cloudinaryUrl) {
+              Alert.alert('Lỗi', 'Không thể tải ảnh lên');
+              return;
+            }
+
+            // Update local state with Cloudinary URL
+            setUser(prev => ({ ...prev, avatar: cloudinaryUrl }));
+
+            // Update server
             const userDataStr = await AsyncStorage.getItem('userData');
             if (!userDataStr) return;
             const userData = JSON.parse(userDataStr);
 
-            console.log(userData.user.id, pickedImageUri)
-
             await updateAvatar({
               user_id: userData.user.id,
-              avatar: pickedImageUri || "",
+              avatar: cloudinaryUrl,
             });
 
             // Update AsyncStorage
             const updatedUserData = {
               ...userData,
-              user: { ...userData.user, avatar: pickedImageUri },
+              user: { ...userData.user, avatar: cloudinaryUrl },
             };
             await AsyncStorage.setItem('userData', JSON.stringify(updatedUserData));
+            
           } catch (error) {
             console.log('Error updating avatar:', error);
+            Alert.alert('Lỗi', 'Không thể cập nhật ảnh đại diện');
           }
         }
       }
@@ -269,10 +301,13 @@ const ProfileScreen = ({ navigation }: any) => {
             <Text style={styles.label}>Cập nhật hồ sơ</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.row}>
+         <TouchableOpacity style={styles.row}>
             <BellIcon size={22} color="#083070" weight="bold" />
             <Text style={styles.label}>Thông báo</Text>
-            <Text style={styles.badge}>ON</Text>
+            <Switch
+              value={isNotificationOn}
+              onValueChange={handleToggleNotification}
+            />
           </TouchableOpacity>
         </View>
 

@@ -17,7 +17,7 @@ export class NotificationsService {
   // Lấy danh sách notifications theo code
   async getNotificationsByCode(code: string, user_id: string,  page: number, limit: number) {
     const notiType = await this.notificationTypeModel.findOne({ code, status: 'active' });
-    if (!notiType) return { notification_type_name: '', notifications: [] };
+    if (!notiType) return { notification_type_name: '', notifications: [], total: 0 };
 
     // 1) Lấy danh sách schedule ids của user
     const schedules = await this.reminderScheduleModel
@@ -27,27 +27,35 @@ export class NotificationsService {
 
     const scheduleIds = schedules.map(s => s._id);
     if (scheduleIds.length === 0) {
-      return { notification_type_name: notiType.name, notifications: [] };
+      return { notification_type_name: notiType.name, notifications: [], total: 0 };
     }
 
     const skip = (page - 1) * limit;
 
-    // 2) Lấy notifications có schedule_id trong danh sách đó
-    const notifications = await this.notificationModel
-      .find({
+    // 2) Lấy notifications có schedule_id trong danh sách đó và tính tổng
+    const [notifications, total] = await Promise.all([
+      this.notificationModel
+        .find({
+          noti_type_id: notiType._id,
+          schedule_id: { $in: scheduleIds },
+          deleted_at: null
+        })
+        .select('schedule_id name description image is_read created_at')
+        .sort({ created_at: -1 })
+        .skip(skip)
+        .limit(limit)
+        .lean(),
+      this.notificationModel.countDocuments({
         noti_type_id: notiType._id,
         schedule_id: { $in: scheduleIds },
         deleted_at: null
       })
-      .select('schedule_id name description image is_read created_at')
-      .sort({ created_at: -1 })
-      .skip(skip)
-      .limit(limit)
-      .lean();
+    ]);
 
     return {
       notification_type_name: notiType.name,
       notifications,
+      total,
     };
   }
 
@@ -112,5 +120,28 @@ export class NotificationsService {
   async create(data: Partial<Notification>): Promise<Notification> {
     const doc = new this.notificationModel(data);
     return doc.save();
+  }
+
+  // Lấy tổng số notification chưa đọc của user
+  async getUnreadCount(user_id: string): Promise<number> {
+    // 1) Lấy danh sách schedule ids của user
+    const schedules = await this.reminderScheduleModel
+      .find({ user_id: new Types.ObjectId(user_id), deleted_at: null })
+      .select('_id')
+      .lean();
+
+    const scheduleIds = schedules.map(s => s._id);
+    if (scheduleIds.length === 0) {
+      return 0;
+    }
+
+    // 2) Đếm số notification chưa đọc
+    const unreadCount = await this.notificationModel.countDocuments({
+      schedule_id: { $in: scheduleIds },
+      is_read: false,
+      deleted_at: null,
+    });
+
+    return unreadCount;
   }
 }

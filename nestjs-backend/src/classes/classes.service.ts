@@ -167,6 +167,7 @@ export class ClassesService {
         id: classInfo._id.toString(),
         name: classInfo.name,
         code: classInfo.code,
+        status: classInfo.status,
         description: classInfo.description,
         created_at: (classInfo as any).created_at,
         updated_at: (classInfo as any).updated_at,

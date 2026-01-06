@@ -6,6 +6,7 @@ import {
   IsArray,
   IsInt,
   Min,
+  Max,
 } from 'class-validator';
 import { Type, Transform } from 'class-transformer';
 
@@ -64,6 +65,14 @@ export class ExamsFilterDto {
   @IsInt()
   @Min(1)
   type?: number;
+
+  @ApiPropertyOptional({ description: 'Độ khó (1: Dễ, 2: Trung bình, 3: Khó)' })
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  @Max(3)
+  difficulty?: number;
 
   @ApiPropertyOptional({ description: 'Trang hiện tại', default: 1 })
   @IsOptional()

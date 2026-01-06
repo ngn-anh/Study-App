@@ -268,7 +268,7 @@ const requestGetDataSource = async (param: any) => {
             </ProForm>
         <div>
           <ProTableFixed
-            headerFixedHeight={350}
+            headerFixedHeight={380}
             params={filterParams}
             actionRef={actionRef}
             request={requestGetDataSource}

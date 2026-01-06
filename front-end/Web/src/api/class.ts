@@ -16,8 +16,9 @@ export const createClass = (data: any) => {
   return api.post("/classes", data);
 };
 
-export const getClassDetail = (id: string) => {
-  return api.get(`/classes/${id}`);
+export const getClassDetail = async (id: string) => {
+  const res = await api.get(`/classes/${id}`);
+  return res.data;
 };
 
 export const updateClass = (id: string, data: any) => {

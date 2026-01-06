@@ -1,4 +1,4 @@
-import { Button, message, Tooltip, Row, Col } from "antd";
+import { Button, message, Tooltip, Row, Col, Image } from "antd";
 import PageContainerFixed from "../../component/PageContainerFixed";
 import { MagnifyingGlass, Trash } from "phosphor-react";
 import './index.less'
@@ -74,6 +74,7 @@ const requestGetDataSource = async (param: any) => {
       email: item.email,
       phone: item.phone,
       class: item.class_name,
+      image: item.avatar,
       status: item.status ?? 1, // tuỳ backend map
     })),
     total: res.meta.total,
@@ -85,6 +86,18 @@ const requestGetDataSource = async (param: any) => {
     const filterParamsData = { ...form.getFieldsValue(), ...param };
     setFilterParams(filterParamsData);
   };
+
+  const optimizeCloudinary = (
+    url?: string,
+    w = 100,
+    h = 80
+  ) =>
+    url
+      ? url.replace(
+          "/upload/",
+          `/upload/w_${w},h_${h},c_fill/`
+        )
+      : "";
 
   const getStatus =(status: number)=>{
     if(status == STATUS_SUBJECT.ACTIVE) return <div className="lbl-active">Đang hoạt động</div>
@@ -127,11 +140,44 @@ const requestGetDataSource = async (param: any) => {
 
   const columns = [
   {
+    title: "Ảnh",
+    dataIndex: "image",
+    width: 90,
+    fixed: "left",
+    align: 'left' as const,
+    render: (_?: any, row?: any) =>
+      row.image ? (
+        <Image
+          src={optimizeCloudinary(row.image)}
+          width={50}
+          height={50}
+          style={{
+            objectFit: "cover",
+            borderRadius: 6,
+            cursor: "pointer",
+          }}
+          preview={{ mask: "Xem" }}
+          fallback="https://cdn-icons-png.flaticon.com/512/219/219969.png"
+        />
+      ) : (
+         <Image
+          src="https://cdn-icons-png.flaticon.com/512/219/219969.png"
+          width={50}
+          height={50}
+          style={{
+            objectFit: "cover",
+            borderRadius: 6,
+            cursor: "pointer",
+          }}
+          preview={{ mask: "Xem" }}
+        />
+      ),
+  },
+  {
     title: "Họ và tên",
     dataIndex: "full_name",
     key: "full_name",
     width: 200,
-    fixed: "left",
   },
   {
     title: "Tên tài khoản",
@@ -260,7 +306,7 @@ const requestGetDataSource = async (param: any) => {
             </ProForm>
         <div>
           <ProTableFixed
-            headerFixedHeight={350}
+            headerFixedHeight={380}
             params={filterParams}
             actionRef={actionRef}
             request={requestGetDataSource}

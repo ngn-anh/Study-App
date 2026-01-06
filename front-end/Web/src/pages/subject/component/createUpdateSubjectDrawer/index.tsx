@@ -1,4 +1,4 @@
-import { Form, message } from 'antd';
+import { Form, message, Upload, Button } from 'antd';
 import ProDrawerForm from '../../../../component/ProDrawerForm';
 import './index.less';
 import { useEffect, useState } from 'react';
@@ -6,7 +6,9 @@ import {
   ProFormSwitch,
   ProFormText,
   ProFormTextArea,
+  ProForm,
 } from '@ant-design/pro-components';
+import { UploadSimple } from 'phosphor-react';
 
 import { getSubjectDetail, createSubject, updateSubject } from '../../../../api/subject';
 import { STATUS_SUBJECT } from '../../../../utils/enum';
@@ -21,11 +23,51 @@ const CreateUpdateSubject = (props: {
   const [form] = Form.useForm();
   const [disableButtonSubmit, setDisableButtonSubmit] = useState<any>(true);
 
+  const VITE_CLOUDINARY_NAME = import.meta.env.VITE_CLOUDINARY_NAME;
+  const VITE_CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+
+  const [subjectImage, setSubjectImage] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [isImageChanged, setIsImageChanged] = useState(false);
+
+  // Chọn ảnh
+  const handleSelectImage = (file: File) => {
+    setSubjectImage(file);
+    setIsImageChanged(true);
+    const reader = new FileReader();
+    reader.onload = () => setPreviewImage(reader.result as string);
+    reader.readAsDataURL(file);
+  };
+
+  // Upload lên Cloudinary khi submit
+  const uploadImage = async (): Promise<string | null> => {
+    if (!subjectImage) return previewImage; // giữ ảnh cũ
+
+    const formData = new FormData();
+    formData.append("file", subjectImage);
+    formData.append("upload_preset", VITE_CLOUDINARY_UPLOAD_PRESET);
+    formData.append("folder", "subjects");
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/${VITE_CLOUDINARY_NAME}/image/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const data = await res.json();
+    return data.secure_url || '';
+  };
+
   const onClose = () => {
     props.setIsOpenDrawer(false);
     props.setIdSubject(undefined);
     form.resetFields();
-    setDisableButtonSubmit(true)
+    setDisableButtonSubmit(true);
+    setIsImageChanged(false);
+    setSubjectImage(null);
+    setPreviewImage(null);
   };
 
   /** GET DETAIL WHEN EDIT */
@@ -33,6 +75,11 @@ const CreateUpdateSubject = (props: {
     try {
       const res = await getSubjectDetail(props.idSubject);
       const data = res.data.data;
+
+      if (data.image) {
+        setPreviewImage(data.image);
+        setSubjectImage(null);
+      }
 
       form.setFieldsValue({
         name: data.name,
@@ -51,6 +98,8 @@ const CreateUpdateSubject = (props: {
         getDetail(); // load detail nếu đang edit
       } else {
         form.resetFields(); // tạo mới thì reset form
+        setPreviewImage(null);
+        setSubjectImage(null);
       }
     }
   }, [props.isOpenDrawer]);
@@ -73,9 +122,13 @@ const CreateUpdateSubject = (props: {
     try {
       const values = await form.validateFields();
 
+      // Upload ảnh lên Cloudinary
+      const imageUrl = await uploadImage();
+
       const payload = {
         ...values,
         status: values.status ? 1 : 2, // convert FE boolean → BE number
+        image: imageUrl ?? '',
       };
 
       if (props.idSubject) {
@@ -131,6 +184,33 @@ const CreateUpdateSubject = (props: {
       }}
     >
       <div>
+        <ProForm.Item
+          label="Ảnh minh họa môn học"
+          name="image"
+          valuePropName="file"
+          getValueFromEvent={(e: any) => e}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {previewImage && (
+              <img
+                src={previewImage}
+                alt="Preview"
+                style={{ width: 150, height: 100, objectFit: 'cover', borderRadius: 4 }}
+              />
+            )}
+            <Upload
+              accept="image/*"
+              showUploadList={false}
+              beforeUpload={(file) => {
+                handleSelectImage(file);
+                return false;
+              }}
+            >
+              <Button icon={<UploadSimple />}>Chọn ảnh</Button>
+            </Upload>
+          </div>
+        </ProForm.Item>
+
         <ProFormText
           label="Tên môn học:"
           placeholder="Nhập tên môn học"

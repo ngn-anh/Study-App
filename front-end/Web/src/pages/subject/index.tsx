@@ -1,4 +1,4 @@
-import { Button, message, Tooltip, Row, Col } from "antd";
+import { Button, message, Tooltip, Row, Col, Image } from "antd";
 import PageContainerFixed from "../../component/PageContainerFixed";
 import { MagnifyingGlass, NotePencil, Plus, Trash } from "phosphor-react";
 import './index.less'
@@ -51,6 +51,7 @@ export default function SubjectPage() {
         code: item.code,
         status: item.status,
         description: item.description,
+        image: item.image,
       })),
       total: res.meta.pagination.total,
       meta: res.meta,
@@ -116,7 +117,57 @@ export default function SubjectPage() {
     );
   };
 
+  const optimizeCloudinary = (
+        url?: string,
+        w = 120,
+        h = 80
+    ) =>
+        url
+            ? url.replace(
+                "/upload/",
+                `/upload/w_${w},h_${h},c_fill/`
+            )
+            : "";
+
   const columns = [
+     {
+      title: "Ảnh",
+      dataIndex: "image",
+      width: 90,
+      fixed: "left",
+      align: 'left',
+      render: (_?: any, row?: any) =>
+          row.image ? (
+              <Image
+                  src={optimizeCloudinary(row.image)}
+                  width={60}
+                  height={40}
+                  style={{
+                      objectFit: "cover",
+                      borderRadius: 6,
+                      cursor: "pointer",
+                  }}
+                  preview={{ mask: "Xem" }}
+                  fallback="/images/no-image.png"
+              />
+          ) : (
+              <div
+                  style={{
+                      width: 60,
+                      height: 40,
+                      background: "#f0f0f0",
+                      borderRadius: 6,
+                      fontSize: 12,
+                      color: "#999",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                  }}
+              >
+                  No image
+              </div>
+          ),
+  },
     {
       title: "Tên môn học",
       dataIndex: 'name',
@@ -276,7 +327,7 @@ export default function SubjectPage() {
         </ProForm>
         <div>
           <ProTableFixed
-            headerFixedHeight={350}
+            headerFixedHeight={380}
             params={filterParams}
             actionRef={actionRef}
             request={requestGetDataSource}

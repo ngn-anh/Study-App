@@ -12,7 +12,7 @@ import { deleteRole, getRoles } from "../../api/role";
 import ConfigPermission from "./component/ConfigPermission";
 import CreateUpdateRole from "./component/CreateUpdateRole";
 import { PermissionGuard } from "../../components/PermissionGuard";
-import { hasPermission } from "../../utils/permission";
+import { hasAnyPermission } from "../../utils/permission";
 
 
 export default function RolePage() {
@@ -62,10 +62,19 @@ const requestGetDataSource = async (param: any) => {
   }
 
   const getPermission =(count: number, row: any)=>{
-    return <div className="lbl-count" onClick={()=>{
+    const canManagePermissions = hasAnyPermission(['permission.create', 'permission.update']);
+    
+    return <div 
+      className="lbl-count" 
+      onClick={()=>{
+        if (!canManagePermissions) return;
         setOpenPermissionDrawer(true)
         setCurrentRole(row)
-    }}>
+      }}
+      style={{
+        cursor: canManagePermissions ? 'pointer' : 'default',
+      }}
+    >
         <Lock size={12} weight="bold"/>
         <div>{count}</div>
     </div>
@@ -266,7 +275,7 @@ const requestGetDataSource = async (param: any) => {
             </ProForm>
         <div>
           <ProTableFixed
-            headerFixedHeight={350}
+            headerFixedHeight={380}
             params={filterParams}
             actionRef={actionRef}
             request={requestGetDataSource}
