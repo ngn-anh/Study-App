@@ -69,4 +69,58 @@
     "$date": "2025-11-24T10:57:02.025Z"
   },
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "694e5bcc45953b5aa92c0f59"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "is_open_noti": false,
+  "temporary_muted_until": null,
+  "temporary_muted_type": null,
+  "created_at": {
+    "$date": "2025-12-26T09:56:28.821Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-26T09:56:28.821Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "694e868dfdeb19c4c71f39e4"
+  },
+  "user_id": {
+    "$oid": "694e86870f2e7ab88f3528da"
+  },
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-26T12:58:53.272Z"
+  },
+  "is_open_noti": true,
+  "temporary_muted_type": null,
+  "temporary_muted_until": null,
+  "updated_at": {
+    "$date": "2025-12-30T14:13:42.810Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6952d1a82ef5afdfdfdcb1d0"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "is_open_noti": false,
+  "temporary_muted_until": null,
+  "temporary_muted_type": null,
+  "created_at": {
+    "$date": "2025-12-29T19:08:24.146Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-29T19:08:24.146Z"
+  },
+  "__v": 0
 }]

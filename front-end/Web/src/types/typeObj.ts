@@ -85,7 +85,7 @@ export type Answer = {
   question_id?: string;
   description: string;
   image?: string | null;
-  is_correct?: boolean;
+  is_correct: boolean;
   explanation?: string;
 };
 
@@ -113,3 +113,16 @@ export type ExamHistory = {
   durationSec?: number;
   duration_text?: string;
 };
+
+export interface ImportAnswer {
+  description: string;
+  explanation?: string;
+  is_correct: boolean;
+}
+
+export interface ImportQuestion {
+  description: string;
+  difficulty: number;
+  section: number;
+  answers: ImportAnswer[];
+}

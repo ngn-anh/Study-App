@@ -13,11 +13,11 @@
     "$date": "2025-10-31T03:02:51.306Z"
   },
   "updated_at": {
-    "$date": "2025-11-26T12:50:29.601Z"
+    "$date": "2025-12-30T16:27:55.908Z"
   },
   "__v": 0,
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDQyNmRiZGJmNDMxM2UyNmQ4MTZkNSIsInVzZXJuYW1lIjoibmdhbjEiLCJyb2xlIjoxLCJpYXQiOjE3NjQxNjE0MjksImV4cCI6MTc2NDc2NjIyOX0._QyCmb-HqKVAcjkLoZivos5Lk_hir_kSgscsd-tslqE",
-  "token_expired": 1764165029,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDQyNmRiZGJmNDMxM2UyNmQ4MTZkNSIsInVzZXJuYW1lIjoibmdhbjEiLCJyb2xlIjoiMSIsImlhdCI6MTc2NzExMjA3NSwiZXhwIjoxNzY3NzE2ODc1fQ.DUNHRg5hjRTcOXk_8ZHU_3pgRX3-7aaagujugSbqon0",
+  "token_expired": 1767115675,
   "class_id": {
     "$oid": "6908a903bc2ae0fd775ccab2"
   }
@@ -61,11 +61,11 @@
     "$date": "2025-11-03T17:17:41.758Z"
   },
   "updated_at": {
-    "$date": "2025-11-27T06:57:06.964Z"
+    "$date": "2025-12-30T16:39:15.712Z"
   },
   "__v": 0,
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDhlM2I1YzhmM2Y4N2FhMzAzMjE4MyIsInVzZXJuYW1lIjoibG9hbiIsInJvbGUiOjEsImlhdCI6MTc2NDIyNjYyNiwiZXhwIjoxNzY0ODMxNDI2fQ.N-HrR3orvIVESPasQt5OC_5NecwkCJUXxisoqYthTgY",
-  "token_expired": 1764230226,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDhlM2I1YzhmM2Y4N2FhMzAzMjE4MyIsInVzZXJuYW1lIjoibG9hbiIsInJvbGUiOiIxIiwiaWF0IjoxNzY3MTEyNzU1LCJleHAiOjE3Njc3MTc1NTV9.6DqXRSKT4uzPuiaw9Xk9AzOM6qJtmhJiD1gXnanS9Ww",
+  "token_expired": 1767116355,
   "class_id": {
     "$oid": "6908a903bc2ae0fd775ccab2"
   }
@@ -231,15 +231,109 @@
   "avatar": null,
   "full_name": null,
   "class_id": null,
-  "role": 2,
+  "role": "admin",
   "deleted_at": null,
   "created_at": {
     "$date": "2025-11-26T12:53:42.766Z"
   },
   "updated_at": {
-    "$date": "2025-12-06T21:49:30.146Z"
+    "$date": "2025-12-30T13:24:02.318Z"
   },
   "__v": 0,
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjZmODU2MWU3ZTg3ZmNiZjA1ZmJlYiIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoyLCJpYXQiOjE3NjUwNTc3NzAsImV4cCI6MTc2NTY2MjU3MH0.vyI5v1khPNB0xwqmqy8HSG1BZ6ePcfx4ZyO8Th51Tm8",
-  "token_expired": 1765061370
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjZmODU2MWU3ZTg3ZmNiZjA1ZmJlYiIsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjcxMDEwNDIsImV4cCI6MTc2NzcwNTg0Mn0.eVQlrIlEyXXxdsWrVJzeIELoEyX6_KyScgxMlg0ak-o",
+  "token_expired": 1767104642
+},
+{
+  "_id": {
+    "$oid": "6942b66010c7ef706becfb39"
+  },
+  "username": "cong",
+  "password": "$2b$10$KPH5RbH2Fu7cKYMAqMzSv.QSYqZVY57DuuBe/fldPaPMqpLqT0/CG",
+  "email": "cong@gmail.com",
+  "phone": null,
+  "avatar": null,
+  "full_name": null,
+  "class_id": null,
+  "role": 2,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-17T13:55:44.650Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-17T13:55:44.750Z"
+  },
+  "__v": 0,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NDJiNjYwMTBjN2VmNzA2YmVjZmIzOSIsInVzZXJuYW1lIjoiY29uZyIsInJvbGUiOjIsImlhdCI6MTc2NTk3OTc0NCwiZXhwIjoxNzY2NTg0NTQ0fQ.9E9j_v0Wi0chcHpEBDc-vALLFKGjxmr2RCvJ6KNxDOM",
+  "token_expired": 1765983344
+},
+{
+  "_id": {
+    "$oid": "6942b67310c7ef706becfb3f"
+  },
+  "username": "cong1",
+  "password": "$2b$10$W.MkNmseIxp6DwIeXkP0peC.NgXozGiPMtlcP7x2hOXwlq4ygEWOm",
+  "email": "cong@gmail.com",
+  "phone": null,
+  "avatar": null,
+  "full_name": null,
+  "class_id": null,
+  "role": 2,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-17T13:56:03.988Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-17T13:56:04.059Z"
+  },
+  "__v": 0,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NDJiNjczMTBjN2VmNzA2YmVjZmIzZiIsInVzZXJuYW1lIjoiY29uZzEiLCJyb2xlIjoyLCJpYXQiOjE3NjU5Nzk3NjQsImV4cCI6MTc2NjU4NDU2NH0.EBVFkl-PPTzy1mDxmAPk2BLVdYDxyg6ten9hSw70j-4",
+  "token_expired": 1765983364
+},
+{
+  "_id": {
+    "$oid": "694e86870f2e7ab88f3528da"
+  },
+  "username": "un16",
+  "password": "$2b$10$AAcz5OgHhVe6XF7guKRFtOJZp2nGK8wvmUhYQM5SSm.ZBlZ2wdhZW",
+  "email": "un@gmail.com",
+  "phone": "0888716903",
+  "avatar": "file:///data/user/0/com.app/cache/rn_image_picker_lib_temp_21ab4e32-3322-4147-adb6-5bfd82eb9321.jpg",
+  "full_name": "Nguyen Un",
+  "class_id": {
+    "$oid": "6908a903bc2ae0fd775ccab1"
+  },
+  "role": "student",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-26T12:58:47.116Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-30T16:27:10.482Z"
+  },
+  "__v": 0,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NGU4Njg3MGYyZTdhYjg4ZjM1MjhkYSIsInVzZXJuYW1lIjoidW4xNiIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNzY3MTAzMDkwLCJleHAiOjE3Njc3MDc4OTB9.9lA3-0NhDv2wS4zUj1WCnTcMfc1WzJu0IRCCMIQWaQI",
+  "token_expired": 1767106690
+},
+{
+  "_id": {
+    "$oid": "694f8c02d9196395d8768df7"
+  },
+  "username": "ladmin",
+  "password": "$2b$10$bwWBKcY5VVa1KS0HjBh3H.IEOQ1B6CFQ7JJ/eYW/Cl6GlXIk5OZx6",
+  "email": "a@gmail.com",
+  "phone": null,
+  "avatar": null,
+  "full_name": null,
+  "class_id": null,
+  "role": "admin",
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-27T07:34:26.907Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:45:35.478Z"
+  },
+  "__v": 0,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NGY4YzAyZDkxOTYzOTVkODc2OGRmNyIsInVzZXJuYW1lIjoibGFkbWluIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzY2OTE1MTM1LCJleHAiOjE3Njc1MTk5MzV9.59_uzCdofHdReOGzvBUMLgopmuzclVX9wNb9Y1t0rs4",
+  "token_expired": 1766918735
 }]

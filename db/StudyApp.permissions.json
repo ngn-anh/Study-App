@@ -1,0 +1,576 @@
+[{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e740"
+  },
+  "code": "user.create",
+  "name": "Tạo người dùng",
+  "module": "user",
+  "action": "create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.789Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.789Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e741"
+  },
+  "code": "user.read",
+  "name": "Xem người dùng",
+  "module": "user",
+  "action": "read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.789Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.789Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e742"
+  },
+  "code": "user.update",
+  "name": "Cập nhật người dùng",
+  "module": "user",
+  "action": "update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.789Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.789Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e743"
+  },
+  "code": "user.delete",
+  "name": "Xoá người dùng",
+  "module": "user",
+  "action": "delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.789Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.789Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e744"
+  },
+  "code": "subject.create",
+  "name": "Tạo môn học",
+  "module": "subject",
+  "action": "create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e745"
+  },
+  "code": "subject.read",
+  "name": "Xem môn học",
+  "module": "subject",
+  "action": "read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e746"
+  },
+  "code": "subject.update",
+  "name": "Cập nhật môn học",
+  "module": "subject",
+  "action": "update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e747"
+  },
+  "code": "subject.delete",
+  "name": "Xoá môn học",
+  "module": "subject",
+  "action": "delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e748"
+  },
+  "code": "class.create",
+  "name": "Tạo lớp học",
+  "module": "class",
+  "action": "create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e749"
+  },
+  "code": "class.read",
+  "name": "Xem lớp học",
+  "module": "class",
+  "action": "read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e74a"
+  },
+  "code": "class.update",
+  "name": "Cập nhật lớp học",
+  "module": "class",
+  "action": "update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e74b"
+  },
+  "code": "class.delete",
+  "name": "Xoá lớp học",
+  "module": "class",
+  "action": "delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e74c"
+  },
+  "code": "program.create",
+  "name": "Tạo chương trình học",
+  "module": "program",
+  "action": "create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.790Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e74d"
+  },
+  "code": "program.read",
+  "name": "Xem chương trình học",
+  "module": "program",
+  "action": "read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e74e"
+  },
+  "code": "program.update",
+  "name": "Cập nhật chương trình học",
+  "module": "program",
+  "action": "update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e74f"
+  },
+  "code": "program.delete",
+  "name": "Xoá chương trình học",
+  "module": "program",
+  "action": "delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e750"
+  },
+  "code": "role.create",
+  "name": "Tạo vai trò",
+  "module": "role",
+  "action": "create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e751"
+  },
+  "code": "role.read",
+  "name": "Xem vai trò",
+  "module": "role",
+  "action": "read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e752"
+  },
+  "code": "role.update",
+  "name": "Cập nhật vai trò",
+  "module": "role",
+  "action": "update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e753"
+  },
+  "code": "role.delete",
+  "name": "Xoá vai trò",
+  "module": "role",
+  "action": "delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e754"
+  },
+  "code": "permission.create",
+  "name": "Tạo quyền",
+  "module": "permission",
+  "action": "create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e755"
+  },
+  "code": "permission.read",
+  "name": "Xem quyền",
+  "module": "permission",
+  "action": "read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e756"
+  },
+  "code": "permission.update",
+  "name": "Cập nhật quyền",
+  "module": "permission",
+  "action": "update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e757"
+  },
+  "code": "permission.delete",
+  "name": "Xoá quyền",
+  "module": "permission",
+  "action": "delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e758"
+  },
+  "code": "exam.create",
+  "name": "Tạo bài thi",
+  "module": "exam",
+  "action": "create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e759"
+  },
+  "code": "exam.read",
+  "name": "Xem bài thi",
+  "module": "exam",
+  "action": "read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e75a"
+  },
+  "code": "exam.update",
+  "name": "Cập nhật bài thi",
+  "module": "exam",
+  "action": "update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e75b"
+  },
+  "code": "exam.delete",
+  "name": "Xoá bài thi",
+  "module": "exam",
+  "action": "delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e75c"
+  },
+  "code": "question.create",
+  "name": "Tạo câu hỏi",
+  "module": "question",
+  "action": "create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e75d"
+  },
+  "code": "question.read",
+  "name": "Xem câu hỏi",
+  "module": "question",
+  "action": "read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.791Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e75e"
+  },
+  "code": "question.update",
+  "name": "Cập nhật câu hỏi",
+  "module": "question",
+  "action": "update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.792Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.792Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e75f"
+  },
+  "code": "question.delete",
+  "name": "Xoá câu hỏi",
+  "module": "question",
+  "action": "delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.792Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.792Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e760"
+  },
+  "code": "answer.create",
+  "name": "Tạo đáp án",
+  "module": "answer",
+  "action": "create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.792Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.792Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e761"
+  },
+  "code": "answer.read",
+  "name": "Xem đáp án",
+  "module": "answer",
+  "action": "read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.792Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.792Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e762"
+  },
+  "code": "answer.update",
+  "name": "Cập nhật đáp án",
+  "module": "answer",
+  "action": "update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.792Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.792Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e763"
+  },
+  "code": "answer.delete",
+  "name": "Xoá đáp án",
+  "module": "answer",
+  "action": "delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.792Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.792Z"
+  }
+}]

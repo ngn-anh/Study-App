@@ -2548,4 +2548,116 @@
     "$date": "2025-11-24T11:56:44.852Z"
   },
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "694e5cc845953b5aa92c0fdf"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "Đề Lịch sử lớp 11 - Cách mạng tháng 10 Nga",
+  "note": "tesst",
+  "due_date": {
+    "$date": "2026-01-18T00:00:00.000Z"
+  },
+  "due_time": "07:00",
+  "remind_date": {
+    "$date": "2025-12-26T00:00:00.000Z"
+  },
+  "remind_time": "17:02",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "eNtnRfxURcioa8btKHGbdg:APA91bEXZWVaLDP_5bmT44HNXk84wphJsaMNARAEyP_qFMvIy5I59HzWHwWtPxBttXakK6n34mX4yt8bE9rszCdFop03FRKR3Sdx_R9DYy55yLR_0GApQbI",
+  "created_at": {
+    "$date": "2025-12-26T10:00:40.112Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-26T10:01:53.020Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "694e5fb445953b5aa92c1052"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "title": "test noti",
+  "note": "vjhhj",
+  "due_date": {
+    "$date": "2025-12-26T00:00:00.000Z"
+  },
+  "due_time": "18:12",
+  "remind_date": {
+    "$date": "2025-12-26T00:00:00.000Z"
+  },
+  "remind_time": "17:14",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "eNtnRfxURcioa8btKHGbdg:APA91bEXZWVaLDP_5bmT44HNXk84wphJsaMNARAEyP_qFMvIy5I59HzWHwWtPxBttXakK6n34mX4yt8bE9rszCdFop03FRKR3Sdx_R9DYy55yLR_0GApQbI",
+  "created_at": {
+    "$date": "2025-12-26T10:13:08.073Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-26T10:13:08.073Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "694e8a890f2e7ab88f352ae4"
+  },
+  "user_id": {
+    "$oid": "694e86870f2e7ab88f3528da"
+  },
+  "title": "Đề kiểm tra Toán lớp 11 - Giữa kỳ 1",
+  "note": "",
+  "due_date": {
+    "$date": "2026-11-10T00:00:00.000Z"
+  },
+  "due_time": "07:00",
+  "remind_date": {
+    "$date": "2025-12-26T00:00:00.000Z"
+  },
+  "remind_time": "20:22",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "eNtnRfxURcioa8btKHGbdg:APA91bEXZWVaLDP_5bmT44HNXk84wphJsaMNARAEyP_qFMvIy5I59HzWHwWtPxBttXakK6n34mX4yt8bE9rszCdFop03FRKR3Sdx_R9DYy55yLR_0GApQbI",
+  "created_at": {
+    "$date": "2025-12-26T13:15:53.703Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-26T13:21:00.035Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "694e8b300f2e7ab88f352b00"
+  },
+  "user_id": {
+    "$oid": "694e86870f2e7ab88f3528da"
+  },
+  "title": "Thi thử tiếng việt ",
+  "note": "Thì thử ",
+  "due_date": {
+    "$date": "2025-12-26T00:00:00.000Z"
+  },
+  "due_time": "21:16",
+  "remind_date": {
+    "$date": "2025-12-26T00:00:00.000Z"
+  },
+  "remind_time": "20:20",
+  "repeat_mode": "none",
+  "deleted_at": null,
+  "fcm_token": "eNtnRfxURcioa8btKHGbdg:APA91bEXZWVaLDP_5bmT44HNXk84wphJsaMNARAEyP_qFMvIy5I59HzWHwWtPxBttXakK6n34mX4yt8bE9rszCdFop03FRKR3Sdx_R9DYy55yLR_0GApQbI",
+  "created_at": {
+    "$date": "2025-12-26T13:18:40.388Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-26T13:18:40.388Z"
+  },
+  "__v": 0
 }]
