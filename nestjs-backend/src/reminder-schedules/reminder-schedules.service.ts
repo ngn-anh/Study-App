@@ -174,7 +174,10 @@ export class ReminderSchedulesService {
     await this.reminderQueue.add(
       'sendReminder',
       { schedule },
-      { delay: Math.max(0, delay) }
+      { 
+        delay: Math.max(0, delay),
+        jobId: schedule._id.toString(), 
+      }
     );
 
     console.log('Scheduled one-time reminder:', schedule.title);
@@ -182,11 +185,19 @@ export class ReminderSchedulesService {
 
   // --- Xóa cron job cũ ---
   async removeDailyCronJobById(scheduleId: string) {
+    // Remove any repeatable (cron) jobs with the same jobId
     const repeatableJobs = await this.reminderQueue.getRepeatableJobs();
-    const job = repeatableJobs.find(j => j.id === scheduleId);
-    if (job) {
+    const matches = repeatableJobs.filter(j => j.id === scheduleId);
+    for (const job of matches) {
       await this.reminderQueue.removeRepeatableByKey(job.key);
       console.log('Removed old cron job for schedule:', scheduleId);
+    }
+
+    // Also remove any one-time/delayed job with the same jobId
+    const existingJob = await this.reminderQueue.getJob(scheduleId);
+    if (existingJob) {
+      await existingJob.remove();
+      console.log('Removed old delayed job for schedule:', scheduleId);
     }
   }
 }

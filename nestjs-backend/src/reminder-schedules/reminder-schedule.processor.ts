@@ -25,12 +25,12 @@ export class ReminderProcessor {
     // Nếu user tắt thông báo
     if (setting.is_open_noti === false) return;
 
-    // 🔹 1️⃣ Tìm loại thông báo "REMINDER"
+    //  Tìm loại thông báo "REMINDER"
     const reminderType = (await this.notificationTypesService.findByCode('REMINDER')) as
       | { _id: Types.ObjectId }
       | null;
 
-    // 🔹 2️⃣ Lưu notification vào MongoDB
+    // Lưu notification vào MongoDB
     const newNoti= await this.notificationsService.create({
       schedule_id: new Types.ObjectId(schedule._id),
       noti_type_id: reminderType?._id,
@@ -40,7 +40,7 @@ export class ReminderProcessor {
       is_read: false,
     });
 
-    // 🔹 3️⃣ Gửi FCM notification qua Firebase Admin SDK
+    //  Gửi FCM notification qua Firebase Admin SDK
     if (schedule.fcm_token) {
       try {
         await sendFCMNotification(
@@ -54,12 +54,12 @@ export class ReminderProcessor {
           }
           // image có thể truyền nếu cần, ví dụ schedule.image
         );
-        console.log('✅ FCM notification sent for schedule', schedule._id);
+        console.log('FCM notification sent for schedule', schedule._id);
       } catch (error) {
-        console.error('❌ Failed to send FCM notification:', error);
+        console.error(' Failed to send FCM notification:', error);
       }
     } else {
-      console.warn('⚠️ No FCM token found for schedule', schedule._id);
+      console.warn('No FCM token found for schedule', schedule._id);
     }
   }
 }
