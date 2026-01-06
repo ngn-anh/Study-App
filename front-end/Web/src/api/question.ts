@@ -19,7 +19,8 @@ export const createQuestion = async (payload: {
   description?: string;
   // image?: string;
   difficulty?: number;
-  section?: string;
+  section?: number;
+  image?: string;
   answers?: Array<{
     description?: string;
     is_correct?: boolean;

@@ -92,7 +92,7 @@ export default function ExamDoScreen() {
         image: q.image || undefined,
         options: q.answers?.map((a: any) => a.description),
         correctAnswer: q.answers.findIndex((a: any) => a.is_correct),
-        answers: q.answers,
+        answers: q?.answers ?? [],
       }));
       setQuestions(mapped);
     } catch (err) {
@@ -394,7 +394,18 @@ export default function ExamDoScreen() {
             Câu {currentIndex + 1}: {currentQuestion.text}
           </Text>
           {currentQuestion.image && (
-            <Image source={{ uri: currentQuestion.image }} style={styles.image} />
+            <ScrollView
+              horizontal
+              style={{ maxWidth: "100%", marginVertical: 8 }}
+              contentContainerStyle={{ alignItems: "center" }}
+              showsHorizontalScrollIndicator={true}
+            >
+              <Image
+                source={{ uri: currentQuestion.image }}
+                style={{ width: undefined, height: 200 }} // giữ chiều cao, chiều rộng tự động
+                resizeMode="contain"
+              />
+            </ScrollView>
           )}
           {currentQuestion.options.map((opt, idx) => (
             <TouchableOpacity

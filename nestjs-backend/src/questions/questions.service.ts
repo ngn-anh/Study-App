@@ -128,7 +128,14 @@ export class QuestionsService {
   }
 
   async createQuestion(dto: CreateQuestionDto) {
-    const { exam_id, description, difficulty, section, answers = [] } = dto;
+    const {
+      exam_id,
+      description,
+      difficulty,
+      section,
+      image,
+      answers = [],
+    } = dto;
 
     try {
       const createdQuestions = await this.questionModel.create([
@@ -137,6 +144,7 @@ export class QuestionsService {
           description,
           difficulty,
           section,
+          image,
         },
       ]);
       const questionDoc = createdQuestions[0];
@@ -241,6 +249,7 @@ export class QuestionsService {
         description: dto.description,
         difficulty: dto.difficulty,
         section: dto.section,
+        ...(dto.image ? { image: dto.image } : {}),
       },
     );
 

@@ -8,6 +8,7 @@ import {
     Tooltip,
     message,
     Button,
+    Image,
 } from "antd";
 import { useEffect, useMemo, useState } from "react";
 import viVN from "antd/locale/vi_VN";
@@ -214,6 +215,18 @@ const ListQuestionModal = ({
         }));
     }, [questions, importQuestions, isImportMode]);
 
+    const optimizeCloudinary = (
+        url?: string,
+        w = 120,
+        h = 80
+    ) =>
+        url
+            ? url.replace(
+                "/upload/",
+                `/upload/w_${w},h_${h},c_fill/`
+            )
+            : "";
+
     const columns = [
         {
             title: "STT",
@@ -227,6 +240,7 @@ const ListQuestionModal = ({
         {
             title: "Câu hỏi",
             dataIndex: "description",
+            width: 200,
             render: (_: any, row: any) => (
                 <Paragraph
                     style={{ marginBottom: 0 }}
@@ -239,6 +253,43 @@ const ListQuestionModal = ({
                     <MathCell latex={row.description} />
                 </Paragraph>
             ),
+        },
+        {
+            title: "Ảnh chèn thêm",
+            dataIndex: "image",
+            width: 110,
+            align: "center",
+            render: (src: string) =>
+                src ? (
+                    <Image
+                        src={optimizeCloudinary(src)}
+                        width={60}
+                        height={40}
+                        style={{
+                            objectFit: "cover",
+                            borderRadius: 6,
+                            cursor: "pointer",
+                        }}
+                        preview={{ mask: "Xem" }}
+                        fallback="/images/no-image.png"
+                    />
+                ) : (
+                    <div
+                        style={{
+                            width: 60,
+                            height: 40,
+                            background: "#f0f0f0",
+                            borderRadius: 6,
+                            fontSize: 12,
+                            color: "#999",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}
+                    >
+                        No image
+                    </div>
+                ),
         },
         {
             title: "Độ khó",
