@@ -32,4 +32,11 @@ export class NotificationsController {
   async markRead(@Param('id') id: string) {
     return this.notificationsService.markAsRead(id);
   }
+
+  // GET /notifications/unread-count
+  @Get('unread-count')
+  async getUnreadCount(@Query('user_id') user_id: string) {
+    const unread_count = await this.notificationsService.getUnreadCount(user_id);
+    return { success: true, data: { unread_count } };
+  }
 }

@@ -14,6 +14,7 @@ export interface Notification {
 export interface NotificationResponse {
   notification_type_name: string;
   notifications: Notification[];
+  total: number;
 }
 
 export const getNotificationTypes = async (user_id: string) => {
@@ -39,10 +40,10 @@ export const getNotificationsByCode = async (code: string,user_id: string,page =
         limit, 
       },
     });
-    return res.data?.data || { notification_type_name: '', notifications: [] };
+    return res.data?.data || { notification_type_name: '', notifications: [], total: 0 };
   } catch (error) {
     console.error("Error fetching notifications:", error);
-    return { notification_type_name: '', notifications: [] };
+    return { notification_type_name: '', notifications: [], total: 0 };
   }
 };
 
@@ -70,5 +71,17 @@ export const markNotificationRead = async (notificationId: string) => {
   } catch (error) {
     console.error("Error marking notification as read:", error);
     return { success: false };
+  }
+};
+// Lấy tổng số notification chưa đọc
+export const getUnreadNotificationCount = async (user_id: string) => {
+  try {
+    const response = await axios.get(`${API_URL}/notifications/unread-count`, {
+      params: { user_id }
+    });
+    return response.data?.data?.unread_count || 0;
+  } catch (error) {
+    console.error("Error fetching unread notification count:", error);
+    return 0;
   }
 };

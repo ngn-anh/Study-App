@@ -269,10 +269,13 @@ const ProfileScreen = ({ navigation }: any) => {
             <Text style={styles.label}>Cập nhật hồ sơ</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.row}>
+         <TouchableOpacity style={styles.row}>
             <BellIcon size={22} color="#083070" weight="bold" />
             <Text style={styles.label}>Thông báo</Text>
-            <Text style={styles.badge}>ON</Text>
+            <Switch
+              value={isNotificationOn}
+              onValueChange={handleToggleNotification}
+            />
           </TouchableOpacity>
         </View>
 
