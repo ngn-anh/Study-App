@@ -9,7 +9,6 @@ import {
   BellIcon,
   AlarmIcon,
   MapTrifoldIcon,
-  AppWindowIcon,
 } from 'phosphor-react-native';
 import { styles } from './ServicesScreen.styles';
 import { useNavigation } from '@react-navigation/native';

@@ -67,7 +67,6 @@ export default function ExamDoScreen() {
   const fetchQuestions = async () => {
     try {
       setLoading(true);
-      // const data = await getExamQuestions(examId);
       const res = await getQuestionsByExam(
         examId,
         reverseQuestion,
@@ -122,40 +121,7 @@ export default function ExamDoScreen() {
     }
   }, [currentIndex]);
 
-  // // Timer chỉ bắt đầu khi questions đã load
-  // useEffect(() => {
-  //   // Không khởi động timer nếu chưa có câu hỏi hoặc thời gian = null (không giới hạn)
-  //   if (questions.length === 0 || duration === null || timeLeft === null) return;
 
-  //   const now = new Date();
-  //   timeStartRef.current = now; // lưu ref
-
-  //   // Xóa timer cũ (nếu còn)
-  //   if (timerRef.current) clearInterval(timerRef.current);
-
-  //   timerRef.current = setInterval(() => {
-  //     setTimeLeft(prev => {
-  //       if (prev === null) return null;
-  //       if (prev <= 1) {
-  //         if (timerRef.current) {
-  //           clearInterval(timerRef.current);
-  //           timerRef.current = null;
-  //         }
-  //         handleAutoSubmit();
-  //         return 0;
-  //       }
-  //       return prev - 1;
-  //     });
-  //   }, 1000);
-
-  //   return () => {
-  //     if (timerRef.current) {
-  //       clearInterval(timerRef.current);
-  //       timerRef.current = null;
-  //     }
-  //   };
-  // }, [questions]);
-  // // }, [questions, duration]);
   useEffect(() => {
     if (questions.length === 0) return;
 
@@ -253,7 +219,6 @@ export default function ExamDoScreen() {
       cancelText: "Tiếp tục làm",
       confirmText: "Thoát",
       onCancel: () => setModalData({ visible: false }),
-      // onConfirm: () => navigation.navigate("ExamListScreen" as never),
       onConfirm: () => handleGoBack(),
       type: "warning",
     });
@@ -372,9 +337,7 @@ export default function ExamDoScreen() {
           <TouchableOpacity onPress={handleBack}>
             <CaretLeft size={20} color="#083070" weight="bold" />
           </TouchableOpacity>
-          {/* <Text style={styles.timerText}>
-            {timeLeft !== null ? formatTime(timeLeft) : "--:--"}
-          </Text> */}
+      
           <Text style={styles.timerText}>
             {durationSetting !== null
               ? formatTime(timeLeft ?? 0)

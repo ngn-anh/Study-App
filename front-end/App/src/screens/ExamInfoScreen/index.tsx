@@ -52,48 +52,10 @@ export default function ExamInfoScreen() {
 
       {/* Body */}
       <View style={styles.body}>
-        {/* <ShortInfoExam
-          exam={{ id: examId }}
-        /> */}
         <ShortInfoExam
           exam={examInfo}
         />
-        {/* Hình ảnh */}
-        {/* <Image source={{ uri: examInfo.image }} style={styles.image} /> */}
 
-        {/* Row trạng thái */}
-        {/* <View style={styles.statusRow}>
-          <View style={styles.statusItem}>
-            <Clock size={16} color="#0C4299" weight="fill" />
-            <Text style={styles.statusText}>{examInfo.duration} phút</Text>
-          </View>
-          <View style={styles.statusItem}>
-            <Student size={16} color="#0C4299" weight="fill" />
-            <Text style={styles.statusText}>{examInfo.participants}</Text>
-          </View>
-          <View style={styles.statusItem}>
-            <ThumbsUp size={16} color="#0C4299" weight="bold" />
-            <Text style={styles.statusText}>{examInfo.likes}</Text>
-          </View>
-        </View> */}
-
-        {/* Instruction box */}
-        {/* <View style={styles.instructionBox}>
-          <Text style={styles.subTitle}>HƯỚNG DẪN LÀM BÀI KIỂM TRA</Text>
-
-          {[
-            "Câu hỏi bao gồm 4 loại là chọn 1 đáp án, chọn nhiều đáp án, nhập văn bản trả lời và câu hỏi tham khảo không cần trả lời",
-            "Thời gian làm bài kiểm tra sẽ được đếm lùi dần cho đến khi kết thúc. Bài thi sẽ kết thúc khi hết thời gian hoặc bạn chọn nộp bài",
-            "Hãy bỏ qua câu hỏi khó, bạn vẫn có thể quay lại làm tiếp khi còn thời gian",
-          ].map((text, index) => (
-            <View key={index} style={styles.instructionRow}>
-              <View style={styles.circle}>
-                <Text style={styles.circleText}>{index + 1}</Text>
-              </View>
-              <Text style={styles.instructionText}>{text}</Text>
-            </View>
-          ))}
-        </View> */}
         <InstructionDoExam />
 
         {/* Nút bắt đầu */}

@@ -59,13 +59,8 @@ export class ExamsController {
     return this.examsService.getExamRank(query);
   }
 
-  // @Get(':id/info')
-  // async getExamInfo(@Param('id') id: string) {
-  //   return this.examsService.getExamInfo(id);
-  // }
-
   @Get(':id/info')
-  @ApiQuery({ name: 'user_id', required: false, type: String }) // (tùy, không bắt buộc)
+  @ApiQuery({ name: 'user_id', required: false, type: String }) 
   @ApiQuery({ type: InfoExamDto })
   async getExamInfo(@Param('id') id: string, @Query() dto: InfoExamDto) {
     return this.examsService.getExamInfo(id, dto.user_id);

@@ -61,17 +61,13 @@ const RegisterScreen: React.FC = () => {
         username,
         email,
         password,
-        class_id: classId || null, // nếu API cho phép
+        class_id: classId || null, 
       });
 
       const userData = result.data;
 
       // Lưu userData vào AsyncStorage
       await AsyncStorage.setItem("userData", JSON.stringify(userData));
-
-      // navigation.navigate("Home"); // hoặc màn bạn muốn
-
-      showModal("Đăng ký thành công!", "success");
 
       setTimeout(() => {
         navigation.navigate("MainTabs", {
