@@ -6,10 +6,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { navigate } from '../navigation/RootNavigation';
 import { markNotificationRead } from '../api/notification';
 
-// 🔹 Cờ ngăn listener gọi nhiều lần
+// Cờ ngăn listener gọi nhiều lần
 let isForegroundListenerSet = false;
 
-// -------------------- 1️⃣ Tạo kênh Android --------------------
+// -------------------- Tạo kênh Android --------------------
 export const createDefaultChannel = async () => {
   if (Platform.OS === 'android') {
     await notifee.createChannel({
@@ -20,7 +20,7 @@ export const createDefaultChannel = async () => {
   }
 };
 
-// -------------------- 2️⃣ Lấy FCM token --------------------
+// --------------------  Lấy FCM token --------------------
 export const getFCMToken = async () => {
   let fcmToken = await AsyncStorage.getItem('fcmToken');
   if (!fcmToken) {
@@ -40,7 +40,7 @@ export const getFCMToken = async () => {
   }
 };
 
-// -------------------- 3️⃣ Request permission --------------------
+// --------------------  Request permission --------------------
 export const requestUserPermission = async () => {
   let enabled = false;
   if (Platform.OS === 'android') {
@@ -54,14 +54,14 @@ export const requestUserPermission = async () => {
   }
 
   if (enabled) {
-    console.log('✅ Notification permission granted');
+    console.log(' Notification permission granted');
     await getFCMToken();
   } else {
-    console.log('❌ Notification permission denied');
+    console.log(' Notification permission denied');
   }
 };
 
-// -------------------- 4️⃣ Hiển thị notification --------------------
+// --------------------  Hiển thị notification --------------------
 const displayNotification = async (remoteMessage: any) => {
   const { title, body } = remoteMessage.notification || {};
   if (!title || !body) return;
@@ -94,7 +94,7 @@ const displayNotification = async (remoteMessage: any) => {
   await notifee.displayNotification({ title, body, android: androidOptions,data });
 };
 
-// -------------------- 5️⃣ Foreground listener --------------------
+// --------------------  Foreground listener --------------------
 export const setupForegroundListener = async () => {
   if (isForegroundListenerSet) return;
   isForegroundListenerSet = true;
@@ -132,7 +132,7 @@ export const setupForegroundListener = async () => {
   }
 };
 
-// -------------------- 7️⃣ Xử lý nhấn notification (foreground) --------------------
+// --------------------  Xử lý nhấn notification (foreground) --------------------
 export const registerNotificationEvents = () => {
   notifee.onForegroundEvent(({ type, detail }) => {
     if (type === EventType.PRESS) {
