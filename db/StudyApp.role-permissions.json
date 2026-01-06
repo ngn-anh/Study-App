@@ -1,0 +1,630 @@
+[{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e765"
+  },
+  "role_code": "admin",
+  "permission_code": "user.create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e766"
+  },
+  "role_code": "admin",
+  "permission_code": "user.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e767"
+  },
+  "role_code": "admin",
+  "permission_code": "user.update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e768"
+  },
+  "role_code": "admin",
+  "permission_code": "user.delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e769"
+  },
+  "role_code": "admin",
+  "permission_code": "subject.create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e76a"
+  },
+  "role_code": "admin",
+  "permission_code": "subject.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e76b"
+  },
+  "role_code": "admin",
+  "permission_code": "subject.update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e76c"
+  },
+  "role_code": "admin",
+  "permission_code": "subject.delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e76d"
+  },
+  "role_code": "admin",
+  "permission_code": "class.create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e76e"
+  },
+  "role_code": "admin",
+  "permission_code": "class.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e76f"
+  },
+  "role_code": "admin",
+  "permission_code": "class.update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e770"
+  },
+  "role_code": "admin",
+  "permission_code": "class.delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e771"
+  },
+  "role_code": "admin",
+  "permission_code": "program.create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.894Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e772"
+  },
+  "role_code": "admin",
+  "permission_code": "program.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e773"
+  },
+  "role_code": "admin",
+  "permission_code": "program.update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e774"
+  },
+  "role_code": "admin",
+  "permission_code": "program.delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e775"
+  },
+  "role_code": "admin",
+  "permission_code": "role.create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e776"
+  },
+  "role_code": "admin",
+  "permission_code": "role.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e777"
+  },
+  "role_code": "admin",
+  "permission_code": "role.update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e778"
+  },
+  "role_code": "admin",
+  "permission_code": "role.delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e779"
+  },
+  "role_code": "admin",
+  "permission_code": "permission.create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e77a"
+  },
+  "role_code": "admin",
+  "permission_code": "permission.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e77b"
+  },
+  "role_code": "admin",
+  "permission_code": "permission.update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e77c"
+  },
+  "role_code": "admin",
+  "permission_code": "permission.delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e77d"
+  },
+  "role_code": "admin",
+  "permission_code": "exam.create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e77e"
+  },
+  "role_code": "admin",
+  "permission_code": "exam.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e77f"
+  },
+  "role_code": "admin",
+  "permission_code": "exam.update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e780"
+  },
+  "role_code": "admin",
+  "permission_code": "exam.delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e781"
+  },
+  "role_code": "admin",
+  "permission_code": "question.create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e782"
+  },
+  "role_code": "admin",
+  "permission_code": "question.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e783"
+  },
+  "role_code": "admin",
+  "permission_code": "question.update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e784"
+  },
+  "role_code": "admin",
+  "permission_code": "question.delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e785"
+  },
+  "role_code": "admin",
+  "permission_code": "answer.create",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e786"
+  },
+  "role_code": "admin",
+  "permission_code": "answer.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e787"
+  },
+  "role_code": "admin",
+  "permission_code": "answer.update",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e788"
+  },
+  "role_code": "admin",
+  "permission_code": "answer.delete",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e789"
+  },
+  "role_code": "staff",
+  "permission_code": "user.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e78a"
+  },
+  "role_code": "staff",
+  "permission_code": "subject.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e78b"
+  },
+  "role_code": "staff",
+  "permission_code": "class.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e78c"
+  },
+  "role_code": "staff",
+  "permission_code": "program.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e78d"
+  },
+  "role_code": "staff",
+  "permission_code": "role.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e78e"
+  },
+  "role_code": "staff",
+  "permission_code": "permission.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e78f"
+  },
+  "role_code": "staff",
+  "permission_code": "exam.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e790"
+  },
+  "role_code": "staff",
+  "permission_code": "question.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6950fa82ef84470e2af0e791"
+  },
+  "role_code": "staff",
+  "permission_code": "answer.read",
+  "__v": 0,
+  "created_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T09:38:10.895Z"
+  }
+}]

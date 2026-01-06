@@ -44,7 +44,7 @@
     "$oid": "6908a903bc2ae0fd775ccad6"
   },
   "image": "https://e1.pngegg.com/pngimages/285/967/png-clipart-cochon-porcelet-dessin-mignon-sanglier-rose-rouge-nez.png",
-  "description": "Tác giả của truyện ngắn 'Lão Hạc' là ai?",
+  "description": "Tác giả của truyện ngắn 'Lão Hạc' là [https://res.cloudinary.com/dr0ncakbs/image/upload/v1747025286/bted2k5lqfiptnw4em1w.jpg] ai? [https://res.cloudinary.com/dr0ncakbs/image/upload/v1746954924/jansnmtzoetex1q26w1g.jpg] ... [https://res.cloudinary.com/dr0ncakbs/image/upload/v1746954839/wiquk8m8rmyxndsmsvpd.jpg]",
   "difficulty": 2,
   "created_at": {
     "$date": "2025-11-07T11:30:50.588Z"
@@ -529,4 +529,61 @@
   },
   "deleted_at": null,
   "section": 2
+},
+{
+  "_id": {
+    "$oid": "6950cbc80d8913d274497449"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad1"
+  },
+  "image": null,
+  "description": "Giải phương trình bậc hai: x² − 5x + 6 = 0.",
+  "difficulty": 1,
+  "created_at": {
+    "$date": "2025-12-28T06:30:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T06:30:00.000Z"
+  },
+  "deleted_at": null,
+  "section": 1
+},
+{
+  "_id": {
+    "$oid": "6950cbc80d8913d27449744a"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad1"
+  },
+  "image": null,
+  "description": "Cho cấp số cộng (uₙ) có u₁ = 3 và công sai d = 2. Tính u₁₀.",
+  "difficulty": 2,
+  "created_at": {
+    "$date": "2025-12-28T06:30:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T06:30:00.000Z"
+  },
+  "deleted_at": null,
+  "section": 2
+},
+{
+  "_id": {
+    "$oid": "6950cbc80d8913d27449744b"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad1"
+  },
+  "image": null,
+  "description": "Trong mặt phẳng tọa độ Oxy, cho hai điểm A(1;2) và B(4;6). Tính độ dài đoạn thẳng AB.",
+  "difficulty": 2,
+  "created_at": {
+    "$date": "2025-12-28T06:30:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T06:30:00.000Z"
+  },
+  "deleted_at": null,
+  "section": 3
 }]

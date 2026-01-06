@@ -1,233 +1,763 @@
-import { useEffect, useRef } from "react";
+// // MathInput.tsx
+// import React, {
+//     useRef,
+//     useState,
+//     useEffect,
+//     forwardRef,
+//     useImperativeHandle,
+// } from "react";
+// import { message, Button } from "antd";
+// import { MathfieldElement } from "mathlive";
+// import "mathlive";
+// import { MathJax } from "better-react-mathjax";
+
+// /* ---------- Utils ---------- */
+// // 1️⃣ Bỏ escape thừa (\\ → \)
+// const unescapeBackslashes = (str: string) => str.replace(/\\\\/g, "\\");
+
+// // 2️⃣ Đảm bảo có delimiter (\(...\) hoặc $$…$$)
+// export const wrapLatex = (
+//     raw: string,
+//     { forceBlock = false }: { forceBlock?: boolean } = {}
+// ): string => {
+//     if (!raw) return "";
+//     const txt = raw.trim();
+//     const isInline = txt.startsWith("\\(") && txt.endsWith("\\)");
+//     const isBlock = txt.startsWith("$$") && txt.endsWith("$$");
+//     if (isInline || isBlock) return txt;
+//     return forceBlock ? `$$${txt}$$` : `\\(${txt}\\)`;
+// };
+
+
+// interface Item {
+//     type: "text" | "latex" | "image";
+//     content?: string;
+//     src?: string;
+//     width?: number;
+//     height?: number;
+// }
+
+// /** 
+//  *  value  : chuỗi LaTeX thuần (ví dụ "\frac{a}{b}=c")
+//  *  onChange : trả về chuỗi LaTeX mới mỗi khi người dùng gõ
+//  */
+// interface Props {
+//     value: string;
+//     onChange: (description: string) => void;
+// }
+
+// const MathInput = forwardRef<MathfieldElement | null, Props>(
+//     ({ value, onChange }, ref) => {
+//         /* -----------------------------------------------------------------
+//            Ref tới Mathfield – expose cho cha (Drawer) để có thể blur, setValue…
+//            ----------------------------------------------------------------- */
+//         const mathfieldRef = useRef<MathfieldElement | null>(null);
+//         useImperativeHandle(ref, () => mathfieldRef.current);
+
+//         /* -----------------------------------------------------------------
+//            Các state nội bộ (preview, upload, latex đang chỉnh sửa …)
+//            ----------------------------------------------------------------- */
+//         const [uploading, setUploading] = useState(false);
+//         const [previewItems, setPreviewItems] = useState<Item[]>([]);
+//         const [editingLatex, setEditingLatex] = useState<string>("");
+
+//         const fileInputRef = useRef<HTMLInputElement | null>(null);
+//         const VITE_CLOUDINARY_NAME = import.meta.env.VITE_CLOUDINARY_NAME;
+//         const VITE_CLOUDINARY_UPLOAD_PRESET =
+//             import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+
+//         /* -----------------------------------------------------------------
+//            1️⃣ Tạo Mathfield (chỉ chạy một lần)
+//            ----------------------------------------------------------------- */
+//         useEffect(() => {
+//             const container = document.getElementById("mathfield-container");
+//             if (!container || container.childElementCount > 0) return;
+
+//             const mf = new MathfieldElement();
+//             mf.defaultMode = "math";
+//             mf.smartMode = true;
+//             mf.setAttribute("virtual-keyboard-mode", "manual");
+//             mf.style.width = "100%";
+//             mf.style.minHeight = "60px";
+//             mf.style.fontSize = "18px";
+//             mf.style.padding = "8px";
+//             mf.style.border = "1px solid #ccc";
+//             mf.style.borderRadius = "4px";
+
+//             // --------- Khi người dùng nhập → trả về cho cha ----------
+//             mf.addEventListener("input", () => {
+//                 const raw = mf.getValue("latex-expanded");
+//                 const cleaned = raw.replace(/\\placeholder\{\}/g, "").trim();
+//                 setEditingLatex(cleaned);
+//                 onChange?.(cleaned); // <-- gửi lại chuỗi LaTeX cho Form
+//             });
+
+//             // --------- Commit khi blur hoặc nhấn Enter ----------
+//             const commit = () => {
+//                 if (editingLatex.trim()) onChange?.(editingLatex.trim());
+//             };
+//             mf.addEventListener("blur", commit);
+//             mf.addEventListener("keydown", ev => {
+//                 if (ev.key === "Enter") {
+//                     ev.preventDefault();
+//                     commit();
+//                     mf.blur();
+//                 }
+//             });
+
+//             container.appendChild(mf);
+//             mathfieldRef.current = mf;
+//         }, []); // chạy 1 lần
+
+//         /* -----------------------------------------------------------------
+//            2️⃣ **NEW** – Khi prop `value` (LaTeX) thay đổi, đưa vào Mathlive
+//            ----------------------------------------------------------------- */
+//         useEffect(() => {
+//             if (!mathfieldRef.current) return;
+//             if (typeof value !== "string") return;
+
+//             // Mathlive API.  Đặt chế độ LaTeX để luôn được render đúng.
+//             (mathfieldRef.current as any).setValue?.(value, { mode: "latex" });
+
+//             // Cập nhật preview tạm để người dùng thấy luôn.
+//             setEditingLatex(value);
+//         }, [value]);
+
+//         /* -----------------------------------------------------------------
+//            3️⃣ Upload ảnh (giữ nguyên)
+//            ----------------------------------------------------------------- */
+//         const uploadImage = async (file: File) => {
+//             try {
+//                 setUploading(true);
+//                 const formData = new FormData();
+//                 formData.append("file", file);
+//                 formData.append("upload_preset", VITE_CLOUDINARY_UPLOAD_PRESET);
+//                 formData.append("folder", "question");
+
+//                 const res = await fetch(
+//                     `https://api.cloudinary.com/v1_1/${VITE_CLOUDINARY_NAME}/image/upload`,
+//                     { method: "POST", body: formData }
+//                 );
+//                 const data = await res.json();
+//                 if (data.secure_url) {
+//                     message.success("Upload ảnh thành công");
+//                     return data.secure_url;
+//                 }
+//                 message.error("Upload ảnh thất bại");
+//                 return "";
+//             } catch (e) {
+//                 console.error(e);
+//                 message.error("Upload ảnh thất bại");
+//                 return "";
+//             } finally {
+//                 setUploading(false);
+//             }
+//         };
+
+//         /* -----------------------------------------------------------------
+//            4️⃣ Helper: thêm một item (text / latex / image) vào preview
+//            ----------------------------------------------------------------- */
+//         const addItem = (newItem: Item) => {
+//             setPreviewItems(prev => {
+//                 const updated = [...prev, newItem];
+//                 const json = JSON.stringify(updated);
+//                 onChange?.(json); // **NOTE**: nếu bạn muốn đồng thời lưu JSON, hãy chắc
+//                 // ở đây bạn muốn lưu gì.  Ở ví dụ này chúng ta chỉ cần LaTeX,
+//                 // vì vậy có thể bỏ onChange ở đây hoặc thay bằng một callback
+//                 // riêng nếu cần.
+//                 console.log("description ->", json);
+//                 return updated;
+//             });
+//         };
+
+//         /* -----------------------------------------------------------------
+//            5️⃣ Commit LaTeX đang edit (được dùng khi chèn ảnh / text)
+//            ----------------------------------------------------------------- */
+//         const commitEditingLatex = (): boolean => {
+//             const tex = editingLatex.trim();
+//             if (!tex) return false;
+//             const latexItem: Item = { type: "latex", content: tex };
+//             addItem(latexItem);
+//             setEditingLatex(""); // reset UI
+//             return true;
+//         };
+
+//         /* -----------------------------------------------------------------
+//            6️⃣ Insert Text
+//            ----------------------------------------------------------------- */
+//         const insertText = (text: string) => {
+//             if (!text.trim()) return;
+//             commitEditingLatex(); // commit pending latex trước
+//             const txtItem: Item = { type: "text", content: text };
+//             addItem(txtItem);
+//         };
+
+//         /* -----------------------------------------------------------------
+//            7️⃣ Insert Image
+//            ----------------------------------------------------------------- */
+//         const handleInsertImage = async (file: File) => {
+//             const url = await uploadImage(file);
+//             if (!url) return;
+//             commitEditingLatex(); // nếu còn latex chưa commit
+//             const imgItem: Item = { type: "image", src: url, width: 150, height: 100 };
+//             addItem(imgItem);
+//         };
+
+//         /* -----------------------------------------------------------------
+//            8️⃣ Log JSON (có tính tới latex chưa commit)
+//            ----------------------------------------------------------------- */
+//         const logCurrentPreview = () => {
+//             const tmp = editingLatex.trim()
+//                 ? [...previewItems, { type: "latex", content: editingLatex.trim() }]
+//                 : previewItems;
+//             console.log("✅ Preview hiện tại (JSON):", JSON.stringify(tmp));
+//         };
+
+//         /* -----------------------------------------------------------------
+//            9️⃣ Xóa toàn bộ
+//            ----------------------------------------------------------------- */
+//         const handleClear = () => {
+//             setPreviewItems([]);
+//             setEditingLatex("");
+//             if (mathfieldRef.current) {
+//                 (mathfieldRef.current as any).setValue?.("", { mode: "latex" });
+//             }
+//             onChange(""); // trả về chuỗi rỗng cho Form
+//             console.log("description -> []");
+//         };
+
+//         /* -----------------------------------------------------------------
+//            10️⃣ Drag & resize ảnh (giữ nguyên)
+//            ----------------------------------------------------------------- */
+//         const handleMouseDown = (
+//             e: React.MouseEvent,
+//             idx: number,
+//             type: "move" | "resize"
+//         ) => {
+//             e.preventDefault();
+//             e.stopPropagation();
+//             const startX = e.clientX;
+//             const startY = e.clientY;
+//             const item = previewItems[idx];
+//             const origWidth = item.width || 150;
+//             const origHeight = item.height || 100;
+
+//             const onMouseMove = (moveEvent: MouseEvent) => {
+//                 const dx = moveEvent.clientX - startX;
+//                 const dy = moveEvent.clientY - startY;
+//                 setPreviewItems(prev => {
+//                     const newItems = [...prev];
+//                     if (type === "resize") {
+//                         newItems[idx] = {
+//                             ...item,
+//                             width: Math.max(20, origWidth + dx),
+//                             height: Math.max(20, origHeight + dy),
+//                         };
+//                     }
+//                     // Nếu muốn đồng thời lưu lại JSON, gọi onChange ở đây
+//                     // onChange?.(JSON.stringify(newItems));
+//                     return newItems;
+//                 });
+//             };
+//             const onMouseUp = () => {
+//                 window.removeEventListener("mousemove", onMouseMove);
+//                 window.removeEventListener("mouseup", onMouseUp);
+//             };
+//             window.addEventListener("mousemove", onMouseMove);
+//             window.addEventListener("mouseup", onMouseUp);
+//         };
+
+//         /* -----------------------------------------------------------------
+//            11️⃣ UI
+//            ----------------------------------------------------------------- */
+//         return (
+//             <div>
+//                 {/* Mathfield container */}
+//                 <div id="mathfield-container" style={{ marginBottom: 8 }} />
+
+//                 {/* Toolbar */}
+//                 <div style={{ marginBottom: 8 }}>
+//                     <Button
+//                         onClick={() => fileInputRef.current?.click()}
+//                         disabled={uploading}
+//                         size="small"
+//                         style={{ marginRight: 8 }}
+//                     >
+//                         📷 {uploading ? "Đang upload…" : "Chèn ảnh"}
+//                     </Button>
+//                     <Button onClick={handleClear} size="small">
+//                         🗑 Xóa tất cả
+//                     </Button>
+//                 </div>
+
+//                 {/* Hidden file input */}
+//                 <input
+//                     type="file"
+//                     ref={fileInputRef}
+//                     style={{ display: "none" }}
+//                     accept="image/*"
+//                     onChange={e => {
+//                         if (e.target.files?.[0]) handleInsertImage(e.target.files[0]);
+//                         e.target.value = "";
+//                     }}
+//                 />
+
+//                 {/* Preview (text / latex / image) */}
+//                 <div
+//                     style={{
+//                         minHeight: 120,
+//                         border: "1px solid #ccc",
+//                         borderRadius: 4,
+//                         padding: 8,
+//                         fontFamily: "Arial, sans-serif",
+//                         fontSize: 16,
+//                         overflow: "auto",
+//                         display: "flex",
+//                         flexWrap: "wrap",
+//                         gap: 4,
+//                     }}
+//                 >
+//                     {previewItems.map((item, idx) => {
+//                         if (item.type === "text")
+//                             return <span key={idx}>{item.content}</span>;
+
+//                         if (item.type === "latex") {
+//                             // 1️⃣ **CHỈ XUẤT KHOÁ BỘ LẠI 1 BACKSLASH** 
+//                             //    (remove escape double‑slash) và bọc delimiter nếu cần
+//                             const rawLatex = unescapeBackslashes(item.content ?? "");
+//                             const withDelim = wrapLatex(rawLatex);
+//                             return (
+//                                 <MathJax dynamic key={idx}>
+//                                     <span contentEditable={false}>{withDelim}</span>
+//                                 </MathJax>
+//                             );
+//                         }
+//                         if (item.type === "image")
+//                             return (
+//                                 <div
+//                                     key={idx}
+//                                     style={{ display: "inline-block", position: "relative" }}
+//                                 >
+//                                     <img
+//                                         src={item.src}
+//                                         width={item.width}
+//                                         height={item.height}
+//                                         style={{ cursor: "nwse-resize" }}
+//                                         onMouseDown={e => handleMouseDown(e, idx, "resize")}
+//                                     />
+//                                 </div>
+//                             );
+
+//                         return null;
+//                     })}
+
+//                     {/* LaTeX đang chỉnh sửa (hiển thị tạm) */}
+//                     {editingLatex && (
+//                         <MathJax dynamic>
+//                             <span
+//                                 style={{
+//                                     background: "#eef",
+//                                     padding: "2px 4px",
+//                                     borderRadius: 4,
+//                                 }}
+//                             >{`\\(${editingLatex}\\)`}</span>
+//                         </MathJax>
+//                     )}
+//                 </div>
+
+//                 {/* <div style={{ marginTop: 8, display: "flex", gap: 8 }}>
+//                     <Button size="small" onClick={logCurrentPreview}>
+//                         📋 Log JSON ra console
+//                     </Button>
+//                 </div> */}
+//             </div>
+//         );
+//     }
+// );
+
+// export default MathInput;
+
+// --------------------------------------------------------------
+// MathInput.tsx
+// --------------------------------------------------------------
+import React, {
+    useRef,
+    useState,
+    useEffect,
+    forwardRef,
+    useImperativeHandle,
+} from "react";
+import { message, Button } from "antd";
 import { MathfieldElement } from "mathlive";
 import "mathlive";
 import { MathJax } from "better-react-mathjax";
 
-interface Props {
-    value: string;
-    onChange: (latex: string) => void;
-}
+/* ---------- Utility ---------- */
+// 1️⃣ Xóa escape thừa (\\ → \)
+const unescapeBackslashes = (str: string) => str.replace(/\\\\/g, "\\");
 
-const MathInput = ({ value, onChange }: Props) => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const mathfieldRef = useRef<MathfieldElement | null>(null);
+// 2️⃣ Bọc delimiter nếu chưa có
+export const formatLatex = (
+    raw: string,
+    { forceBlock = false }: { forceBlock?: boolean } = {}
+): string => {
+    if (!raw) return "";
+    const txt = raw.trim();
 
-    useEffect(() => {
-        if (!containerRef.current) return;
+    const hasInline = txt.startsWith("\\(") && txt.endsWith("\\)");
+    const hasBlock = txt.startsWith("$$") && txt.endsWith("$$");
+    if (hasInline || hasBlock) return txt;
 
-        const mf = new MathfieldElement();
-
-        mf.defaultMode = "math";
-        mf.smartMode = true;
-
-        // Tắt bàn phím ảo tự động
-        mf.setAttribute("virtual-keyboard-mode", "manual");
-
-        mf.value = value;
-        mf.style.width = "100%";
-        mf.style.minHeight = "80px";
-        mf.style.fontSize = "18px";
-        mf.style.padding = "16px";
-        mf.style.border = "2px solid #e2e8f0";
-        mf.style.borderRadius = "8px";
-        mf.style.backgroundColor = "#ffffff";
-        mf.style.fontFamily = "'Cambria Math', 'Times New Roman', serif";
-        mf.style.transition = "all 0.3s ease";
-
-        mf.addEventListener("focus", () => {
-            mf.style.borderColor = "#3b82f6";
-            mf.style.boxShadow = "0 0 0 3px rgba(59, 130, 246, 0.1)";
-        });
-
-        mf.addEventListener("blur", () => {
-            mf.style.borderColor = "#e2e8f0";
-            mf.style.boxShadow = "none";
-        });
-
-        mf.addEventListener("input", () => {
-            onChange(mf.value);
-        });
-
-        containerRef.current.appendChild(mf);
-        mathfieldRef.current = mf;
-
-        return () => {
-            mf.remove();
-        };
-    }, []);
-
-    useEffect(() => {
-        if (mathfieldRef.current && mathfieldRef.current.value !== value) {
-            mathfieldRef.current.value = value;
-        }
-    }, [value]);
-
-    // Hàm chèn ký hiệu đơn giản
-    const insertSymbol = (latex: string) => {
-        if (mathfieldRef.current) {
-            mathfieldRef.current.insert(latex, { focus: true });
-            mathfieldRef.current.focus();
-        }
-    };
-
-    // Các ký hiệu toán học được tổ chức theo nhóm
-    const symbolGroups = [
-        {
-            name: "Cấu trúc",
-            symbols: [
-                { label: "a/b", latex: "\\frac{}{}", title: "Phân số" },
-                { label: "√x", latex: "\\sqrt{}", title: "Căn bậc 2" },
-                { label: "ⁿ√x", latex: "\\sqrt[]{}", title: "Căn bậc n" },
-                { label: "x²", latex: "^{}", title: "Chỉ số trên" },
-                { label: "x₂", latex: "_{}", title: "Chỉ số dưới" },
-            ]
-        },
-        {
-            name: "Chữ Hy Lạp",
-            symbols: [
-                { label: "π", latex: "\\pi", title: "Pi" },
-                { label: "α", latex: "\\alpha", title: "Alpha" },
-                { label: "β", latex: "\\beta", title: "Beta" },
-                { label: "θ", latex: "\\theta", title: "Theta" },
-                { label: "λ", latex: "\\lambda", title: "Lambda" },
-                { label: "∞", latex: "\\infty", title: "Vô cực" },
-            ]
-        },
-        {
-            name: "Toán tử",
-            symbols: [
-                { label: "∫", latex: "\\int_{}^{}", title: "Tích phân" },
-                { label: "Σ", latex: "\\sum_{}^{}", title: "Tổng" },
-                { label: "∏", latex: "\\prod_{}^{}", title: "Tích" },
-                { label: "≠", latex: "\\neq", title: "Khác" },
-                { label: "≤", latex: "\\leq", title: "Nhỏ hơn hoặc bằng" },
-                { label: "≥", latex: "\\geq", title: "Lớn hơn hoặc bằng" },
-                { label: "±", latex: "\\pm", title: "Cộng trừ" },
-                { label: "×", latex: "\\times", title: "Nhân" },
-            ]
-        }
-    ];
-
-    return (
-        <div className="math-input-container">
-            {/* THANH CÔNG CỤ ĐẸP */}
-            <div className="math-toolbar">
-                {symbolGroups.map((group, groupIndex) => (
-                    <div className="toolbar-group" key={groupIndex}>
-                        <span className="toolbar-label">{group.name}</span>
-                        <div className="symbols-grid">
-                            {group.symbols.map((symbol, index) => (
-                                <button
-                                    key={index}
-                                    className="symbol-btn"
-                                    onClick={() => insertSymbol(symbol.latex)}
-                                    title={symbol.title}
-                                >
-                                    {symbol.label}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                ))}
-
-                <div className="actions-group">
-                    <button
-                        className="action-btn clear-btn"
-                        onClick={() => {
-                            if (mathfieldRef.current) {
-                                mathfieldRef.current.value = "";
-                                onChange("");
-                            }
-                        }}
-                    >
-                        🗑️ Xóa tất cả
-                    </button>
-                    <button
-                        className="action-btn focus-btn"
-                        onClick={() => {
-                            if (mathfieldRef.current) {
-                                mathfieldRef.current.focus();
-                            }
-                        }}
-                    >
-                        ✏️ Focus
-                    </button>
-                </div>
-            </div>
-
-            {/* Ô SOẠN THẢO */}
-            <div ref={containerRef} className="math-input-area" />
-
-            {/* PREVIEW ĐẸP HIỂN THỊ CÔNG THỨC TOÁN */}
-            <div className="preview-container">
-                <div className="preview-header">
-                    <div className="preview-title">Xem trước công thức</div>
-                    {value && (
-                        <div className="preview-length">
-                            {value.length} ký tự
-                        </div>
-                    )}
-                </div>
-                <div className="preview-content">
-                    {value ? (
-                        <>
-                            {/* Hiển thị công thức toán */}
-                            <div className="math-preview">
-                                <MathJax dynamic>{`\\(${value}\\)`}</MathJax>
-                            </div>
-                            {/* Hiển thị code LaTeX bên dưới */}
-                            <div className="latex-code" style={{
-                                marginTop: "12px",
-                                paddingTop: "12px",
-                                borderTop: "1px solid #e2e8f0",
-                                fontSize: "12px",
-                                color: "#64748b",
-                                fontFamily: "monospace"
-                            }}>
-                                LaTeX: <code>{value}</code>
-                            </div>
-                        </>
-                    ) : (
-                        <div style={{
-                            color: "#94a3b8",
-                            fontStyle: "italic",
-                            textAlign: "center",
-                            padding: "20px"
-                        }}>
-                            Chưa có nội dung. Bắt đầu nhập công thức toán...
-                        </div>
-                    )}
-                </div>
-            </div>
-
-            {/* HƯỚNG DẪN */}
-            <div className="help-container">
-                <div className="help-title">Hướng dẫn nhanh</div>
-                <div className="help-text">
-                    Sử dụng các nút trên thanh công cụ để chèn ký hiệu toán học nhanh chóng.
-                    Bạn cũng có thể nhập trực tiếp LaTeX.
-                </div>
-                <div className="help-tips">
-                    <div className="tip-item">
-                        <span>📌</span>
-                        <span>Gõ <code>/</code> cho phân số</span>
-                    </div>
-                    <div className="tip-item">
-                        <span>📌</span>
-                        <span>Gõ <code>^</code> cho số mũ</span>
-                    </div>
-                    <div className="tip-item">
-                        <span>📌</span>
-                        <span>Gõ <code>_</code> cho chỉ số dưới</span>
-                    </div>
-                    <div className="tip-item">
-                        <span>📌</span>
-                        <span>Gõ <code>\</code> + tên lệnh</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+    // nếu chưa có delimiter → bọc
+    return forceBlock ? `$$${txt}$$` : `\\(${txt}\\)`;
 };
+
+/* ---------- Component ---------- */
+interface Item {
+    type: "text" | "latex" | "image";
+    content?: string;
+    src?: string;
+    width?: number;
+    height?: number;
+}
+interface Props {
+    /** LaTeX thuần (đã *unescaped*, ví dụ: "\frac{a}{b}=c") */
+    value: string;
+    /** Gửi lại LaTeX mới mỗi khi người dùng gõ */
+    onChange: (description: string) => void;
+}
+const MathInput = forwardRef<MathfieldElement | null, Props>(
+    ({ value, onChange }, ref) => {
+        /* -----------------------------------------------------------------
+           Ref tới Mathlive – expose cho cha (Drawer) để có thể blur, setValue…
+           ----------------------------------------------------------------- */
+        const mathfieldRef = useRef<MathfieldElement | null>(null);
+        useImperativeHandle(ref, () => mathfieldRef.current);
+
+        /* -----------------------------------------------------------------
+           State nội bộ
+           ----------------------------------------------------------------- */
+        const [uploading, setUploading] = useState(false);
+        const [previewItems, setPreviewItems] = useState<Item[]>([]);
+        const [editingLatex, setEditingLatex] = useState<string>(""); // LaTeX đang chỉnh sửa
+        const fileInputRef = useRef<HTMLInputElement | null>(null);
+        const VITE_CLOUDINARY_NAME = import.meta.env.VITE_CLOUDINARY_NAME;
+        const VITE_CLOUDINARY_UPLOAD_PRESET =
+            import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+
+        /* -----------------------------------------------------------------
+           1️⃣ Tạo Mathfield (chỉ chạy một lần)
+           ----------------------------------------------------------------- */
+        useEffect(() => {
+            const container = document.getElementById("mathfield-container");
+            if (!container || container.childElementCount > 0) return;
+
+            const mf = new MathfieldElement();
+            mf.defaultMode = "math";
+            mf.smartMode = true;
+            mf.setAttribute("virtual-keyboard-mode", "manual");
+            mf.style.width = "100%";
+            mf.style.minHeight = "60px";
+            mf.style.fontSize = "18px";
+            mf.style.padding = "8px";
+            mf.style.border = "1px solid #ccc";
+            mf.style.borderRadius = "4px";
+
+            // Khi người dùng gõ → lấy LaTeX thuần (một backslash) và đưa lên form
+            mf.addEventListener("input", () => {
+                const raw = mf.getValue("latex-expanded"); // một \, không escaped
+                const cleaned = raw.replace(/\\placeholder\{\}/g, "").trim();
+                setEditingLatex(cleaned);
+                onChange?.(cleaned); // trả lại cho Form
+            });
+
+            // Commit khi blur hoặc Enter
+            const commit = () => {
+                if (editingLatex.trim()) onChange?.(editingLatex.trim());
+            };
+            mf.addEventListener("blur", commit);
+            mf.addEventListener("keydown", (ev) => {
+                if (ev.key === "Enter") {
+                    ev.preventDefault();
+                    commit();
+                    mf.blur();
+                }
+            });
+
+            container.appendChild(mf);
+            mathfieldRef.current = mf;
+        }, []); // chỉ chạy 1 lần
+
+        /* -----------------------------------------------------------------
+           2️⃣ Khi prop `value` thay đổi → đưa vào Mathlive
+           ----------------------------------------------------------------- */
+        useEffect(() => {
+            if (!mathfieldRef.current) return;
+            if (typeof value !== "string") return;
+
+            // value là LaTeX thuần (đã un‑escaped). Đặt vào Mathlive.
+            (mathfieldRef.current as any).setValue?.(value, { mode: "latex" });
+            setEditingLatex(value);
+        }, [value]);
+
+        /* -----------------------------------------------------------------
+           3️⃣ Upload ảnh (giữ nguyên)
+           ----------------------------------------------------------------- */
+        const uploadImage = async (file: File) => {
+            try {
+                setUploading(true);
+                const formData = new FormData();
+                formData.append("file", file);
+                formData.append("upload_preset", VITE_CLOUDINARY_UPLOAD_PRESET);
+                formData.append("folder", "question");
+                const res = await fetch(
+                    `https://api.cloudinary.com/v1_1/${VITE_CLOUDINARY_NAME}/image/upload`,
+                    { method: "POST", body: formData }
+                );
+                const data = await res.json();
+                if (data.secure_url) {
+                    message.success("Upload ảnh thành công");
+                    return data.secure_url;
+                }
+                message.error("Upload ảnh thất bại");
+                return "";
+            } catch (e) {
+                console.error(e);
+                message.error("Upload ảnh thất bại");
+                return "";
+            } finally {
+                setUploading(false);
+            }
+        };
+
+        /* -----------------------------------------------------------------
+           4️⃣ Helper: thêm một item (text / latex / image) vào preview
+           ----------------------------------------------------------------- */
+        const addItem = (newItem: Item) => {
+            setPreviewItems((prev) => {
+                const updated = [...prev, newItem];
+                console.log("preview JSON:", JSON.stringify(updated));
+                return updated;
+            });
+        };
+
+        /* -----------------------------------------------------------------
+           5️⃣ Commit LaTeX đang edit (khi chèn ảnh / text)
+           ----------------------------------------------------------------- */
+        const commitEditingLatex = (): boolean => {
+            const tex = editingLatex.trim();
+            if (!tex) return false;
+            const latexItem: Item = { type: "latex", content: tex };
+            addItem(latexItem);
+            setEditingLatex(""); // reset UI
+            return true;
+        };
+
+        /* -----------------------------------------------------------------
+           6️⃣ Insert Text
+           ----------------------------------------------------------------- */
+        const insertText = (text: string) => {
+            if (!text.trim()) return;
+            commitEditingLatex(); // commit pending latex nếu còn
+            addItem({ type: "text", content: text });
+        };
+
+        /* -----------------------------------------------------------------
+           7️⃣ Insert Image
+           ----------------------------------------------------------------- */
+        const handleInsertImage = async (file: File) => {
+            const url = await uploadImage(file);
+            if (!url) return;
+            commitEditingLatex(); // chắc chắn không còn latex chưa commit
+            addItem({ type: "image", src: url, width: 150, height: 100 });
+        };
+
+        /* -----------------------------------------------------------------
+           8️⃣ Log JSON (có tính tới latex chưa commit)
+           ----------------------------------------------------------------- */
+        const logCurrentPreview = () => {
+            const tmp = editingLatex.trim()
+                ? [...previewItems, { type: "latex", content: editingLatex.trim() }]
+                : previewItems;
+            console.log("✅ Preview hiện tại (JSON):", JSON.stringify(tmp));
+        };
+
+        /* -----------------------------------------------------------------
+           9️⃣ Xóa toàn bộ
+           ----------------------------------------------------------------- */
+        const handleClear = () => {
+            setPreviewItems([]);
+            setEditingLatex("");
+            if (mathfieldRef.current) {
+                (mathfieldRef.current as any).setValue?.("", { mode: "latex" });
+            }
+            onChange("");
+            console.log("description -> []");
+        };
+
+        /* -----------------------------------------------------------------
+           10️⃣ Drag & resize ảnh (giữ nguyên)
+           ----------------------------------------------------------------- */
+        const handleMouseDown = (
+            e: React.MouseEvent,
+            idx: number,
+            type: "move" | "resize"
+        ) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const startX = e.clientX;
+            const startY = e.clientY;
+            const item = previewItems[idx];
+            const origWidth = item.width || 150;
+            const origHeight = item.height || 100;
+
+            const onMouseMove = (moveEvent: MouseEvent) => {
+                const dx = moveEvent.clientX - startX;
+                const dy = moveEvent.clientY - startY;
+                setPreviewItems((prev) => {
+                    const newItems = [...prev];
+                    if (type === "resize") {
+                        newItems[idx] = {
+                            ...item,
+                            width: Math.max(20, origWidth + dx),
+                            height: Math.max(20, origHeight + dy),
+                        };
+                    }
+                    return newItems;
+                });
+            };
+            const onMouseUp = () => {
+                window.removeEventListener("mousemove", onMouseMove);
+                window.removeEventListener("mouseup", onMouseUp);
+            };
+            window.addEventListener("mousemove", onMouseMove);
+            window.addEventListener("mouseup", onMouseUp);
+        };
+
+        /* -----------------------------------------------------------------
+           11️⃣ UI
+           ----------------------------------------------------------------- */
+        return (
+            <div>
+                {/* Mathfield container */}
+                <div id="mathfield-container" style={{ marginBottom: 8 }} />
+
+                {/* Toolbar */}
+                <div style={{ marginBottom: 8 }}>
+                    <Button
+                        onClick={() => fileInputRef.current?.click()}
+                        disabled={uploading}
+                        size="small"
+                        style={{ marginRight: 8 }}
+                    >
+                        📷 {uploading ? "Đang upload…" : "Chèn ảnh"}
+                    </Button>
+                    <Button onClick={handleClear} size="small">
+                        🗑 Xóa tất cả
+                    </Button>
+                </div>
+
+                {/* Hidden file input */}
+                <input
+                    type="file"
+                    ref={fileInputRef}
+                    style={{ display: "none" }}
+                    accept="image/*"
+                    onChange={(e) => {
+                        if (e.target.files?.[0]) handleInsertImage(e.target.files[0]);
+                        e.target.value = "";
+                    }}
+                />
+
+                {/* Preview (text / latex / image) */}
+                <div
+                    style={{
+                        minHeight: 120,
+                        border: "1px solid #ccc",
+                        borderRadius: 4,
+                        padding: 8,
+                        fontFamily: "Arial, sans-serif",
+                        fontSize: 16,
+                        overflow: "auto",
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: 4,
+                    }}
+                >
+                    {previewItems.map((item, idx) => {
+                        // ---------------------------------------------------------
+                        //  TEXT
+                        // ---------------------------------------------------------
+                        if (item.type === "text")
+                            return <span key={idx}>{item.content}</span>;
+
+                        // ---------------------------------------------------------
+                        //  LATEX
+                        // ---------------------------------------------------------
+                        if (item.type === "latex") {
+                            // item.content ở DB đang là **escaped** (\\text{…})
+                            // Bước 1: un‑escape --> "\text{…}"
+                            const rawLatex = unescapeBackslashes(item.content ?? "");
+
+                            // Bước 2: bọc delimiter (inline) nếu chưa có
+                            const formatted = formatLatex(rawLatex);
+
+                            return (
+                                <MathJax dynamic key={idx}>
+                                    {/* MathJax sẽ tự parse \text{…} → hiển thị đúng */}
+                                    <span contentEditable={false}>{formatted}</span>
+                                </MathJax>
+                            );
+                        }
+
+                        // ---------------------------------------------------------
+                        //  IMAGE
+                        // ---------------------------------------------------------
+                        if (item.type === "image")
+                            return (
+                                <div
+                                    key={idx}
+                                    style={{ display: "inline-block", position: "relative" }}
+                                >
+                                    <img
+                                        src={item.src}
+                                        width={item.width}
+                                        height={item.height}
+                                        style={{ cursor: "nwse-resize" }}
+                                        onMouseDown={(e) => handleMouseDown(e, idx, "resize")}
+                                    />
+                                </div>
+                            );
+
+                        return null;
+                    })}
+
+                    {/* LaTeX đang chỉnh sửa (hiển thị tạm) */}
+                    {editingLatex && (
+                        <MathJax dynamic>
+                            {/* editingLatex đã là một back‑slash → chỉ cần bọc delimiter */}
+                            <span
+                                style={{
+                                    background: "#eef",
+                                    padding: "2px 4px",
+                                    borderRadius: 4,
+                                }}
+                            >
+                                {formatLatex(editingLatex)}
+                            </span>
+                        </MathJax>
+                    )}
+                </div>
+
+                {/* Nút Log JSON */}
+                <div style={{ marginTop: 8, display: "flex", gap: 8 }}>
+                    <Button size="small" onClick={logCurrentPreview}>
+                        📋 Log JSON ra console
+                    </Button>
+                </div>
+            </div>
+        );
+    }
+);
 
 export default MathInput;

@@ -1,0 +1,1919 @@
+[{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d88f"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d885"
+  },
+  "description": "Hà Nội",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Hà Nội là thủ đô của Việt Nam từ năm 1976.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d890"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d885"
+  },
+  "description": "TP. Hồ Chí Minh",
+  "image": null,
+  "is_correct": false,
+  "explanation": "TP. Hồ Chí Minh là trung tâm kinh tế lớn nhất nước.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d891"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d885"
+  },
+  "description": "Đà Nẵng",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Đà Nẵng là thành phố lớn ở miền Trung Việt Nam.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d892"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d885"
+  },
+  "description": "Huế",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Huế từng là kinh đô của triều Nguyễn.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d893"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d886"
+  },
+  "description": "45",
+  "image": null,
+  "is_correct": true,
+  "explanation": "15 × 3 = 45.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d894"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d886"
+  },
+  "description": "35",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, 15 × 3 không bằng 35.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d895"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d886"
+  },
+  "description": "55",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, kết quả lớn hơn thực tế.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d896"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d886"
+  },
+  "description": "50",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, 15 nhân 3 không thể ra số chẵn 50.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d897"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d887"
+  },
+  "description": "Nam Cao",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Nam Cao là tác giả truyện ngắn 'Lão Hạc'.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d898"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d887"
+  },
+  "description": "Ngô Tất Tố",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Ngô Tất Tố là tác giả 'Tắt đèn'.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d899"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d887"
+  },
+  "description": "Vũ Trọng Phụng",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Vũ Trọng Phụng là tác giả 'Số đỏ'.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d89a"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d887"
+  },
+  "description": "Nguyễn Du",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Nguyễn Du là tác giả 'Truyện Kiều'.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d89b"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d888"
+  },
+  "description": "8",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Oxy có 8 electron, 8 proton và 8 neutron.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d89c"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d888"
+  },
+  "description": "6",
+  "image": null,
+  "is_correct": false,
+  "explanation": "6 là số electron của nguyên tử Cacbon.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d89d"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d888"
+  },
+  "description": "10",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, oxy chỉ có 8 electron.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d89e"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d888"
+  },
+  "description": "12",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, 12 là số electron của Magie (Mg).",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d89f"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d889"
+  },
+  "description": "Nitơ và Oxy",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Không khí gồm khoảng 78% Nitơ và 21% Oxy.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a0"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d889"
+  },
+  "description": "Hydro và Helium",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, đó là thành phần của Mặt trời.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a1"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d889"
+  },
+  "description": "Oxy và Carbon",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, Carbon chỉ chiếm tỉ lệ nhỏ trong không khí.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a2"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d889"
+  },
+  "description": "Hydro và Nitơ",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, khí Hydro rất ít trong khí quyển.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a3"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88a"
+  },
+  "description": "90°",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Trong tam giác vuông, tổng hai góc nhọn bằng 90°.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a4"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88a"
+  },
+  "description": "180°",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, đó là tổng ba góc của tam giác.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a5"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88a"
+  },
+  "description": "60°",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, không phải tổng hai góc nhọn trong tam giác vuông.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a6"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88a"
+  },
+  "description": "120°",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, tổng hai góc nhọn không vượt quá 90°.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a7"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88b"
+  },
+  "description": "Sông Mê Kông",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Sông Mê Kông là con sông dài nhất chảy qua Việt Nam.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a8"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88b"
+  },
+  "description": "Sông Hồng",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sông Hồng ngắn hơn sông Mê Kông.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8a9"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88b"
+  },
+  "description": "Sông Đồng Nai",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sông Đồng Nai là sông lớn miền Nam nhưng không dài nhất.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8aa"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88b"
+  },
+  "description": "Sông Cửu Long",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sông Cửu Long là tên gọi phần sông Mê Kông ở Việt Nam.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8ab"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88c"
+  },
+  "description": "Charles Darwin",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Darwin là cha đẻ của thuyết tiến hóa bằng chọn lọc tự nhiên.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8ac"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88c"
+  },
+  "description": "Albert Einstein",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Einstein là nhà vật lý, không phải nhà sinh học.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8ad"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88c"
+  },
+  "description": "Isaac Newton",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Newton nghiên cứu về cơ học và hấp dẫn.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8ae"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88c"
+  },
+  "description": "Louis Pasteur",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Pasteur là nhà vi sinh học, không phải người sáng lập thuyết tiến hóa.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8af"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88d"
+  },
+  "description": "Android OS",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Android OS là hệ điều hành phổ biến nhất cho điện thoại Android.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8b0"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88d"
+  },
+  "description": "iOS",
+  "image": null,
+  "is_correct": false,
+  "explanation": "iOS được dùng cho thiết bị Apple, không phải Android.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8b1"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88d"
+  },
+  "description": "Windows Mobile",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Windows Mobile hiện đã ngừng phát triển.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8b2"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88d"
+  },
+  "description": "HarmonyOS",
+  "image": null,
+  "is_correct": false,
+  "explanation": "HarmonyOS chỉ phổ biến trên thiết bị Huawei.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8b3"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88e"
+  },
+  "description": "6",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Thế giới có 6 châu lục chính: Á, Âu, Phi, Mỹ, Úc, Nam Cực.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8b4"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88e"
+  },
+  "description": "5",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, có 6 châu lục, không phải 5.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8b5"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88e"
+  },
+  "description": "7",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Một số tài liệu tính Bắc Mỹ và Nam Mỹ là một, nên vẫn là 6.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "690dd9ca1e4d52743251d8b6"
+  },
+  "question_id": {
+    "$oid": "690dd86a1e4d52743251d88e"
+  },
+  "description": "8",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, không có 8 châu lục được công nhận.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.417Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8dff8f83e935fec549c5"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549b9"
+  },
+  "description": "x = 2 hoặc x = 3",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Phân tích thành (x − 2)(x − 3) = 0.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8dff8f83e935fec549c6"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549b9"
+  },
+  "description": "x = −2 hoặc x = −3",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai dấu nghiệm.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8dff8f83e935fec549c7"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549b9"
+  },
+  "description": "x = 1 hoặc x = 6",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Không thỏa mãn phương trình.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8dff8f83e935fec549c8"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549b9"
+  },
+  "description": "Phương trình vô nghiệm",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Phương trình có hai nghiệm phân biệt.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8e0b8f83e935fec549ca"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549ba"
+  },
+  "description": "128",
+  "image": null,
+  "is_correct": true,
+  "explanation": "2³ = 8, 4² = 16 → 8 × 16 = 128.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8e0b8f83e935fec549cb"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549ba"
+  },
+  "description": "64",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Chỉ nhân một lũy thừa.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8e0b8f83e935fec549cc"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549ba"
+  },
+  "description": "32",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai khi tính giá trị lũy thừa.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8e0b8f83e935fec549cd"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549ba"
+  },
+  "description": "256",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Nhân nhầm lũy thừa.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8e178f83e935fec549cf"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549bb"
+  },
+  "description": "14",
+  "image": null,
+  "is_correct": true,
+  "explanation": "a₅ = 2 + 4 × 3 = 14.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8e178f83e935fec549d0"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549bb"
+  },
+  "description": "11",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Thiếu số hạng.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8e178f83e935fec549d1"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549bb"
+  },
+  "description": "17",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Cộng sai số lần công sai.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8e178f83e935fec549d2"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549bb"
+  },
+  "description": "20",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Không đúng công thức.",
+  "created_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:36:42.416Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f608f83e935fec549d4"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549bc"
+  },
+  "description": "x ≥ 2",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Biểu thức trong căn phải không âm: x − 2 ≥ 0.",
+  "created_at": {
+    "$date": "2025-11-07T11:40:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:40:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f608f83e935fec549d5"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549bc"
+  },
+  "description": "x > 2",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Thiếu giá trị x = 2.",
+  "created_at": {
+    "$date": "2025-11-07T11:40:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:40:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f608f83e935fec549d6"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549bc"
+  },
+  "description": "x ≤ 2",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Giá trị âm không thỏa mãn.",
+  "created_at": {
+    "$date": "2025-11-07T11:40:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:40:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f608f83e935fec549d7"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549bc"
+  },
+  "description": "x ∈ ℝ",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Hàm căn không xác định với mọi x.",
+  "created_at": {
+    "$date": "2025-11-07T11:40:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:40:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f6a8f83e935fec549d9"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549bd"
+  },
+  "description": "x > 4",
+  "image": null,
+  "is_correct": true,
+  "explanation": "2x > 8 ⇒ x > 4.",
+  "created_at": {
+    "$date": "2025-11-07T11:41:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:41:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f6a8f83e935fec549da"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549bd"
+  },
+  "description": "x ≥ 4",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Không lấy dấu bằng.",
+  "created_at": {
+    "$date": "2025-11-07T11:41:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:41:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f6a8f83e935fec549db"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549bd"
+  },
+  "description": "x > −4",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Chuyển vế sai.",
+  "created_at": {
+    "$date": "2025-11-07T11:41:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:41:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f6a8f83e935fec549dc"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549bd"
+  },
+  "description": "x < 4",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai chiều bất phương trình.",
+  "created_at": {
+    "$date": "2025-11-07T11:41:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:41:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f798f83e935fec549de"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549be"
+  },
+  "description": "−3",
+  "image": null,
+  "is_correct": true,
+  "explanation": "y = 2(−2) + 1 = −3.",
+  "created_at": {
+    "$date": "2025-11-07T11:42:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:42:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f798f83e935fec549df"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549be"
+  },
+  "description": "−5",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Tính sai phép cộng.",
+  "created_at": {
+    "$date": "2025-11-07T11:42:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:42:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f798f83e935fec549e0"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549be"
+  },
+  "description": "3",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai dấu.",
+  "created_at": {
+    "$date": "2025-11-07T11:42:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:42:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f798f83e935fec549e1"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549be"
+  },
+  "description": "1",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Chưa thay giá trị x.",
+  "created_at": {
+    "$date": "2025-11-07T11:42:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:42:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f848f83e935fec549e3"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549bf"
+  },
+  "description": "y' = 3x² − 6x",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Áp dụng quy tắc đạo hàm lũy thừa.",
+  "created_at": {
+    "$date": "2025-11-07T11:43:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:43:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f848f83e935fec549e4"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549bf"
+  },
+  "description": "y' = x² − 6x",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Thiếu hệ số.",
+  "created_at": {
+    "$date": "2025-11-07T11:43:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:43:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f848f83e935fec549e5"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549bf"
+  },
+  "description": "y' = 3x² − 3x",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Đạo hàm sai hạng tử.",
+  "created_at": {
+    "$date": "2025-11-07T11:43:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:43:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f848f83e935fec549e6"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549bf"
+  },
+  "description": "y' = 3x² − 6",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Đạo hàm thiếu x.",
+  "created_at": {
+    "$date": "2025-11-07T11:43:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:43:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f908f83e935fec549e8"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549c0"
+  },
+  "description": "Tam giác vuông",
+  "image": null,
+  "is_correct": true,
+  "explanation": "3² + 4² = 5².",
+  "created_at": {
+    "$date": "2025-11-07T11:44:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:44:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f908f83e935fec549e9"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549c0"
+  },
+  "description": "Tam giác đều",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Ba cạnh không bằng nhau.",
+  "created_at": {
+    "$date": "2025-11-07T11:44:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:44:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f908f83e935fec549ea"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549c0"
+  },
+  "description": "Tam giác cân",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Không có hai cạnh bằng nhau.",
+  "created_at": {
+    "$date": "2025-11-07T11:44:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:44:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f908f83e935fec549eb"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549c0"
+  },
+  "description": "Tam giác tù",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Có góc vuông, không phải góc tù.",
+  "created_at": {
+    "$date": "2025-11-07T11:44:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:44:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f9b8f83e935fec549ed"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549c1"
+  },
+  "description": "x = π/6 + 2kπ hoặc x = 5π/6 + 2kπ",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Giá trị sin bằng 1/2 tại các góc đặc biệt.",
+  "created_at": {
+    "$date": "2025-11-07T11:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:45:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f9b8f83e935fec549ee"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549c1"
+  },
+  "description": "x = π/3 + kπ",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Giá trị sin khác 1/2.",
+  "created_at": {
+    "$date": "2025-11-07T11:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:45:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f9b8f83e935fec549ef"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549c1"
+  },
+  "description": "x = π/2 + kπ",
+  "image": null,
+  "is_correct": false,
+  "explanation": "sin π/2 = 1.",
+  "created_at": {
+    "$date": "2025-11-07T11:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:45:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8f9b8f83e935fec549f0"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549c1"
+  },
+  "description": "x = kπ",
+  "image": null,
+  "is_correct": false,
+  "explanation": "sin kπ = 0.",
+  "created_at": {
+    "$date": "2025-11-07T11:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:45:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8fa68f83e935fec549f2"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549c2"
+  },
+  "description": "1",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Giới hạn lượng giác cơ bản.",
+  "created_at": {
+    "$date": "2025-11-07T11:46:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:46:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8fa68f83e935fec549f3"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549c2"
+  },
+  "description": "0",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Giá trị giới hạn không bằng 0.",
+  "created_at": {
+    "$date": "2025-11-07T11:46:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:46:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8fa68f83e935fec549f4"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549c2"
+  },
+  "description": "∞",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Giới hạn hữu hạn.",
+  "created_at": {
+    "$date": "2025-11-07T11:46:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:46:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693e8fa68f83e935fec549f5"
+  },
+  "question_id": {
+    "$oid": "693e8d168f83e935fec549c2"
+  },
+  "description": "Không tồn tại",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Giới hạn tồn tại.",
+  "created_at": {
+    "$date": "2025-11-07T11:46:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-07T11:46:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693ef04cfe3739ab34a077b3"
+  },
+  "question_id": {
+    "$oid": "693eee1dfe3739ab34a077ab"
+  },
+  "description": "5",
+  "image": null,
+  "is_correct": true,
+  "explanation": "lim (x → 0) (sin(5x)/x) = 5 theo công thức lim (x → 0) (sin x / x) = 1.",
+  "created_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693ef04cfe3739ab34a077b4"
+  },
+  "question_id": {
+    "$oid": "693eee1dfe3739ab34a077ab"
+  },
+  "description": "0",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, do bỏ hệ số 5.",
+  "created_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693ef04cfe3739ab34a077b5"
+  },
+  "question_id": {
+    "$oid": "693eee1dfe3739ab34a077ab"
+  },
+  "description": "1",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, công thức lim (x → 0) (sin x / x) = 1 áp dụng cho x, không phải 5x.",
+  "created_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693ef04cfe3739ab34a077b6"
+  },
+  "question_id": {
+    "$oid": "693eee1dfe3739ab34a077ac"
+  },
+  "description": "x = 1 hoặc x = 3/2",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Phân tích 2x^2 - 5x + 3 = (2x-3)(x-1) = 0 → x = 1 hoặc x = 3/2.",
+  "created_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693ef04cfe3739ab34a077b7"
+  },
+  "question_id": {
+    "$oid": "693eee1dfe3739ab34a077ac"
+  },
+  "description": "x = -1 hoặc x = 3/2",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, nghiệm -1 không thỏa phương trình.",
+  "created_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693ef04cfe3739ab34a077b8"
+  },
+  "question_id": {
+    "$oid": "693eee1dfe3739ab34a077ac"
+  },
+  "description": "x = 1 hoặc x = -3/2",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, nghiệm -3/2 không thỏa phương trình.",
+  "created_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693ef04cfe3739ab34a077b9"
+  },
+  "question_id": {
+    "$oid": "693eee1dfe3739ab34a077ad"
+  },
+  "description": "9",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Tích phân ∫(2x) dx từ 0 đến 3 = [x^2]_0^3 = 9.",
+  "created_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693ef04cfe3739ab34a077ba"
+  },
+  "question_id": {
+    "$oid": "693eee1dfe3739ab34a077ad"
+  },
+  "description": "6",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, tích phân x^2 từ 0 đến 3 cho 9, không phải 6.",
+  "created_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "693ef04cfe3739ab34a077bb"
+  },
+  "question_id": {
+    "$oid": "693eee1dfe3739ab34a077ad"
+  },
+  "description": "12",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai, tích phân ∫(2x) dx từ 0 đến 3 = 9, không phải 12.",
+  "created_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-15T00:00:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "6950cc2e0d8913d27449744e"
+  },
+  "question_id": {
+    "$oid": "6950cbc80d8913d274497449"
+  },
+  "description": "x = 2 và x = 3",
+  "image": null,
+  "is_correct": true,
+  "explanation": "Ta có x² − 5x + 6 = (x−2)(x−3) = 0 nên x = 2 hoặc x = 3.",
+  "created_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "6950cc2e0d8913d27449744f"
+  },
+  "question_id": {
+    "$oid": "6950cbc80d8913d274497449"
+  },
+  "description": "x = −2 và x = −3",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Thay vào phương trình không thỏa mãn.",
+  "created_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "6950cc2e0d8913d274497450"
+  },
+  "question_id": {
+    "$oid": "6950cbc80d8913d274497449"
+  },
+  "description": "x = 1 và x = 6",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Không phân tích được phương trình thành các nhân tử tương ứng.",
+  "created_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "6950cc2e0d8913d274497451"
+  },
+  "question_id": {
+    "$oid": "6950cbc80d8913d274497449"
+  },
+  "description": "Phương trình vô nghiệmPhương trình vô nghiệmPhương trình vô nghiệmPhương trình vô nghiệmPhương trình vô nghiệmPhương trình vô nghiệmPhương trình vô nghiệmPhương trình vô nghiệmPhương trình vô nghiệmPhương trình vô nghiệm",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Δ = 1 > 0 nên phương trình có hai nghiệm phân biệt.",
+  "created_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "6950cc3c0d8913d274497453"
+  },
+  "question_id": {
+    "$oid": "6950cbc80d8913d27449744a"
+  },
+  "description": "u₁₀ = 21",
+  "image": null,
+  "is_correct": true,
+  "explanation": "u₁₀ = u₁ + 9d = 3 + 9×2 = 21.",
+  "created_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "6950cc3c0d8913d274497454"
+  },
+  "question_id": {
+    "$oid": "6950cbc80d8913d27449744a"
+  },
+  "description": "u₁₀ = 18",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Sai công thức số hạng tổng quát.",
+  "created_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "6950cc3c0d8913d274497455"
+  },
+  "question_id": {
+    "$oid": "6950cbc80d8913d27449744a"
+  },
+  "description": "u₁₀ = 20",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Tính thiếu một công sai.",
+  "created_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "6950cc3c0d8913d274497456"
+  },
+  "question_id": {
+    "$oid": "6950cbc80d8913d27449744a"
+  },
+  "description": "u₁₀ = 23",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Tính sai số hạng thứ n.",
+  "created_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "6950cc470d8913d274497458"
+  },
+  "question_id": {
+    "$oid": "6950cbc80d8913d27449744b"
+  },
+  "description": "AB = 5",
+  "image": null,
+  "is_correct": true,
+  "explanation": "AB = √[(4−1)² + (6−2)²] = √(9+16) = 5.",
+  "created_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "6950cc470d8913d274497459"
+  },
+  "question_id": {
+    "$oid": "6950cbc80d8913d27449744b"
+  },
+  "description": "AB = √13",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Tính sai bình phương tọa độ.",
+  "created_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "6950cc470d8913d27449745a"
+  },
+  "question_id": {
+    "$oid": "6950cbc80d8913d27449744b"
+  },
+  "description": "AB = 7",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Không đúng công thức khoảng cách.",
+  "created_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "deleted_at": null
+},
+{
+  "_id": {
+    "$oid": "6950cc470d8913d27449745b"
+  },
+  "question_id": {
+    "$oid": "6950cbc80d8913d27449744b"
+  },
+  "description": "AB = 4",
+  "image": null,
+  "is_correct": false,
+  "explanation": "Chỉ tính hiệu hoành độ.",
+  "created_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-28T06:45:00.000Z"
+  },
+  "deleted_at": null
+}]

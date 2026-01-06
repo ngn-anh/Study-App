@@ -2630,4 +2630,70 @@
     "$date": "2025-11-24T15:23:08.408Z"
   },
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "694e8a900f2e7ab88f352af2"
+  },
+  "schedule_id": {
+    "$oid": "694e8a890f2e7ab88f352ae4"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề kiểm tra Toán lớp 11 - Giữa kỳ 1",
+  "description": "",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-26T13:16:00.076Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-26T13:16:31.367Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "694e8b800f2e7ab88f352b06"
+  },
+  "schedule_id": {
+    "$oid": "694e8b300f2e7ab88f352b00"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Thi thử tiếng việt ",
+  "description": "Thì thử ",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-26T13:20:00.070Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-26T13:20:03.224Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "694e8bf80f2e7ab88f352b20"
+  },
+  "schedule_id": {
+    "$oid": "694e8a890f2e7ab88f352ae4"
+  },
+  "noti_type_id": {
+    "$oid": "6911dfece15eaf755174a92f"
+  },
+  "name": "Đề kiểm tra Toán lớp 11 - Giữa kỳ 1",
+  "description": "",
+  "is_read": true,
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-26T13:22:00.069Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-26T13:22:15.624Z"
+  },
+  "__v": 0
 }]

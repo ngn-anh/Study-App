@@ -1,6 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
+import { ClientSession, Model, Types } from 'mongoose';
 import { Question, QuestionDocument } from './schemas/questions.schema';
 import {
   AnswerQuestion,
@@ -8,6 +12,9 @@ import {
 } from 'src/answer-questions/schemas/answer-questions.schema';
 import { Exam, ExamDocument } from 'src/exams/schemas/exams.schema';
 import { shuffleArray } from 'src/utils';
+import { CreateQuestionDto } from './dto/create-question.dto';
+import { CreateManyQuestionDto } from './dto/create-many-question.dto';
+import { UpdateQuestionDto } from './dto/update-question.dto';
 
 @Injectable()
 export class QuestionsService {
@@ -117,5 +124,186 @@ export class QuestionsService {
       ...question,
       answers,
     };
+  }
+
+  async createQuestion(dto: CreateQuestionDto) {
+    const { exam_id, description, difficulty, section, answers = [] } = dto;
+
+    try {
+      const createdQuestions = await this.questionModel.create([
+        {
+          exam_id: new Types.ObjectId(exam_id),
+          description,
+          difficulty,
+          section,
+        },
+      ]);
+      const questionDoc = createdQuestions[0];
+
+      let answerDocs: AnswerQuestionDocument[] = [];
+      if (answers.length > 0) {
+        const answerInsert = answers.map((ans) => ({
+          question_id: questionDoc._id,
+          description: ans.description,
+          image: ans.image,
+          is_correct: ans.is_correct ?? false,
+          explanation: ans.explanation,
+        }));
+
+        // insertMany trả về các document đã chèn (có _id)
+        const answerDocs = await this.answerModel
+          .insertMany(answerInsert)
+          .then((docs) => docs as AnswerQuestionDocument[]);
+      }
+
+      // -------------------------------------------------
+      // 3️⃣ Trả về kết quả
+      // -------------------------------------------------
+      return {
+        question: questionDoc.toObject(),
+        answers: answerDocs.map((doc) => doc.toObject()),
+      };
+    } catch (err) {
+      // Ghi log lỗi để tiện debug, sau đó ném lỗi cho controller
+      console.error('Create question error →', err);
+      throw new InternalServerErrorException('Tạo câu hỏi thất bại');
+    }
+    // return dto;
+  }
+
+  async createManyQuestions(dto: CreateManyQuestionDto) {
+    const { exam_id, questions } = dto;
+
+    if (!questions || questions.length === 0) {
+      throw new BadRequestException('Danh sách câu hỏi trống');
+    }
+
+    try {
+      /** 1️⃣ Insert questions */
+      const questionDocs = await this.questionModel.insertMany(
+        questions.map((q) => ({
+          exam_id: new Types.ObjectId(exam_id),
+          description: q.description,
+          difficulty: q.difficulty,
+          section: q.section,
+        })),
+      );
+
+      /** 2️⃣ Build answers */
+      const answerInserts: Partial<AnswerQuestion>[] = [];
+
+      questionDocs.forEach((questionDoc, index) => {
+        const questionInput = questions[index];
+
+        questionInput.answers?.forEach((ans) => {
+          answerInserts.push({
+            question_id: questionDoc._id as Types.ObjectId,
+            description: ans.description,
+            explanation: ans.explanation,
+            is_correct: ans.is_correct ?? false,
+          });
+        });
+      });
+
+      /** 3️⃣ Insert answers */
+      let answerDocs: AnswerQuestionDocument[] = [];
+      if (answerInserts.length > 0) {
+        answerDocs = await this.answerModel.insertMany(answerInserts);
+      }
+
+      /** 4️⃣ Map question → answers */
+      const result = questionDocs.map((q) => ({
+        question: q.toObject(),
+        answers: answerDocs
+          .filter((a) => a.question_id.toString() === q._id.toString())
+          .map((a) => a.toObject() as AnswerQuestion),
+      }));
+
+      return result;
+    } catch (err) {
+      console.error('Create many questions error →', err);
+      throw new InternalServerErrorException('Import câu hỏi thất bại');
+    }
+  }
+
+  async updateQuestion(questionId: string, dto: UpdateQuestionDto) {
+    if (!Types.ObjectId.isValid(questionId)) {
+      throw new BadRequestException('Invalid questionId');
+    }
+
+    const question = await this.questionModel.findOne({
+      _id: questionId,
+      deleted_at: null,
+    });
+
+    if (!question) {
+      throw new BadRequestException('Question not found');
+    }
+
+    /* =====================
+     * 1️⃣ Update Question
+     * ===================== */
+    await this.questionModel.findByIdAndUpdate(
+      { _id: questionId },
+      {
+        description: dto.description,
+        difficulty: dto.difficulty,
+        section: dto.section,
+      },
+    );
+
+    if (!dto.answers) return { _id: questionId };
+
+    const dbAnswers = await this.answerModel.find({
+      question_id: question._id,
+      deleted_at: null,
+    });
+
+    const dbAnswerMap = new Map(dbAnswers.map((a) => [a._id.toString(), a]));
+
+    const incomingIds = new Set<string>();
+
+    /* =====================
+     * 3️⃣ Update / Insert
+     * ===================== */
+    for (const ans of dto.answers) {
+      if (ans._id && dbAnswerMap.has(ans._id)) {
+        // UPDATE
+        incomingIds.add(ans._id);
+
+        await this.answerModel.findByIdAndUpdate(
+          { _id: ans._id },
+          {
+            description: ans.description,
+            explanation: ans.explanation,
+            is_correct: ans.is_correct ?? false,
+          },
+        );
+      } else {
+        // INSERT NEW
+        await this.answerModel.create({
+          question_id: question._id,
+          description: ans.description,
+          explanation: ans.explanation,
+          is_correct: ans.is_correct ?? false,
+        });
+      }
+    }
+
+    /* =====================
+     * 4️⃣ Soft delete đáp án bị xóa trên FE
+     * ===================== */
+    const toDeleteIds = dbAnswers
+      .filter((a) => !incomingIds.has(a._id.toString()))
+      .map((a) => a._id);
+
+    if (toDeleteIds.length) {
+      await this.answerModel.updateMany(
+        { _id: { $in: toDeleteIds } },
+        { deleted_at: new Date() },
+      );
+    }
+
+    return { _id: questionId };
   }
 }

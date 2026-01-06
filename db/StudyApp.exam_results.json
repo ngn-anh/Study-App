@@ -1,0 +1,952 @@
+[{
+  "_id": {
+    "$oid": "690eec066b2048cd06492417"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 2,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-11-08T07:06:34.382Z"
+  },
+  "time_end": {
+    "$date": "2025-11-08T07:06:46.106Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-08T07:06:46.188Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T07:06:46.188Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690eec626b2048cd06492427"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 0,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-11-08T07:07:17.062Z"
+  },
+  "time_end": {
+    "$date": "2025-11-08T07:08:18.111Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-08T07:08:18.170Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T07:08:18.170Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690eeca96b2048cd06492434"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 1,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-11-08T07:08:28.389Z"
+  },
+  "time_end": {
+    "$date": "2025-11-08T07:09:29.424Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-08T07:09:29.490Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T07:09:29.490Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690ef98510384dda93439396"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 1,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-11-08T08:04:15.922Z"
+  },
+  "time_end": {
+    "$date": "2025-11-08T08:04:21.764Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-08T08:04:21.847Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:04:21.847Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690efb9d10384dda934393a9"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 1,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-11-08T08:13:14.871Z"
+  },
+  "time_end": {
+    "$date": "2025-11-08T08:13:17.568Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-08T08:13:17.602Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:13:17.602Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690efc5910384dda934393bc"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 1,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-11-08T08:16:21.373Z"
+  },
+  "time_end": {
+    "$date": "2025-11-08T08:16:25.401Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-08T08:16:25.434Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:16:25.434Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690f0085e69968b4e08a95bb"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 1,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-11-08T08:34:07.828Z"
+  },
+  "time_end": {
+    "$date": "2025-11-08T08:34:13.592Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-08T08:34:13.621Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:34:13.621Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690f00dce69968b4e08a95d1"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 1,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-11-08T08:35:32.720Z"
+  },
+  "time_end": {
+    "$date": "2025-11-08T08:35:40.321Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-08T08:35:40.372Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:35:40.372Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690f015fe69968b4e08a95e6"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 1,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-11-08T08:37:44.510Z"
+  },
+  "time_end": {
+    "$date": "2025-11-08T08:37:51.631Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-08T08:37:51.692Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:37:51.692Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690f01f8e69968b4e08a95fb"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 1,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-11-08T08:40:17.153Z"
+  },
+  "time_end": {
+    "$date": "2025-11-08T08:40:24.217Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-08T08:40:24.271Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:40:24.271Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690f0549e69968b4e08a9611"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 1,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-11-08T08:54:25.787Z"
+  },
+  "time_end": {
+    "$date": "2025-11-08T08:54:31.119Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-08T08:54:33.046Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:54:33.046Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690f05fae69968b4e08a962c"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 1,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-11-08T08:57:16.634Z"
+  },
+  "time_end": {
+    "$date": "2025-11-08T08:57:28.999Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-08T08:57:30.913Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T08:57:30.913Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690f0d061b908e644b1261d9"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 2,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-11-08T09:27:15.091Z"
+  },
+  "time_end": {
+    "$date": "2025-11-08T09:27:32.571Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-08T09:27:34.488Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T09:27:34.488Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690f10f71b908e644b126284"
+  },
+  "user_id": {
+    "$oid": "690426dbdbf4313e26d816d5"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 1,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-11-08T09:44:13.888Z"
+  },
+  "time_end": {
+    "$date": "2025-11-08T09:44:21.906Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-08T09:44:23.817Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T09:44:23.817Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690f14ad1b908e644b12630a"
+  },
+  "user_id": {
+    "$oid": "690428e8dbf4313e26d816d8"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 3,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-11-08T09:59:40.993Z"
+  },
+  "time_end": {
+    "$date": "2025-11-08T10:00:11.303Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-08T10:00:13.223Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-08T10:00:13.223Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692185558387c49434a79669"
+  },
+  "user_id": {
+    "$oid": "691dd03b4f9c7f0a8095add3"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 1,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-11-22T09:41:29.203Z"
+  },
+  "time_end": {
+    "$date": "2025-11-22T09:41:39.786Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-11-22T09:41:41.106Z"
+  },
+  "updated_at": {
+    "$date": "2025-11-22T09:41:41.106Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693ecc6c8678cd75c7e11667"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "total_question": 10,
+  "total_correct": 3,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-14T14:37:27.203Z"
+  },
+  "time_end": {
+    "$date": "2025-12-14T14:40:32.106Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-14T14:40:44.161Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-14T14:40:44.161Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693ecd418678cd75c7e116d8"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "total_question": 10,
+  "total_correct": 0,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-14T14:42:11.756Z"
+  },
+  "time_end": {
+    "$date": "2025-12-14T14:44:07.953Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-14T14:44:17.572Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-14T14:44:17.572Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693ecfcc8678cd75c7e1175b"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "total_question": 10,
+  "total_correct": 0,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-14T14:54:59.116Z"
+  },
+  "time_end": {
+    "$date": "2025-12-14T14:54:59.119Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-14T14:55:08.834Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-14T14:55:08.834Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693ed2f08678cd75c7e117a3"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "total_question": 10,
+  "total_correct": 9,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-14T15:06:09.568Z"
+  },
+  "time_end": {
+    "$date": "2025-12-14T15:08:23.223Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-14T15:08:32.721Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-14T15:08:32.721Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693ed4884868ba88c60283a8"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "total_question": 10,
+  "total_correct": 0,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-14T15:12:06.769Z"
+  },
+  "time_end": {
+    "$date": "2025-12-14T15:15:10.072Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-14T15:15:20.617Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-14T15:15:20.617Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693ed98a4868ba88c6028466"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "total_question": 10,
+  "total_correct": 0,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-14T15:34:50.442Z"
+  },
+  "time_end": {
+    "$date": "2025-12-14T15:36:32.584Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-14T15:36:42.112Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-14T15:36:42.112Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693edcce4868ba88c60284ed"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "total_question": 10,
+  "total_correct": 0,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-14T15:50:10.904Z"
+  },
+  "time_end": {
+    "$date": "2025-12-14T15:50:29.036Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-14T15:50:38.515Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-14T15:50:38.515Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693ee7874868ba88c602872e"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "total_question": 10,
+  "total_correct": 0,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-14T16:35:57.512Z"
+  },
+  "time_end": {
+    "$date": "2025-12-14T16:36:13.886Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-14T16:36:23.330Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-14T16:36:23.330Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693ee8274868ba88c6028754"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "total_question": 10,
+  "total_correct": 0,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-14T16:38:48.093Z"
+  },
+  "time_end": {
+    "$date": "2025-12-14T16:38:53.905Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-14T16:39:03.425Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-14T16:39:03.425Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693ee9e54868ba88c60287ac"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "total_question": 10,
+  "total_correct": 0,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-14T16:43:14.026Z"
+  },
+  "time_end": {
+    "$date": "2025-12-14T16:46:19.694Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-14T16:46:29.511Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-14T16:46:29.511Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693ee9e54868ba88c60287ae"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "total_question": 10,
+  "total_correct": 0,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-14T16:43:14.022Z"
+  },
+  "time_end": {
+    "$date": "2025-12-14T16:46:19.676Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-14T16:46:29.532Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-14T16:46:29.532Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693eeb074868ba88c60287f9"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "total_question": 10,
+  "total_correct": 0,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-14T16:49:36.725Z"
+  },
+  "time_end": {
+    "$date": "2025-12-14T16:51:10.210Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-14T16:51:19.640Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-14T16:51:19.640Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693eeb1a4868ba88c6028819"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "total_question": 10,
+  "total_correct": 0,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-14T16:48:25.656Z"
+  },
+  "time_end": {
+    "$date": "2025-12-14T16:51:29.513Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-14T16:51:38.969Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-14T16:51:38.969Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693eeb1a4868ba88c602881b"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "total_question": 10,
+  "total_correct": 0,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-14T16:48:25.657Z"
+  },
+  "time_end": {
+    "$date": "2025-12-14T16:51:29.515Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-14T16:51:38.984Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-14T16:51:38.984Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693ef0b74868ba88c6028930"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad2"
+  },
+  "total_question": 3,
+  "total_correct": 0,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-14T17:14:59.425Z"
+  },
+  "time_end": {
+    "$date": "2025-12-14T17:15:25.774Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-14T17:15:35.256Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-14T17:15:35.256Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "694e88c70f2e7ab88f352a2d"
+  },
+  "user_id": {
+    "$oid": "694e86870f2e7ab88f3528da"
+  },
+  "exam_id": {
+    "$oid": "6908a903bc2ae0fd775ccad6"
+  },
+  "total_question": 10,
+  "total_correct": 2,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-26T13:07:22.398Z"
+  },
+  "time_end": {
+    "$date": "2025-12-26T13:08:23.416Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-26T13:08:23.956Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-26T13:08:23.956Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "694e8a470f2e7ab88f352aaa"
+  },
+  "user_id": {
+    "$oid": "694e86870f2e7ab88f3528da"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ac"
+  },
+  "total_question": 0,
+  "total_correct": 0,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-26T13:14:47.361Z"
+  },
+  "time_end": {
+    "$date": "2025-12-26T13:14:47.364Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-26T13:14:47.906Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-26T13:14:47.906Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6954011a4febe57c39be24ee"
+  },
+  "user_id": {
+    "$oid": "6908e3b5c8f3f87aa3032183"
+  },
+  "exam_id": {
+    "$oid": "693e66c08f83e935fec549ae"
+  },
+  "total_question": 10,
+  "total_correct": 0,
+  "is_finish": true,
+  "time_start": {
+    "$date": "2025-12-30T16:42:29.333Z"
+  },
+  "time_end": {
+    "$date": "2025-12-30T16:43:06.356Z"
+  },
+  "deleted_at": null,
+  "created_at": {
+    "$date": "2025-12-30T16:43:06.754Z"
+  },
+  "updated_at": {
+    "$date": "2025-12-30T16:43:06.754Z"
+  },
+  "__v": 0
+}]
