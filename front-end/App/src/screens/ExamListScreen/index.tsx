@@ -20,7 +20,6 @@ import {
 import { NavigationProp, RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { getSubjectTagStyle } from "../../utils/getSubjectTagStyle";
 import { styles } from "./index.styles";
-import { SUBJECTS } from "../../constants/subjects";
 import RNModal from "react-native-modal";
 import { getExams } from "../../api/exam";
 import { getSubjectByClass } from "../../api/subject";
@@ -54,6 +53,7 @@ export default function ExamListScreen() {
   const [selectedDifficulty, setSelectedDifficulty] = useState<number | null>(null);
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const LIMIT = 5;
@@ -130,19 +130,28 @@ export default function ExamListScreen() {
 
         const res = await getExams(params);
         console.log("loanhtm res: ", res);
-        // setExams(res.data || []);
+        
+        // Cập nhật total từ response
+        const newTotal = res.total || 0;
+        setTotal(newTotal);
+        
+        // Merge dữ liệu và loại bỏ trùng lặp
+        let updatedExams: any[] = [];
         if (reset) {
-          setExams(res.data || []);
+          updatedExams = res.data || [];
         } else {
           // tránh trùng lặp
-          setExams(prev => {
-            const map = new Map();
-            [...prev, ...res.data].forEach(item => map.set(item._id, item));
-            return Array.from(map.values());
-          });
+          const map = new Map();
+          [...exams, ...res.data].forEach(item => map.set(item._id, item));
+          updatedExams = Array.from(map.values());
         }
-
-        setHasMore(res.data.length === LIMIT);
+        
+        // Cập nhật exams
+        setExams(updatedExams);
+        
+        // Kiểm tra hasMore dựa vào total và số items thực tế sau khi merge
+        setHasMore(updatedExams.length < newTotal);
+        
       } catch (err) {
         console.error("❌ Lỗi khi tải danh sách bài thi:", err);
       } finally {
@@ -150,7 +159,6 @@ export default function ExamListScreen() {
         setLoadingMore(false);
       }
     },
-    // [activeTab, selectedTime, selectedSubjects, searchText, userId]
     [activeTab, selectedTime, selectedSubjects, searchText, classId, userId, page]
   );
 
@@ -166,6 +174,8 @@ export default function ExamListScreen() {
 
   useEffect(() => {
     if (!userId || !classId) return;
+    setPage(1); // reset page trước
+    setTotal(0); // reset total
     fetchExams(true); // reset = true, load page 1
   }, [activeTab, selectedTime, selectedSubjects, selectedDifficulty, searchText, userId, classId]);
 
@@ -234,7 +244,7 @@ export default function ExamListScreen() {
 
   const renderDifficultyStars = (difficulty: number) => {
     const count = getDifficultyCount(difficulty);
-    const starColor = "#FBBF24"; // vàng
+    const starColor = "#FBBF24"; 
 
     return (
       <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
@@ -252,22 +262,9 @@ export default function ExamListScreen() {
 
   // --- Render exam item ---
   const renderExamItem = ({ item }: { item: any }) => {
-    const subjectCode = item.subject.code as keyof typeof SUBJECTS;
-    const subjectInfo = SUBJECTS[subjectCode] ?? { name: "Không xác định", code: "MATH" };
-    const tagStyle = getSubjectTagStyle(subjectInfo.code);
-    const subjectName = subjectInfo.name;
-
-    const now = new Date();
-    const start = new Date(item.start_date);
-    const end = new Date(item.end_date);
-    const diffDays =
-      activeTab === "ongoing"
-        ? Math.ceil((end.getTime() - now.getTime()) / (1000 * 3600 * 24))
-        : Math.ceil((start.getTime() - now.getTime()) / (1000 * 3600 * 24));
-    const timeText =
-      activeTab === "ongoing"
-        ? `Kết thúc vào ${diffDays} ngày`
-        : `Bắt đầu sau ${diffDays} ngày`;
+    const subjectCode = item.subject.code;
+    const tagStyle = getSubjectTagStyle(subjectCode);
+    const subjectName = item.subject.name;
     
     const startTimeText = formatDateTime(item.start_date);
     const endTimeText = formatDateTime(item.end_date);
@@ -454,7 +451,7 @@ export default function ExamListScreen() {
           onEndReachedThreshold={0.05}
           ListEmptyComponent={
             <Text style={{ textAlign: "center", marginTop: 40, color: "#6B7280", fontSize: 14 }}>
-              Không có kết quả
+              Không có bài thi nào
             </Text>
           }
           ListFooterComponent={

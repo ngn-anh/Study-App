@@ -74,16 +74,6 @@ export class ExamsService {
 
     // --- (1) Lấy classId từ code ---
     let classId = class_id;
-    // let classId: string | null = null;
-    // if (currentClassCode) {
-    //   const classDoc = await this.classModel
-    //     .findOne({ code: currentClassCode })
-    //     .select('_id')
-    //     .lean();
-    //   console.log("classDoc: ", classDoc);
-    //   if (!classDoc) return { data: [], total: 0, page, limit };
-    //   classId = classDoc._id.toString();
-    // }
 
     // --- (2) Lấy subjectIds ---
     let subjectIds: string[] = [];
@@ -162,11 +152,6 @@ export class ExamsService {
     const examIds = data.map((e) => e._id);
 
     // --- (6) Lấy số người tham gia cho mỗi exam ---
-    // const results = await this.examResultModel.aggregate([
-    //   { $match: { exam_id: { $in: examIds }, deleted_at: null } },
-    //   { $group: { _id: '$exam_id', count: { $addToSet: '$user_id' } } },
-    //   { $project: { _id: 1, participants: { $size: '$count' } } },
-    // ]);
     const results = await this.examResultModel.aggregate([
       { $match: { exam_id: { $in: examIds }, deleted_at: null } },
       { $group: { _id: '$exam_id', participants: { $sum: 1 } } },
@@ -313,29 +298,6 @@ export class ExamsService {
     return { examResultId: examResult._id, total_correct, total_question };
   }
 
-  // async getExamInfo(examId: string) {
-  //   if (!Types.ObjectId.isValid(examId)) {
-  //     throw new NotFoundException('Exam not found');
-  //   }
-
-  //   const exam = await this.examModel.findById(examId).lean();
-  //   if (!exam) throw new NotFoundException('Exam not found');
-
-  //   // Lấy danh sách user_id duy nhất đã tham gia
-  //   const uniqueUsers = await this.examResultModel.distinct('user_id', {
-  //     exam_id: exam._id,
-  //     deleted_at: null,
-  //   });
-
-  //   return {
-  //     _id: exam._id,
-  //     name: exam.name,
-  //     image: exam.image,
-  //     duration: exam.duration,
-  //     participants: uniqueUsers.length,
-  //   };
-  // }
-
   async getExamInfo(examId: string, user_id?: string) {
     // ----- Kiểm tra ID hợp lệ -----
     if (!Types.ObjectId.isValid(examId)) {
@@ -344,7 +306,7 @@ export class ExamsService {
 
     // ----- Lấy exam + populate subject_class + subject -----
     const exam = await this.examModel
-      .findById({ _id: examId, deleted_at: null })
+      .findOne({ _id: examId, deleted_at: null })
       .populate({
         path: 'subject_class_id',
         select: '_id subject_id',
@@ -365,11 +327,7 @@ export class ExamsService {
       throw new NotFoundException('Exam not found');
     }
 
-    // ----- 1. Số người tham gia (unique user_id) -----
-    // const participantsArray = await this.examResultModel.distinct('user_id', {
-    //   exam_id: exam._id,
-    //   deleted_at: null,
-    // });
+    // ----- 1. Số người tham gia -----
     const participantsArray = await this.examResultModel.find({
       exam_id: exam._id,
       deleted_at: null,

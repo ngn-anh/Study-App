@@ -40,8 +40,6 @@ const LoginScreen = () => {
       // Lưu userData vào AsyncStorage
       await AsyncStorage.setItem("userData", JSON.stringify(userData));
 
-      showModal("Đăng nhập thành công!", "success");
-
       // Delay để modal hiển thị trước khi navigate
       setTimeout(() => {
         navigation.reset({

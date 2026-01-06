@@ -60,10 +60,6 @@ export class QuestionsService {
       .lean();
 
     // Gộp question + answers
-    // const questionsWithAnswers = questions.map(q => ({
-    //   ...q,
-    //   answers: answers.filter(a => a.question_id.toString() === q._id.toString()),
-    // }));
     let questionsWithAnswers = questions.map((q) => {
       let questionAnswers = answers.filter(
         (a) => a.question_id.toString() === q._id.toString(),

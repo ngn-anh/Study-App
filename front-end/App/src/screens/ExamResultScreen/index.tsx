@@ -17,14 +17,24 @@ import {
   MinusCircleIcon,
 } from "phosphor-react-native";
 import { RootStackParamList } from "../../types/data";
-import { ExamResultDetail, getExamResultDetail } from "../../api/examResult";
+import { getExamResultDetail } from "../../api/examResult";
 
 type RouteProps = RouteProp<RootStackParamList, "ExamResultScreen">;
+
+type ExamResultDetail = {
+  examResultId: string;
+  total_correct: number;
+  total_question: number;
+  total_wrong: number;
+  total_not_done: number;
+  durationSec: number;
+  duration_text: string;
+};
 
 export const ExamResultScreen = () => {
   const route = useRoute<RouteProps>();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const { examId, userId } = route.params; // giả sử bạn truyền examId & userId từ route
+  const { examId, userId } = route.params;
   const [result, setResult] = useState<ExamResultDetail | null>(null);
   const [loading, setLoading] = useState(true);
 
