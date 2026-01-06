@@ -23,6 +23,7 @@ export default function ExamInfoScreen() {
     const fetchExamInfo = async () => {
       try {
         const data = await getExamInfo(examId);
+        console.log("Thông tin bài thi:", data);
         setExamInfo(data);
       } catch (err) {
         console.error("Không lấy được thông tin bài thi:", err);
