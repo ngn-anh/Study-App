@@ -246,7 +246,7 @@ export class ExamsService {
 
       return {
         _id: exam._id,
-        subject_class_id: exam.subject_class_id._id,
+        subject_class_id: subjectClass?._id || null,
         name: exam.name,
         description: exam.description,
         type: exam.type,

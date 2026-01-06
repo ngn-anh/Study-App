@@ -17,10 +17,13 @@ export class Subject {
   @Prop()
   description?: string;
 
+  @Prop({ default: 1 }) // 1: active, 2: inactive
+  status: number;
+
   @Prop()
   image?: string;
 
-  @Prop({ type: Date })
+  @Prop({ type: Date, default: null })
   deleted_at?: Date;
 }
 

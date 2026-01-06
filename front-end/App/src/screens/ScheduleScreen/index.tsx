@@ -258,6 +258,11 @@ const ScheduleScreen = () => {
         onEndReachedThreshold={0.05}
         onMomentumScrollEnd={loadMore}
         scrollEventThrottle={16}
+        ListEmptyComponent={
+                              <Text style={{ textAlign: "center", marginTop: 40, color: "#6B7280", fontSize: 14 }}>
+                                Không có lịch hẹn nào
+                              </Text>
+                            }
         ListFooterComponent={
           loadingMore ? (
             <ActivityIndicator size="small" color="#0066FF" style={{ marginVertical: 10 }} />

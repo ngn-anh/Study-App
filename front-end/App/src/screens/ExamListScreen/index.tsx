@@ -23,6 +23,7 @@ import { styles } from "./index.styles";
 import { SUBJECTS } from "../../constants/subjects";
 import RNModal from "react-native-modal";
 import { getExams } from "../../api/exam";
+import { getSubjectByClass } from "../../api/subject";
 import { RootStackParamList } from "../../types/data";
 import SuccessModal from "../../components/SuccessModal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -45,6 +46,7 @@ export default function ExamListScreen() {
   const [exams, setExams] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [expandedTitles, setExpandedTitles] = useState<Set<string>>(new Set());
+  const [subjects, setSubjects] = useState<any[]>([]);
 
   // --- Filter states ---
   const [selectedTime, setSelectedTime] = useState<"newest" | "oldest" | null>(null);
@@ -79,6 +81,25 @@ export default function ExamListScreen() {
 
     })();
   }, []);
+
+  // Fetch subjects từ API
+  const fetchSubjects = useCallback(async () => {
+    if (!classId) return;
+    try {
+      const res = await getSubjectByClass(classId);
+      console.log('res',res)
+      const activeSubjects = res.data;
+      setSubjects(activeSubjects);
+    } catch (err) {
+      console.error("❌ Lỗi khi tải môn học:", err);
+    }
+  }, [classId]);
+
+  useEffect(() => {
+    if (classId) {
+      fetchSubjects();
+    }
+  }, [classId]);
 
   // --- Fetch exams ---
   const fetchExams = useCallback(
@@ -490,10 +511,10 @@ export default function ExamListScreen() {
             ))}
 
             <Text style={styles.filterSectionTitle}>Môn học</Text>
-            {Object.values(SUBJECTS).map((subj) => {
+            {subjects.map((subj) => {
               const tagStyle = getSubjectTagStyle(subj.code);
               return (
-                <TouchableOpacity key={subj.code} style={styles.filterOption} onPress={() => toggleTempSubject(subj.code)}>
+                <TouchableOpacity key={subj._id} style={styles.filterOption} onPress={() => toggleTempSubject(subj.code)}>
                   <Text style={[styles.filterOptionText, { color: tagStyle.color || "#374151" }]}>{subj.name}</Text>
                   {tempSubjects.includes(subj.code) && <Check size={16} color="#1669EF" weight="bold" />}
                 </TouchableOpacity>

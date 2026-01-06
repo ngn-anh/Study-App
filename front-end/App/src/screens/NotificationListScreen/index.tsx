@@ -129,6 +129,11 @@ const NotificationListScreen = () => {
           onEndReached={loadMore}
           onEndReachedThreshold={0.05}
           contentContainerStyle={styles.componentCard}
+          ListEmptyComponent={
+                      <Text style={{ textAlign: "center", marginTop: 40, color: "#6B7280", fontSize: 14 }}>
+                        Không có thông báo nhắc nhở nào
+                      </Text>
+                    }
           ListFooterComponent={loadingMore ? <Text style={{ textAlign: 'center', padding: 10 }}>Đang tải thêm...</Text> : null}
           renderItem={({ item }) => (
             <TouchableOpacity

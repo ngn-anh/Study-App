@@ -140,6 +140,7 @@ export class SubjectsService {
     const [data, total] = await Promise.all([
       this.subjectModel
         .find(filter)
+        .sort({ created_at: -1 })
         .select('-created_at -updated_at')
         .skip(skip)
         .limit(limit)

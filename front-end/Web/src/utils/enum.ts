@@ -15,4 +15,7 @@ export const MODULE_LABEL_MAP: Record<string, string> = {
   subject: "Quản lý môn học",
   role: "Quản lý vai trò",
   permission: "Quản lý quyền",
+  exam: "Quản lý bài thi",
+  question: "Quản lý câu hỏi",
+  answer: "Quản lý đáp án",
 };

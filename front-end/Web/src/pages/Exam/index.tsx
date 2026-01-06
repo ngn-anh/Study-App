@@ -263,7 +263,7 @@ const ExamPage = () => {
         {
             title: "Thời gian thi (phút)",
             dataIndex: "duration",
-            width: 90,
+            width: 130,
             align: "center",
             render: (text: string) => {
                 return (
@@ -492,7 +492,7 @@ const ExamPage = () => {
 
                     <div>
                         <ProTableFixed
-                            // headerFixedHeight={350}
+                            headerFixedHeight={380}
                             // params={filterParams}
                             actionRef={actionRef}
                             request={fetchExams}
