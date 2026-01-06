@@ -32,7 +32,12 @@ export class UpdateQuestionDto {
   difficulty: number;
 
   @IsNumber()
+  @IsOptional()
   section: number;
+
+  @IsString()
+  @IsOptional()
+  image: string;
 
   @IsOptional()
   @IsArray()

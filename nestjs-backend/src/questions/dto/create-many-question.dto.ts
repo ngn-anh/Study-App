@@ -30,8 +30,9 @@ class CreateManyQuestionItemDto {
   @IsNumber()
   difficulty: number;
 
-  @IsNotEmpty()
-  section: number | string;
+  @IsNumber()
+  @IsOptional()
+  section: number;
 
   @IsArray()
   @ValidateNested({ each: true })

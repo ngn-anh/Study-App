@@ -11,6 +11,7 @@ import {
     Tooltip,
     Input,
     Form,
+    Upload,
 } from "antd";
 import {
     ProForm,
@@ -28,11 +29,13 @@ import {
     // updateQuestion,
 } from "../../../../api/question";
 import PermissionGuard from "../../../../components/PermissionGuard";
-import { NotePencil, Trash } from "phosphor-react";
+import { NotePencil, Trash, UploadSimple } from "phosphor-react";
 import CustomModal from "../../../../component/CustomModal";
 import MathInput from "../../../../component/MathInput/MathInput";
 import { MathJaxContext } from "better-react-mathjax";
 import type { MathfieldElement } from "mathlive";
+import { getCroppedImg } from "../../../../utils/cropImage";
+import Cropper from "react-easy-crop";
 
 const { Paragraph } = Typography;
 
@@ -47,9 +50,6 @@ interface Props {
     onImportUpdated?: (q: ImportQuestion) => void;
 }
 
-/* ------------------------------------------------------------
-   Drawer: Thêm / Cập nhật câu hỏi
-   ------------------------------------------------------------ */
 const CreateUpdateQuestionDrawer = ({
     open,
     examId,
@@ -81,6 +81,18 @@ const CreateUpdateQuestionDrawer = ({
     const mathRef = useRef<MathfieldElement | null>(null);
     const [resetKey, setResetKey] = useState<number>(0);
 
+    const VITE_CLOUDINARY_NAME = import.meta.env.VITE_CLOUDINARY_NAME;
+    const VITE_CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+    const [questionImage, setQuestionImage] = useState<File | null>(null); // file mới chọn
+    const [previewQuestionImage, setPreviewQuestionImage] = useState<string | null>(null); // hiển thị preview
+    const [isImageChanged, setIsImageChanged] = useState(false); // check thay đổi
+
+    // const [crop, setCrop] = useState({ x: 0, y: 0 });
+    // const [zoom, setZoom] = useState(1);
+    // const [croppedAreaPixels, setCroppedAreaPixels] = useState<any>(null);
+    // const [croppingImage, setCroppingImage] = useState<string | null>(null); // preview để crop
+
+
     // ---------------------- Load dữ liệu khi chỉnh sửa ----------------------
     useEffect(() => {
         if (!open) return;
@@ -90,6 +102,11 @@ const CreateUpdateQuestionDrawer = ({
         if (!questionId) {
             form.resetFields();
             setAnswers([]);
+            // setPreviewQuestionImage(null);   // ✅ reset ảnh preview
+            // setQuestionImage(null);          // ✅ reset file ảnh mới
+            // setCroppingImage(null);          // ✅ reset cropper
+            // setCrop({ x: 0, y: 0 });         // ✅ reset crop vị trí
+            // setZoom(1);
             // setPreviewItems([]);
             return;
         }
@@ -100,23 +117,6 @@ const CreateUpdateQuestionDrawer = ({
                 const res = await getQuestionById(questionId);
                 if (res?.errorCode === 0) {
                     const data = res.data;
-
-                    /* -------------------------------------------------
-                       1️⃣ Lấy LaTeX từ JSON (nếu dữ liệu lưu dưới dạng JSON)
-                          - data.description có thể là JSON string chứa text/latex/image.
-                          - Ta tách ra chuỗi LaTeX để đưa vào MathInput.
-                       ------------------------------------------------- */
-                    // let latexForEditor = "";
-                    // try {
-                    //     const arr: any[] = JSON.parse(data.description);
-                    //     latexForEditor = arr
-                    //         .filter(i => i.type === "latex")
-                    //         .map(i => (i.content ?? "").trim())
-                    //         .join(" ");
-                    // } catch (_) {
-                    //     // nếu parse thất bại, coi như data.description đã là LaTeX thuần
-                    //     latexForEditor = data.description || "";
-                    // }
 
                     let latexForEditor = "";
                     try {
@@ -144,6 +144,16 @@ const CreateUpdateQuestionDrawer = ({
                     // Tuy nhiên component MathInput hiện tại chỉ dùng preview khi
                     // người dùng tự chèn, nên ở đây không cần set previewItems.
                     setAnswers(data.answers || []);
+
+                    if (data.image) {
+                        setPreviewQuestionImage(data.image);  // hiển thị preview
+                        //     setCroppingImage(data.image);         // cropper sẽ có ảnh
+                        //     setCrop({ x: 0, y: 0 });              // reset crop
+                        //     setZoom(1);                            // reset zoom
+                    } else {
+                        setPreviewQuestionImage(null);
+                        //     setCroppingImage(null);
+                    }
 
                     // ✅ Sửa thêm: đồng bộ MathInput với form
                     if (mathRef.current) {
@@ -223,6 +233,9 @@ const CreateUpdateQuestionDrawer = ({
             if (mathRef.current) mathRef.current.blur();
             await new Promise(r => setTimeout(r, 0)); // đợi Form cập nhật
 
+            // Upload ảnh nếu có
+            const imageUrl = await uploadQuestionImage();
+
             const sanitizedAnswers = (answers ?? [])
                 .filter(a => typeof a.description === "string" && a.description.trim() !== "")
                 .map(a => ({
@@ -236,8 +249,9 @@ const CreateUpdateQuestionDrawer = ({
                 ...(isEdit ? {} : { exam_id: examId }),
                 description: values.description!.trim(),
                 difficulty: values.difficulty,
-                section: Number(values.section),
+                ...(values.section ? { section: Number(values.section) } : {}),
                 ...(sanitizedAnswers.length > 0 ? { answers: sanitizedAnswers } : {}),
+                ...(imageUrl ? { image: imageUrl } : {}),
             };
 
             if (isEdit && questionId) {
@@ -298,11 +312,6 @@ const CreateUpdateQuestionDrawer = ({
         setAnswers(answers.filter(a => a._id !== answer._id));
     };
 
-    // const handleDeleteAnswer = (answerId: string) => {
-    //     setAnswers(answers.filter(a => a._id !== answerId));
-    //     message.success("Xóa đáp án thành công");
-    // };
-
     const onOpenDeleteAnswer = (answer: Answer) => {
         setAnswerSelected(answer);
         setOpenDeleteAnswer(true);
@@ -314,6 +323,38 @@ const CreateUpdateQuestionDrawer = ({
         message.success("Xóa đáp án thành công");
         setOpenDeleteAnswer(false);
         setAnswerSelected(null);
+    };
+
+    // const handleSelectQuestionImage = (file: File) => {
+    //     const reader = new FileReader();
+    //     reader.onload = () => {
+    //         setCroppingImage(reader.result as string); // dùng trong cropper
+    //     };
+    //     reader.readAsDataURL(file);
+    // };
+    const handleSelectQuestionImage = (file: File) => {
+        setQuestionImage(file);
+        setIsImageChanged(true);
+        const reader = new FileReader();
+        reader.onload = () => setPreviewQuestionImage(reader.result as string);
+        reader.readAsDataURL(file);
+    };
+
+    const uploadQuestionImage = async (): Promise<string | null> => {
+        if (!questionImage) return previewQuestionImage; // giữ ảnh cũ nếu không đổi
+
+        const formData = new FormData();
+        formData.append("file", questionImage);
+        formData.append("upload_preset", VITE_CLOUDINARY_UPLOAD_PRESET);
+        formData.append("folder", "questions");
+
+        const res = await fetch(
+            `https://api.cloudinary.com/v1_1/${VITE_CLOUDINARY_NAME}/image/upload`,
+            { method: "POST", body: formData }
+        );
+
+        const data = await res.json();
+        return data.secure_url || '';
     };
 
     // ---------------------- Bảng đáp án ----------------------
@@ -427,9 +468,115 @@ const CreateUpdateQuestionDrawer = ({
                     />
                     {/* </MathJaxContext> */}
                 </ProFormItem>
+                {/* <div style={{ marginBottom: 16 }}>
+                    <label style={{ display: "block", marginBottom: 8, fontWeight: 600 }}>
+                        Chèn ảnh câu hỏi
+                    </label>
+
+                    {previewQuestionImage && !croppingImage && (
+                        <img
+                            src={previewQuestionImage}
+                            alt="Preview Question"
+                            style={{ width: 200, height: "auto", display: "block", marginBottom: 8, border: "1px solid #ccc", borderRadius: 4 }}
+                        />
+                    )}
+
+                    {!croppingImage && !viewOnly && (
+                        <Upload
+                            accept="image/*"
+                            showUploadList={false}
+                            beforeUpload={(file) => {
+                                handleSelectQuestionImage(file);
+                                return false;
+                            }}
+                        >
+                            <Button icon={<UploadSimple />}>Chọn ảnh</Button>
+                        </Upload>
+                    )}
+
+                    {croppingImage && (
+                        <div style={{ position: "relative", width: 400, height: 300, background: "#333", marginTop: 8 }}>
+                            <Cropper
+                                image={croppingImage}
+                                crop={crop}
+                                zoom={zoom}
+                                // aspect={4 / 3} // bạn có thể đổi tỉ lệ
+                                onCropChange={setCrop}
+                                onZoomChange={setZoom}
+                                onCropComplete={(_, croppedAreaPixels) => setCroppedAreaPixels(croppedAreaPixels)}
+                            />
+                            <div style={{ marginTop: 8, display: "flex", gap: 8 }}>
+                                <Button
+                                    type="primary"
+                                    onClick={async () => {
+                                        if (!croppedAreaPixels || !croppingImage) return;
+                                        const blob = await getCroppedImg(croppingImage, croppedAreaPixels, zoom);
+                                        const file = new File([blob], "question.jpg", { type: "image/jpeg" });
+                                        setQuestionImage(file);
+                                        setPreviewQuestionImage(URL.createObjectURL(file));
+                                        setCroppingImage(null); // đóng cropper
+                                    }}
+                                >
+                                    Lưu ảnh
+                                </Button>
+                                <Button onClick={() => setCroppingImage(null)}>Hủy</Button>
+                            </div>
+                        </div>
+                    )}
+
+                    {previewQuestionImage && !viewOnly && !croppingImage && (
+                        <Button
+                            type="link"
+                            danger
+                            onClick={() => {
+                                setPreviewQuestionImage(null);
+                                setQuestionImage(null);
+                                setIsImageChanged(true);
+                            }}
+                        >
+                            Xóa ảnh
+                        </Button>
+                    )}
+                </div> */}
+
+                <div style={{ marginBottom: 16 }}>
+                    <label style={{ display: "block", marginBottom: 8, fontWeight: 600 }}>
+                        Chèn ảnh câu hỏi
+                    </label>
+                    {previewQuestionImage && (
+                        <img
+                            src={previewQuestionImage}
+                            alt="Preview Question"
+                            style={{ width: 250, height: "auto", display: "block", marginBottom: 8, border: "1px solid #ccc", borderRadius: 4 }}
+                        />
+                    )}
+                    <Upload
+                        accept="image/*"
+                        showUploadList={false}
+                        beforeUpload={(file) => {
+                            handleSelectQuestionImage(file);
+                            return false;
+                        }}
+                    >
+                        <Button icon={<UploadSimple />}>Chọn ảnh</Button>
+                    </Upload>
+                    {previewQuestionImage && !viewOnly && (
+                        <Button
+                            type="link"
+                            danger
+                            onClick={() => {
+                                setPreviewQuestionImage(null);
+                                setQuestionImage(null);
+                                setIsImageChanged(true);
+                            }}
+                        >
+                            Xóa ảnh
+                        </Button>
+                    )}
+                </div>
 
                 {/* ---------- Độ khó & Phần ---------- */}
-                <div className="difficulty-section" style={{ display: "flex", gap: 24, marginTop: 16 }}>
+                <div className="difficulty-section">
                     <ProFormSelect
                         name="difficulty"
                         label="Độ khó"
@@ -448,7 +595,7 @@ const CreateUpdateQuestionDrawer = ({
                         label="Phần"
                         placeholder="VD: 1"
                         fieldProps={{ disabled: viewOnly, min: 1, max: 5 }}
-                        rules={[{ required: true, message: "Vui lòng nhập phần (1‑5)" }]}
+                        rules={[{ required: true, message: "Vui lòng nhập phần là số (1‑5)" }]}
                     />
                 </div>
             </ProForm>
@@ -470,7 +617,7 @@ const CreateUpdateQuestionDrawer = ({
 
             {/* ---------- Thêm / sửa đáp án ---------- */}
             {!viewOnly && (
-                <div style={{ marginTop: 24 }}>
+                <div style={{ marginTop: 20 }}>
                     {isAddingAnswer ? (
                         <div style={{ marginBottom: 8 }}>
                             <div className="answer-question-edit">Soạn đáp án</div>
@@ -518,7 +665,7 @@ const CreateUpdateQuestionDrawer = ({
                             </div>
                         </div>
                     ) : (
-                        <Button type="dashed" onClick={() => setIsAddingAnswer(true)}>
+                        <Button type="primary" onClick={() => setIsAddingAnswer(true)} >
                             Thêm đáp án
                         </Button>
                     )}

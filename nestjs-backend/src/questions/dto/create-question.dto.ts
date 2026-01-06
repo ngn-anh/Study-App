@@ -1,37 +1,41 @@
 // src/questions/dto/create-question.dto.ts
 import {
-    IsString,
-    IsNotEmpty,
-    IsMongoId,
-    IsNumber,
-    IsArray,
-    ValidateNested,
-    IsOptional,
+  IsString,
+  IsNotEmpty,
+  IsMongoId,
+  IsNumber,
+  IsArray,
+  ValidateNested,
+  IsOptional,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { CreateAnswerDto } from '../../answer-questions/dto/create-answer.dto';
 
 export class CreateQuestionDto {
-    @IsMongoId()
-    @IsNotEmpty()
-    exam_id: string;                     // ObjectId của Exam
+  @IsMongoId()
+  @IsNotEmpty()
+  exam_id: string;
 
-    @IsString()
-    @IsNotEmpty()
-    description: string;                // JSON string được MathInput trả về
+  @IsString()
+  @IsNotEmpty()
+  description: string;
 
-    @IsNumber()
-    @IsNotEmpty()
-    difficulty: number;                 // 1‑4
+  @IsNumber()
+  @IsNotEmpty()
+  difficulty: number;
 
-    @IsString()
-    @IsNotEmpty()
-    section: string;                    // ví dụ: "1", "2", …
+  @IsNumber()
+  @IsOptional()
+  section: number;
 
-    // ------------ optional answers -----------------
-    @IsOptional()
-    @IsArray()
-    @ValidateNested({ each: true })
-    @Type(() => CreateAnswerDto)
-    answers?: CreateAnswerDto[];
+  @IsString()
+  @IsOptional()
+  image: string;
+
+  // ------------ optional answers -----------------
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreateAnswerDto)
+  answers?: CreateAnswerDto[];
 }
