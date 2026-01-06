@@ -178,6 +178,7 @@ const ListQuestionModal = ({
                     description: q.description,
                     difficulty: q.difficulty,
                     section: q.section,
+                    image: q.image,
                     answers: (q.answers || []).map(a => ({
                         description:
                             typeof a.description === "string"

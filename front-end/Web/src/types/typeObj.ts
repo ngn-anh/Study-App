@@ -124,5 +124,6 @@ export interface ImportQuestion {
   description: string;
   difficulty: number;
   section: number;
+  image?: string;
   answers: ImportAnswer[];
 }

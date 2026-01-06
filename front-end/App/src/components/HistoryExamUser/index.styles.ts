@@ -1,127 +1,159 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    // padding: 16,
-    // backgroundColor: "#FFFFFF",
-    // borderRadius: 8,
-    // margin: 8,
-    // shadowColor: "#000",
-    // shadowOffset: { width: 0, height: 2 },
-    // shadowOpacity: 0.1,
-    // shadowRadius: 4,
-    // elevation: 3,
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     paddingHorizontal: 16,
   },
   historyItem: {
-    padding: 16,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     borderRadius: 8,
-    margin: 8,
-    shadowColor: '#000',
+    marginVertical: 8,
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
   },
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 28,
   },
 
-  /* ----- Score box (trái) ----- */
   scoreBox: {
     minWidth: 80,
     paddingVertical: 8,
     paddingHorizontal: 6,
-    borderRadius: 6,
-    alignItems: 'center',
-    justifyContent: 'center',
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 2,
   },
   scoreText: {
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 
-  /* ----- Detail container (phải) ----- */
   detailContainer: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    flexDirection: "column",
+    justifyContent: "space-between",
     paddingHorizontal: 3,
     paddingVertical: 4,
-    borderWidth: 1,
   },
 
   detailItem: {
     // flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 5,
   },
 
   timeLine: {
-    color: '#000',
+    color: "#000000",
+    fontSize: 14,
   },
 
-  /* ----- Progress bar ----- */
   progressWrapper: {
-    marginTop: 4,
-    marginBottom: 4,
-    position: 'relative',
+    marginTop: 13,
+    position: "relative",
     height: 20,
     borderRadius: 10,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   progressBackground: {
-    flexDirection: 'row',
-    height: '100%',
-    backgroundColor: '#89B5FB',
+    flexDirection: "row",
+    height: "100%",
+    backgroundColor: "#89B5FB",
   },
   progressDone: {
-    backgroundColor: '#0C4299',
+    backgroundColor: "#0C4299",
   },
   progressRemain: {
-    backgroundColor: '#89B5FB',
+    backgroundColor: "#89B5FB",
   },
   progressLabelOverlay: {
     ...StyleSheet.absoluteFillObject,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   progressLabel: {
     fontSize: 12,
-    fontWeight: '600',
-    color: '#FFF',
+    fontWeight: "600",
+    color: "#FFF",
   },
 
-  /* ----- Stats (Đúng / Sai / Bỏ trống) ----- */
   statsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: 6,
   },
+
   statItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    marginTop: 10,
+    alignItems: "center",
+    paddingLeft: 15,
+    paddingRight: 5,
+    paddingVertical: 8,
+    backgroundColor: "#F2EDED",
+    borderRadius: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "30%",
+    gap: 7,
+  },
+
+  statLeft: {
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 2,
+  },
+
+  statIcon: {
+    width: 15,
+    height: 15,
+    marginRight: 6,
   },
   statLabel: {
     fontSize: 12,
-    color: '#666',
-    marginRight: 2,
+    color: "#000000",
   },
   statValue: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#333',
+    fontSize: 14,
+    fontWeight: "600",
   },
 
   errorText: {
-    color: '#EE0033',
+    color: "#EE0033",
     marginVertical: 20,
-    fontSize: 13,
-    textAlign: 'center',
+    fontSize: 14,
+    textAlign: "center",
+  },
+
+  levelHeader: {
+    paddingHorizontal: 16,
+    paddingVertical: 5,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+
+  levelRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    textAlign: "center",
+    justifyContent: "center",
+  },
+
+  levelText: {
+    fontSize: 14,
+    fontWeight: "600",
+    textAlign: "center",
+    letterSpacing: 0.5,
+  },
+
+  historyContent: {
+    padding: 16,
+    backgroundColor: "#FFFFFF",
   },
 });

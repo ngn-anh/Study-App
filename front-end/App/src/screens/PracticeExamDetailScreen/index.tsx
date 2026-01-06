@@ -2,7 +2,7 @@ import { Image, Platform, ScrollView, Text, TouchableOpacity, View } from "react
 import { styles } from "./index.styles";
 import { RouteProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../types/data";
-import { CalendarDotsIcon, ClockIcon, EyeIcon, FileArrowDownIcon, QuestionIcon, ShareFatIcon } from "phosphor-react-native";
+import { CalendarDotsIcon, ClockIcon, EyeIcon, FileArrowDown, FileArrowDownIcon, FileIcon, QuestionIcon, ShareFatIcon } from "phosphor-react-native";
 // import ButtonCustom from "../../components/ButtonCustom";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Icons } from "../../constants/icons";
@@ -80,13 +80,7 @@ const PracticeExamDetailScreen = (props: Props) => {
   useEffect(() => {
     fetchGetExamInfo();
   }, [examId]);
-  // Cấu hình base URL cho PDF service (nên đặt trong file config)
-  // useEffect(() => {
-  //   // Cấu hình URL API backend
-  //   pdfService.setBaseUrl("http://your-api-url:3000"); // Thay bằng URL thật của bạn
-  // }, []);
 
-  // const fileNamePdf = `${exam?.name ?? ''}.pdf`;
   const [activeTab, setActiveTab] = useState<string>(TabKey.Preview);
 
   useEffect(() => {
@@ -101,9 +95,6 @@ const PracticeExamDetailScreen = (props: Props) => {
     navigation.navigate('PracticeExamSettingScreen', { examId: examInfo?._id });
   };
 
-  /** --------------------------------------------------------------
-   *  Toggle like / unlike cho exam hiện tại
-   * -------------------------------------------------------------- */
   const handleToggleLike = async () => {
     if (!user?.id || !examInfo) {
       console.warn("User hoặc examInfo chưa sẵn sàng");
@@ -157,6 +148,40 @@ const PracticeExamDetailScreen = (props: Props) => {
       setLiking(false);
     }
   };
+
+  // const handleToggleLike = async () => {
+  //   if (!user?.id || !examInfo) {
+  //     console.warn("User hoặc examInfo chưa sẵn sàng");
+  //     return;
+  //   }
+
+  //   const currentlyLiked = examInfo.is_liked ?? 0;
+
+  //   try {
+  //     setLiking(true);
+
+  //     const param = {
+  //       user_id: user.id,
+  //       exam_id: examInfo._id,
+  //       is_liked: currentlyLiked,
+  //     }
+  //     console.log("loanhtm param: ", param);
+
+  //     // Gọi API toggle like
+  //     const resp = await toggleExamLike(param);
+  //     console.log("loanhtm resp: ", resp);
+
+  //     if (resp.errorCode === 0) {
+  //       await fetchGetExamInfo();
+  //     } else {
+  //       console.warn("Like API error:", resp.message);
+  //     }
+  //   } catch (err) {
+  //     console.error("toggleLike failed:", err);
+  //   } finally {
+  //     setLiking(false);
+  //   }
+  // };
 
   const handleGoBack = () => {
     // navigation.navigate("PracticeExamScreen", {
@@ -252,12 +277,7 @@ const PracticeExamDetailScreen = (props: Props) => {
                   style={styles.iconGroupLink}
                 >
                   <Image
-                    source={
-                      Icons.LikeIcon
-                      // (examInfo?.is_liked == 1)
-                      //   ? Icons.LikeIcon
-                      //   : Icons.LikeIcon
-                    }
+                    source={Icons.LikeIcon}
                     style={[
                       styles.iconLink,
                       { tintColor: (examInfo?.is_liked == 1) ? "#1669EF" : "#555" },
@@ -276,6 +296,18 @@ const PracticeExamDetailScreen = (props: Props) => {
                   <Image source={Icons.ShareIcon} style={styles.iconLink} />
                   <Text style={styles.linkText}>Chia sẻ</Text>
                 </View>
+                {/* <TouchableOpacity
+                  activeOpacity={0.7}
+                  onPress={handleDownloadPdf}
+                  style={styles.iconGroupLink}
+                >
+                  <FileIcon
+                    size={24}
+                    color="#1669EF"
+                    weight="bold"
+                  />
+                  <Text style={styles.linkText}>Tải Pdf</Text>
+                </TouchableOpacity> */}
               </View>
             </View>
             <View style={styles.infoExam}>

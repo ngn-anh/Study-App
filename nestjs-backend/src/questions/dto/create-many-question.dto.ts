@@ -34,6 +34,10 @@ class CreateManyQuestionItemDto {
   @IsOptional()
   section: number;
 
+  @IsString()
+  @IsOptional()
+  image: string;
+
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreateManyAnswerDto)
