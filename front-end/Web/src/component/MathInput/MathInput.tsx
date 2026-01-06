@@ -456,13 +456,16 @@ const MathInput = forwardRef<MathfieldElement | null, Props>(
             mf.defaultMode = "math";
             mf.smartMode = true;
             mf.setAttribute("virtual-keyboard-mode", "manual");
-            mf.style.width = "100%";
+            mf.style.width = "98%";
             mf.style.minHeight = "60px";
             mf.style.fontSize = "18px";
             mf.style.padding = "8px";
             mf.style.border = "1px solid #ccc";
             mf.style.borderRadius = "4px";
-
+            mf.smartMode = true;
+            mf.letterShapeStyle = "tex";
+            mf.mathVirtualKeyboardPolicy = "manual";
+            mf.setValue(value, { format: "auto" });
             // Khi người dùng gõ → lấy LaTeX thuần (một backslash) và đưa lên form
             mf.addEventListener("input", () => {
                 const raw = mf.getValue("latex-expanded"); // một \, không escaped
@@ -572,15 +575,12 @@ const MathInput = forwardRef<MathfieldElement | null, Props>(
             addItem({ type: "image", src: url, width: 150, height: 100 });
         };
 
-        /* -----------------------------------------------------------------
-           8️⃣ Log JSON (có tính tới latex chưa commit)
-           ----------------------------------------------------------------- */
-        const logCurrentPreview = () => {
-            const tmp = editingLatex.trim()
-                ? [...previewItems, { type: "latex", content: editingLatex.trim() }]
-                : previewItems;
-            console.log("✅ Preview hiện tại (JSON):", JSON.stringify(tmp));
-        };
+        // const logCurrentPreview = () => {
+        //     const tmp = editingLatex.trim()
+        //         ? [...previewItems, { type: "latex", content: editingLatex.trim() }]
+        //         : previewItems;
+        //     console.log("✅ Preview hiện tại (JSON):", JSON.stringify(tmp));
+        // };
 
         /* -----------------------------------------------------------------
            9️⃣ Xóa toàn bộ
@@ -749,12 +749,11 @@ const MathInput = forwardRef<MathfieldElement | null, Props>(
                     )}
                 </div>
 
-                {/* Nút Log JSON */}
-                <div style={{ marginTop: 8, display: "flex", gap: 8 }}>
+                {/* <div style={{ marginTop: 8, display: "flex", gap: 8 }}>
                     <Button size="small" onClick={logCurrentPreview}>
                         📋 Log JSON ra console
                     </Button>
-                </div>
+                </div> */}
             </div>
         );
     }

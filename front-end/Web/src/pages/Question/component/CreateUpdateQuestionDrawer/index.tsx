@@ -106,13 +106,27 @@ const CreateUpdateQuestionDrawer = ({
                           - data.description có thể là JSON string chứa text/latex/image.
                           - Ta tách ra chuỗi LaTeX để đưa vào MathInput.
                        ------------------------------------------------- */
+                    // let latexForEditor = "";
+                    // try {
+                    //     const arr: any[] = JSON.parse(data.description);
+                    //     latexForEditor = arr
+                    //         .filter(i => i.type === "latex")
+                    //         .map(i => (i.content ?? "").trim())
+                    //         .join(" ");
+                    // } catch (_) {
+                    //     // nếu parse thất bại, coi như data.description đã là LaTeX thuần
+                    //     latexForEditor = data.description || "";
+                    // }
+
                     let latexForEditor = "";
                     try {
                         const arr: any[] = JSON.parse(data.description);
+
+                        // giữ tất cả item, text + latex
                         latexForEditor = arr
-                            .filter(i => i.type === "latex")
-                            .map(i => (i.content ?? "").trim())
-                            .join(" ");
+                            .map(i => i.content ?? "")  // lấy content dù là text hay latex
+                            .join(" ")                  // giữ khoảng trắng giữa các item
+                            .trim();                    // trim cuối cùng, không trim từng item
                     } catch (_) {
                         // nếu parse thất bại, coi như data.description đã là LaTeX thuần
                         latexForEditor = data.description || "";
@@ -130,6 +144,11 @@ const CreateUpdateQuestionDrawer = ({
                     // Tuy nhiên component MathInput hiện tại chỉ dùng preview khi
                     // người dùng tự chèn, nên ở đây không cần set previewItems.
                     setAnswers(data.answers || []);
+
+                    // ✅ Sửa thêm: đồng bộ MathInput với form
+                    if (mathRef.current) {
+                        mathRef.current.setValue(latexForEditor, { format: "auto" });
+                    }
                 }
             } catch (_) {
                 message.error("Không lấy được thông tin câu hỏi");
@@ -138,6 +157,7 @@ const CreateUpdateQuestionDrawer = ({
             }
         };
         fetchDetail();
+
     }, [open, questionId, form]);
 
     useEffect(() => {
@@ -171,6 +191,15 @@ const CreateUpdateQuestionDrawer = ({
         });
 
         message.success("Cập nhật câu hỏi import thành công");
+        handleCloseDrawer();
+    };
+
+    const handleCloseDrawer = () => {
+        form.resetFields();   // reset Form
+        setAnswers([]);       // reset đáp án
+        setNewAnswer({ description: "", is_correct: false, explanation: "" });
+        setIsAddingAnswer(false);
+        setEditingAnswerId(null);
         onClose();
     };
 
@@ -194,25 +223,20 @@ const CreateUpdateQuestionDrawer = ({
             if (mathRef.current) mathRef.current.blur();
             await new Promise(r => setTimeout(r, 0)); // đợi Form cập nhật
 
-            // const sanitizedAnswers = (answers ?? []).map(a => ({
-            //     description: a.description?.trim(),
-            //     is_correct: a.is_correct ?? false,
-            //     explanation: a.explanation?.trim() ?? '',
-            // }));
             const sanitizedAnswers = (answers ?? [])
                 .filter(a => typeof a.description === "string" && a.description.trim() !== "")
                 .map(a => ({
-                    ...(a._id ? { _id: a._id } : {}), // ⭐ GIỮ _id nếu có
+                    ...(a._id ? { _id: a._id } : {}),
                     description: a.description.trim(),
                     is_correct: Boolean(a.is_correct ?? false),
                     explanation: a.explanation?.trim() ?? "",
                 }));
 
             const payload = {
-                exam_id: examId,
+                ...(isEdit ? {} : { exam_id: examId }),
                 description: values.description!.trim(),
                 difficulty: values.difficulty,
-                section: String(values.section),
+                section: Number(values.section),
                 ...(sanitizedAnswers.length > 0 ? { answers: sanitizedAnswers } : {}),
             };
 
@@ -232,12 +256,12 @@ const CreateUpdateQuestionDrawer = ({
             }
 
             // Đóng drawer & reset
-            onClose();
-            form.resetFields();
-            setAnswers([]);
+            handleCloseDrawer();
+            // form.resetFields();
+            // setAnswers([]);
         } catch (err: any) {
             console.error(err);
-            message.error(err?.response?.data?.message || "Thao tác thất bại");
+            message.error("Có lỗi xảy ra. Vui lòng thử lại sau");
         }
     };
 
@@ -265,6 +289,7 @@ const CreateUpdateQuestionDrawer = ({
         setIsAddingAnswer(false);
         setEditingAnswerId(null);
     };
+
     const handleEditAnswer = (answer: Answer) => {
         setBackupAnswers([...answers]);
         setNewAnswer({ ...answer });
@@ -272,14 +297,17 @@ const CreateUpdateQuestionDrawer = ({
         setEditingAnswerId(answer._id);
         setAnswers(answers.filter(a => a._id !== answer._id));
     };
-    const handleDeleteAnswer = (answerId: string) => {
-        setAnswers(answers.filter(a => a._id !== answerId));
-        message.success("Xóa đáp án thành công");
-    };
+
+    // const handleDeleteAnswer = (answerId: string) => {
+    //     setAnswers(answers.filter(a => a._id !== answerId));
+    //     message.success("Xóa đáp án thành công");
+    // };
+
     const onOpenDeleteAnswer = (answer: Answer) => {
         setAnswerSelected(answer);
         setOpenDeleteAnswer(true);
     };
+
     const handleConfirmDeleteAnswer = () => {
         if (!answerSelected) return;
         setAnswers(prev => prev.filter(a => a._id !== answerSelected._id));
@@ -298,7 +326,7 @@ const CreateUpdateQuestionDrawer = ({
             render: (text: string) => (
                 <Paragraph
                     style={{ marginBottom: 0 }}
-                    ellipsis={{ rows: 2, expandable: true, symbol: e => (e ? "rút gọn" : "xem thêm") }}
+                    ellipsis={{ rows: 2, expandable: true, symbol: e => (e ? "Rút gọn" : "Xem thêm") }}
                 >
                     {text}
                 </Paragraph>
@@ -359,13 +387,13 @@ const CreateUpdateQuestionDrawer = ({
             title={viewOnly ? "Thông tin câu hỏi" : isEdit ? "Cập nhật câu hỏi" : "Thêm câu hỏi"}
             placement="right"
             width={900}
-            onClose={onClose}
+            onClose={handleCloseDrawer}
             open={open}
             destroyOnClose
             footer={
                 !viewOnly && (
                     <div style={{ textAlign: "right" }}>
-                        <Button onClick={onClose} style={{ marginRight: 8 }}>
+                        <Button onClick={handleCloseDrawer} style={{ marginRight: 8 }}>
                             Hủy
                         </Button>
                         <Button type="primary" onClick={() => form.submit()}>

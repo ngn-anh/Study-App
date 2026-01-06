@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ClientSession, Model, Types } from 'mongoose';
@@ -208,14 +209,16 @@ export class QuestionsService {
       /** 3️⃣ Insert answers */
       let answerDocs: AnswerQuestionDocument[] = [];
       if (answerInserts.length > 0) {
-        answerDocs = await this.answerModel.insertMany(answerInserts);
+        answerDocs = (await this.answerModel.insertMany(
+          answerInserts,
+        )) as AnswerQuestionDocument[];
       }
 
       /** 4️⃣ Map question → answers */
       const result = questionDocs.map((q) => ({
         question: q.toObject(),
         answers: answerDocs
-          .filter((a) => a.question_id.toString() === q._id.toString())
+          .filter((a) => a.question_id?.toString() === q._id?.toString())
           .map((a) => a.toObject() as AnswerQuestion),
       }));
 
@@ -228,22 +231,11 @@ export class QuestionsService {
 
   async updateQuestion(questionId: string, dto: UpdateQuestionDto) {
     if (!Types.ObjectId.isValid(questionId)) {
-      throw new BadRequestException('Invalid questionId');
+      throw new BadRequestException('Mã câu hỏi không hợp lệ');
     }
 
-    const question = await this.questionModel.findOne({
-      _id: questionId,
-      deleted_at: null,
-    });
-
-    if (!question) {
-      throw new BadRequestException('Question not found');
-    }
-
-    /* =====================
-     * 1️⃣ Update Question
-     * ===================== */
-    await this.questionModel.findByIdAndUpdate(
+    // 1. Cập nhật câu hỏi
+    const question = await this.questionModel.findByIdAndUpdate(
       { _id: questionId },
       {
         description: dto.description,
@@ -252,6 +244,10 @@ export class QuestionsService {
       },
     );
 
+    if (!question) {
+      throw new BadRequestException('Không tồn tại câu hỏi');
+    }
+
     if (!dto.answers) return { _id: questionId };
 
     const dbAnswers = await this.answerModel.find({
@@ -259,13 +255,11 @@ export class QuestionsService {
       deleted_at: null,
     });
 
-    const dbAnswerMap = new Map(dbAnswers.map((a) => [a._id.toString(), a]));
+    const dbAnswerMap = new Map(dbAnswers.map((a) => [a._id?.toString(), a]));
 
     const incomingIds = new Set<string>();
 
-    /* =====================
-     * 3️⃣ Update / Insert
-     * ===================== */
+    // 3. Update hoặc create đáp án
     for (const ans of dto.answers) {
       if (ans._id && dbAnswerMap.has(ans._id)) {
         // UPDATE
@@ -290,20 +284,74 @@ export class QuestionsService {
       }
     }
 
-    /* =====================
-     * 4️⃣ Soft delete đáp án bị xóa trên FE
-     * ===================== */
+    // 4. Xóa các đáp án bị xóa trên FE
     const toDeleteIds = dbAnswers
-      .filter((a) => !incomingIds.has(a._id.toString()))
+      .filter((a) => !incomingIds.has(a._id!.toString()))
       .map((a) => a._id);
 
+    // if (toDeleteIds.length) {
+    //   await this.answerModel.updateMany(
+    //     { _id: { $in: toDeleteIds } },
+    //     { deleted_at: new Date() },
+    //   );
+    // }
+
     if (toDeleteIds.length) {
-      await this.answerModel.updateMany(
-        { _id: { $in: toDeleteIds } },
-        { deleted_at: new Date() },
-      );
+      await this.answerModel.deleteMany({ _id: { $in: toDeleteIds } });
     }
 
     return { _id: questionId };
+  }
+
+  async softDeleteQuestion(questionId: string) {
+    if (!Types.ObjectId.isValid(questionId)) {
+      throw new NotFoundException('Không tìm thấy câu hỏi');
+    }
+
+    const objectId = new Types.ObjectId(questionId);
+    const now = new Date();
+
+    // 1. Cập nhật câu hỏi
+    const question = await this.questionModel.findByIdAndUpdate(
+      { objectId, deleted_at: null },
+      { deleted_at: now },
+      { new: true },
+    );
+
+    if (!question) {
+      throw new NotFoundException('Câu hỏi không tồn tại hoặc đã bị xóa');
+    }
+
+    // 2. Xóa mềm tất cả đáp án liên quan
+    await this.answerModel.updateMany(
+      { question_id: objectId, deleted_at: null },
+      { deleted_at: now },
+    );
+
+    return {
+      message: 'Xóa câu hỏi và câu trả lời thành công',
+    };
+  }
+
+  async hardDeleteQuestion(questionId: string) {
+    if (!Types.ObjectId.isValid(questionId)) {
+      throw new NotFoundException('Không tìm thấy câu hỏi');
+    }
+
+    const objectId = new Types.ObjectId(questionId);
+
+    // 1. Xóa câu hỏi
+    const question = await this.questionModel.findByIdAndDelete(objectId);
+
+    if (!question) {
+      throw new NotFoundException('Không tìm thấy câu hỏi để xóa');
+    }
+
+    // 2. Xóa tất cả đáp án liên quan
+    await this.answerModel.deleteMany({ question_id: objectId });
+
+    return {
+      message: 'Xóa câu hỏi và câu trả lời thành công',
+    };
   }
 }

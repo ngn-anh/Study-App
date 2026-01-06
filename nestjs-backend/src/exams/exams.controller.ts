@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -38,8 +39,13 @@ export class ExamsController {
   }
 
   @Patch('delete/:id')
-  async deleteExam(@Param('id') id: string) {
-    return this.examsService.deleteExam(id);
+  async softDeleteExam(@Param('id') id: string) {
+    return this.examsService.softDeleteExam(id);
+  }
+
+  @Delete('delete/:id')
+  async hardDeleteExam(@Param('id') id: string) {
+    return this.examsService.hardDeleteExam(id);
   }
 
   @Post('submit')

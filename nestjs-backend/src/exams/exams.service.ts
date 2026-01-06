@@ -33,6 +33,10 @@ import {
 } from 'src/like-exam/schemas/like-exam.schema';
 import { CreateExamDto } from './dto/create-exam.dto';
 import { UpdateExamDto } from './dto/update-exam.dto';
+import {
+  AnswerQuestion,
+  AnswerQuestionDocument,
+} from 'src/answer-questions/schemas/answer-questions.schema';
 
 @Injectable()
 export class ExamsService {
@@ -48,6 +52,8 @@ export class ExamsService {
     private examResultModel: Model<ExamResultDocument>,
     @InjectModel(Question.name) private questionModel: Model<QuestionDocument>,
     @InjectModel(LikeExam.name) private likeExamModel: Model<LikeExamDocument>,
+    @InjectModel(AnswerQuestion.name)
+    private answerModel: Model<AnswerQuestionDocument>,
   ) {}
 
   async getExams(filterDto: ExamsFilterDto) {
@@ -614,17 +620,84 @@ export class ExamsService {
     );
   }
 
-  async deleteExam(id: string) {
-    const updatedExam = await this.examModel.findByIdAndUpdate(
-      { _id: id, deleted_at: null },
-      { $set: { deleted_at: new Date() } },
-      { new: true },
+  async softDeleteExam(examId: string) {
+    if (!Types.ObjectId.isValid(examId))
+      throw new NotFoundException('Đề thi không hợp lệ');
+
+    const now = new Date();
+
+    // 1. Xóa đề thi
+    const exam = await this.examModel.findByIdAndUpdate(
+      new Types.ObjectId(examId),
+      {
+        deleted_at: now,
+      },
+    );
+    if (!exam) throw new NotFoundException('Không tìm thấy đề thi');
+
+    // 2. Xóa tất cả các câu hỏi của đề thi
+    const questions = await this.questionModel
+      .find({ exam_id: new Types.ObjectId(examId), deleted_at: null })
+      .select('_id');
+    const questionIds = questions.map((q) => q._id?.toString());
+
+    await this.questionModel.updateMany(
+      {
+        _id: { $in: questionIds.map((id) => new Types.ObjectId(id as string)) },
+      },
+      { deleted_at: now },
     );
 
-    if (!updatedExam) {
-      throw new NotFoundException('Không tìm thấy đề thi hoặc đã bị xóa');
+    // 3. Xóa tất cả các câu hỏi liên quan
+    await this.answerModel.updateMany(
+      {
+        question_id: {
+          $in: questionIds.map((id) => new Types.ObjectId(id as string)),
+        },
+        deleted_at: null,
+      },
+      { deleted_at: now },
+    );
+
+    return {
+      message:
+        'Xóa bài kiểm tra, các câu hỏi và câu trả lời liên quan thành công',
+    };
+  }
+
+  async hardDeleteExam(examId: string) {
+    if (!Types.ObjectId.isValid(examId))
+      throw new NotFoundException('Đề thi không hợp lệ');
+
+    const exam = await this.examModel.findById(examId);
+    if (!exam) throw new NotFoundException('Không tìm thấy đề thi để xóa');
+
+    // 1. Lấy tất cả câu hỏi thuộc đề thi
+    const questions = await this.questionModel
+      .find({ exam_id: new Types.ObjectId(examId) })
+      .select('_id');
+    const questionIds = questions.map((q) => q._id?.toString());
+
+    // 2. Xóa tất cả các câu trả lời liên quan
+    if (questionIds.length > 0) {
+      await this.answerModel.deleteMany({
+        question_id: {
+          $in: questionIds.map((id) => new Types.ObjectId(id as string)),
+        },
+      });
     }
 
-    return updatedExam;
+    // 3. Xóa tất cả các câu hỏi thuộc đề thi
+    await this.questionModel.deleteMany({
+      _id: { $in: questionIds.map((id) => new Types.ObjectId(id as string)) },
+    });
+
+    // 4. Xóa đề thi
+    await this.examModel.findByIdAndDelete(new Types.ObjectId(examId));
+
+    return {
+      message:
+        'Xóa bài kiểm tra, các câu hỏi và câu trả lời liên quan thành công',
+    };
   }
 }

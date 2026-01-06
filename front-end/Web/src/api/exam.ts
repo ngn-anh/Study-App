@@ -41,7 +41,12 @@ export const updateExam = async (id: string, data: ExamInfo) => {
   return res;
 };
 
+// export const deleteExam = async (examId: string) => {
+//   const res = await api.patch(`/exams/delete/${examId}`);
+//   return res;
+// };
+
 export const deleteExam = async (examId: string) => {
-  const res = await api.patch(`/exams/delete/${examId}`);
+  const res = await api.delete(`/exams/delete/${examId}`);
   return res;
 };
