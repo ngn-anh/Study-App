@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -72,18 +73,28 @@ export class QuestionsController {
     @Param() param: GetQuestionByIdDto,
     @Body() dto: UpdateQuestionDto,
   ) {
-    const data = await this.questionsService.updateQuestion(param.id, dto);
+    const result = await this.questionsService.updateQuestion(param.id, dto);
     return {
       success: true,
-      data,
+      data: result,
     };
   }
 
-  // @Patch('delete/:id')
-  // async softDelete(@Param() param: GetQuestionByIdDto) {
-  //   await this.questionsService.softDeleteQuestion(param.id);
-  //   return {
-  //     success: true,
-  //   };
-  // }
+  @Patch('delete/:id')
+  async softDelete(@Param() param: GetQuestionByIdDto) {
+    const result = await this.questionsService.softDeleteQuestion(param.id);
+    return {
+      success: true,
+      data: result,
+    };
+  }
+
+  @Delete('delete/:id')
+  async hardDelete(@Param() param: GetQuestionByIdDto) {
+    const result = await this.questionsService.hardDeleteQuestion(param.id);
+    return {
+      success: true,
+      data: result,
+    };
+  }
 }

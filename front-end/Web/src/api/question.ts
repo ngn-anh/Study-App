@@ -52,7 +52,12 @@ export const updateQuestion = async (id: string, body: any) => {
   return res.data;
 };
 
-export const softDeleteQuestion = async (id: string) => {
-  const res = await api.patch(`/questions/delete/${id}`);
+// export const deleteQuestion = async (id: string) => {
+//   const res = await api.patch(`/questions/delete/${id}`);
+//   return res.data;
+// };
+
+export const deleteQuestion = async (id: string) => {
+  const res = await api.delete(`/questions/delete/${id}`);
   return res.data;
 };

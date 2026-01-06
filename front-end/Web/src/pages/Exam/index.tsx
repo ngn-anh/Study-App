@@ -37,7 +37,6 @@ const ExamPage = () => {
     }>({});
 
     const [importQuestions, setImportQuestions] = useState<ImportQuestion[]>([]);
-    const [importing, setImporting] = useState(false);
 
     const fetchExams = async (param: any) => {
         const res = await getExams({
@@ -45,7 +44,7 @@ const ExamPage = () => {
             limit: param.pageSize,
             name: filterParams.name,
             type: filterParams.type,
-            sort: filterParams.sort, // backend cần nhận param này để sort
+            sort: filterParams.sort,
         });
 
         return {
@@ -92,19 +91,20 @@ const ExamPage = () => {
         try {
             await deleteExam(examId);
             setOpenDelete(false);
-
-            notification.success({
-                message: `Xóa đề thi thành công!`,
-                placement: "topRight",
-            });
+            message.success("Xóa đề thi thành công!");
+            // notification.success({
+            //     message: `Xóa đề thi thành công!`,
+            //     placement: "topRight",
+            // });
 
             actionRef.current?.reload();
         } catch (err) {
             console.error(err);
-            notification.error({
-                message: `Có lỗi xảy ra. Vui lòng thử lại sau.`,
-                placement: "topRight",
-            });
+            message.error("Có lỗi xảy ra. Vui lòng thử lại sau.");
+            // notification.error({
+            //     message: `Có lỗi xảy ra. Vui lòng thử lại sau.`,
+            //     placement: "topRight",
+            // });
         }
     };
 
@@ -114,27 +114,6 @@ const ExamPage = () => {
         // setIsOpenDrawer(true);
         // navigate(`/exam/${examId}/question`);
     };
-
-    // const handleImportExcel = async (examId: string, file: File) => {
-    //     try {
-    //         const data = await file.arrayBuffer();
-    //         const workbook = XLSX.read(data);
-    //         const sheetName = workbook.SheetNames[0];
-    //         const sheet = workbook.Sheets[sheetName];
-    //         const jsonData: any[] = XLSX.utils.sheet_to_json(sheet, { defval: "" });
-
-    //         console.log("Excel data for examId:", examId, jsonData);
-
-    //         // TODO: map jsonData thành định dạng câu hỏi & gọi API tạo câu hỏi cho examId
-    //         // await createQuestionsBulk(examId, jsonData);
-
-    //         message.success(`Import ${jsonData.length} câu hỏi cho đề thi thành công!`);
-    //         actionRef.current?.reload();
-    //     } catch (err) {
-    //         console.error(err);
-    //         message.error("Import Excel thất bại");
-    //     }
-    // };
 
     const parseQuestionExcel = async (file: File): Promise<ImportQuestion[]> => {
         const buffer = await file.arrayBuffer();
@@ -379,7 +358,7 @@ const ExamPage = () => {
                                     setImportQuestions(data);
 
                                     notification.success({
-                                        message: `Đã đọc ${data.length} câu hỏi từ Excel`,
+                                        message: `Đã đọc ${data.length} câu hỏi từ file Excel`,
                                         placement: "topRight",
                                     });
 

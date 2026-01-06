@@ -17,7 +17,7 @@ import type {
     ImportQuestion,
     Question,
 } from "../../../../types/typeObj";
-import { createManyQuestion, getQuestionsByExam } from "../../../../api/question";
+import { createManyQuestion, deleteQuestion, getQuestionsByExam } from "../../../../api/question";
 import PermissionGuard from "../../../../components/PermissionGuard";
 import { NotePencil, Trash } from "phosphor-react";
 import CreateUpdateQuestionModal from "../CreateUpdateQuestionDrawer";
@@ -133,7 +133,7 @@ const ListQuestionModal = ({
     const handleConfirmDelete = async () => {
         try {
             if (!deleteQuestionId) return;
-            // await deleteQuestion(deleteQuestionId);
+            await deleteQuestion(deleteQuestionId);
             message.success("Xoá câu hỏi thành công");
             setOpenDelete(false);
             setDeleteQuestionId(undefined);
@@ -143,7 +143,7 @@ const ListQuestionModal = ({
         }
     };
 
-    /** IMPORT handlers */
+    /** IMPORT Excel */
     const handleEditImportQuestion = (row: any) => {
         setEditingImportQuestion(row as ImportQuestion);
         setEditingImportIndex(row.__importIndex);
@@ -202,18 +202,7 @@ const ListQuestionModal = ({
         }
     };
 
-    /** GỘP DATA */
-    // const tableData = useMemo(() => {
-    //     if (!isImportMode) return questions;
-
-    //     return importQuestions.map((q, index) => ({
-    //         ...q,
-    //         _id: `import-${index}`,      // key cho table
-    //         __importIndex: index,        // dùng cho edit/delete
-    //         isImported: true,
-    //     }));
-    // }, [questions, importQuestions, isImportMode]);
-
+    /** Data */
     const tableData = useMemo(() => {
         if (!isImportMode) return questions;
 
@@ -247,11 +236,6 @@ const ListQuestionModal = ({
                         symbol: "Xem thêm",
                     }}
                 >
-                    {/* {row.isImported && (
-                        <Tag color="orange" style={{ marginRight: 6 }}>
-                            IMPORT
-                        </Tag>
-                    )} */}
                     <MathCell latex={row.description} />
                 </Paragraph>
             ),
@@ -291,14 +275,38 @@ const ListQuestionModal = ({
                 return (
                     <div className="answer-list-preview">
                         {answers.map((a, idx) => (
-                            <Paragraph
+                            <div
                                 key={idx}
-                                style={{ marginBottom: 4 }}
-                                className={a.is_correct ? "correct" : ""}
+                                style={{
+                                    display: "flex",
+                                    alignItems: "flex-start",
+                                    marginBottom: 8,
+                                }}
                             >
-                                {String.fromCharCode(65 + idx)}.{" "}
-                                {a.description}
-                            </Paragraph>
+                                <span
+                                    style={{
+                                        color: a.is_correct ? "green" : "red",
+                                        fontWeight: "bold",
+                                        marginRight: 8,
+                                        fontSize: 16,
+                                        lineHeight: 1,
+                                        flexShrink: 0,
+                                    }}
+                                >
+                                    {a.is_correct ? "✓" : "✗"}
+                                </span>
+
+                                <Paragraph
+                                    style={{
+                                        margin: 0,
+                                        whiteSpace: "normal",
+                                        wordBreak: "break-word",
+                                    }}
+                                    ellipsis={{ rows: 2, expandable: true, symbol: e => (e ? "Rút gọn" : "Xem thêm") }}
+                                >
+                                    {String.fromCharCode(65 + idx)}. {a.description}
+                                </Paragraph>
+                            </div>
                         ))}
                     </div>
                 );

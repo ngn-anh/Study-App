@@ -26,6 +26,10 @@ import {
   LikeExam,
   LikeExamSchema,
 } from 'src/like-exam/schemas/like-exam.schema';
+import {
+  AnswerQuestion,
+  AnswerQuestionSchema,
+} from 'src/answer-questions/schemas/answer-questions.schema';
 
 @Module({
   imports: [
@@ -44,6 +48,9 @@ import {
     MongooseModule.forFeature([
       { name: ExamResult.name, schema: ExamResultSchema },
       { name: ExamResultAnswer.name, schema: ExamResultAnswerSchema },
+    ]),
+    MongooseModule.forFeature([
+      { name: AnswerQuestion.name, schema: AnswerQuestionSchema },
     ]),
   ],
   controllers: [ExamsController],

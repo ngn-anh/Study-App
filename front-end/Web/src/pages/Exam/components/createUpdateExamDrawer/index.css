@@ -11,28 +11,14 @@
 .class-subject {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  /* 2 cột bằng nhau */
   gap: 16px;
   width: 100%;
   /* border: 1px solid red; */
 }
 
-/* .subject-contain {
-  flex: 1;
-  width: auto;
-  border: 1px solid black;
-}
-
-.class-contain {
-  flex: 1;
-  width: auto;
-  border: 1px solid green;
-} */
-
 .type-duration-difficulty {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  /* 2 cột bằng nhau */
   gap: 16px;
   width: 100%;
   /* border: 1px solid red; */
@@ -41,7 +27,6 @@
 .startDate-endDate {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  /* 2 cột bằng nhau */
   gap: 16px;
   width: 100%;
   /* border: 1px solid red; */
