@@ -357,18 +357,7 @@ export default function ExamDoScreen() {
             Câu {currentIndex + 1}: {currentQuestion.text}
           </Text>
           {currentQuestion.image && (
-            <ScrollView
-              horizontal
-              style={{ maxWidth: "100%", marginVertical: 8 }}
-              contentContainerStyle={{ alignItems: "center" }}
-              showsHorizontalScrollIndicator={true}
-            >
-              <Image
-                source={{ uri: currentQuestion.image }}
-                style={{ width: undefined, height: 200 }} // giữ chiều cao, chiều rộng tự động
-                resizeMode="contain"
-              />
-            </ScrollView>
+             <Image source={{ uri: currentQuestion.image }} style={styles.image} />
           )}
           {currentQuestion.options.map((opt, idx) => (
             <TouchableOpacity

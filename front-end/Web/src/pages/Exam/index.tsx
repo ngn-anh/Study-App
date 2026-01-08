@@ -1,5 +1,6 @@
 import "./index.less";
 import { Button, Image, Tag, Tooltip, Typography, Upload, message, notification } from "antd";
+import { useForm } from "antd/es/form/Form";
 import PageContainerFixed from "../../component/PageContainerFixed";
 import ProTableFixed from "../../component/ProTableFixed";
 import { Plus, NotePencil, Trash, Question, FileArrowUp, MagnifyingGlass } from "phosphor-react";
@@ -22,6 +23,9 @@ const { Paragraph } = Typography;
 
 const ExamPage = () => {
     const actionRef = useRef<any>();
+    const [form] = useForm();
+    const currentPageRef = useRef<number>(1);
+    const pageSizeRef = useRef<number>(10);
     // const navigate = useNavigate();
     const [api, contextHolder] = notification.useNotification();
 
@@ -39,6 +43,8 @@ const ExamPage = () => {
     const [importQuestions, setImportQuestions] = useState<ImportQuestion[]>([]);
 
     const fetchExams = async (param: any) => {
+        currentPageRef.current = param?.current || 1;
+        pageSizeRef.current = param?.pageSize || 10;
         const res = await getExams({
             page: param.current,
             limit: param.pageSize,
@@ -162,13 +168,7 @@ const ExamPage = () => {
             fixed: "left",
             align: "center",
             render: (_text: string, _row: any, index: number) => {
-                // Lấy current page và pageSize từ actionRef
-                // Nếu chưa có thì dùng mặc định từ pagination của table
-                const defaultPageSize = actionRef.current?.paginationProps?.pageSize || 10;
-                const currentPage = actionRef.current?.paginationProps?.current || 1;
-                const pageSize = actionRef.current?.paginationProps?.pageSize || defaultPageSize;
-
-                return (currentPage - 1) * pageSize + index + 1;
+                return (currentPageRef.current - 1) * pageSizeRef.current + index + 1;
             },
         },
         {
@@ -263,7 +263,7 @@ const ExamPage = () => {
         {
             title: "Thời gian thi (phút)",
             dataIndex: "duration",
-            width: 90,
+            width: 130,
             align: "center",
             render: (text: string) => {
                 return (
@@ -432,6 +432,7 @@ const ExamPage = () => {
                     <ProForm
                         submitter={false}
                         layout="inline"
+                        form={form}
                         style={{ marginBottom: 16, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}
                         onFinish={(values) => {
                             setFilterParams(values);
@@ -479,6 +480,7 @@ const ExamPage = () => {
                             <Button
                                 onClick={() => {
                                     setFilterParams({});
+                                    form.resetFields()
                                     actionRef.current?.reload();
                                 }}
                             >
@@ -492,8 +494,8 @@ const ExamPage = () => {
 
                     <div>
                         <ProTableFixed
-                            // headerFixedHeight={350}
-                            // params={filterParams}
+                            headerFixedHeight={380}
+                            params={filterParams}
                             actionRef={actionRef}
                             request={fetchExams}
                             columns={columns}

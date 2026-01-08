@@ -127,7 +127,7 @@ export class ExamsService {
 
     if (sort === SortOrder.NEWEST) sortOption = { start_date: -1 };
     else if (sort === SortOrder.OLDEST) sortOption = { start_date: 1 };
-    else sortOption = { start_date: -1 }; // mặc định newest
+    else sortOption = { created_at: -1 }; // mặc định newest
     const skip = (page - 1) * limit;
 
     const [data, total] = await Promise.all([
