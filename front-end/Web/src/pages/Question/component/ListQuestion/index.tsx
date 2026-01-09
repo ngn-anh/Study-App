@@ -1,7 +1,6 @@
 import './index.less';
 import {
     Modal,
-    Table,
     Tag,
     Typography,
     ConfigProvider,
@@ -9,8 +8,9 @@ import {
     message,
     Button,
     Image,
+    Popover,
 } from "antd";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import viVN from "antd/locale/vi_VN";
 import type {
     Answer,
@@ -26,6 +26,7 @@ import CustomModal from "../../../../component/CustomModal";
 import MathCell from "../../../../component/MathCell";
 import { MathJaxContext } from "better-react-mathjax";
 import { mathJaxConfig } from "../../../../utils/latex";
+import ProTableFixed from "../../../../component/ProTableFixed";
 
 const { Paragraph } = Typography;
 
@@ -60,6 +61,7 @@ const ListQuestionModal = ({
         current: PAGINATION.PAGE_DEFAULT,
         pageSize: PAGINATION.LIMIT,
     });
+    const actionRef = useRef<any>();
 
     /** CRUD DB */
     const [openQuestionModal, setOpenQuestionModal] = useState(false);
@@ -73,6 +75,7 @@ const ListQuestionModal = ({
         useState<ImportQuestion | undefined>(undefined);
     const [editingImportIndex, setEditingImportIndex] =
         useState<number | null>(null);
+    const [expandedDescription, setExpandedDescription] = useState<string | null>(null);
     const isImportMode = importQuestions.length > 0;
 
     const fetchDataQuestion = async (id: string) => {
@@ -92,6 +95,38 @@ const ListQuestionModal = ({
         }
     };
 
+    // ProTableFixed request function
+    const fetchQuestionsForTable = async (params: any) => {
+        if (isImportMode) {
+            // Mode import không cần fetch
+            return {
+                data: importQuestions.map((q, index) => ({
+                    ...q,
+                    _id: `import-${index}`,
+                    __importIndex: index,
+                    isImported: true,
+                })),
+                success: true,
+            };
+        }
+
+        if (!examId) return { data: [], success: false };
+
+        try {
+            const res = await getQuestionsByExam(examId);
+            if (res?.success) {
+                setExamInfo(res.data.exam);
+                return {
+                    data: res.data.questions || [],
+                    success: true,
+                };
+            }
+            return { data: [], success: false };
+        } catch {
+            return { data: [], success: false };
+        }
+    };
+
     // useEffect(() => {
     //     if (!open || !examId) return;
     //     fetchDataQuestion(examId);
@@ -99,6 +134,8 @@ const ListQuestionModal = ({
     useEffect(() => {
         if (open && examId && !isImportMode) {
             fetchDataQuestion(examId);
+        } else if (open) {
+            actionRef.current?.reload();
         }
     }, [open, examId, isImportMode]);
 
@@ -231,8 +268,8 @@ const ListQuestionModal = ({
     const columns = [
         {
             title: "STT",
-            width: 70,
-            align: "center" as const,
+            width: 50,
+            align: "left" as const,
             render: (_: any, __: any, index: number) => {
                 const { current, pageSize } = pagination;
                 return (current - 1) * pageSize + index + 1;
@@ -241,18 +278,25 @@ const ListQuestionModal = ({
         {
             title: "Câu hỏi",
             dataIndex: "description",
-            width: 200,
+            width: 320,
             render: (_: any, row: any) => (
-                <Paragraph
-                    style={{ marginBottom: 0 }}
-                    ellipsis={{
-                        rows: 2,
-                        expandable: true,
-                        symbol: "Xem thêm",
-                    }}
+                <Popover
+                    title="Chi tiết câu hỏi"
+                    content={
+                        <div style={{ maxWidth: 600 }}>
+                            <MathCell latex={row.description} />
+                        </div>
+                    }
+                    trigger="click"
+                    placement="top"
                 >
-                    <MathCell latex={row.description} />
-                </Paragraph>
+                    <div className="question-cell">
+                        <MathCell latex={row.description} />
+                        <div style={{ cursor: "pointer", color: "#0c4299", fontSize: 12, marginTop: 4 }}>
+                            Xem thêm →
+                        </div>
+                    </div>
+                </Popover>
             ),
         },
         {
@@ -407,6 +451,7 @@ const ListQuestionModal = ({
                 <Modal
                     open={open}
                     onCancel={handleClose}
+                    centered
                     footer={null}
                     width={1500}
                     destroyOnClose
@@ -448,25 +493,19 @@ const ListQuestionModal = ({
                         </div>
                     }
                 >
-                    <Table
-                        bordered
-                        size="middle"
-                        rowKey="_id"
-                        loading={loading}
-                        columns={columns}
-                        dataSource={tableData}
-                        pagination={{
-                            current: pagination.current,
-                            pageSize: pagination.pageSize,
-                            onChange: (current, pageSize) => {
-                                setPagination({
-                                    current,
-                                    pageSize:
-                                        pageSize || pagination.pageSize,
-                                });
-                            },
-                        }}
-                    />
+                    <div className='table-list-question'>
+                        <ProTableFixed
+                            sticky={true}
+                            loading={loading}
+                            headerFixedHeight={300}
+                            actionRef={actionRef}
+                            request={fetchQuestionsForTable}
+                            columns={columns}
+                            rowKey="_id"
+                            tableAlertRender={false}
+                        />
+                    </div>
+                    
 
                     <CreateUpdateQuestionModal
                         open={openQuestionModal}
@@ -487,7 +526,7 @@ const ListQuestionModal = ({
                             setQuestionId(undefined);
                             setEditingImportQuestion(undefined);
                             setEditingImportIndex(null);
-                            if (examId) fetchDataQuestion(examId);
+                            actionRef.current?.reload();
                         }}
                     />
 

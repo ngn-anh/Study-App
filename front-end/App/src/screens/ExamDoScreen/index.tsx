@@ -9,6 +9,7 @@ import { ConfirmModal } from "../../components/ConfirmModal";
 import { submitExam } from "../../api/exam";
 import { getQuestionsByExam } from "../../api/question";
 import { formatTime } from "../../utils/time";
+import { convertLatexToText } from "../../utils/latexToText";
 import { SUBMITTED_EXAM, TYPE_EXAM } from "../../constants";
 
 type RouteProps = RouteProp<RootStackParamList, "ExamDoScreen">;
@@ -354,7 +355,7 @@ export default function ExamDoScreen() {
       {currentQuestion && (
         <View style={styles.questionContainer}>
           <Text style={styles.questionText}>
-            Câu {currentIndex + 1}: {currentQuestion.text}
+            Câu {currentIndex + 1}: {convertLatexToText(currentQuestion.text)}
           </Text>
           {currentQuestion.image && (
              <Image source={{ uri: currentQuestion.image }} style={styles.image} />
@@ -374,7 +375,7 @@ export default function ExamDoScreen() {
                   selectedAnswers[currentQuestion.id] === idx && styles.optionTextSelected,
                 ]}
               >
-                {opt}
+                {convertLatexToText(opt)}
               </Text>
             </TouchableOpacity>
           ))}

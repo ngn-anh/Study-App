@@ -192,7 +192,7 @@ const PracticeExamDetailScreen = (props: Props) => {
     if (!!submitted && submitted == SUBMITTED_EXAM.DE_LUYEN) {
       navigation.navigate("MainTabs");
     } else {
-      navigation.goBack();
+      navigation.navigate("MainTabs");
     }
   }
 

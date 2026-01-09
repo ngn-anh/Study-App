@@ -11,7 +11,7 @@ export const mathJaxConfig = {
         packages: {
             "[+]": ["base", "ams", "autoload", "newcommand", "unicode", "textmacros"],
         },
-        inlineMath: [["\\(", "\\)"]],
+        inlineMath: [["\\(", "\\)"], ["$", "$"]],
         displayMath: [["$$", "$$"]],
         unicode: {
             fonts: "STIXGeneral, TeX", // dùng font có glyph mở rộng

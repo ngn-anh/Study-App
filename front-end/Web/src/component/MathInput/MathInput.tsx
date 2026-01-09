@@ -14,7 +14,45 @@ import { MathJax } from "better-react-mathjax";
 // 1️⃣ Xóa escape thừa (\\ → \)
 const unescapeBackslashes = (str: string) => str.replace(/\\\\/g, "\\");
 
-// 2️⃣ Bọc delimiter nếu chưa có
+// 2️⃣ Heuristic LaTeX hóa chuỗi pha lẫn chữ + toán, giữ nguyên khoảng trắng
+const autoLaTeXize = (raw: string) => {
+    if (!raw) return "";
+    let s = raw.replace(/\s+/g, " ").trim();
+
+    // Chuyển biến kèm số mũ: x2, y10 -> x^{2}, y^{10}
+    s = s.replace(/(\p{L})(\d+)/gu, "$1^{" + "$2" + "}");
+
+    // Tách token, giữ nguyên khoảng trắng
+    const tokenRe = /(\s+|\\[a-zA-Z]+|[\p{L}]+|\d+|[^\s])/gu;
+    const tokens = s.match(tokenRe) || [s];
+
+    const out: string[] = [];
+    let textBuf = "";
+
+    const isPlainToken = (t: string) => /^(\s+|[\p{L}]+|[.,;:!?…"'“”‘’])$/u.test(t);
+    const escapeText = (t: string) => t.replace(/[{}]/g, "\\$&");
+
+    const flushText = () => {
+        if (textBuf) {
+            out.push(`\\text{${escapeText(textBuf)}}`);
+            textBuf = "";
+        }
+    };
+
+    for (const t of tokens) {
+        if (isPlainToken(t)) {
+            textBuf += t; // gom text + khoảng trắng liên tiếp
+        } else {
+            flushText();
+            out.push(t);
+        }
+    }
+    flushText();
+
+    return out.join("");
+};
+
+// 3️⃣ Bọc delimiter nếu chưa có
 export const formatLatex = (
     raw: string,
     { forceBlock = false }: { forceBlock?: boolean } = {}
@@ -83,13 +121,12 @@ const MathInput = forwardRef<MathfieldElement | null, Props>(
             mf.smartMode = true;
             mf.letterShapeStyle = "tex";
             mf.mathVirtualKeyboardPolicy = "manual";
-            mf.setValue(value, { format: "auto" });
-            // Khi người dùng gõ → lấy LaTeX thuần (một backslash) và đưa lên form
+            mf.setValue(value ?? "", { format: "latex" });
+            // Khi người dùng gõ → lấy raw value
             mf.addEventListener("input", () => {
-                const raw = mf.getValue("latex-expanded"); // một \, không escaped
-                const cleaned = raw.replace(/\\placeholder\{\}/g, "").trim();
-                setEditingLatex(cleaned);
-                onChange?.(cleaned); // trả lại cho Form
+                const raw = mf.getValue("latex"); // Lấy raw LaTeX
+                setEditingLatex(raw);
+                onChange?.(raw); // Trả về nguyên gốc, autoLaTeXize sẽ xử lý khi hiển thị
             });
 
             // Commit khi blur hoặc Enter
@@ -110,15 +147,30 @@ const MathInput = forwardRef<MathfieldElement | null, Props>(
         }, []); // chỉ chạy 1 lần
 
         /* -----------------------------------------------------------------
-           2️⃣ Khi prop `value` thay đổi → đưa vào Mathlive
+           2️⃣ Khi prop `value` thay đổi → đưa vào Mathlive với heuristic
            ----------------------------------------------------------------- */
         useEffect(() => {
             if (!mathfieldRef.current) return;
             if (typeof value !== "string") return;
 
-            // value là LaTeX thuần (đã un‑escaped). Đặt vào Mathlive.
-            (mathfieldRef.current as any).setValue?.(value, { mode: "latex" });
-            setEditingLatex(value);
+            const txt = value ?? "";
+            
+            // Nếu có dấu hiệu là text + công thức (có chữ tiếng Việt + ký hiệu toán)
+            // thì dùng autoLaTeXize để wrap text trong \text{} giữ khoảng trắng
+            const hasVietnameseText = /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i.test(txt);
+            const hasMathSymbols = /[\^_=+\-*/()]/g.test(txt);
+            const alreadyHasTextWrap = /\\text\{/.test(txt);
+            
+            // Nếu có text tiếng Việt + công thức và chưa được wrap
+            if (hasVietnameseText && hasMathSymbols && !alreadyHasTextWrap) {
+                const latexized = autoLaTeXize(txt);
+                (mathfieldRef.current as any).setValue?.(latexized, { format: "latex" });
+                setEditingLatex(txt); // Lưu raw value
+            } else {
+                // Ngược lại set trực tiếp
+                (mathfieldRef.current as any).setValue?.(txt, { format: "latex" });
+                setEditingLatex(txt);
+            }
         }, [value]);
 
         /* -----------------------------------------------------------------
